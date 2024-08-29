@@ -11930,9 +11930,9 @@ checkbox1.setAttribute('hidden', "");
             }
             else {
               const price = prices[0] ? Math.min(...prices.map(obj => parseInt(obj.price))) : 0
-              const pV = cloned.querySelector('.price_normal').querySelector('.price_value')
+              const pV = cloned.querySelector('.price_normal')?.querySelector('.price_value')
 
-              const integer = pV.querySelector('.product_price_integer')
+              const integer = pV?.querySelector('.product_price_integer')
               if (integer) {
                 const decimal = pV.querySelector('.product_price_decimal')
                 const separator = pV.querySelector('.product_price_separator')
@@ -11940,11 +11940,11 @@ checkbox1.setAttribute('hidden', "");
                 separator.textContent = '.'
                 decimal.textContent = price.toFixed(2).split('.')[1]
               }
-              else {
+              else if(pV){
                 pV.textContent = price.toFixed(2)
               }
-              cloned.querySelector('.price_discount').remove()
-              cloned.querySelector('.price_old').remove()
+              cloned.querySelector('.price_discount')?.remove()
+              cloned.querySelector('.price_old')?.remove()
             }
             originalCart.parentNode.append(cloned)
 

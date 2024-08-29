@@ -11877,7 +11877,7 @@ checkbox1.setAttribute('hidden', "");
               },
             }).then(e => e.json()).then(({ items }) => items)
             const site = pathItemPath.split('/')[0].toLowerCase()
-            const images = await fetch(`${backend_url}?id=sku:${element}&sk=data_catalog-image:${site}&startsWith=true`, {
+            const images = await fetch(`${backend_url}?id=${id1}&sk=data_catalog-image:${site}&startsWith=true`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -11885,8 +11885,9 @@ checkbox1.setAttribute('hidden', "");
             }).then(e => e.json())
 
             const src = images?.items[0]?.crops?.split(',')[0].split(' ')[0]
-            const img = cloned.querySelector('.product_lead_img').setAttribute('src', src)
-            const heading = cloned.querySelector('.product_heading')
+            const imgEl =art ? cloned.querySelectorAll('.article_lead_img') : cloned.querySelector('.product_lead_img')
+            const img =imgEl.setAttribute('src', src)
+            const heading =art ? cloned.querySelectorAll('.article_heading') : cloned.querySelector('.product_heading')
 
             const a = heading.querySelector('a')
             if (a) {
@@ -11897,7 +11898,8 @@ checkbox1.setAttribute('hidden', "");
               heading.textContent = novar
             }
             const wAnchor = anchor.startsWith('https://') ? anchor : 'https://' + anchor
-            cloned.querySelectorAll('.product_anchor').forEach(e => e.setAttribute('href', wAnchor))
+            const anchEl = art ? cloned.querySelectorAll('.article_anchor') :cloned.querySelectorAll('.product_anchor')
+            anchEl.forEach(e => e.setAttribute('href', wAnchor))
             if (prices[0]?.oldPrice) {
               const price = Math.min(...prices.map(obj => parseInt(obj.price)));
               const oldprice = Math.min(...prices.map(obj => parseInt(obj.oldPrice)));

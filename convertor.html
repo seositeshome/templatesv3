@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Converter</title>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+</head>
+<body>
+
+<h2>TXT</h2>
+<textarea id="editor1"></textarea>
+
+<h2>HTML</h2>
+<textarea id="output" rows="10" cols="50" readonly></textarea>
+
+<script>
+    // Инициализируем CKEditor на элементе с id 'editor1'
+    CKEDITOR.replace('editor1', {
+        // Добавляем обработчик события 'change'
+        on: {
+            change: function() {
+                // Каждый раз при изменении содержимого редактора обновляем текст в 'output'
+                showHTML();
+            }
+        }
+    });
+
+    function showHTML() {
+        var htmlContent = CKEDITOR.instances.editor1.getData();
+        document.getElementById('output').value = htmlContent;
+    }
+</script>
+
+</body>
+</html>

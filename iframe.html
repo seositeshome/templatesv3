@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US" id="generated-page">
+
+<head id="head">
+</head>
+
+<body id="body">
+</body>
+
+
+<div data-remove data-builder-right-click-menu>
+     <link rel="stylesheet" href="css/right-click-menu.css" media="all">   
+     <link rel="stylesheet" href="css/buttons-and-menus.css" media="all">
+
+    <!--<link rel="stylesheet" href="css/buttons-and-menus.css" media="all"> -->
+
+    <div style="display: none;" id="right-click-menu" class="right-click-menu">
+        <div id="options">
+            <div class="menu-option" onclick="alert('Option 0 selected')">🖼️ Edit pic</div>
+            <div class="menu-option" onclick="alert('Option 0 selected')">📄 Edit alt</div>
+            <div class="menu-option" onclick="alert('Option 0 selected')">🗑️ Remove</div>
+        </div>
+        <div id="add_alt" hidden style="padding: 10px;  width: 500px;">
+            <input onclick="stopPropagation(event)" id="editHrefInput" style="width: 500px" placeholder="🖼️ edit alt " type="text">
+            <button id="editHrefButton">💾</button>
+        </div>
+    </div>
+
+</html>
+<script data-remove>
+    const stopPropagation = (e)=>e.stopPropagation()
+</script>

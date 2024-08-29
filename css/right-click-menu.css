@@ -1,0 +1,60 @@
+
+.right-click-menu {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  width: 150px;
+  background: white;
+  border: 1px solid #ddd;
+  border-color: #4A90E2; 
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  margin: 0; /* Убираем внешние отступы */
+  padding: 0; /* Убираем внутренние отступы */
+  color:#05356d;
+  border-radius: 10px;
+}
+
+.menu-option {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #4A90E2; /* Разделительные линии между опциями */
+}
+
+.menu-option:last-child {
+  border-bottom: none; /* Убираем линию у последнего элемента */
+}
+
+.menu-option:hover {
+  background-color: #d8d6d6;
+}
+
+
+/* Define the basic look of .receive-target */
+.receive-target {
+  padding: 0 10px;
+  font-size: 24px;
+  border-radius: 10px;
+  margin: 5px;
+  border: 1px dashed #4A90E2;
+  transition: transform 0.5s ease-in-out; /* Smooth transition for the transform */
+  margin: 10px;
+}
+
+/* Define the hover effect using keyframes */
+@keyframes hoverEffect {
+  0%, 100% {
+    transform: scale(1); /* Regular size */
+    cursor: default; /* Regular cursor */
+  }
+  50% {
+    transform: scale(1.5); /* Enlarged size */
+    cursor: pointer; /* Pointer cursor */
+  }
+}
+
+/* Apply the animation to .receive-target during drag enter and drag over */
+.receive-target.drag-over {
+  animation: hoverEffect 1s infinite; /* Run the animation continuously with a duration of 2 seconds */
+  background-color: #63e24a; /* Change background color */
+  cursor: pointer; /* Pointer cursor */
+}

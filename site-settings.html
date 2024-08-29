@@ -1,0 +1,244 @@
+<head>
+    <link rel="stylesheet" href="css/right-click-menu.css" media="all">
+    <link rel="stylesheet" href="css/buttons-and-menus.css" media="all">
+    <link rel="stylesheet" href="css/panels.css" media="all">
+  
+  </head>
+  
+  
+  <body class="body">
+    <aside class="aside">
+  
+      <div class="panel top">
+        <button disabled class="b-1" id="last-action-time"
+          style="color: black;z-index:1; position: absolute;top: 50%;left: 50%; transform: translate(-50%, -50%);">0.0</button>
+      </div>
+  
+      <div class="panel left" style="margin-top: 10px;">
+        <a href="https://webdev983.github.io/templatesv3"><button class="b-1">📂</button></a>
+      </div>
+  
+    </aside>
+    <main class="main">
+  
+      <div style="margin: 10px;">
+        <a href="https://webdev983.github.io/templatesv3/">
+          <button class="b-4" style="margin-right: 5px;"><label class="l-1">🌐</label>
+            <label class="l-2">Sites</label></button>
+        </a>
+  
+        <a href="https://webdev983.github.io/templatesv3/">
+          <button class="b-4" style="margin-right: 5px;"><label class="l-1">🛍️</label>
+            <label class="l-2">Orders</label></button>
+        </a>
+      </div>
+  
+      <div class="panel horizontal-menu">
+        <label class="l-1" style="margin-left: 40px; user-select: none; margin-right: 5px;">🌐</label><label
+          class="l-1 b-dark-blue" id="site-name-value">-</label>
+      </div>
+  
+      <label class="l-1 b-dark-blue" style=" margin-left: 30px; font-weight: 800;">AWS</label>
+  
+      <ul class="list-1 hide-bullets" id="aws-creds" style="margin-left: 30px;">
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">🆔</label><label class="l-3" id="aws-id"
+            ondblclick="onDoubleClick(event,'access_key')">-</label></li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">🔑</label><label class="l-3" id="aws-secret"
+            ondblclick="onDoubleClick(event,'secret_key')">-</label></td>
+        </li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">🌍</label><label class="l-3"
+            id="aws-bucket-region" ondblclick="onDoubleClick(event,'region')">-</label></td>
+        </li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">🪣</label><label class="l-3"
+            id="s3-bucket-name" ondblclick="onDoubleClick(event,'bucket')">-</label>
+        </li>
+      </ul>
+  
+  
+      <label class="l-1 b-dark-blue" style="font-style: italic; margin-left: 30px; font-weight: 800;">PP</label>
+      <ul class="list-1 hide-bullets" id="pp-creds" style="margin-left: 30px;">
+        <select id="environment-select" class="select-1" style="margin-bottom: 5px;" onchange="updateEnvironment(event)">
+          <option id="env-sandbox">🏖️ Sandbox</option>
+          <option id="env-live">🧑‍💼 Live</option>
+        </select>
+  
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">🆔</label><label class="l-3" id="pp-id"
+            ondblclick="onDoubleClick(event,'pp_id',true)">-</label></li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">🔑</label><label class="l-3" id="pp-secret"
+            ondblclick="onDoubleClick(event,'pp_secret',true)">-</label></li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;"> 🌐</label><label class="l-3" id="pp-domain"
+            ondblclick="onDoubleClick(event,'pp_domain',true)">-</label></li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">🛒</label><label class="l-3" id="pp-cart"
+            ondblclick="onDoubleClick(event,'pp_cart',true)">-</label></li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">✅</label><label class="l-3" id="pp-success"
+            ondblclick="onDoubleClick(event,'pp_success',true)">-</label></li>
+        <li><label class="l-3" style="user-select: none; margin-right: 5px;">❌</label><label class="l-3" id="pp-fail"
+            ondblclick="onDoubleClick(event,'pp_fail',true)">-</label></li>
+  
+  
+  
+      </ul>
+    </main>
+  
+  
+    </div>
+    <script>
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const site = urlSearchParams.get('site');
+      let response
+      let pp_response
+      function updateEnvironment() {
+        document.getElementById('env-live').selected ? savePP('environment', 'live') : savePP('environment', 'sandbox')
+  
+      }
+      function onDoubleClick(e, name, pp) {
+        var target = e.target;
+  
+        // Prevent the default double-click behavior
+        e.preventDefault();
+  
+        // Set the 'contenteditable' attribute to 'true', making the element editable
+        target.setAttribute('contenteditable', 'true');
+  
+        // Set focus on the editable element
+        target.focus();
+  
+        let textContent = target.textContent;
+  
+        target.addEventListener('blur', function (blurEvent) {
+          // Call the save function when the element loses focus
+  
+          if (textContent) {
+            pp ? savePP(name, blurEvent.target.textContent) : save(name, blurEvent.target.textContent);
+          }
+  
+          // Remove the 'contenteditable' attribute after blur
+          target.removeAttribute('contenteditable');
+        });
+      }
+  
+  
+      const save = async (name, text) => {
+        // Create a new object to only send the updated field to the server
+        response[name] = text
+        console.log(name + text)
+        console.log(JSON.stringify(response))
+  
+        response.ownerUUID = 'aws_creds:' + localStorage.getItem('ownerid')
+  
+  
+        const res1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(response),
+        });
+  
+      }
+      const savePP = async (name, text) => {
+        // Create a new object to only send the updated field to the server
+        pp_response[name] = text
+        pp_response.ownerUUID = 'pp_creds:' + localStorage.getItem('ownerid')
+        const res1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(pp_response),
+        });
+  
+      }
+      const getSite = async () => {
+        const res = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${site.toLowerCase()}:creds`)
+        response = await res.json()
+        console.log('1' + JSON.stringify(response))
+        if (!response) {
+          response = {
+            id: site.toLowerCase(),
+            sk: 'creds',
+            access_key: 'your_access_key',
+            secret_key: 'your_secret_key',
+            region: 'your_region',
+            bucket: 'your_bucket',
+            ownerUUID: 'aws_creds:' + localStorage.getItem('ownerid'),
+          };
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(response),
+          })
+  
+        }
+        response.id = site.toLowerCase()
+        // Get references to the HTML elements
+        const awsIdElement = document.getElementById('aws-id');
+        const awsSecretElement = document.getElementById('aws-secret');
+        const awsRegionElement = document.getElementById('aws-bucket-region');
+        const s3BucketNameElement = document.getElementById('s3-bucket-name');
+        const siteName = document.getElementById('site-name-value');
+  
+        // Update the content of the HTML elements with the values from the 'response' object
+        awsIdElement.textContent = response.access_key;
+        awsSecretElement.textContent = response.secret_key;
+        awsRegionElement.textContent = response.region;
+        s3BucketNameElement.textContent = response.bucket;
+        siteName.textContent = site;
+  
+      }
+      const getSitePP = async () => {
+        const res = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${site.toLowerCase()}:pp_creds`)
+        pp_response = await res.json()
+        console.log('1' + JSON.stringify(pp_response))
+        if (!pp_response) {
+          pp_response = {
+            id: site.toLowerCase(),
+            sk: 'pp_creds',
+            pp_id: 'pp_id',
+            pp_secret: 'pp_secret',
+            pp_domain: 'pp_domain',
+            pp_cart: 'pp_cart',
+            pp_success: 'pp_success',
+            pp_fail: 'pp_fail',
+            environment: 'live',
+            ownerUUID: 'pp_creds:' + localStorage.getItem('ownerid'),
+          };
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pp_response),
+          })
+  
+        }
+        pp_response.id = site.toLowerCase()
+        // Get references to the HTML elements
+        const pp_id = document.getElementById('pp-id');
+        const secret = document.getElementById('pp-secret');
+        const domain = document.getElementById('pp-domain');
+        const cart = document.getElementById('pp-cart');
+        const success = document.getElementById('pp-success');
+        const fail = document.getElementById('pp-fail');
+        const environment = document.getElementById('pp-fail');
+  
+        // Update the content of the HTML elements with the values from the 'response' object
+        pp_id.textContent = pp_response.pp_id;
+        secret.textContent = pp_response.pp_secret;
+        domain.textContent = pp_response.pp_domain;
+        cart.textContent = pp_response.pp_cart;
+        success.textContent = pp_response.pp_success;
+        fail.textContent = pp_response.pp_fail;
+  
+  
+        if (pp_response.environment === 'live') {
+          document.getElementById('env-live').selected = true
+        } else if (pp_response.environment === 'sandbox') {
+          document.getElementById('env-sandbox').selected = true
+        }
+      }
+      document.addEventListener('DOMContentLoaded', getSite);
+      document.addEventListener('DOMContentLoaded', getSitePP);
+    </script>

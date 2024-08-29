@@ -1,0 +1,1105 @@
+ 
+#pics-menu #remove-galeryMenu,
+#pics-menu [data-select-image],
+[data-pics-head] #pics-menu-choose-save-destination,
+[data-pics-head] [data-pics-queue-tdh],
+[data-pics-head] [data-pics-sku-var-buttons-tdh],
+[data-pics-head] [data-pics-sku-var-image-tdh],
+[data-pics-article] [data-pics-sku-var-buttons-tdh] {
+    display: none;
+}
+
+
+
+
+
+
+
+.login {
+  height: 80%;
+  display: flex;
+  width: 200vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #faf8f8; /* Optional: Background color */
+}
+
+.hidden {
+  display: none !important
+}
+
+  .gallery-image {
+    position: relative;
+    /* This is necessary for absolute positioning of children */
+  }
+
+
+  .picture-actions {
+    position: absolute;
+    left: 40px;
+    top: 0;
+    /* Adjust if you want to change the vertical positioning */
+    right: 20;
+    /* Adjust if you want to change the horizontal positioning */
+    display: flex;
+    /* Use flex layout to align buttons */
+    gap: 5px;
+    /* Space between buttons */
+    padding: 5px;
+    /* Padding around the buttons */
+  }
+
+
+
+
+
+
+
+
+
+
+/*.screen-reader-text {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+*/
+
+/*
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+*/
+
+
+  .summary-L-3::-webkit-details-marker {
+    list-style: none;
+    display: none;
+      font-size: 24px; 
+    
+  }
+
+
+.input-1 {
+  min-width: 700px; 
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 18px; margin-bottom: 7px;
+}
+
+.input-uuid {
+  min-width: 340px; 
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 18px; margin-bottom: 7px;
+}
+
+.input-actions {
+  min-width: 550px; 
+  padding: 3px; 
+  border: 1px solid #4A90E2;   
+  border-radius: 3px;   
+  font-size: 14px; 
+}
+
+.input-2 {
+  min-width: 180px; 
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 18px; margin-bottom: 7px;
+}
+
+
+.select-big {
+  width: 700px;
+  font-size: 24px; 
+  border-radius: 10px;
+  background-color: white;
+  border-width: 1px;
+  padding-left: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+}
+
+.select-big:hover {
+  border-radius: 10px;
+}
+
+
+
+
+
+.select-1 {
+  width: 250px;
+  font-size: 18px; 
+  border-radius: 5px;
+  background-color: white;
+  border-width: 1px;
+  padding-left: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  height: auto; 
+  overflow-y: auto;
+
+}
+
+.select-1:hover {
+  border-radius: 5px;
+}
+
+.click {
+  cursor: pointer;
+}
+
+
+.b-1 {
+  font-size: 30px; 
+  border-radius: 10px;
+
+  
+}
+
+.b-2 {
+  font-size: 24px; 
+  border-radius: 9px;
+
+
+  
+}
+
+.b-3 {
+  font-size: 21px; 
+  border-radius: 8px;
+}
+
+.t {
+  border-radius: 10px
+}
+
+.b-4 {
+  font-size: 19px; 
+  border-radius: 7px;
+}
+
+.b-5 {
+  font-size: 14px; 
+  border-radius: 6px;
+}
+
+.b-6 {
+  font-size: 11px; 
+  border-radius: 5px;
+}
+
+.b-p {
+  font-size: 18px; 
+  border-radius: 7px;
+
+}
+
+.b-1, .b-2, .b-3, .b-4, .b-5, .b-6, .b-p {
+  user-select: none;
+  transition: all 0.1s ease;
+  border-width: 1px;
+  border-color: #4A90E2;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Horizontal offset, Vertical offset, Blur radius, Color */
+  background-color: rgb(235, 234, 234);
+}
+
+.b-1:hover, .b-2:hover, .b-3:hover, .b-4:hover, .b-5:hover, .b-6:hover, .b-p:hover {
+  background-color: #c4c4c4; /*#f0f0f0;*/
+  transform: scale(1); /* 1.05*/
+}
+
+.b-selected {
+  border-width: 2.5px; 
+  transition: all 0.1s ease;
+  background-color:  #c4c4c4; /* A darker color on hover */
+  transform: scale(1); /* 0.95*/
+}
+
+.b-selected:hover {
+  background-color: #f0f0f0;
+  transform: scale(1); /* 1.02*/
+}
+
+.b-selected:hover {
+  background-color: #d8d7d7;
+  transform: scale(1);  /* 1.02*/
+}
+
+
+.b-green {
+  border-color: green;
+  background: #c7f5d2;
+
+}
+
+.b-green:hover {
+  background: #2ef85a;
+
+}
+
+.b-red {
+  border-color: red;
+  background: #f1afaf;
+}
+
+
+.b-dark-blue {
+  color: #005eca;
+}
+
+.b-dark-green {
+  color: #078500;
+}
+
+
+
+.b-red:hover {
+  background: #fc9393;
+
+}
+
+.b-yellow {
+  border-color: #fbff00;
+  background: #f0f7b2;
+}
+
+.b-yellow:hover {
+  background: #f3ff87;
+
+}
+
+
+
+.menu {
+  border-top-left-radius: 20px;
+  margin-bottom: 20px;
+  border-left: 1px solid #4A90E2;
+  border-top: 1px solid #4A90E2;
+  border-right: none;
+  border-bottom: none;
+  cursor: default;
+  width: fit-content;
+  clear: both;
+  margin-top: 10px;
+  }
+
+  .section {
+    border-top-left-radius: 20px;
+    margin-bottom: 20px;
+    border-left: 1px solid #4A90E2;
+    border-top: 1px solid #4A90E2;
+    border-right: none;
+    border-bottom: none;
+    cursor: default;
+    margin-top: 10px;
+    }
+  
+
+  .menu legend, .section legend {
+    color: 4A90E2;
+    user-select: none;
+  }
+
+
+
+  .table-1 {
+    max-width: 100%;
+    width: auto;
+    border-collapse: collapse;
+    border-radius: 10px; /* Rounded corners */
+}
+.table-1 th, td {
+    text-align: left;
+    padding-right: 50px;
+
+}
+
+.table-1 tbody tr:nth-child(odd) {
+    background-color:  #ffffff; 
+}
+
+.table-1 tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+.table-1 tbody tr:hover {
+    background-color:  #dddddd; /* A darker color on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+
+/* Стили для элемента caption */
+.table-1 caption {
+    caption-side: top; /* Расположение caption сверху таблицы */
+    text-align: left; /* Выравнивание текста caption слева */
+    font-size: 1.5em; /* Размер шрифта для caption */
+    font-weight: bold; /* Жирный шрифт для caption */
+    padding: 10px 0; /* Отступы сверху и снизу для caption */
+    color: darkblue; /* Цвет текста */
+}
+
+/* Стили для текста внутри caption */
+.table-1 caption .l-2 {
+    color: darkblue; /* Цвет текста */
+    font-weight: bold; /* Жирный шрифт */
+}
+
+/* Стили для кнопки внутри caption */
+.table-1 caption .b-2 {
+    font-size: 1em; /* Размер шрифта */
+    padding: 5px 10px; /* Отступы внутри кнопки */
+    background-color: #007bff; /* Фоновый цвет кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Курсор в виде руки при наведении */
+    margin-left: 10px; /* Отступ слева */
+}
+
+.table-1 caption .b-2:hover {
+    background-color: #0056b3; /* Темнее цвет кнопки при наведении */
+    transition: background-color 0.3s; /* Плавный переход при наведении */
+}
+
+
+
+/* table files */
+
+
+
+
+  .table-files {
+    max-width: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px; /* Rounded corners */
+}
+
+.table-files th, .table-files td {
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 2px;
+
+    position: relative; /* Добавлено */
+}
+
+.table-files tr:nth-child(odd) {
+    background-color: #ffffff; 
+}
+
+.table-files tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+.table-files tr:hover {
+    background-color: #dddddd;
+    transition: background-color 0.3s;
+}
+
+.action-icon {
+  user-select: none;
+  margin-right: 3px;
+}
+
+.action-label {
+display: block;
+}
+
+.action-single-label {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  }
+
+  
+.action-group-label
+{
+  display: block;
+  margin-left: -25px;
+  margin-top: 10px;
+  }
+
+
+.action-data-group {
+  margin-left: 25px;
+  margin-bottom: 10px;
+  }
+  
+  .action-data-group-lvl2 {
+    margin-bottom: 10px;
+    }
+    
+
+  
+
+
+  .action-group-list-label {
+    margin-left: -42px;
+    margin-bottom: 10px;
+    }
+    
+
+  
+
+.table-files td:first-child::before {
+  content: counter(rowNumber) ". ";
+  position: absolute;
+  right: calc(100% + 5px); /* Отступ от правого края ячейки */
+  top: calc(100% - 15.5px); /* Отступ от нижнего края ячейки */
+  transform: translateY(-50%);
+  font-size: 21px;
+  color:#4A90E2;
+  counter-increment: rowNumber;
+}
+
+
+
+
+.table-files {
+    counter-reset: rowNumber;
+}
+
+
+
+/* table files */
+
+
+
+
+.table-row-number tbody {
+  counter-reset: rowNumber; /* Инициализация счетчика */
+}
+
+.table-row-number tbody tr {
+  counter-increment: rowNumber; /* Увеличение счетчика для каждой строки */
+}
+
+.table-row-number tbody tr td:first-child {
+  position: relative; /* Делаем первую ячейку каждой строки относительно позиционированной */
+}
+
+.table-row-number tbody tr td:first-child::before {
+  content: counter(rowNumber) "."; /* Добавление номера строки */
+  position: absolute; /* Абсолютное позиционирование */
+  left: -20px; /* Сдвигаем влево от начала ячейки */
+  top: 50%; /* Выравнивание по центру ячейки */
+  transform: translateY(-50%); /* Центрирование относительно высоты ячейки */
+  font-size: 18px; /* Размер шрифта номера */
+}
+
+
+.list-1 li {
+  border-radius: 5px;
+
+}
+.list-1 
+  li:nth-child(odd) {
+  background-color: #ffffff;
+  padding: 5px;
+}
+
+.list-1 li:nth-child(even) {
+  background-color: #f0f0f0;
+  padding: 5px;
+
+}
+
+.list-1 li:hover {
+  background-color: #dddddd;
+}
+
+
+
+
+.hide-bullets {
+list-style-type: none; /* Removes bullets and numbers */
+padding-left: 0;      /* Resets the padding */
+margin-left: 0;       /* Resets the margin */
+}
+
+
+.list-2 li {
+  border-radius: 5px;
+
+}
+.list-2 
+  li:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.list-2 li:nth-child(even) {
+  background-color: #f0f0f0;
+
+}
+
+.list-2 li:hover {
+  background-color: #dddddd;
+}
+
+
+
+.l-1 {
+  font-size: 30px; 
+
+  
+}
+
+.l-2 {
+  font-size: 24px; 
+
+
+  
+}
+
+.l-3 {
+  font-size: 21px; 
+}
+
+.l-4 {
+  font-size: 19px; 
+}
+
+.l-5 {
+  font-size: 14px; 
+}
+
+.l-6 {
+  font-size: 11px; 
+}
+
+.l-p {
+  font-size: 18px; 
+
+}
+
+.textdata {
+  background-color: #fafafa; /* Светло-серый фон */
+  font-size: 16px; /* Удобный размер шрифта для чтения */
+  line-height: 1.5; /* Интерлиньяж для лучшей читаемости */
+  border-radius: 4px; /* Скругленные углы */
+  width: 1000px;
+}
+
+
+.text1 {
+  background-color: #fafafa; /* Светло-серый фон */
+  font-size: 16px; /* Удобный размер шрифта для чтения */
+  line-height: 1.5; /* Интерлиньяж для лучшей читаемости */
+  border-radius: 4px; /* Скругленные углы */
+  width: 700px;
+  height: 500px;
+}
+
+
+
+.tree-element {
+
+  border-bottom: none;
+  border-right: none;
+  border-top-left-radius: 0px;
+  border-top-width: 1px;
+  /*border-left-width: 1px; */
+  border-left: none;
+  border-top: 1px dashed #808080;
+  margin-top: 6px;
+  padding: 0;
+
+
+}
+
+
+
+
+
+
+.tree-element legend {
+  margin-bottom: -1px;
+}
+
+.arrow:hover {
+  background-color: green;
+  border-color: rgb(0, 92, 0);
+
+}
+
+
+.arrow {
+  border-width: 1px;
+  border-radius: 15px;
+}
+
+.pressed {
+  /* Define your pressed state styles here */
+  transform: scale(0.95);
+  /* Example pressed effect */
+}
+
+
+
+.table-2 {
+  max-width: 100%;
+  width: auto;
+  border-collapse: collapse;
+  border-radius: 10px; /* Rounded corners */
+}
+.table-2 th, td {
+  text-align: left;
+  padding-right: 50px;
+
+}
+
+.table-2  tr:nth-child(odd) {
+  background-color:  #ffffff; 
+}
+
+.table-2 tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.table-2 tr:hover {
+  background-color:  #dddddd; /* A darker color on hover */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+
+
+.table-row-number2 {
+counter-reset: rowNumber; /* Инициализация счетчика */
+}
+
+.table-row-number2 tr {
+counter-increment: rowNumber; /* Увеличение счетчика для каждой строки */
+}
+
+.table-row-number2 tr td:first-child {
+position: relative; /* Делаем первую ячейку каждой строки относительно позиционированной */
+}
+
+.table-row-number2 tr td:first-child::before {
+content: counter(rowNumber) "."; /* Добавление номера строки */
+position: absolute; /* Абсолютное позиционирование */
+left: -20px; /* Сдвигаем влево от начала ячейки */
+top: 50%; /* Выравнивание по центру ячейки */
+transform: translateY(-50%); /* Центрирование относительно высоты ячейки */
+font-size: 18px; /* Размер шрифта номера */
+}
+
+
+  .tagsTable-style th,
+  .tagsTable-style td {
+    padding: 5px;
+    text-align: left;
+  }
+
+  .tagsTable-style tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .tagsTable-style input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tagsTable-style tr:hover {
+    cursor: pointer;
+    background-color: #ddd;
+  }
+
+
+
+  .sku-attribute {
+    color:#078500;
+    font-weight: 900;
+  }
+
+
+  .input-sku {
+    width: 50px; 
+    padding: 5px; 
+    border: 2px solid #4A90E2;   
+    border-radius: 5px;   
+    font-size: 18px;
+  }
+  
+
+  .input-days {
+    width: 75px; 
+    padding: 5px; 
+    border: 2px solid #4A90E2;   
+    border-radius: 5px;   
+    font-size: 18px;
+  }
+  
+
+
+
+  .table-sku {
+    max-width: 100%;
+    width: auto;
+    border-collapse: collapse;
+    border-radius: 10px; /* Rounded corners */
+}
+.table-sku  td {
+    text-align: center;
+    padding-right: 50px;
+
+}
+
+.table-sku  th {
+  text-align: left;
+  padding-right: 50px;
+
+}
+
+
+
+
+
+.table-sku tbody tr:nth-child(odd) {
+    background-color:  #ffffff; 
+}
+
+.table-sku tbody tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+.table-sku tbody tr:hover {
+    background-color:  #dddddd; /* A darker color on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+
+/* Стили для элемента caption */
+.table-sku caption {
+    caption-side: top; /* Расположение caption сверху таблицы */
+    text-align: left; /* Выравнивание текста caption слева */
+    font-size: 1.5em; /* Размер шрифта для caption */
+    font-weight: bold; /* Жирный шрифт для caption */
+    padding: 10px 0; /* Отступы сверху и снизу для caption */
+    color: darkblue; /* Цвет текста */
+}
+
+/* Стили для текста внутри caption */
+.table-sku caption .l-2 {
+    color: darkblue; /* Цвет текста */
+    font-weight: bold; /* Жирный шрифт */
+}
+
+/* Стили для кнопки внутри caption */
+.table-sku caption .b-2 {
+    font-size: 1em; /* Размер шрифта */
+    padding: 5px 10px; /* Отступы внутри кнопки */
+    background-color: #007bff; /* Фоновый цвет кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Курсор в виде руки при наведении */
+    margin-left: 10px; /* Отступ слева */
+}
+
+.table-sku caption .b-2:hover {
+    background-color: #0056b3; /* Темнее цвет кнопки при наведении */
+    transition: background-color 0.3s; /* Плавный переход при наведении */
+}
+
+
+
+.price-old {
+  font-size: 21px; 
+  float: left;
+  margin-left: 20px;
+}
+
+.price-discount {
+  font-size: 21px; 
+  float: right;
+  margin-right: 20px;
+
+}
+
+
+.price-normal {
+  font-size: 21px; 
+}
+
+
+.price-normal::before {
+  content: '$';
+  margin-right: 0px; /* Расстояние между значком и текстом */
+}
+
+.price-discount::before {
+  content: '$';
+  margin-right: 0px; /* Расстояние между значком и текстом */
+}
+
+
+         .scrollable-table-container {
+            max-width: 100%; /* Установите желаемую максимальную ширину */
+            overflow-x: auto; /* Горизонтальная прокрутка */
+        }
+
+        .scrollable-table-container::-webkit-scrollbar {
+            display: none; /* Скрыть полосу прокрутки */
+        }
+
+        /* Для Firefox */
+        .scrollable-table-container {
+            scrollbar-width: none; /* Скрыть полосу прокрутки */
+        }
+
+
+
+
+        .select-country {
+          width: 100px;
+          font-size: 15px; 
+          border-radius: 3px;
+          background-color: white;
+          border-width: 1px;
+          padding-left: 3px;
+          padding-top: 2px;
+          padding-bottom: 2px;
+        
+        }
+        
+        .select-country:hover {
+          border-radius: 3px;
+        }
+        
+
+
+        .select-num {
+          width: 50px;
+          font-size: 15px; 
+          border-radius: 3px;
+          background-color: white;
+          border-width: 1px;
+          padding-left: 3px;
+          padding-top: 2px;
+          padding-bottom: 2px;
+        
+        }
+        
+        .select-num:hover {
+          border-radius: 3px;
+        }
+        
+
+
+.sku-key {
+  font-size: 21px; 
+  font-weight: 700;
+  color:rgb(7, 133, 0);
+}
+
+.sku-value {
+  font-size: 21px; 
+  font-weight: 700;
+}
+
+
+
+.select-time {
+  font-size: 18px; 
+  border-radius: 5px;
+  background-color: white;
+  border-width: 1px;
+  padding-left: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+
+}
+
+.select-time:hover {
+  border-radius: 5px;
+}
+
+
+.table-timer {
+  border-collapse: collapse; /* Удаление пробела между ячейками таблицы */
+}
+.table-timer td {
+  padding: 0;
+  margin: 0;
+  text-align: center; /* Горизонтальное выравнивание текста */
+  vertical-align: middle; /* Вертикальное выравнивание текста */
+}
+.table-timer select,
+.table-timer span {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.table-timer td:first-child {
+  padding-right: 10px; /* Добавление отступа справа для первой ячейки */
+}
+.table-timer td:not(:first-child) {
+  padding-left: 10px; /* Добавление отступа слева для всех ячеек, кроме первой */
+}
+.table-timer button {
+  margin: 0;
+  padding: 5px; /* Добавление внутреннего отступа для кнопки */
+}
+.table-timer select {
+  padding: 2px 10px; /* Добавление внутреннего отступа для элементов select */
+}
+
+.variable-builder-div {
+  margin-top: 10px;
+
+}
+
+
+.variable-builder-div-multi {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  max-width: 50%
+
+}
+
+
+
+.variable-builder-input {
+  width: 70%; 
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 18px; 
+}
+
+
+.variable-builder-input-multi {
+  width: 100%; 
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 18px; 
+}
+
+
+
+
+.h1-input-div {
+  display: flex;
+  align-items: center;
+  max-width: 50%
+}
+
+
+
+
+
+.h1-input {
+  width: 70%; 
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 18px; 
+}
+
+
+
+.link-div-editable {
+  width: 40px; /* Фиксированная ширина */
+  height: 20px; /* Фиксированная высота */
+  display: inline-block;  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: ltr;
+  text-align: left;
+  border: 1px solid #000; /* Для наглядности */
+  box-sizing: border-box; /* Учитывает границу в ширине */
+}
+
+.link-div-editable.filled {
+  background-color: green; /* Цвет фона для непустого элемента */
+}
+
+
+.table-price-r {
+  width: 79px;
+  float: right;
+}
+
+
+.table-price-l {
+  width: 79px;
+  float: left;
+}
+
+.table-price {
+  width: 79px;
+}
+
+
+
+.partial-green {
+   border-radius: 50%; 
+   border-style: dashed; 
+   border-width: 3px; border-color: green; 
+   border-image: linear-gradient(to right, green 100%, transparent 0%) 3; 
+   padding-left: 2px; padding-right: 2px;
+}
+
+
+.table-reviews {
+  width: 100%; /* Таблица займет всю ширину родительского контейнера */
+  border-collapse: collapse; /* Убираем промежутки между ячейками таблицы */
+
+}
+
+.textarea-reviews {
+  width: 100%; /* Таблица займет всю ширину родительского контейнера */
+  height: 300px;
+}
+
+
+
+.select-collection-type {
+  max-width: 200px;
+  font-size: 15px; 
+  border-radius: 3px;
+  background-color: white;
+  border-width: 1px;
+  padding-left: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+
+}
+
+.select-collection-type:hover {
+  border-radius: 3px;
+}
+
+
+
+.sku-attached {
+  font-size: 24px;
+}
+  .collection-attached {
+    font-size: 24px; 
+    border-color: green;
+    background: #2ef85a;
+}
+
+
+.data-menu {
+  margin-left: 30px; 
+  padding-top: 10px;
+}
+

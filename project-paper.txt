@@ -1,0 +1,158 @@
+================
+about imoort logic
+if we have p-lead and p-img
+its exception
+so if we have it then first p or first img goes there, p-lead not copies, not moves anywhere, we put there innerHTML and forget about it, next go by general logic
+============
+
+
+
+
+ID's
+id is uuidv4
+-when element created it gets id: id="id"
+-when element copied it gets copy-id:  id="id:copy-id"
+-when element has data-id-Parent attribute, all it child's get element id: id="parent-id;id:copy-id" or id="parent-id;id"
+-when component attached to other component,    id of attached component changes: id="new-component-id"
+-when component replaced
+  *the replacement component/components elements adds attribute: data-replace-id="new-component-id" 
+  *the replacement component/components elements which has no copy id adds new-component-id in role of copy id: id="id:new-component-id"
+
+
+  
+============================EASY CASES==========================================
+---------------------------------------------------------------------------------
+Usual Append
+---------------------------------------------------------------------------------
+  *target element found by id
+   child element found by query  id starts with
+   all child elements  append to target element
+   ==================================================
+   result: all child elements appended to target element
+---------------------------------------------------------------------------------
+Append + ( duplicate with parent option)
+---------------------------------------------------------------------------------
+  *target element found by id
+   child elements found by query id starts  with
+   target element duplicated as many times as many child elements minus first copy
+   each copy of target element gets copy-id - id="id:copy-id", except first
+   each target element copy get it own child element
+   ==================================================
+   result: each child element appended to each copy of target element
+
+
+---------------------------------------------------------------------------------
+Insert before
+---------------------------------------------------------------------------------
+  *find target element by id
+   find child elements by id starts with
+   insert all child elements before target element
+   ==================================================
+   result: child elements inserted before target element
+
+
+---------------------------------------------------------------------------------
+Determine there is Append  or insert with replacement components option
+---------------------------------------------------------------------------------
+  *if target element not found, query for id starts with
+   if found check element has data-replace-id 
+   if yes then  action in replacement component
+  *child element has data-replace-id
+========================================HARD CASES================================
+---------------------------------------------------------------------------------
+Usual Append + (target element has data-replace-id) + (child element has data-replace-id)
+---------------------------------------------------------------------------------
+   *query target elements by starts with id
+    get list of data-replace-id from found elements
+    remove duplicates (if any) from list of data-replace-id
+    loop for each
+    find target element id="id;new-component-id"
+    find child elements: data-replace-id = "new-component-id" & id starts with id
+    append all child elements to target element
+ ===============================================================================
+ result: for each replacement component, all child elements append to target element
+ 
+---------------------------------------------------------------------------------
+Usual Append + (target element has replace-id) + (child element has data-replace-id) + (duplicate with parent option)
+---------------------------------------------------------------------------------
+   *query target elements by starts with id
+    get list of data-replace-id from found elements
+    remove duplicates from list of data-replace-id
+    loop for each
+    find target element id="id;new-component-id"
+    find child elements: data-replace-id = "new-component-id" & id starts with id
+    target element duplicated as many times as many child elements minus first copy
+    each copy of target element gets copy-id - id="id:copy-id", except first it already has new component id in role of copyid
+    append each child element to each target element
+    do next replacement component
+
+===================================================================================
+result: in each replacement component, each child element appended to it a copy of target element.    
+
+---------------------------------------------------------------------------------
+Usual Append + (target element has data-replace-id) + (child element has no data-replace-id & HAS NO copies)
+---------------------------------------------------------------------------------
+   *find target elements by starts with id
+    get list of data-replace-id from found elements
+    remove duplicates (if any) from list of data-replace-id
+    find child element by id
+    loop for each
+    find target element id="id;new-component-id"
+    append it a copy of child element
+    add child element data-replace-id="new-component-id"
+    add child element id="id:new-component-id
+    do next replacement component
+ ===============================================================================
+ result: for each replacement component, child element append to target element
+ 
+ 
+---------------------------------------------------------------------------------
+Usual Append + (target element has data-replace-id) + (child element has no data-replace-id)&(has copies)  &or  (dublicate with parent)
+---------------------------------------------------------------------------------
+cant do because child element has copies and each copy has copy id, if append to replacements, it will have same id's
+
+---------------------------------------------------------------------------------
+Usual Append + (target element has no data-replace-id) + (child element has data-replace-id)
+---------------------------------------------------------------------------------
+   do as usual append,  because all child components be like copies
+   
+---------------------------------------------------------------------------------
+Usual Append + (target element has no data-replace-id) + (child element has data-replace-id) + (duplicate with parent option)
+---------------------------------------------------------------------------------
+do as usual append with duplicate parent,  because all child components be like copies
+
+
+
+---------------------------------------------------------------------------------
+Insert before + ( target element has data-replace-id) + (child element has no data-replace-id) & HAS NO COPIES!!!!
+---------------------------------------------------------------------------------
+  *find target elements by starts with id
+   get list of data-replace-ids from found elements
+   remove duplicates from list of data-replace-ids
+   find child element by id
+   loop for each
+   find each target element by id="id:new-component-id"
+   insert copy of child element before target element
+   add child element get data-replace-id="new-component-id"
+   add child element id="id:new-component-id
+   ==================================================
+   result: inside of each replacement component, child element inserted before target element.
+   
+---------------------------------------------------------------------------------   
+Insert before + ( target element has data-replace-id) + (child element has data-replace-id)
+---------------------------------------------------------------------------------
+  *find target elements by starts with id
+   get list of data-replace-ids from found elements
+   remove duplicates from list of data-replace-ids
+   loop for each
+   find target element by id="id:new-component-id"
+   find child elements by id starts with id data-replace-id="new-component-id"
+   insert all child elements before target
+   ==================================================
+   result: inside of each replacement component, child elements inserted before target element.
+   
+
+---------------------------------------------------------------------------------
+ Insert before + ( target element has no data-replace-id) + (child element has data-replace-id)
+---------------------------------------------------------------------------------
+do as usual insert-Before, since all components will be like copies.

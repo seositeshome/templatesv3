@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetching Files with Ordinal Suffixes</title>
+  <style>
+    hr {
+      width: 3px;
+      background-color: black;
+      border: none;
+      height: 20px; /* Height to make the line visible vertically */
+    }
+  </style>
+</head>
+<body>
+  <h1>Fetching Files with Correct Ordinal Suffixes</h1>
+  <p id="timeTaken">Total time taken: </p> <!-- Time taken will be displayed here -->
+  <button id="fetchButton">Fetch Files</button>
+  <div id="fileContents"></div>
+
+  <script>
+    // Function to get the correct ordinal suffix for a number
+    function getOrdinalSuffix(n) {
+      const suffixes = ["th", "st", "nd", "rd"];
+      const v = n % 100;
+      return n + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
+    }
+
+    // Array of file URLs with ordinal suffix from test (3rd copy).js to test (111th copy).js
+    const urls = [];
+    for (let i = 3; i <= 111; i++) {
+      const ordinal = getOrdinalSuffix(i); // Get the correct ordinal suffix for the number
+      urls.push(`https://webdev983.github.io/templatesv3/test/test%20(${ordinal}%20copy).js`); // Path to the files
+    }
+    
+    const fileContents = document.getElementById('fileContents');
+    const fetchButton = document.getElementById('fetchButton');
+    const timeTakenElement = document.getElementById('timeTaken'); // Element to display time taken
+
+    // Function to fetch the content of a file
+    async function fetchFile(url, index) {
+      try {
+        const response = await fetch(url); // Send the request
+        if (response.ok) {
+          const text = await response.text(); // Read the response as text
+          return `<details><summary>Fetched from: test (${index} copy).js</summary><pre>${text}</pre></details><hr>`; // Return the content inside <details> and <summary>
+        } else {
+          return `<details><summary>Fetched from: test (${index} copy).js</summary><pre>Error: ${response.status}</pre></details><hr>`; // Handle error
+        }
+      } catch (error) {
+        return `<details><summary>Fetched from: test (${index} copy).js</summary><pre>Error: ${error.message}</pre></details><hr>`; // Handle network error
+      }
+    }
+
+    // Main function to fetch files asynchronously
+    async function fetchFileMultipleTimes() {
+      fileContents.innerHTML = ''; // Clear the content before starting
+      const startTime = performance.now(); // Start measuring time
+
+      // Fetch all files in parallel using Promise.all
+      const promises = urls.map((url, i) => fetchFile(url, getOrdinalSuffix(i + 3)));
+      const results = await Promise.all(promises); // Wait for all the fetch requests to complete
+
+      // Display the results
+      fileContents.innerHTML = results.join('');
+
+      const endTime = performance.now(); // End measuring time
+      const totalTime = ((endTime - startTime) / 1000).toFixed(2); // Calculate total time in seconds and format it
+      timeTakenElement.textContent = `Total time taken: ${totalTime} seconds`; // Display the total time
+    }
+
+    // Add event listener to the button
+    fetchButton.addEventListener('click', fetchFileMultipleTimes);
+  </script>
+</body>
+</html>

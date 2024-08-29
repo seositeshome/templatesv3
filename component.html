@@ -11885,9 +11885,9 @@ checkbox1.setAttribute('hidden', "");
             }).then(e => e.json())
 
             const src = images?.items[0]?.crops?.split(',')[0].split(' ')[0]
-            const imgEl =art ? cloned.querySelectorAll('.article_lead_img') : cloned.querySelector('.product_lead_img')
+            const imgEl =art ? cloned.querySelector('.article_lead_img') : cloned.querySelector('.product_lead_img')
             imgEl && imgEl.setAttribute('src', src)
-            const heading =art ? cloned.querySelectorAll('.article_heading') : cloned.querySelector('.product_heading')
+            const heading =art ? cloned.querySelector('.article_heading') : cloned.querySelector('.product_heading')
 
             const a = heading.querySelector('a')
             if (a) {

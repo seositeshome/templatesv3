@@ -11717,9 +11717,9 @@ checkbox1.setAttribute('hidden', "");
               'Content-Type': 'application/json',
             },
           }).then(e => e.json()).then(({ items }) => items[0]?.value)
-          const h = section.querySelector('.collection_products_heading')
+          const h = section.querySelector('.collection_articles_heading')
           h && (h.textContent = heading)
-          const l = section.querySelector('.collection_products_lead_paragraph')
+          const l = section.querySelector('.collection_articles_lead_paragraph')
           l && (l.textContent = leadP)
         }
         else if (name === 'attached_collection') {
@@ -11750,9 +11750,9 @@ checkbox1.setAttribute('hidden', "");
               'Content-Type': 'application/json',
             },
           }).then(e => e.json()).then(({ items }) => items[0]?.value)
-          const h = section.querySelector('.collection_products_heading')
+          const h =art? section.querySelector('.collection_articles_heading'):  section.querySelector('.collection_products_heading')
           h && (h.textContent = heading)
-          const l = section.querySelector('.collection_products_lead_paragraph')
+          const l =art? section.querySelector('.collection_articles_lead_paragraph'): section.querySelector('.collection_products_lead_paragraph')
           l && (l.textContent = leadP)
 
         }

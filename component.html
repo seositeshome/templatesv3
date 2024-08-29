@@ -11900,7 +11900,7 @@ checkbox1.setAttribute('hidden', "");
             const wAnchor = anchor.startsWith('https://') ? anchor : 'https://' + anchor
             const anchEl = art ? cloned.querySelectorAll('.article_anchor') :cloned.querySelectorAll('.product_anchor')
             anchEl.forEach(e => e.setAttribute('href', wAnchor))
-            if (prices[0]?.oldPrice) {
+            if (prices[0]?.oldPrice && !art) {
               const price = Math.min(...prices.map(obj => parseInt(obj.price)));
               const oldprice = Math.min(...prices.map(obj => parseInt(obj.oldPrice)));
               const pV = cloned.querySelector('.price_discount').querySelector('.price_value')

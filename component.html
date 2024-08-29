@@ -11849,7 +11849,7 @@ checkbox1.setAttribute('hidden', "");
             if (max > 1) {
               cloned = originalCart.cloneNode(true)
             }
-            const id1 = art ? `sku:${element}` :`article:${element}`
+            const id1 = !art ? `sku:${element}` :`article:${element}`
             const anchorUrl = `${backend_url}?id=${id1}&sk=addedSite:${pathItemPath.split('/')[0].toLowerCase()}&startsWith=true`
             console.log('getting ' + anchorUrl)
             const anchor = await fetch(anchorUrl, {

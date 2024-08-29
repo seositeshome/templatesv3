@@ -11863,7 +11863,7 @@ checkbox1.setAttribute('hidden', "");
               continue
             }
             const st = pathItemPath.split('/')[0].toLowerCase()
-            const novar = await fetch(`${backend_url}?id=${id1}&sk=data_heading-without-vars-sku:${st}&startsWith=true`, {
+            const novar = await fetch(`${backend_url}?id=${id1}&sk=${art?'data_article-heading':'data_heading-without-vars-sku'}:${st}&startsWith=true`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',

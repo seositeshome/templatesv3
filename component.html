@@ -11627,6 +11627,7 @@ checkbox1.setAttribute('hidden', "");
     }
     var generateArticleCollection = async () => {
       const cols = querySelectorAll1('[data-builder-collection]')
+      console.log('pushing article coll type all')
       for (const col1 of cols) {
         const [coltype, col] = col1.getAttribute('data-builder-collection').split(':')
         const collName = col

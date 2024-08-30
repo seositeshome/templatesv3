@@ -11626,9 +11626,9 @@ checkbox1.setAttribute('hidden', "");
 
     }
     var generateArticleCollection = async () => {
-      const cols = querySelectorAll1('[data-builder-article-collection]')
+      const cols = querySelectorAll1('[data-builder-collection]')
       for (const col1 of cols) {
-        const [coltype, col] = col1.getAttribute('data-builder-article-collection').split(':')
+        const [coltype, col] = col1.getAttribute('data-builder-collection').split(':')
         const collName = col
         if (col && coltype && coltype !== 'related_products') {
           mains = {

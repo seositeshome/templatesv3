@@ -11873,6 +11873,12 @@ checkbox1.setAttribute('hidden', "");
                   'Content-Type': 'application/json',
                 },
               }).then(e => e.json()).then(({ items }) => items[0]?.value)
+              const plead = await fetch(`${backend_url}?id=${id1}&sk=data_article-lead-paragraph:${st}&startsWith=true`, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }).then(e => e.json()).then(({ items }) => items[0]?.value)
 
               const prices = await fetch(`${backend_url}?id=${id1}&sk=site_price:${pathItemPath.split('/')[0].toLowerCase()}&startsWith=true`, {
                 method: 'GET',
@@ -11892,7 +11898,10 @@ checkbox1.setAttribute('hidden', "");
               const imgEl = art ? cloned.querySelector('.article_lead_img') : cloned.querySelector('.product_lead_img')
               imgEl && imgEl.setAttribute('src', src)
               const heading = art ? cloned.querySelector('.article_heading') : cloned.querySelector('.product_heading')
-
+              const pleadE = cloned.querySelector('.article_p_lead')
+              if(plead  && pleadE){
+                pleadE.textContent = plead
+              }
               const a = heading.querySelector('a')
               if (a) {
                 a.textContent = novar

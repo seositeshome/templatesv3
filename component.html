@@ -7105,7 +7105,7 @@
           pathItemArticleCollection = pathItem.article_collection
         }
       }
-      await handleMenus()
+      
       try {
         await onOpen1()
       }
@@ -7113,6 +7113,7 @@
         console.log(e.message)
       }
       await loadFromDb()
+      await handleMenus()
       if (pathItem.hub_items?.menus?.import_menu_toggle) {
         document.getElementById('import-menu-2').removeAttribute('hidden')
         !toPublish && await handleImportMenu2()
@@ -11627,7 +11628,7 @@ checkbox1.setAttribute('hidden', "");
     }
     var generateArticleCollection = async () => {
       const cols = querySelectorAll1('[data-builder-collection]')
-      console.log('pushing article coll type all')
+      console.log('pushing article coll type all ')
       for (const col1 of cols) {
         const [coltype, col] = col1.getAttribute('data-builder-collection').split(':')
         const collName = col

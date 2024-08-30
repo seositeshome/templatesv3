@@ -6305,7 +6305,7 @@
         */
       }
       //setAttAction(compEl.id + '-tree', 'data-sku-variable', pathItemSku + ':' + skuVariables[0].sk)
-      await generateForSite(firstSite, firstComparision, skuVariables[0])
+      firstComparision ? await generateForSite(firstSite, firstComparision, skuVariables[0]) : compEl.setAttribute('hidden','')
       let lastEl = firstSite
 
       for (const comparison of comparisionPics) {

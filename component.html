@@ -18374,8 +18374,14 @@ elementsToRemove.forEach(element => element.remove());
 
     }
     const cleanSkuToHtmlF = async () => {
-      const article = querySelectorAll1('.product_article')[0].querySelector('.product_attributes_fieldset')
-      const allSubs = article.querySelectorAll('*')
+      const articles = querySelectorAll1('.product_article')[0].querySelectorAll('.product_attributes_fieldset')
+      const allSubs = []
+      const allSubs1 = articles.forEach(e => {
+
+        const els = e.querySelectorAll('*')
+        allSubs.push(...Array.from(els))
+
+      })
       const allIds = Array.from(allSubs).map(e => e.id + "-tree")
       allIds.push(article.id + '-tree')
       const filteredActions = actions.filter(e =>
@@ -18383,7 +18389,7 @@ elementsToRemove.forEach(element => element.remove());
         &&
         e.target_element &&
         typeof e.target_element === 'string' &&  // Check if target_element is a string
-        allIds.find(item=> e.target_element.startsWith(item.split(':')[0])))
+        allIds.find(item => e.target_element.startsWith(item.split(':')[0])))
 
       const ps = filteredActions.map(
         action =>

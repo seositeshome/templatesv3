@@ -7429,7 +7429,7 @@
           responseData = await response.json();
         }
         else {
-          setCachedFalse()
+          setCachedFalse(id)
           const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
             method: 'GET',
             headers: {
@@ -13037,7 +13037,7 @@ checkbox1.setAttribute('hidden', "");
       log1('time' + time)
       actionLog.push(element)
       !firstLoad && await pushActionToDb(element)
-      !firstLoad && await setCachedFalse()
+      !firstLoad && await setCachedFalse(pathItem.id)
       try {
         if (element.action !== 'Replace_Component') {
           let ac = element.action
@@ -13081,9 +13081,9 @@ checkbox1.setAttribute('hidden', "");
 
       }
     }
-    const setCachedFalse = () => {
-      postToDb({ id: 'updated-component', sk: pathItem.id })
-      postToDb({ id: pathItem.id, sk: 'cache',value:false })
+    const setCachedFalse = (id) => {
+      postToDb({ id: 'updated-component', sk: id })
+      postToDb({ id:id, sk: 'cache',value:false })
     }
     const pushActionToDb = async (action) => {
       const urlSearchParams = new URLSearchParams(window.location.search);

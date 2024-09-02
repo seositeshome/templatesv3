@@ -18384,6 +18384,7 @@ elementsToRemove.forEach(element => element.remove());
       })
       const allIds = Array.from(allSubs).map(e => e.id + "-tree")
       allIds.push(...Array.from(articles).map(e=>e.id))
+      console.log('all Ids '+JSON.stringify(allIds))
       const filteredActions = actions.filter(e =>
         e.action !== 'Add_Component'
         &&

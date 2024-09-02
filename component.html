@@ -7124,7 +7124,7 @@
       lastActionTime.textContent = timerElement.textContent;
       loadingScreen.style.display = 'none';
       if (updateComponentsMap) {
-        const componentsIds = Object.keys(cache).filter(e=>cache[e].items.find(element=>element.sk ==='path').lsi1.split('/')[0] ===pathItemPath.split('/')[0])
+        const componentsIds = Object.keys(cache).filter(e => cache[e].items.find(element => element.sk === 'path').lsi1.split('/')[0] === pathItemPath.split('/')[0])
         const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
@@ -7136,7 +7136,7 @@
       }
       if (updateStyleMap) {
         console.log('updating style map')
-        const componentsIds = Object.keys(cache).filter(e=>cache[e].items.find(element=>element.sk ==='path').lsi1.split('/')[0] !==pathItemPath.lsi1.split('/')[0])
+        const componentsIds = Object.keys(cache).filter(e => cache[e].items.find(element => element.sk === 'path').lsi1.split('/')[0] !== pathItemPath.lsi1.split('/')[0])
         const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
@@ -7408,7 +7408,7 @@
       if (cache[id]) {
         return deepCopy(cache[id])
       }
-      
+
 
       try {
         // Make a GET request to the API with the 'id' query parameter
@@ -7427,8 +7427,8 @@
         // Parse and log the response or handle it as needed
         const responseData1 = await response1.json();
         let responseData
-        console.log('value2 '+JSON.stringify(responseData1))
-        if (responseData1.items.length &&responseData1.items[0].value) {
+        console.log('value2 ' + JSON.stringify(responseData1))
+        if (responseData1.items.length && responseData1.items[0].value) {
           const response = await fetch(`/components/${id}.json`, {
             method: 'GET',
             headers: {
@@ -7442,7 +7442,7 @@
           // Parse and log the response or handle it as needed
           responseData = await response.json();
         }
-        if(!responseData) {
+        if (!responseData) {
           setCachedFalse(id)
           const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
             method: 'GET',
@@ -7464,8 +7464,19 @@
 
         // Store the response in the cache for future use
         !main && (cache[id] = deepCopy(responseData));
-        !firstLoad && pathItemPath && responseData.items.find(e=>e.sk==='path').lsi1.split('/')[0] ===pathItemPath.split('/')[0]  && (updateComponentsMap = true)
-        !firstLoad && pathItemPath && responseData.items.find(e=>e.sk==='path').lsi1.split('/')[0] !==pathItemPath.split('/')[0]  && (updateStyleMap = true)
+        const pathItemPrefix = pathItemPath ? pathItemPath.split('/')[0] : null;
+        const responsePathItem = responseData.items.find(e => e.sk === 'path');
+        const responsePathPrefix = responsePathItem ? responsePathItem.lsi1.split('/')[0] : null;
+
+        if (pathItemPrefix) {
+          if (!firstLoad) {
+            if (responsePathPrefix === pathItemPrefix) {
+              updateComponentsMap = true;
+            } else {
+              updateStyleMap = true;
+            }
+          }
+        }
 
         return responseData;
       } catch (error) {
@@ -13099,7 +13110,7 @@ checkbox1.setAttribute('hidden', "");
     }
     const setCachedFalse = (id) => {
       postToDb({ id: 'updated-component', sk: id })
-      postToDb({ id:id, sk: 'cache',value:false })
+      postToDb({ id: id, sk: 'cache', value: false })
     }
     const pushActionToDb = async (action) => {
       const urlSearchParams = new URLSearchParams(window.location.search);
@@ -17310,12 +17321,12 @@ elementsToRemove.forEach(element => element.remove());
       if (id) {
 
         responseData = await getRes(id)
-        const pI = responseData.items.find(e=>e.sk==='path')
+        const pI = responseData.items.find(e => e.sk === 'path')
         const sp = pI.lsi1.split('|')
-        
-        if(!styleItem && sp[0] !==pathItemPath.split('/')[0] && sp.pop() ==='Hub'){
+
+        if (!styleItem && sp[0] !== pathItemPath.split('/')[0] && sp.pop() === 'Hub') {
           styleItem = pI
-          Promise.all(responseData.items.find(e=>e.sk==='componentsMap').items.map(id => getRes(id, false, true)))
+          Promise.all(responseData.items.find(e => e.sk === 'componentsMap').items.map(id => getRes(id, false, true)))
         }
         const reusableId1 = reusableId ? reusableId + '|' : ''
         const { items } = responseData

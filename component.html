@@ -17314,6 +17314,7 @@ elementsToRemove.forEach(element => element.remove());
         
         if(!styleItem && sp[0] !==pathItemPath.split('/')[0] && sp.pop() ==='Hub'){
           styleItem = pI
+          Promise.all(responseData.items.find(e=>e.sk==='componentsMap').items.map(id => getRes(id, false, true)))
         }
         const reusableId1 = reusableId ? reusableId + '|' : ''
         const { items } = responseData

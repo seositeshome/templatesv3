@@ -7138,11 +7138,11 @@
       if (updateStyleMap) {
         console.log('updating style map')
         const pathItemPrefix = pathItemPath.split('/')[0];
-        
+
         const componentsIds = Object.keys(cache).filter(key => {
           const items = cache[key].items;
           const pathItem = items.find(item => item.sk === 'path');
-          console.log('comp52 '+pathItem.lsi1)
+          console.log('comp52 ' + pathItem.lsi1)
           return pathItem && pathItem.lsi1.split('/')[0] !== pathItemPrefix;
         }); const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
@@ -7477,11 +7477,15 @@
         console.log('prefix ' + pathItemPrefix)
         console.log('prefix2 ' + responsePathPrefix)
         if (pathItemPrefix) {
-          if (responsePathPrefix === pathItemPrefix) {
-            updateComponentsMap = true;
-          } else {
-            console.log('style map update')
-            updateStyleMap = true;
+          if (!firstLoad) {
+
+
+            if (responsePathPrefix === pathItemPrefix) {
+              updateComponentsMap = true;
+            } else {
+              console.log('style map update')
+              updateStyleMap = true;
+            }
           }
 
         }

@@ -7123,7 +7123,7 @@
       lastActionTime.textContent = timerElement.textContent;
       loadingScreen.style.display = 'none';
       if (updateComponentsMap) {
-        const componentsIds = Object.keys(cache)
+        const componentsIds = Object.keys(cache).filter(e=>e.items.find(element=>element.sk ==='path').lsi1.split('/')[0] ===pathItemPath.split('/')[0])
         const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
@@ -7395,7 +7395,7 @@
       if (cache[id]) {
         return deepCopy(cache[id])
       }
-      !firstLoad && (updateComponentsMap = true)
+      
 
       try {
         // Make a GET request to the API with the 'id' query parameter
@@ -7451,6 +7451,7 @@
 
         // Store the response in the cache for future use
         !main && (cache[id] = deepCopy(responseData));
+        !firstLoad && pathItemPath && responseData.items.find(e=>e.sk==='path').lsi1.split('/')[0] ===pathItemPath.split('/')[0]  && (updateComponentsMap = true)
 
         return responseData;
       } catch (error) {

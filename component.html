@@ -5890,8 +5890,8 @@
       url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${tableLsi}`;
       const { items } = await fetch(url).then(e => e.json())
 
-      const eventData1 = { url: `https://webdev983.github.io/templatesv3/component.html?id=${items[0].id}&clean=1&ownerid=${ownerid}` };
-      //console.log('event ' + eventData1.url)
+      const eventData1 = { url: `https://webdev983.github.io/templatesv3/component.html?id=${items[0].id}&cleanSkuToHtml=1&ownerid=${ownerid}` };
+      console.log('event ' + eventData1.url)
       // Fetch options
       const options0 = {
         method: 'POST',
@@ -5900,7 +5900,7 @@
         },
         body: JSON.stringify(eventData1)
       };
-      //await fetch(pup_url, options0);
+      await fetch(pup_url, options0);
 
 
       const eventData = { url: `https://webdev983.github.io/templatesv3/component.html?id=${items[0].id}&generateHtmlFromSku=${pathItemSku}&ownerid=${ownerid}` };
@@ -7020,6 +7020,7 @@
       const generateAnchorHref = urlParams.get('generateanchor')
       const importAttribute = urlParams.get('attr')
       const cleanAttribute = urlParams.get('cleanAttr')
+      const cleanSkuToHtml = urlParams.get('cleanSkuToHtml')
       const clean = urlParams.get('clean')
       const importValue = urlParams.get('val')
       const message = urlParams.get('message')
@@ -7105,7 +7106,7 @@
           pathItemArticleCollection = pathItem.article_collection
         }
       }
-      
+
       try {
         await onOpen1()
       }
@@ -7253,6 +7254,9 @@
       }
       if (cleanAttribute) {
         await cleanImport(cleanAttribute)
+      }
+      if (cleanSkuToHtml) {
+        await cleanSkuToHtmlF()
       }
       if (clean) {
         await cleanImport()
@@ -11899,7 +11903,7 @@ checkbox1.setAttribute('hidden', "");
               imgEl && imgEl.setAttribute('src', src)
               const heading = art ? cloned.querySelector('.article_heading') : cloned.querySelector('.product_heading')
               const pleadE = cloned.querySelector('.article_p_lead')
-              if(plead  && pleadE){
+              if (plead && pleadE) {
                 pleadE.textContent = plead
               }
               const a = heading.querySelector('a')
@@ -18368,6 +18372,30 @@ elementsToRemove.forEach(element => element.remove());
       });
       await Promise.all(promises)
 
+    }
+    const cleanSkuToHtmlF = async () => {
+      const article = querySelectorAll1('.product_article')[0]
+      const allSubs = article.querySelectorAll('*')
+      const allIds = Array.From(allSubs).map(e => e.id + "-tree")
+      allIds.push(article.id + '-tree')
+      const filteredActions = actions.filter(e =>
+        e.action !== 'Add_Component')
+        &&
+        e.target_element &&
+        typeof e.target_element === 'string' &&  // Check if target_element is a string
+        allIds.includes(e.target_element)
+
+      const ps = filteredActions.map(
+        action =>
+          fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${action.id}:${action.sk}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              // Add any additional headers if needed
+            },
+          })
+      );
+      await Promise.all(ps)
     }
     const cleanImport = async (attr) => {
       if (!attr) {

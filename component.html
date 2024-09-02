@@ -7429,7 +7429,7 @@
           // Parse and log the response or handle it as needed
           responseData = await response.json();
         }
-        else {
+        if(!responseData) {
           setCachedFalse(id)
           const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
             method: 'GET',

@@ -13003,6 +13003,7 @@ checkbox1.setAttribute('hidden', "");
       log1('time' + time)
       actionLog.push(element)
       !firstLoad && await pushActionToDb(element)
+      !firstLoad && await setCachedFalse()
       try {
         if (element.action !== 'Replace_Component') {
           let ac = element.action
@@ -13045,6 +13046,10 @@ checkbox1.setAttribute('hidden', "");
 
 
       }
+    }
+    const setCachedFalse = ()=>{
+      postToDb({id:'updated-component',sk:pathItem.id})
+      postToDb({id:pathItem.id,sk:'cached-false'})
     }
     const pushActionToDb = async (action) => {
       const urlSearchParams = new URLSearchParams(window.location.search);
@@ -18377,7 +18382,7 @@ elementsToRemove.forEach(element => element.remove());
       const articles = querySelectorAll1('.product_article')[0].querySelectorAll('.product_attributes_fieldset')
       const allSubs = []
       const allSubs1 = articles.forEach(e => {
-
+        
         const els = e.querySelectorAll('*')
         allSubs.push(...Array.from(els))
 

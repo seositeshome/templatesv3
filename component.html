@@ -11942,7 +11942,7 @@ checkbox1.setAttribute('hidden', "");
 
               }
               else {
-                const price = prices[0] ? Math.min(...prices.map(obj => parseInt(obj.price))) : 0
+                const price = prices[0] ? Math.min(...prices.map(obj => parseFloat(obj.price))) : 0
                 const pV = cloned.querySelector('.price_normal')?.querySelector('.price_value')
 
                 const integer = pV?.querySelector('.product_price_integer')

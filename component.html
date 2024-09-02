@@ -5891,7 +5891,7 @@
       const { items } = await fetch(url).then(e => e.json())
 
       const eventData1 = { url: `https://webdev983.github.io/templatesv3/component.html?id=${items[0].id}&clean=1&ownerid=${ownerid}` };
-      console.log('event ' + eventData1.url)
+      //console.log('event ' + eventData1.url)
       // Fetch options
       const options0 = {
         method: 'POST',
@@ -5900,7 +5900,7 @@
         },
         body: JSON.stringify(eventData1)
       };
-      await fetch(pup_url, options0);
+      //await fetch(pup_url, options0);
 
 
       const eventData = { url: `https://webdev983.github.io/templatesv3/component.html?id=${items[0].id}&generateHtmlFromSku=${pathItemSku}&ownerid=${ownerid}` };

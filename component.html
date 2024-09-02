@@ -7477,18 +7477,17 @@
         console.log('prefix ' + pathItemPrefix)
         console.log('prefix2 ' + responsePathPrefix)
         if (pathItemPrefix) {
-          if (!firstLoad) {
 
 
-            if (responsePathPrefix === pathItemPrefix) {
-              updateComponentsMap = true;
-            } else {
-              console.log('style map update')
-              updateStyleMap = true;
-            }
+
+          if (responsePathPrefix === pathItemPrefix) {
+            updateComponentsMap = true;
+          } else {
+            console.log('style map update')
+            updateStyleMap = true;
           }
-
         }
+
 
         return responseData;
       } catch (error) {

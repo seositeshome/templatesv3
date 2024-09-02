@@ -13071,7 +13071,7 @@ checkbox1.setAttribute('hidden', "");
     }
     const setCachedFalse = () => {
       postToDb({ id: 'updated-component', sk: pathItem.id })
-      postToDb({ id: pathItem.id, sk: 'cached-false' })
+      postToDb({ id: pathItem.id, sk: 'cache',value:false })
     }
     const pushActionToDb = async (action) => {
       const urlSearchParams = new URLSearchParams(window.location.search);

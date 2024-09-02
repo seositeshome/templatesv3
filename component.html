@@ -7471,13 +7471,12 @@
         console.log('prefix '+pathItemPrefix)
         console.log('prefix2 '+responsePathPrefix)
         if (pathItemPrefix) {
-          if (!firstLoad) {
             if (responsePathPrefix === pathItemPrefix) {
               updateComponentsMap = true;
             } else {
               updateStyleMap = true;
             }
-          }
+          
         }
 
         return responseData;

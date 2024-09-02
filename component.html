@@ -18376,7 +18376,7 @@ elementsToRemove.forEach(element => element.remove());
     const cleanSkuToHtmlF = async () => {
       const article = querySelectorAll1('.product_article')[0]
       const allSubs = article.querySelectorAll('*')
-      const allIds = Array.From(allSubs).map(e => e.id + "-tree")
+      const allIds = Array.from(allSubs).map(e => e.id + "-tree")
       allIds.push(article.id + '-tree')
       const filteredActions = actions.filter(e =>
         e.action !== 'Add_Component')

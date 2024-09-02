@@ -18383,7 +18383,7 @@ elementsToRemove.forEach(element => element.remove());
         &&
         e.target_element &&
         typeof e.target_element === 'string' &&  // Check if target_element is a string
-        allIds.includes(e.target_element)
+        allIds.find(item=> e.target_element.startsWith(item.split(':')[0]))
 
       const ps = filteredActions.map(
         action =>

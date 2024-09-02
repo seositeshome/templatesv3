@@ -7415,7 +7415,18 @@
         const responseData1 = await response.json();
         let responseData
         if (responseData1.items.length &&responseData1.items[0].value) {
-          
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          if (!response.ok) {
+            throw new Error(`Failed to load data from the database. Status: ${response.status}`);
+          }
+
+          // Parse and log the response or handle it as needed
+          responseData = await response.json();
         }
         else {
           setCachedFalse()

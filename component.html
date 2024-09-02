@@ -7399,7 +7399,7 @@
 
       try {
         // Make a GET request to the API with the 'id' query parameter
-        const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=cached-false&startsWith=true`, {
+        const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=cache&startsWith=true`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -7414,6 +7414,7 @@
         // Parse and log the response or handle it as needed
         const responseData1 = await response1.json();
         let responseData
+        console.log('value2 '+JSON.stringify(responseData1))
         if (responseData1.items.length &&responseData1.items[0].value) {
           const response = await fetch(`/components/${id}.json`, {
             method: 'GET',

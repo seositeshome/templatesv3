@@ -7442,12 +7442,13 @@
               'Content-Type': 'application/json',
             },
           });
-          if (!response.ok) {
-            throw new Error(`Failed to load data from the database. Status: ${response.status}`);
+          if (response.ok) {
+            responseData = await response.json();
+            //throw new Error(`Failed to load data from the database. Status: ${response.status}`);
           }
 
           // Parse and log the response or handle it as needed
-          responseData = await response.json();
+          
         }
         if (!responseData) {
           setCachedFalse(id)

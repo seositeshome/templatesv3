@@ -18379,11 +18379,11 @@ elementsToRemove.forEach(element => element.remove());
       const allIds = Array.from(allSubs).map(e => e.id + "-tree")
       allIds.push(article.id + '-tree')
       const filteredActions = actions.filter(e =>
-        e.action !== 'Add_Component')
+        e.action !== 'Add_Component'
         &&
         e.target_element &&
         typeof e.target_element === 'string' &&  // Check if target_element is a string
-        allIds.find(item=> e.target_element.startsWith(item.split(':')[0]))
+        allIds.find(item=> e.target_element.startsWith(item.split(':')[0])))
 
       const ps = filteredActions.map(
         action =>

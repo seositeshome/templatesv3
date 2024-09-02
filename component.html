@@ -7412,7 +7412,7 @@
         }
 
         // Parse and log the response or handle it as needed
-        const responseData1 = await response.json();
+        const responseData1 = await response1.json();
         let responseData
         if (responseData1.items.length &&responseData1.items[0].value) {
           const response = await fetch(`/components/${id}.json`, {

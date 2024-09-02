@@ -6939,6 +6939,7 @@
   <script>
     var backend_url = 'https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2'
     var pathItem
+    var styleItem
     var pathItemPath
     var positionItem
     var site1
@@ -7130,6 +7131,17 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ id: idFromQuery, sk: 'componentsMap', items: componentsIds }),
+        });
+
+      }
+      if (updateStyleMap) {
+        const componentsIds = Object.keys(cache).filter(e=>e.items.find(element=>element.sk ==='path').lsi1.split('/')[0] ===styleItem.lsi1.split('/')[0])
+        const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: styleItem.id, sk: 'componentsMap', items: componentsIds }),
         });
 
       }
@@ -7452,6 +7464,7 @@
         // Store the response in the cache for future use
         !main && (cache[id] = deepCopy(responseData));
         !firstLoad && pathItemPath && responseData.items.find(e=>e.sk==='path').lsi1.split('/')[0] ===pathItemPath.split('/')[0]  && (updateComponentsMap = true)
+        !firstLoad && pathItemPath && responseData.items.find(e=>e.sk==='path').lsi1.split('/')[0] !==pathItemPath.split('/')[0]  && (updateStyleMap = true)
 
         return responseData;
       } catch (error) {
@@ -17119,7 +17132,7 @@ elementsToRemove.forEach(element => element.remove());
     }
 
     var updateComponentsMap = false
-
+    var updateStyleMap = false
     function deepCopy(obj) {
       if (typeof obj !== 'object' || obj === null) {
         // Return the input if it's not an object
@@ -17296,6 +17309,12 @@ elementsToRemove.forEach(element => element.remove());
       if (id) {
 
         responseData = await getRes(id)
+        const pI = responseData.items.find(e=>e.sk==='path')
+        const sp = pI.lsi1.split('|')
+        
+        if(!styleItem && sp[0] !==pathItemPath.split('/')[0] && sp.pop() ==='Hub'){
+          styleItem = pI
+        }
         const reusableId1 = reusableId ? reusableId + '|' : ''
         const { items } = responseData
         log1('iteeems ' + JSON.stringify(items))

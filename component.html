@@ -7124,7 +7124,7 @@
       lastActionTime.textContent = timerElement.textContent;
       loadingScreen.style.display = 'none';
       if (updateComponentsMap) {
-        const componentsIds = Object.keys(cache).filter(e => cache[e].items.find(element => element.sk === 'path').lsi1.split('/')[0] === pathItemPath.split('/')[0])
+        const componentsIds = Object.keys(cache).filter(e => cache[e].items.find(element => element.sk === 'path')?.lsi1.split('/')[0] === pathItemPath.split('/')[0])
         const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
@@ -7142,7 +7142,7 @@
         const componentsIds = Object.keys(cache).filter(key => {
           const items = cache[key].items;
           const pathItem = items.find(item => item.sk === 'path');
-          console.log('comp52 ' + pathItem.lsi1)
+          console.log('comp52 ' + pathItem?.lsi1)
           return pathItem && pathItem.lsi1.split('/')[0] !== pathItemPrefix;
         }); const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',

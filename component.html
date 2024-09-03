@@ -13104,7 +13104,7 @@ checkbox1.setAttribute('hidden', "");
       }
 
       catch (e) {
-
+        throw e
         if (!errored) {
           console.log('\tname: ' + e.name + ' message: ' + e.message + ' at: ' + e.at + ' text: ' + e.text);
           log1(e.stack);

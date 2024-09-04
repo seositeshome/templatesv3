@@ -13972,6 +13972,7 @@ checkbox1.setAttribute('hidden', "");
               },
               body: JSON.stringify(payload),
             });
+            await setCachedFalse(pathItem.id)
             cloned.remove()
             codeTreeTagFieldsets.forEach(function (fieldset) {
               var checkbox = fieldset.querySelector('input[type="checkbox"]');

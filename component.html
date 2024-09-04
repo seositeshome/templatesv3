@@ -7448,7 +7448,7 @@
           }
 
           // Parse and log the response or handle it as needed
-          
+
         }
         if (!responseData) {
           setCachedFalse(id)
@@ -24337,7 +24337,12 @@ headers: {
       pathItemSku && showSku(pathItemSku, true)
       pathItemSku && showSku2(pathItemSku, true)
       pathItemArticle && showArticle(pathItemArticle, true)
-      showPics()
+      try {
+        showPics()
+      }
+      catch (e) {
+
+      }
 
 
 

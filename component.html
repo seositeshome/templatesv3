@@ -13543,6 +13543,7 @@ checkbox1.setAttribute('hidden', "");
                   positionItem
                 ),
               });
+              await setCachedFalse(pathItem.id)
               //document.querySelectorAll('[data-move-actions]').forEach(e=>e.setAttribute('hidden',''))
               clonedElement.parentNode.insertBefore(clonedElement, element)
               document.querySelectorAll('#code-log-element').forEach(element1 => {
@@ -13691,6 +13692,7 @@ checkbox1.setAttribute('hidden', "");
             },
             body: JSON.stringify(payload),
           });
+          await setCachedFalse(pathItem.id)
         }
         clonedChangeComponent.onclick = (e) => {
 
@@ -13751,6 +13753,7 @@ checkbox1.setAttribute('hidden', "");
                 },
                 body: JSON.stringify(payload),
               });
+              await setCachedFalse(pathItem.id)
               cloned.remove()
 
             }
@@ -14013,6 +14016,7 @@ checkbox1.setAttribute('hidden', "");
           },
           body: JSON.stringify(payload),
         });
+        await setCachedFalse(pathItem.id)
       }
       // Insert the cloned element before the original element
 

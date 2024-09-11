@@ -18239,6 +18239,7 @@ elementsToRemove.forEach(element => element.remove());
 
     }
     const resizeApi = async (newName, imageSrc, defaultRes, custom) => {
+      console.log('resizing '+ JSON.stringify({newName, imageSrc, defaultRes, custom}))
       const site = pathItemPath.split('/')[0]
       const splited = pathItemPath.split('/')
       splited.pop()

@@ -7114,7 +7114,9 @@
       catch (e) {
         console.log(e.message)
       }
+      console.log('---loading from db')
       await loadFromDb()
+      console.log('---handling menus')
       await handleMenus()
       if (pathItem.hub_items?.menus?.import_menu_toggle) {
         document.getElementById('import-menu-2').removeAttribute('hidden')
@@ -7123,38 +7125,43 @@
       clearInterval(interval);
       lastActionTime.textContent = timerElement.textContent;
       loadingScreen.style.display = 'none';
-      if (updateComponentsMap) {
-        const componentsIds = Object.keys(cache).filter(e => cache[e].items.find(element => element.sk === 'path')?.lsi1.split('/')[0] === pathItemPath.split('/')[0])
-        const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ id: idFromQuery, sk: 'componentsMap', items: componentsIds }),
-        });
-
-      }
-      console.log(updateStyleMap)
-      if (updateStyleMap) {
-        console.log('updating style map')
-        const pathItemPrefix = pathItemPath.split('/')[0];
-
-        const componentsIds = Object.keys(cache).filter(key => {
-          const items = cache[key].items;
-          const pathItem = items.find(item => item.sk === 'path');
-          console.log('comp52 ' + pathItem?.lsi1)
-          return pathItem && pathItem.lsi1.split('/')[0] !== pathItemPrefix;
-        });
-        if (styleItem) {
+      try {
+        if (updateComponentsMap) {
+          const componentsIds = Object.keys(cache).filter(e => cache[e].items.find(element => element.sk === 'path')?.lsi1.split('/')[0] === pathItemPath.split('/')[0])
           const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id: styleItem.id, sk: 'componentsMap', items: componentsIds }),
+            body: JSON.stringify({ id: idFromQuery, sk: 'componentsMap', items: componentsIds }),
           });
-        }
 
+        }
+        console.log(updateStyleMap)
+        if (updateStyleMap) {
+          console.log('updating style map')
+          const pathItemPrefix = pathItemPath.split('/')[0];
+
+          const componentsIds = Object.keys(cache).filter(key => {
+            const items = cache[key].items;
+            const pathItem = items.find(item => item.sk === 'path');
+            console.log('comp52 ' + pathItem?.lsi1)
+            return pathItem && pathItem.lsi1.split('/')[0] !== pathItemPrefix;
+          });
+          if (styleItem) {
+            const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ id: styleItem.id, sk: 'componentsMap', items: componentsIds }),
+            });
+          }
+
+        }
+      }
+      catch (e) {
+        console.log(e.message)
       }
       console.log('---handling head')
       await handleHead()

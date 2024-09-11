@@ -24353,7 +24353,7 @@ headers: {
 
       const resultList = await getProductAttributes()
 
-
+      console.log('showing 1')
       pathItemSku && showSku(pathItemSku, true)
       pathItemSku && showSku2(pathItemSku, true)
       pathItemArticle && showArticle(pathItemArticle, true)
@@ -24369,9 +24369,9 @@ headers: {
 
       const splited = pathItemPath.split(';')[0].split('/')
       const name = splited[splited.length - 1]
-
+      console.log('showing 2')
       showListMenus(pathItem.hub_items?.list, undefined, pathItem.hub_items)
-
+      console.log('showing 3')
       await showList(pathItem.hub_items?.list, undefined, pathItem.hub_items)
       /* showai
       if (pathItem.hub_items?.gpt) {
@@ -24396,6 +24396,7 @@ headers: {
         mainHubLsi = splited[0] + '/Seed-Home|Hub'
         headHubLsi = splited[0] + '/Seed-Home/Content/Page|Head-Content'
       }*/
+      console.log('showing 4')
       if (pathItem.lsi1.split(';')[0] !== mainHubLsi) {
         url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${mainHubLsi}`;
         let mainHub
@@ -24427,6 +24428,7 @@ headers: {
         } catch (error) {
           // Handle errors
         }
+        console.log('showing 5')
         if (mainHub?.hub_items?.list) {
 
           url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${headHubLsi}`;

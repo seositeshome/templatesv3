@@ -6305,7 +6305,7 @@
         */
       }
       //setAttAction(compEl.id + '-tree', 'data-sku-variable', pathItemSku + ':' + skuVariables[0].sk)
-      firstComparision ? await generateForSite(firstSite, firstComparision, skuVariables[0]) : compEl.setAttribute('hidden', '')
+      firstComparision ? await generateForSite(firstSite, firstComparision, skuVariables[0]) : querySelectorAll1('.price_compare_section')[0].setAttribute('hidden', '')
       let lastEl = firstSite
 
       for (const comparison of comparisionPics) {
@@ -12042,6 +12042,9 @@ checkbox1.setAttribute('hidden', "");
               originalCart.parentNode.append(cloned)
 
             }
+          }
+          else if(!list.length){
+            section.setAttribute('hidden','')
           }
           originalCart && originalCart.remove()
         }

@@ -18259,6 +18259,7 @@ elementsToRemove.forEach(element => element.remove());
       if (custom) {
         body.customRes = "150"
       }
+      console.log(JSON.stringify(body))
       const response = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/resize', {
         method: 'POST',
         body: JSON.stringify(body),

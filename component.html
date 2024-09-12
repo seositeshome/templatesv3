@@ -4904,6 +4904,15 @@
       const selectedLabels = dataMenu.querySelectorAll('[data-picture-attached-label]');
       selectedLabels.forEach(label => label.textContent = "NO");
       attached && (attached.textContent = 'YES')
+      crop[imageUUID] = data_src.split(',').map(src => {
+        const splited = src1.split('_')
+        splited.pop()
+        const [p, s] = src.split('.')
+        const l = p + 'w'
+        splited.push([l, s].join('.'))
+        return splited.join('_') + ' ' + l
+      })
+      postToDb(crop)
 
       /*
       const payload = {

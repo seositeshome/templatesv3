@@ -4820,7 +4820,7 @@
 
             return true
           });
-        console.log('flag '+ flag)
+        console.log('flag ' + flag)
         if (flag) {
           const { src, data_src } = await resizeApi(name, imageSrc, defaultRes)
           src1 = src
@@ -4837,7 +4837,7 @@
 
         }
         else {
-          
+
           src1 = first
           data_src1 = crop[imageUUID].join(',')
         }
@@ -4868,8 +4868,17 @@
 
         }
         await pushAction(payload3)
-        console.log('srcs '+JSON.stringify(data_src1))
-        await setSrcSet(imageElement, data_src1)
+        console.log('srcs ' + JSON.stringify(data_src1))
+        const payload = {
+
+          time: (new Date()).getTime().toString(),
+          action: 'setAttribute',
+          target_element: imageElement.id + '-tree',
+          key: 'srcset',
+          value: data_src1,
+
+        }
+        await pushAction(payload)
         dataMenu.remove()
         return
       }
@@ -7156,7 +7165,7 @@
           'Content-Type': 'application/json',
         },
       }).then(e => e.json()).then(({ items }) => items[0])
-      const allCrops = [crop1, crop2, crop3].filter(e=>e)
+      const allCrops = [crop1, crop2, crop3].filter(e => e)
       for (const c of allCrops) {
         const keys = Object.keys(c).filter(e => e !== 'id' && e !== 'sk')
         for (const key of keys) {

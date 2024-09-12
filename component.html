@@ -4837,6 +4837,7 @@
 
         }
         else {
+          
           src1 = first
           data_src1 = crop[imageUUID].join(',')
         }
@@ -4867,7 +4868,7 @@
 
         }
         await pushAction(payload3)
-
+        console.log('srcs '+JSON.stringify(data_src1))
         await setSrcSet(imageElement, data_src1)
         dataMenu.remove()
         return

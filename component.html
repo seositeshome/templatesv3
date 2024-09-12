@@ -7331,6 +7331,8 @@
       }
       console.log('---loading from db')
       await loadFromDb()
+      checkImages()
+
       console.log('---handling menus')
       await handleMenus()
       if (pathItem.hub_items?.menus?.import_menu_toggle) {
@@ -7565,8 +7567,7 @@
       }
     }
 
-    await loadFirst()
-    checkImages()
+    loadFirst()
     var getAbsolutePath = (currentPath, relativePath) => {
       // Split current path and relative path into arrays of directories and filename
       const currentPathParts = currentPath.split('/');

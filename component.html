@@ -4901,6 +4901,7 @@
         body: JSON.stringify(body),
       });
       const { src, data_src } = await response.json()
+      src1 = src
       const selectedLabels = dataMenu.querySelectorAll('[data-picture-attached-label]');
       selectedLabels.forEach(label => label.textContent = "NO");
       attached && (attached.textContent = 'YES')

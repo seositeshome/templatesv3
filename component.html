@@ -4841,7 +4841,7 @@
         }
         const selectedLabels = dataMenu.querySelectorAll('[data-picture-attached-label]');
         selectedLabels.forEach(label => label.textContent = "NO");
-        attached && attached.textContent = 'YES'
+        attached && (attached.textContent = 'YES')
 
         /*
         const payload = {

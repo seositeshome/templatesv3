@@ -5437,6 +5437,16 @@
 
         }
         await pushAction(payload3)
+        const payload4 = {
+
+          time: (new Date()).getTime().toString(),
+          action: 'setAttribute',
+          target_element: mainImage.id + '-tree',
+          key: 'alt',
+          value: mainPics[0].alt || mainPics[0]['alt:' + site] || mainPics[0]['alt:global'],
+
+        }
+        await pushAction(payload4)
         //postToDb({ id: `article:${sku}`, sk: 'data_lead-image', crops: payload3.value })
 
       }
@@ -5457,6 +5467,16 @@
 
         }
         await pushAction(payload3)
+        const payload4 = {
+
+          time: (new Date()).getTime().toString(),
+          action: 'setAttribute',
+          target_element: secondaryImages[i].id + '-tree',
+          key: 'alt',
+          value: secondaryImages[i].alt || secondaryImages[i]['alt:' + site] || secondaryImages[i]['alt:global'],
+
+        }
+        await pushAction(payload4)
 
       }
 
@@ -5665,6 +5685,16 @@
         //postToDb({ id: `sku:${sku}`, sk: 'data_lead-image', crops: payload3.value })
         //keys = Object.keys(picsWithCondition)
         console.log('with ' + JSON.stringify(picsWithCondition))
+        const payload4 = {
+
+          time: (new Date()).getTime().toString(),
+          action: 'setAttribute',
+          target_element: lastEl,
+          key: 'alt',
+          value: mainPics[0].alt || mainPics[0]['alt:' + site] || mainPics[0]['alt:global'],
+
+        }
+        await pushAction(payload4)
       }
       else {
         console.log(pics)
@@ -5681,6 +5711,16 @@
 
           }
           await pushAction(payload3)
+          const payload4 = {
+
+            time: (new Date()).getTime().toString(),
+            action: 'setAttribute',
+            target_element: lastEl,
+            key: 'alt',
+            value: mainPics[0].alt || mainPics[0]['alt:' + site] || mainPics[0]['alt:global'],
+
+          }
+          await pushAction(payload4)
           //postToDb({ id: `sku:${sku}`, sk: 'data_lead-image', crops: payload3.value })
 
         }
@@ -5718,6 +5758,7 @@
 
           }
           await pushAction(payload2)
+          
           lastEl = newId
         }
         console.log(JSON.stringify(withoutSku))
@@ -7164,7 +7205,7 @@
         console.log(e.message)
       }
       console.log('---handling head')
-      await handleHead()
+      await handleHead(toPublish)
       console.log('---handling handleSelectedDependeeChange')
       await handleSelectedDependeeChange()
       console.log('---handling handleDependency')
@@ -7202,7 +7243,9 @@
 
       if (toPublish || republish) {
         console.log('publishing')
-        await publish()
+
+        const entireSite = urlParams.get('entireSite')
+        await publish(undefined, undefined, entireSite)
       }
       const imagePs = imagesIds.map(async (imageId) => {
         const element = getElementById1(imageId)
@@ -7685,6 +7728,8 @@
         if (!hubItems || !hubItems.menus[list.name]) {
           continue
         }
+
+
         const cloned = list1.cloneNode(true)
 
 
@@ -12052,8 +12097,8 @@ checkbox1.setAttribute('hidden', "");
 
             }
           }
-          else if(!list?.length){
-            section.setAttribute('hidden','')
+          else if (!list?.length) {
+            section.setAttribute('hidden', '')
           }
           originalCart && originalCart.remove()
         }
@@ -18028,7 +18073,7 @@ elementsToRemove.forEach(element => element.remove());
       attributesEqual: ["data-remove"],
       removeAttributesStartWith: ["data-visual", "data-builder", "data-replaceid", "data-transfer", "data-b", "data-import", "data-parentid"]
     }
-    const publish = async (e, updateContent) => {
+    const publish = async (e, updateContent, entireSite) => {
 
       const date = new Date()
       if (visualOn) {
@@ -18133,7 +18178,7 @@ elementsToRemove.forEach(element => element.remove());
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: idFromLink, html, path: pagePathContent, toRemove, robotsTxt, siteMapPriority, siteMapNotDefiniedPriorities, date: date.getTime(), sku: pathItemSku, updateContent, cleanHtml, generateProductJson }),
+        body: JSON.stringify({ id: idFromLink, html, path: pagePathContent, toRemove, robotsTxt, siteMapPriority, siteMapNotDefiniedPriorities, date: date.getTime(), sku: pathItemSku, updateContent, cleanHtml, generateProductJson, entireSite }),
       });
       const r = await response.json()
       if (reload) {
@@ -18251,7 +18296,7 @@ elementsToRemove.forEach(element => element.remove());
 
     }
     const resizeApi = async (newName, imageSrc, defaultRes, custom) => {
-      console.log('resizing '+ JSON.stringify({newName, imageSrc, defaultRes, custom}))
+      console.log('resizing ' + JSON.stringify({ newName, imageSrc, defaultRes, custom }))
       const site = pathItemPath.split('/')[0]
       const splited = pathItemPath.split('/')
       splited.pop()
@@ -24351,7 +24396,7 @@ headers: {
 
     }
 
-    const handleHead = async () => {
+    const handleHead = async (toPublish) => {
 
       const resultList = await getProductAttributes()
 
@@ -24374,7 +24419,7 @@ headers: {
       console.log('showing 2')
       showListMenus(pathItem.hub_items?.list, undefined, pathItem.hub_items)
       console.log('showing 3')
-      await showList(pathItem.hub_items?.list, undefined, pathItem.hub_items)
+      await showList(pathItem.hub_items?.list, undefined, pathItem.hub_items, toPublish)
       /* showai
       if (pathItem.hub_items?.gpt) {
         await showai(pathItem.hub_items?.gpt)

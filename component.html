@@ -4522,7 +4522,8 @@
         imgEl.setAttribute('cid', item.id)
         if (src !== uuid) {
 
-          const attachedLabel = clonedRow.querySelector('[data-picture-attached-label]');
+          const attachedLabel = clonedRow.querySelector('[data-picture-attached]');
+          const attached1 = clonedRow.querySelector('[data-picture-attached-label]');
           if (attachedLabel) {
             attachedLabel.textContent = 'NO'
           }

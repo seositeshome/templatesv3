@@ -7041,6 +7041,76 @@
         iframe.addEventListener('error', onError);
       });
     }
+    const checkImages = async () => {
+      const crop1 = await fetch(`${backend_url}?id=${headContentItem.id}&sk=manual-crops&startsWith=true`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json()).then(({ items }) => items[0])
+      const crop2 = await fetch(`${backend_url}?id=${headContentItem.id}&sk=crop:article&startsWith=true`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json()).then(({ items }) => items[0])
+      const crop3 = await fetch(`${backend_url}?id=${headContentItem.id}&sk=crop:product&startsWith=true`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json()).then(({ items }) => items[0])
+      const allCrops = [crop1, crop2, crop3]
+      for (const c of allCrops) {
+        const keys = Object.keys(c).filter(e => e !== 'id' && e !== 'sk')
+        for (const key of keys) {
+          const first = c[key][0].split(' ')[0]
+          const flag = await fetch('https://api.allorigins.win/raw?url=' + first)
+            .then(async response => {
+              if (response.ok || response.status === 200) {
+                const t = await response.text()
+                if (t.includes('404')) {
+
+                  return true
+                }
+                else {
+                  log1('Image exists.');
+                }
+
+              } else {
+                log1('image doesnt exist')
+                return true
+              }
+            })
+            .catch(error => {
+              console.error('Error checking image existence:', error);
+
+              return true
+            });
+          if (flag) {
+            const splited = c[key][0].split(';')
+            const last = splited[splited.length - 1]
+            const [fname,ext] = last.split('.')
+            const splited2 = fname.split('_')
+            splited2.pop()
+            const newName = splited2.join('_')
+            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '300', custom)
+            src1 = src
+            data_src1 = data_src
+            crop[imageUUID] = data_src.split(',').map(src => {
+              const splited = src1.split('_')
+              splited.pop()
+              const [p, s] = src.split('.')
+              const l = p + 'w'
+              splited.push([l, s].join('.'))
+              return splited.join('_') + ' ' + l
+            })
+            postToDb(crop)
+
+          }
+        }
+      }
+    }
     async function loadFirst() {
       console.log('loading first')
       var iframe = document.getElementById("generated-page-iframe");
@@ -7403,6 +7473,7 @@
     }
 
     loadFirst()
+    checkImages()
     var getAbsolutePath = (currentPath, relativePath) => {
       // Split current path and relative path into arrays of directories and filename
       const currentPathParts = currentPath.split('/');
@@ -18440,19 +18511,19 @@ elementsToRemove.forEach(element => element.remove());
           data_src1 = crop[imageUUID].join(',')
         }
       }
-      else{
+      else {
         const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
-          src1 = src
-          data_src1 = data_src
-          crop[imageUUID] = data_src.split(',').map(src => {
-            const splited = src1.split('_')
-            splited.pop()
-            const [p, s] = src.split('.')
-            const l = p + 'w'
-            splited.push([l, s].join('.'))
-            return splited.join('_') + ' ' + l
-          })
-          postToDb(crop)
+        src1 = src
+        data_src1 = data_src
+        crop[imageUUID] = data_src.split(',').map(src => {
+          const splited = src1.split('_')
+          splited.pop()
+          const [p, s] = src.split('.')
+          const l = p + 'w'
+          splited.push([l, s].join('.'))
+          return splited.join('_') + ' ' + l
+        })
+        postToDb(crop)
       }
       await setImg1(imageUUID, src1, data_src1, imageElement)
 

@@ -4795,6 +4795,7 @@
       const site = pathItemPath.split('/')[0]
       let src1
       let data_src1
+      const attached = event.target.closest('tr').querySelector('[data-picture-attached-label]')
       if (crop[imageUUID]) {
         const first = crop[imageUUID][0].split(' ')[0]
         const flag = await fetch('https://api.allorigins.win/raw?url=' + first)
@@ -4840,7 +4841,7 @@
         }
         const selectedLabels = dataMenu.querySelectorAll('[data-picture-attached-label]');
         selectedLabels.forEach(label => label.textContent = "NO");
-        event.target.closest('tr').querySelector('[data-picture-attached-label]').textContent = 'YES'
+        attached && attached.textContent = 'YES'
 
         /*
         const payload = {
@@ -4902,7 +4903,7 @@
       const { src, data_src } = await response.json()
       const selectedLabels = dataMenu.querySelectorAll('[data-picture-attached-label]');
       selectedLabels.forEach(label => label.textContent = "NO");
-      event.target.closest('tr').querySelector('[data-picture-attached-label]').textContent = 'YES'
+      attached && (attached.textContent = 'YES')
 
       /*
       const payload = {

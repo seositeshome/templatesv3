@@ -22073,9 +22073,19 @@ headers: {
 
         // Now set the appropriate property
         if (old) {
-          pushItem.oldPrice = formattedValue
+          if(value ===0){
+            delete  pushItem.oldPrice
+          }
+          else{
+            pushItem.oldPrice = formattedValue
+          }
         } else {
-          pushItem.price = formattedValue
+          if(value ===0){
+            delete  pushItem.price
+          }
+          else{
+            pushItem.price = formattedValue
+          }
         }
         target.textContent = formattedValue
       }

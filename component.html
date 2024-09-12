@@ -7670,6 +7670,7 @@
       const list1 = document.querySelector('[data-list][hidden]')
 
       !storageId1 && document.querySelectorAll('[data-list]:not([hidden])').forEach(e => e.remove())
+      console.log('getting sku vars')
       const skuVariables = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=sku:${pathItemSku}&sk=sku-variables;&startsWith=true`)
         .then(response => response.json()).then(res => res.items)
       let combKeys = []
@@ -7679,7 +7680,7 @@
         splited.pop()
         combKeys = splited.map(element => element.split(':')[0])
       }
-
+      console.log('processing lists')
       for (const list of parsedLists['data-lists']) {
         if (!hubItems || !hubItems.menus[list.name]) {
           continue
@@ -8221,6 +8222,7 @@
 
         }
         const addedValues = []
+        console.log('processing list values')
         for (const el of listValues) {
           const clonedListElement = listOriginalElement.cloneNode(true)
           clonedListElement.removeAttribute('hidden')

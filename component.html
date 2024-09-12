@@ -4785,8 +4785,90 @@
       const imageElement = getElementById1(removeLastOccurrence(imgId, '-tree'))
       const name = imageElement.getAttribute('data-builder-image-name')
       const defaultRes = imageElement.getAttribute('data-builder-image-default')
+      const crop = await fetch(`${backend_url}?id=${headContentItem.id}&sk=manual-crops&startsWith=true`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json()).then(({ items }) => items[0] || { id: headContentItem.id, sk: 'manual-crops' })
 
       const site = pathItemPath.split('/')[0]
+      let src1
+      let data_src1
+      if (crop[imageUUID]) {
+        const first = crop[imageUUID][0].split(' ')[0]
+        const flag = await fetch('https://api.allorigins.win/raw?url=' + first)
+          .then(async response => {
+            if (response.ok || response.status === 200) {
+              const t = await response.text()
+              if (t.includes('404')) {
+
+                return true
+              }
+              else {
+                log1('Image exists.');
+              }
+
+            } else {
+              log1('image doesnt exist')
+              return true
+            }
+          })
+          .catch(error => {
+            console.error('Error checking image existence:', error);
+
+            return true
+          });
+        if (flag) {
+          const { src, data_src } = await resizeApi(name, imageSrc, defaultRes)
+          src1 = src
+          data_src1 = data_src
+          crop[imageUUID] = data_src.split(',').map(src => {
+            const splited = src1.split('_')
+            splited.pop()
+            const [p, s] = src.split('.')
+            const l = p + 'w'
+            splited.push([l, s].join('.'))
+            return splited.join('_') + ' ' + l
+          })
+          postToDb(crop)
+
+        }
+        else {
+          src1 = first
+          data_src1 = crop[imageUUID].join(',')
+        }
+        const selectedLabels = dataMenu.querySelectorAll('[data-picture-attached-label]');
+        selectedLabels.forEach(label => label.textContent = "NO");
+        event.target.closest('tr').querySelector('[data-picture-attached-label]').textContent = 'YES'
+
+        /*
+        const payload = {
+  
+          time: (new Date()).getTime().toString(),
+          action: 'setAttribute',
+          target_element: imgId,
+          key: 'data-builder-image-source',
+          value: imageUUID,
+  
+        }
+        await pushAction(payload)
+        */
+        const payload3 = {
+
+          time: (new Date()).getTime().toString(),
+          action: 'setAttribute',
+          target_element: imgId,
+          key: 'src',
+          value: src1,
+          check_b: true
+
+        }
+        await pushAction(payload3)
+
+        await setSrcSet(imageElement, data_src1)
+        dataMenu.remove()
+      }
       let randomString = generateRandomString(3)
       let url1 = 'https://' + site + '/pics/' + randomString + '_' + name
       function checkSrcStartsWithUrl1() {
@@ -4845,8 +4927,8 @@
 
       }
       await pushAction(payload3)
-      
-      await setSrcSet(imageElement,data_src)
+
+      await setSrcSet(imageElement, data_src)
       dataMenu.remove()
 
 
@@ -7090,7 +7172,7 @@
           if (flag) {
             const splited = c[key][0].split(';')
             const last = splited[splited.length - 1]
-            const [fname,ext] = last.split('.')
+            const [fname, ext] = last.split('.')
             const splited2 = fname.split('_')
             splited2.pop()
             const newName = splited2.join('_')
@@ -18349,7 +18431,7 @@ elementsToRemove.forEach(element => element.remove());
         }
       }
     }
-    const setSrcSet = async (imageElement,data_src) => {
+    const setSrcSet = async (imageElement, data_src) => {
       //const data_src = imageElement.getAttribute('data-src')
       if (data_src) {
         const resolutions = data_src.split(',').map(e => e.split('.')[0])
@@ -18434,9 +18516,9 @@ elementsToRemove.forEach(element => element.remove());
 
       }
       await pushAction(payload3)
-      
+
       // Add your logic for selecting the image here
-      await setSrcSet(imageElement,data_src)
+      await setSrcSet(imageElement, data_src)
     }
     async function selectImage1(imgId, imageSrc, imageUUID, custom, name1, noPrefix) {
       console.log('selecting image' + imageSrc + 'for id ' + imgId)

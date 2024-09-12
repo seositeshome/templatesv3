@@ -18400,10 +18400,74 @@ elementsToRemove.forEach(element => element.remove());
 
       // resize
       let newName = noPrefix ? name : randomString + '_' + name
-      const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
 
+      const crop = await fetch(`${backend_url}?id=${headContentItem.id}&sk=manual-crops&startsWith=true`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json()).then(({ items }) => items[0] || { id: headContentItem.id, sk: 'manual-crops' })
+      let src1
+      let data_src1
+      if (crop[imageUUID]) {
+        const first = crop[imageUUID][0].split(' ')[0]
+        const flag = await fetch('https://api.allorigins.win/raw?url=' + first)
+          .then(async response => {
+            if (response.ok || response.status === 200) {
+              const t = await response.text()
+              if (t.includes('404')) {
 
-      await setImg1(imageUUID, src, data_src, imageElement)
+                return true
+              }
+              else {
+                log1('Image exists.');
+              }
+
+            } else {
+              log1('image doesnt exist')
+              return true
+            }
+          })
+          .catch(error => {
+            console.error('Error checking image existence:', error);
+
+            return true
+          });
+        if (flag) {
+          const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
+          src1 = src
+          data_src1 = data_src
+          crop[imageUUID] = data_src.split(',').map(src => {
+            const splited = src1.split('_')
+            splited.pop()
+            const [p, s] = src.split('.')
+            const l = p + 'w'
+            splited.push([l, s].join('.'))
+            return splited.join('_') + ' ' + l
+          })
+          postToDb(crop)
+
+        }
+        else {
+          src1 = first
+          data_src1 = crop[imageUUID].join(',')
+        }
+      }
+      else{
+        const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
+          src1 = src
+          data_src1 = data_src
+          crop[imageUUID] = data_src.split(',').map(src => {
+            const splited = src1.split('_')
+            splited.pop()
+            const [p, s] = src.split('.')
+            const l = p + 'w'
+            splited.push([l, s].join('.'))
+            return splited.join('_') + ' ' + l
+          })
+          postToDb(crop)
+      }
+      await setImg1(imageUUID, src1, data_src1, imageElement)
 
 
       // Add a "selected" label to the selected image
@@ -22092,25 +22156,25 @@ headers: {
 
         // Now set the appropriate property
         if (old) {
-          if(parsedValue ===0){
-            delete  pushItem.oldPrice
+          if (parsedValue === 0) {
+            delete pushItem.oldPrice
             target.textContent = '0'
           }
-          else{
+          else {
             pushItem.oldPrice = formattedValue
             target.textContent = formattedValue
           }
         } else {
-          if(parsedValue ===0){
-            delete  pushItem.price
+          if (parsedValue === 0) {
+            delete pushItem.price
             target.textContent = '0'
           }
-          else{
+          else {
             pushItem.price = formattedValue
             target.textContent = formattedValue
           }
         }
-        
+
       }
       console.log(JSON.stringify(pushItem))
       await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {

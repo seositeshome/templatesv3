@@ -7153,7 +7153,7 @@
           'Content-Type': 'application/json',
         },
       }).then(e => e.json()).then(({ items }) => items[0])
-      const allCrops = [crop1, crop2, crop3]
+      const allCrops = [crop1, crop2, crop3].filter(e=>e)
       for (const c of allCrops) {
         const keys = Object.keys(c).filter(e => e !== 'id' && e !== 'sk')
         for (const key of keys) {

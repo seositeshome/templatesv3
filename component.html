@@ -4844,17 +4844,8 @@
 
       }
       await pushAction(payload3)
-      const payload4 = {
-
-        time: (new Date()).getTime().toString(),
-        action: 'setAttribute',
-        target_element: imgId,
-        key: 'data-src',
-        value: data_src,
-
-      }
-      await pushAction(payload4)
-      await setSrcSet(imageElement)
+      
+      await setSrcSet(imageElement,data_src)
       dataMenu.remove()
 
 
@@ -7266,6 +7257,7 @@
         const entireSite = urlParams.get('entireSite')
         await publish(undefined, undefined, entireSite)
       }
+      /*
       const imagePs = imagesIds.map(async (imageId) => {
         const element = getElementById1(imageId)
         if (!element) {
@@ -7329,7 +7321,8 @@
           body: JSON.stringify(body),
         });
       }
-      )
+       
+      ) */
       await Promise.all(imagePs)
 
       if (generatetable) {
@@ -18284,8 +18277,8 @@ elementsToRemove.forEach(element => element.remove());
         }
       }
     }
-    const setSrcSet = async (imageElement) => {
-      const data_src = imageElement.getAttribute('data-src')
+    const setSrcSet = async (imageElement,data_src) => {
+      //const data_src = imageElement.getAttribute('data-src')
       if (data_src) {
         const resolutions = data_src.split(',').map(e => e.split('.')[0])
         const src = imageElement.getAttribute('src')
@@ -18367,18 +18360,9 @@ elementsToRemove.forEach(element => element.remove());
 
       }
       await pushAction(payload3)
-      const payload4 = {
-
-        time: (new Date()).getTime().toString(),
-        action: 'setAttribute',
-        target_element: imgId,
-        key: 'data-src',
-        value: data_src,
-
-      }
-      await pushAction(payload4)
+      
       // Add your logic for selecting the image here
-      await setSrcSet(imageElement)
+      await setSrcSet(imageElement,data_src)
     }
     async function selectImage1(imgId, imageSrc, imageUUID, custom, name1, noPrefix) {
       console.log('selecting image' + imageSrc + 'for id ' + imgId)

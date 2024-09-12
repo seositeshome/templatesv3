@@ -5573,7 +5573,7 @@
         }
         const combinations = generateCombinations(data)
         for (const combination of combinations) {
-          const r = skToPic(element.sk)
+          const r = { ...skToPic(element.sk), alt: element.alt }
           if (picsWithCondition[combination]?.length) {
             picsWithCondition[combination].push(r)
           }
@@ -5596,7 +5596,7 @@
         }
         const combinations = generateCombinations(data)
         for (const combination of combinations) {
-          const r = skToPic(element.sk)
+          const r = { ...skToPic(element.sk), alt: element.alt }
           if (mainpicsWithCondition[combination]?.length) {
             mainpicsWithCondition[combination].push(r)
           }
@@ -5691,7 +5691,7 @@
           action: 'setAttribute',
           target_element: lastEl,
           key: 'alt',
-          value: mainPics[0].alt || mainPics[0]['alt:' + site] || mainPics[0]['alt:global'],
+          value: mainpicsWithCondition[keys[0]].alt || mainpicsWithCondition[keys[0]]['alt:' + site] || mainpicsWithCondition[keys[0]]['alt:global'],
 
         }
         await pushAction(payload4)
@@ -5758,7 +5758,16 @@
 
           }
           await pushAction(payload2)
-          
+          const payload4 = {
+
+            time: (new Date()).getTime().toString(),
+            action: 'setAttribute',
+            target_element: newId,
+            key: 'alt',
+            value: picsWithCondition[keys[0]].alt || picsWithCondition[keys[0]]['alt:' + site] || picsWithCondition[keys[0]]['alt:global'],
+
+          }
+          await pushAction(payload4)
           lastEl = newId
         }
         console.log(JSON.stringify(withoutSku))
@@ -5792,6 +5801,16 @@
             key: "data-var-img"
           }
           await pushAction(el)
+          const payload4 = {
+
+            time: (new Date()).getTime().toString(),
+            action: 'setAttribute',
+            target_element: newId,
+            key: 'alt',
+            value: withoutSku[i].alt || withoutSku[i]['alt:' + site] || withoutSku[i]['alt:global'],
+
+          }
+          await pushAction(payload4)
           // await selectImage1(newId, 'https://s3.amazonaws.com/checkout-admin-panel/' + key, key.split('.')[0].replace('pics', ''))
           lastEl = newId
         }

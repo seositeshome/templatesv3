@@ -22075,19 +22075,23 @@ headers: {
         if (old) {
           if(parsedValue ===0){
             delete  pushItem.oldPrice
+            target.textContent = '0'
           }
           else{
             pushItem.oldPrice = formattedValue
+            target.textContent = formattedValue
           }
         } else {
           if(parsedValue ===0){
             delete  pushItem.price
+            target.textContent = '0'
           }
           else{
             pushItem.price = formattedValue
+            target.textContent = formattedValue
           }
         }
-        target.textContent = formattedValue
+        
       }
       console.log(JSON.stringify(pushItem))
       await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {

@@ -4822,7 +4822,7 @@
       selectedLabels.forEach(label => label.textContent = "NO");
       event.target.closest('tr').querySelector('[data-picture-attached-label]').textContent = 'YES'
 
-
+      /*
       const payload = {
 
         time: (new Date()).getTime().toString(),
@@ -4833,7 +4833,7 @@
 
       }
       await pushAction(payload)
-
+      */
       const payload3 = {
 
         time: (new Date()).getTime().toString(),
@@ -18339,6 +18339,7 @@ elementsToRemove.forEach(element => element.remove());
     }
     const setImg1 = async (imageUUID, src, data_src, imageElement) => {
       const imgId = imageElement.id + '-tree'
+      /*
       const payload = {
 
         time: (new Date()).getTime().toString(),
@@ -18349,6 +18350,7 @@ elementsToRemove.forEach(element => element.remove());
 
       }
       await pushAction(payload)
+      */
 
       const payload3 = {
 

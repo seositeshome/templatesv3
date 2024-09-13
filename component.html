@@ -4550,7 +4550,13 @@
                 item['picture_buttons_sku_variables' + s][key] = []
               }
               else {
-                item['picture_buttons_sku_variables' + s][key] = selectedValues
+                if(item['picture_buttons_sku_variables' + s]){
+                  item['picture_buttons_sku_variables' + s][key] = selectedValues
+                }
+                else{
+                  item['picture_buttons_sku_variables' + s]={[key] :selectedValues}
+                }
+                
               }
 
               postToDb(item)
@@ -4561,7 +4567,13 @@
                 item['gallery_variables_sku_variables' + s][key] = []
               }
               else {
-                item['gallery_variables_sku_variables' + s][key] = selectedValues
+                if(item['gallery_variables_sku_variables' + s]){
+                  item['gallery_variables_sku_variables' + s][key] = selectedValues
+                }
+                else{
+                  item['gallery_variables_sku_variables' + s]={[key] :selectedValues}
+                }
+                //item['gallery_variables_sku_variables' + s][key] = selectedValues
               }
               postToDb(item)
             }

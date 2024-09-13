@@ -4950,8 +4950,18 @@
 
       }
       await pushAction(payload3)
+      const payload4 = {
 
-      await setSrcSet(imageElement, data_src)
+        time: (new Date()).getTime().toString(),
+        action: 'setAttribute',
+        target_element: imgId,
+        key: 'srcset',
+        value: data_src,
+        check_b: true
+
+        }
+        await pushAction(payload4)
+
       dataMenu.remove()
 
 

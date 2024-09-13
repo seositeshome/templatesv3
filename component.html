@@ -13383,7 +13383,8 @@ checkbox1.setAttribute('hidden', "");
           const codeLog = getElementById1("code-log-body");
           const query = `#code-log-action-time[sk="${element.time}"]`
           log1(query)
-          codeLog.querySelector(query).classList.add('action-error');
+          const res = codeLog.querySelector(query)
+          res?.classList.add('action-error');
           openLeftPanel()
         }
 

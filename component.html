@@ -7212,7 +7212,7 @@
             const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '300w')
             src1 = src
             data_src1 =  getRealSrcSet(data_src,src)
-            c[imageUUID] = data_src.split(',').map(src => {
+            c[key] = data_src.split(',').map(src => {
               const splited = src1.split('_')
               splited.pop()
               const [p, s] = src.split('.')

@@ -4824,7 +4824,7 @@
         if (flag) {
           const { src, data_src } = await resizeApi(name, imageSrc, defaultRes)
           src1 = src
-          data_src1 = data_src
+          data_src1 = getRealSrcSet(data_src,src)
           crop[imageUUID] = data_src.split(',').map(src => {
             const splited = src1.split('_')
             splited.pop()
@@ -4950,7 +4950,7 @@
 
       }
       await pushAction(payload3)
-      setSrcSet(imageElement,data_src)
+      setSrcSet(imageElement, data_src)
 
       dataMenu.remove()
 
@@ -7171,9 +7171,9 @@
         const keys = Object.keys(c).filter(e => e !== 'id' && e !== 'sk')
         for (const key of keys) {
           const first = c[key][0].split(' ')[0]
-          if(pathItemPath.split(';')[0].split('/').pop() ==='Hub' ){
+          if (pathItemPath.split(';')[0].split('/').pop() === 'Hub') {
 
-            if(!querySelectorAll1(`[srcset^="${c[key][0]}"]`).length){
+            if (!querySelectorAll1(`[srcset^="${c[key][0]}"]`).length) {
               delete c[key]
             }
           }
@@ -7208,7 +7208,7 @@
             const newName = splited2.join('_')
             const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '300', custom)
             src1 = src
-            data_src1 = data_src
+            data_src1 =  getRealSrcSet(data_src,src)
             c[imageUUID] = data_src.split(',').map(src => {
               const splited = src1.split('_')
               splited.pop()
@@ -7350,9 +7350,9 @@
       }
       console.log('---loading from db')
       await loadFromDb()
-      
+
       checkImages()
-      
+
       console.log('---handling menus')
       await handleMenus()
       if (pathItem.hub_items?.menus?.import_menu_toggle) {
@@ -7364,11 +7364,11 @@
       loadingScreen.style.display = 'none';
       try {
         if (updateComponentsMap) {
-          let componentsIds  = Object.keys(cache)
-          if(pathItemPath.split('/').pop() ==='Hub'){
+          let componentsIds = Object.keys(cache)
+          if (pathItemPath.split('/').pop() === 'Hub') {
             componentsIds = componentsIds.filter(e => cache[e].items.find(element => element.sk === 'path')?.lsi1.split('/')[0] === pathItemPath.split('/')[0])
           }
-          
+
           const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
@@ -7389,7 +7389,7 @@
             console.log('comp52 ' + pathItem?.lsi1)
             return pathItem && pathItem.lsi1.split('/')[0] !== pathItemPrefix;
           });
-          console.log('style item '+ JSON.stringify(styleItem))
+          console.log('style item ' + JSON.stringify(styleItem))
           if (styleItem) {
             const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
               method: 'POST',
@@ -18253,7 +18253,23 @@ elementsToRemove.forEach(element => element.remove());
       return map
 
     }
-
+    const getRealSrcSet = (data_src,src) => {
+      const resolutions = data_src.split(',').map(e => e.split('.')[0])
+      
+      const splited = src.split('/')
+      const fName = splited.pop()
+      const [name, ext] = fName.split('.')
+      const splitedName = name.split('_')
+      splitedName.pop()
+      const pref = splitedName.join('_')
+      const srcSet = resolutions.map(
+        res => {
+          const newFName = `${pref}_${res}w.${ext} ${res}w`
+          return [...splited, newFName].join('/')
+        }
+      ).join(',')
+      return srcSet
+    }
     const getFromSiteData = (k) => {
       const all = document.querySelectorAll('[data-list]:not([hidden])')
       for (const el of all) {
@@ -18614,7 +18630,7 @@ elementsToRemove.forEach(element => element.remove());
         if (flag) {
           const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
           src1 = src
-          data_src1 = data_src
+          data_src1 = getRealSrcSet(data_src,src)
           crop[imageUUID] = data_src.split(',').map(src => {
             const splited = src1.split('_')
             splited.pop()
@@ -18634,7 +18650,7 @@ elementsToRemove.forEach(element => element.remove());
       else {
         const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
         src1 = src
-        data_src1 = data_src
+        data_src1 = getRealSrcSet(data_src,src)
         crop[imageUUID] = data_src.split(',').map(src => {
           const splited = src1.split('_')
           splited.pop()

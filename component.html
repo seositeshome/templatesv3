@@ -7173,9 +7173,10 @@
           const first = c[key][0].split(' ')[0]
           if (pathItemPath.split(';')[0].split('/').pop() === 'Hub') {
 
-            if (!querySelectorAll1(`[srcset^="${c[key][0]}"]`).length) {
+            if (localStorage.getItem('executionToggle') && !querySelectorAll1(`[srcset^="${c[key][0]}"]`).length) {
               console.log('keys test ' +key + ' not found')
               delete c[key]
+              continue
             }
           }
           const flag = await fetch('https://api.allorigins.win/raw?url=' + first)

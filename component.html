@@ -7216,13 +7216,14 @@
             });
           if (flag) {
             console.log('keys problem ' +key + ' not found '+first)
-            const splited = c[key][c[key].length -1].split(' ')[0].split('/')
+            const a =  c[key][c[key].length -1].split(' ')
+            const splited =a[0].split('/')
             const last = splited[splited.length - 1]
             const [fname, ext] = last.split('.')
             const splited2 = fname.split('_')
             splited2.pop()
             const newName = splited2.join('_')
-            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '3000w')
+            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, a[1])
             src1 = src
             data_src1 =  getRealSrcSet(data_src,src)
             c[key] = data_src.split(',').map(src => {

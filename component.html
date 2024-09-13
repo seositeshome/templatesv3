@@ -7352,8 +7352,8 @@
       }
       console.log('---loading from db')
       await loadFromDb()
-
-      checkImages()
+      console.log('---checking images')
+      await checkImages()
 
       console.log('---handling menus')
       await handleMenus()

@@ -7209,7 +7209,7 @@
             const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '300', custom)
             src1 = src
             data_src1 = data_src
-            crop[imageUUID] = data_src.split(',').map(src => {
+            c[imageUUID] = data_src.split(',').map(src => {
               const splited = src1.split('_')
               splited.pop()
               const [p, s] = src.split('.')
@@ -7217,7 +7217,6 @@
               splited.push([l, s].join('.'))
               return splited.join('_') + ' ' + l
             })
-            postToDb(crop)
 
           }
         }

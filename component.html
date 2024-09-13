@@ -7174,6 +7174,7 @@
           if (pathItemPath.split(';')[0].split('/').pop() === 'Hub') {
 
             if (!querySelectorAll1(`[srcset^="${c[key][0]}"]`).length) {
+              console.log('keys test ' +key + ' not found')
               delete c[key]
             }
           }
@@ -7200,13 +7201,14 @@
               return true
             });
           if (flag) {
+            console.log('keys problem ' +key + ' not found '+first)
             const splited = c[key][0].split(' ')[0].split('/')
             const last = splited[splited.length - 1]
             const [fname, ext] = last.split('.')
             const splited2 = fname.split('_')
             splited2.pop()
             const newName = splited2.join('_')
-            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '300', custom)
+            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '300w')
             src1 = src
             data_src1 =  getRealSrcSet(data_src,src)
             c[imageUUID] = data_src.split(',').map(src => {

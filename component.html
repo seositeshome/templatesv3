@@ -26,7 +26,7 @@
 
     <div class="panel left" style="overflow-y: auto; height: 100vh;">
       <div id="nav-buttons" hidden>
-        <a href="./templatesv3/"><button class="b-1">📂</button></a>
+        <a href="https://seositeshome.github.io/templatesv3/"><button class="b-1">📂</button></a>
       </div>
       <div style="margin-top: 3px;">
         <button class="b-1 b-select" id="log-open">🪵</button>
@@ -5379,6 +5379,7 @@
       };
       //await fetch(pup_url, options0);
 
+
       const eventData = { url: `https://seositeshome.github.io/templatesv3/component.html?id=${items[0].id}&skuToButtonPics=${pathItemSku}&ownerid=${ownerid}` };
 
       // Fetch options
@@ -7165,10 +7166,17 @@
         },
       }).then(e => e.json()).then(({ items }) => items[0])
       const allCrops = [crop1, crop2, crop3].filter(e => e)
+
       for (const c of allCrops) {
         const keys = Object.keys(c).filter(e => e !== 'id' && e !== 'sk')
         for (const key of keys) {
           const first = c[key][0].split(' ')[0]
+          if(pathItemPath.split(';')[0].split('/').pop() ==='Hub' ){
+
+            if(!querySelectorAll1(`[srcset^="${c[key][0]}"]`).length){
+              delete c[key]
+            }
+          }
           const flag = await fetch('https://api.allorigins.win/raw?url=' + first)
             .then(async response => {
               if (response.ok || response.status === 200) {
@@ -7213,6 +7221,7 @@
 
           }
         }
+        postToDb(c)
       }
     }
     async function loadFirst() {
@@ -7342,8 +7351,9 @@
       }
       console.log('---loading from db')
       await loadFromDb()
+      
       checkImages()
-
+      
       console.log('---handling menus')
       await handleMenus()
       if (pathItem.hub_items?.menus?.import_menu_toggle) {

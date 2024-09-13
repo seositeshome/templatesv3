@@ -7222,7 +7222,7 @@
             const splited2 = fname.split('_')
             splited2.pop()
             const newName = splited2.join('_')
-            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '300w')
+            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, '3000w')
             src1 = src
             data_src1 =  getRealSrcSet(data_src,src)
             c[key] = data_src.split(',').map(src => {
@@ -11931,7 +11931,7 @@ checkbox1.setAttribute('hidden', "");
         }
         randomStrings.push(randomString)
         let newName = randomString + '_' + name
-        const { src, data_src } = await resizeApi(newName, imageSrc, '300w')
+        const { src, data_src } = await resizeApi(newName, imageSrc, '3000w')
         const src1 = src
         crop[imageUUID] = data_src.split(',').map(src => {
           const splited = src1.split('_')

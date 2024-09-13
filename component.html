@@ -11941,7 +11941,7 @@ checkbox1.setAttribute('hidden', "");
       postToDb({ id, sk: 'data_lead-image:' + site, crops: mainCrop })
       postToDb({ id, sk: 'data_catalog-image:' + site, crops: catalogCrop || mainCrop })
       postToDb({ id, sk: 'data_promo-image:' + site, crops: promoCrop || mainCrop })
-      article ? articleToPicturesApi(crop) : skuToPicturesApi(crop)
+      article ? (await articleToPicturesApi(crop)) : (await skuToPicturesApi(crop))
 
     }
     var generateCollection = async () => {

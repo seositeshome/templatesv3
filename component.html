@@ -7171,6 +7171,7 @@
         const keys = Object.keys(c).filter(e => e !== 'id' && e !== 'sk')
         for (const key of keys) {
           const first = c[key][0].split(' ')[0]
+          /*
           if (pathItemPath.split(';')[0].split('/').pop() === 'Hub') {
 
             if (localStorage.getItem('executionToggle') && !querySelectorAll1(`[srcset^="${c[key][0]}"]`).length) {
@@ -7178,7 +7179,7 @@
               delete c[key]
               continue
             }
-          }
+          }*/
           const flag = await fetch('https://api.allorigins.win/raw?url=' + first)
             .then(async response => {
               if (response.ok || response.status === 200) {

@@ -7216,7 +7216,7 @@
             });
           if (flag) {
             console.log('keys problem ' +key + ' not found '+first)
-            const splited = c[key][0].split(' ')[0].split('/')
+            const splited = c[key][c[key].length -1].split(' ')[0].split('/')
             const last = splited[splited.length - 1]
             const [fname, ext] = last.split('.')
             const splited2 = fname.split('_')

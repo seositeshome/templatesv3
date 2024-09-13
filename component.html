@@ -7385,6 +7385,7 @@
             console.log('comp52 ' + pathItem?.lsi1)
             return pathItem && pathItem.lsi1.split('/')[0] !== pathItemPrefix;
           });
+          console.log('style item '+ JSON.stringify(styleItem))
           if (styleItem) {
             const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
               method: 'POST',

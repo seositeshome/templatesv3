@@ -17599,7 +17599,7 @@ elementsToRemove.forEach(element => element.remove());
         const pI = responseData.items.find(e => e.sk === 'path')
         const sp = pI.lsi1.split('|')
 
-        if (!styleItem && sp[0] !== pathItemPath.split('/')[0] && sp.pop() === 'Hub') {
+        if (!styleItem && sp[0] !== pathItemPath.split('/')[0] ) {
           styleItem = pI
           Promise.all(responseData.items.find(e => e.sk === 'componentsMap').items.map(id => getRes(id, false, true)))
         }

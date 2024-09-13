@@ -7364,7 +7364,11 @@
       loadingScreen.style.display = 'none';
       try {
         if (updateComponentsMap) {
-          const componentsIds = Object.keys(cache).filter(e => cache[e].items.find(element => element.sk === 'path')?.lsi1.split('/')[0] === pathItemPath.split('/')[0])
+          let componentsIds  = Object.keys(cache)
+          if(pathItemPath.split('/').pop() ==='Hub'){
+            componentsIds = componentsIds.filter(e => cache[e].items.find(element => element.sk === 'path')?.lsi1.split('/')[0] === pathItemPath.split('/')[0])
+          }
+          
           const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
@@ -17599,7 +17603,7 @@ elementsToRemove.forEach(element => element.remove());
         const pI = responseData.items.find(e => e.sk === 'path')
         const sp = pI.lsi1.split('|')
 
-        if (!styleItem && sp[0] !== pathItemPath.split('/')[0] ) {
+        if (!styleItem && sp[0] !== pathItemPath.split('/')[0] && sp.pop() === 'Hub') {
           styleItem = pI
           Promise.all(responseData.items.find(e => e.sk === 'componentsMap').items.map(id => getRes(id, false, true)))
         }

@@ -5682,8 +5682,9 @@
           })
         }
         const combinations = generateCombinations(data)
+        const alt =  element.alt  || element['alt:' + site] || element['alt:global']
         for (const combination of combinations) {
-          const r = { ...skToPic(element.sk), alt: element.alt  || element['alt:' + site] || element['alt:global']}
+          const r = skToPic(element.sk)
           if (picsWithCondition[combination]?.length) {
             picsWithCondition[combination].push(r)
           }
@@ -5691,6 +5692,7 @@
             picsWithCondition[combination] = [r]
           }
         }
+        picsWithCondition.alt = alt
 
       }
       const mainpicsWithCondition = {}
@@ -5705,8 +5707,9 @@
           })
         }
         const combinations = generateCombinations(data)
+        const alt =  element.alt  || element['alt:' + site] || element['alt:global']
         for (const combination of combinations) {
-          const r = { ...skToPic(element.sk), alt: element.alt  || element['alt:' + site] || element['alt:global'] }
+          const r = skToPic(element.sk)
           if (mainpicsWithCondition[combination]?.length) {
             mainpicsWithCondition[combination].push(r)
           }
@@ -5714,6 +5717,7 @@
             mainpicsWithCondition[combination] = [r]
           }
         }
+        mainpicsWithCondition.alt = alt
 
       }
 

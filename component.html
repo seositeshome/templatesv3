@@ -12266,6 +12266,9 @@ checkbox1.setAttribute('hidden', "");
                 },
               }).then(e => e.json())
               console.log('found for related '+JSON.stringify(images?.items[0]))
+              if(!images.items.length){
+                continue
+              }
               const src = images.items[0].crops?.split(',')[0].split(' ')[0]
               const imgEl = art ? cloned.querySelector('.article_lead_img') : cloned.querySelector('.product_lead_img')
               imgEl && imgEl.setAttribute('src', src)

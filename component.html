@@ -5757,6 +5757,7 @@
       */
       const mainpicsWithCondition1 ={...mainpicsWithCondition}
       delete mainpicsWithCondition1.alt
+      console.log('main with cond'+ JSON.stringify(mainpicsWithCondition))
       let keys = Object.keys(mainpicsWithCondition1)
       function filterObjectByIndex(obj, index) {
         let result = {};

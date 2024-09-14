@@ -7230,8 +7230,8 @@
             const splited2 = fname.split('_')
             splited2.pop()
             const newName = splited2.join('_')
-            const def = querySelectorAll1(`[srcset^="${c[key][0]}"]`)[0].getAttribute('srcset').split(' ').pop()
-            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, def)
+            //const def = querySelectorAll1(`[srcset^="${c[key][0]}"]`)[0].getAttribute('srcset').split(' ').pop()
+            const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, "3000w")
             src1 = src
             console.log('data_src is '+data_src)
             data_src1 =  getRealSrcSet(data_src,src)

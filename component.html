@@ -5610,6 +5610,7 @@
     }
 
     const skuToPictures = async (sku, secondary, hid) => {
+      console.log('---generating pics with sku')
       const id = 'sku:' + sku
       const skuVariables = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=sku-variables;&startsWith=true`)
         .then(response => response.json()).then(res => res.items)

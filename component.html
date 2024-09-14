@@ -7231,6 +7231,7 @@
             const newName = splited2.join('_')
             const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, a[1])
             src1 = src
+            console.log('data_src is '+data_src)
             data_src1 =  getRealSrcSet(data_src,src)
             c[key] = data_src.split(',').map(src => {
               const splited = src1.split('_')

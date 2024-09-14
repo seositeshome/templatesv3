@@ -7196,10 +7196,16 @@
             .then(async response => {
               if (response.ok || response.status === 200) {
                 const t = await response.text()
+                const contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.includes('text/html')) {
+                    return true
+                    // Process the HTML content here
+                }
                 if (t.includes('404')) {
 
                   return true
                 }
+
                 else {
                   log1('Image exists.');
                 }

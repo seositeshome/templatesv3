@@ -7182,6 +7182,7 @@
       for (const c of allCrops) {
         const keys = Object.keys(c).filter(e => e !== 'id' && e !== 'sk')
         for (const key of keys) {
+          console.log(key)
           const first = c[key][0].split(' ')[0]
           /*
           if (pathItemPath.split(';')[0].split('/').pop() === 'Hub') {

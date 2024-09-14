@@ -5682,7 +5682,7 @@
         }
         const combinations = generateCombinations(data)
         for (const combination of combinations) {
-          const r = { ...skToPic(element.sk), alt: element.alt }
+          const r = { ...skToPic(element.sk), alt: element.alt  || element['alt:' + site] || element['alt:global']}
           if (picsWithCondition[combination]?.length) {
             picsWithCondition[combination].push(r)
           }
@@ -5705,7 +5705,7 @@
         }
         const combinations = generateCombinations(data)
         for (const combination of combinations) {
-          const r = { ...skToPic(element.sk), alt: element.alt }
+          const r = { ...skToPic(element.sk), alt: element.alt  || element['alt:' + site] || element['alt:global'] }
           if (mainpicsWithCondition[combination]?.length) {
             mainpicsWithCondition[combination].push(r)
           }
@@ -5754,7 +5754,9 @@
         return { combination: sku + ';' + combination, pics: transformedPics }
       })
       */
-      let keys = Object.keys(mainpicsWithCondition)
+      const mainpicsWithCondition1 ={...mainpicsWithCondition}
+      delete mainpicsWithCondition1.alt
+      let keys = Object.keys(mainpicsWithCondition1)
       function filterObjectByIndex(obj, index) {
         let result = {};
         for (let key in obj) {
@@ -5777,7 +5779,7 @@
           action: 'setAttribute',
           target_element: lastEl,
           key: 'data-var-img',
-          value: JSON.stringify(filterObjectByIndex(mainpicsWithCondition, 0)),
+          value: JSON.stringify(filterObjectByIndex(mainpicsWithCondition1, 0)),
 
         }
         await pushAction(payload2)
@@ -5787,7 +5789,7 @@
           action: 'setAttribute',
           target_element: lastEl,
           key: 'srcset',
-          value: mainpicsWithCondition[keys[0]][0],
+          value: mainpicsWithCondition1[keys[0]][0],
 
         }
         await pushAction(payload3)
@@ -5800,7 +5802,7 @@
           action: 'setAttribute',
           target_element: lastEl,
           key: 'alt',
-          value: mainpicsWithCondition[keys[0]].alt || mainpicsWithCondition[keys[0]]['alt:' + site] || mainpicsWithCondition[keys[0]]['alt:global'],
+          value: mainpicsWithCondition[keys[0]].alt 
 
         }
         await pushAction(payload4)
@@ -5826,7 +5828,7 @@
             action: 'setAttribute',
             target_element: lastEl,
             key: 'alt',
-            value: mainPics[0].alt || mainPics[0]['alt:' + site] || mainPics[0]['alt:global'],
+            value: mainPics[0].alt,
 
           }
           await pushAction(payload4)
@@ -5873,7 +5875,7 @@
             action: 'setAttribute',
             target_element: newId,
             key: 'alt',
-            value: picsWithCondition[keys[0]].alt || picsWithCondition[keys[0]]['alt:' + site] || picsWithCondition[keys[0]]['alt:global'],
+            value: picsWithCondition[keys[0]].alt,
 
           }
           await pushAction(payload4)

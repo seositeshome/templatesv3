@@ -3517,7 +3517,7 @@
         const hubItems = await response.json()
         console.log(JSON.stringify(hubItems))
         const style = hubItems.items[0].hub_items.style
-
+        console.log('style '+ style)
 
         const elements = document.querySelectorAll('[data-element="file-pathpattached"]')
         const folders = Array.from(elements).filter(e => e.hasAttribute('folder')).map(e => e.getAttribute('folder'))

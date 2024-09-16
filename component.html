@@ -20405,6 +20405,8 @@ headers: {
       return resultList
     }
     const handleStockClick = (event)=>{
+      const {target} = event
+      const tr = target.closest('tr')
       
     }
     const handleSkuItemClick = (cloned, item, sku) => {

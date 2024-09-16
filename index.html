@@ -3363,6 +3363,7 @@
     const handleBlogPostChange = (e) => {
       const storedPath = localStorage.getItem('storedPath')
       document.querySelector('[data-input="create-new-file-path-input"]').value = storedPath.split('/')[0] + '/Blog/'
+      product = false
     }
     var product = false
     const handleProductPostChange = (e) => {

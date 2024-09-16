@@ -20406,7 +20406,7 @@ headers: {
     }
     const handleStockClick = (event)=>{
       const {target} = event
-      const tr = target.closest('tr')
+      const cloned = target.closest('tr')
       const variant = item.sk.replace('qty;', '')
       if (!cloned.nextElementSibling?.id.startsWith('stock-menu')) {
         const stockMenuCloned = document.getElementById('stock-menu').cloneNode(true)

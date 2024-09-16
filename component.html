@@ -7382,6 +7382,8 @@
               pathItemArticle = headContentItem.article
               pathItemCollection = headContentItem.collection
               pathItemArticleCollection = headContentItem.article_collection
+              console.log('---checking images')
+              await checkImages()
             })
         }
         else {
@@ -7400,8 +7402,7 @@
       }
       console.log('---loading from db')
       await loadFromDb()
-      console.log('---checking images')
-      await checkImages()
+     
 
       console.log('---handling menus')
       await handleMenus()

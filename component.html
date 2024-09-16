@@ -22593,7 +22593,7 @@ headers: {
 
     const handleDataMenus = async () => {
       console.log('---handling menus')
-      const elements = document.querySelectorAll('[id^="data-menu_"]');
+      const elements = querySelectorAll1('[id^="data-menu_"]');
       console.log('data menu elements are'+JSON.stringify(Array.from(elements)))
       for (const element of elements) {
         const type = element.id.replace('data-menu_', '')

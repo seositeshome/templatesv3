@@ -20515,7 +20515,7 @@ headers: {
                 method: 'POST',
                 body: JSON.stringify(newItem),
               });
-              cloned.querySelector('#sku-qty').textContent = newItem.qty
+              cloned.querySelector('#sku-variable-quantity').textContent = newItem.qty
               clonedAddStock.remove()
             }
             clonedAddStock.querySelectorAll('[save-stock]').forEach(e => e.addEventListener("click", handleSaveStock))

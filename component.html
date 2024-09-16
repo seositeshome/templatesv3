@@ -12511,6 +12511,7 @@ checkbox1.setAttribute('hidden', "");
         multiple && multiple.remove()
         single.setAttribute('data-transfer-receiver', 'product-schema-org')
         const singleV = JSON.parse(single.innerHTML)
+        console.log('name is '+ name)
         singleV.name = name
         singleV.description = description
         const url = pathToUrl()// getElementById1("published-site-label").getAttribute('href')

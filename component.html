@@ -12051,7 +12051,7 @@ checkbox1.setAttribute('hidden', "");
         //get related products
         let list
         console.log('name ' + name)
-        console.log('list is '+JSON.stringify(list))
+        
         const site = pathItemPath.split('/')[0].toLowerCase()
         //console.log('getting1 ' + leadPUrl)
 
@@ -12217,7 +12217,7 @@ checkbox1.setAttribute('hidden', "");
 
 
         }
-
+        console.log('list is '+JSON.stringify(list))
         console.log('list is' + JSON.stringify(list))
         try {
 
@@ -12361,6 +12361,7 @@ checkbox1.setAttribute('hidden', "");
             console.log('hiding section')
             section.setAttribute('hidden', '')
           }
+          console.log('removing original cart')
           originalCart && originalCart.remove()
         }
         catch (e) {

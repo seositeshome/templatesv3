@@ -7486,6 +7486,7 @@
       )
       
       //await runScripts()
+      await handleDataMenus()
       try {
         console.log('---handling onload')
         await onLoad()
@@ -7494,7 +7495,7 @@
       catch (e) {
         console.log(e.message)
       }
-      await handleDataMenus()
+      
       if (toPublish || republish) {
         console.log('publishing')
 

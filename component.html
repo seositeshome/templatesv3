@@ -20407,7 +20407,148 @@ headers: {
     const handleStockClick = (event)=>{
       const {target} = event
       const tr = target.closest('tr')
-      
+      const variant = item.sk.replace('qty;', '')
+      if (!cloned.nextElementSibling?.id.startsWith('stock-menu')) {
+        const stockMenuCloned = document.getElementById('stock-menu').cloneNode(true)
+        stockMenuCloned.id = stockMenuCloned.id + ';' + item.sk.replace('qty;', '')
+        cloned.insertAdjacentElement('afterend', stockMenuCloned)
+        let type = 'digital-good'
+        const handleTypeChange = (e) => {
+          if (e.target.id === 'digital-good') {
+            if (e.target.checked) {
+              stockMenuCloned.parentNode.querySelector('#digital-menu').removeAttribute('hidden')
+              stockMenuCloned.parentNode.querySelector('#real-goods-menu').setAttribute('hidden', '')
+              type = 'digital-good'
+            }
+            else {
+              stockMenuCloned.parentNode.querySelector('#digital-menu').setAttribute('hidden', '')
+              stockMenuCloned.parentNode.querySelector('#real-goods-menu').removeAttribute('hidden')
+              type = 'real-good'
+            }
+          }
+          if (e.target.id === 'real-good') {
+            if (e.target.checked) {
+              stockMenuCloned.parentNode.querySelector('#real-goods-menu').removeAttribute('hidden')
+              stockMenuCloned.parentNode.querySelector('#digital-menu').setAttribute('hidden', '')
+              type = 'real-good'
+            }
+            else {
+              stockMenuCloned.parentNode.querySelector('#real-goods-menu').setAttribute('hidden', '')
+              stockMenuCloned.parentNode.querySelector('#digital-menu').removeAttribute('hidden')
+              type = 'digital-good'
+            }
+          }
+
+        }
+        stockMenuCloned.querySelectorAll('input[type="radio"][name="choose-goods-type"]').forEach(e => e.addEventListener('change', handleTypeChange));
+        const qtyMenu = document.getElementById('stock-qty')
+
+        
+        const addStockMenu = document.getElementById('add-stock-menu')
+        const handleAddStock = (e) => {
+          if (!stockMenuCloned.nextElementSibling?.id.startsWith('add-stock-menu')) {
+            const clonedAddStock = addStockMenu.cloneNode(true)
+            clonedAddStock.id = clonedAddStock.id + ';' + sku
+
+            const handleSaveStock = async (e) => {
+              const input = clonedAddStock.querySelector('#add-stock-input').value
+              const lines = input.split('\n').map(e => e.trim()).filter(line => line)
+              for (const line of lines) {
+
+                const timeStamp = (new Date()).getTime().toString()
+                const body = {
+                  id: item.id,
+                  sk: 'stock-item;' + variant + timeStamp,
+                  lsi1: timeStamp + ':' + line,
+                  ownerUUID: `free:${item.id};${variant}`,
+                  type
+
+                }
+                const response = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                  method: 'POST',
+                  body: JSON.stringify(body),
+                });
+              }
+              //update qty
+              newItem.qty ? (newItem.qty += lines.length) : (newItem.qty = lines.length)
+              fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                method: 'POST',
+                body: JSON.stringify(newItem),
+              });
+              cloned.querySelector('#sku-qty').textContent = newItem.qty
+              clonedAddStock.remove()
+            }
+            clonedAddStock.querySelectorAll('[save-stock]').forEach(e => e.addEventListener("click", handleSaveStock))
+
+
+            stockMenuCloned.insertAdjacentElement('afterend', clonedAddStock)
+            stockMenuCloned.remove()
+
+          }
+        }
+
+        const viewStockMenu = document.getElementById('view-stock')
+        const stockItem0 = document.querySelector('[stockItem]')
+        const handleViewStock = async (e) => {
+          if (!stockMenuCloned.nextElementSibling?.id.startsWith('view-stock')) {
+            const clonedViewStock = viewStockMenu.cloneNode(true)
+            clonedViewStock.id = clonedViewStock.id + ';' + sku
+            const url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=${'stock-item;' + variant}&startsWith=true&descending=true&pageSize=100`
+            const res = await fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(el => el.json())
+            log1(JSON.stringify(res))
+
+            const table = clonedViewStock.querySelector('#stock-table-body')
+            for (const item of res.items) {
+              const clonedStockItem = stockItem0.cloneNode(true)
+              const key = item.lsi1.split(':')[1]
+              clonedStockItem.id = clonedStockItem.id + ';' + key
+              clonedStockItem.removeAttribute('hidden')
+              clonedStockItem.querySelector('#stock-item-value').textContent = key
+              clonedStockItem.querySelector('#stock-item-status').textContent = item.ownerUUID.split(';')[0].split(':')[0]
+              table.append(clonedStockItem)
+            }
+
+            stockMenuCloned.insertAdjacentElement('afterend', clonedViewStock)
+            stockMenuCloned.remove()
+
+          }
+        }
+        const stockLabelMenu = document.getElementById('stock-label')
+        const handleStockLabel = async (e) => {
+          if (!stockMenuCloned.nextElementSibling?.id.startsWith('stock-label')) {
+            const clonedstockLabel = stockLabelMenu.cloneNode(true)
+            clonedstockLabel.id = clonedstockLabel.id + ';' + sku
+            clonedstockLabel.querySelector('#stock-label-input').value = newItem.label || ''
+            clonedstockLabel.querySelector('#update-label').addEventListener('click', async (e) => {
+              const newLabel = clonedstockLabel.querySelector('#stock-label-input').value
+              newItem.label = newLabel
+              item.label = newLabel
+              await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                method: 'POST',
+                body: JSON.stringify(newItem),
+              });
+              clonedstockLabel.remove()
+
+            })
+            stockMenuCloned.insertAdjacentElement('afterend', clonedstockLabel)
+            stockMenuCloned.remove()
+
+          }
+        }
+        stockMenuCloned.querySelectorAll('[stock-qty]').forEach(e => {
+          e.addEventListener("click", handleStockQtyClick)
+        })
+        stockMenuCloned.querySelector('[add-stock]').addEventListener("click", handleAddStock)
+        stockMenuCloned.querySelector('[view-stock]').addEventListener("click", handleViewStock)
+        stockMenuCloned.querySelector('[stock-label]').addEventListener("click", handleStockLabel)
+
+
+      }
     }
     const handleSkuItemClick = (cloned, item, sku) => {
       let newItem = { ...item }

@@ -20533,7 +20533,7 @@ headers: {
           if (!stockMenuCloned.nextElementSibling?.id.startsWith('view-stock')) {
             const clonedViewStock = viewStockMenu.cloneNode(true)
             clonedViewStock.id = clonedViewStock.id + ';' + variant
-            const url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=${'stock-item;' + variant}&startsWith=true&descending=true&pageSize=100`
+            const url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=sku:${pathItemSku}&sk=${'stock-item;' + variant}&startsWith=true&descending=true&pageSize=100`
             const res = await fetch(url, {
               method: 'GET',
               headers: {

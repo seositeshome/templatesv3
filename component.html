@@ -7482,7 +7482,7 @@
           }
         }
       )
-      await handleDataMenus()
+      
       //await runScripts()
       try {
         console.log('---handling onload')
@@ -7492,7 +7492,7 @@
       catch (e) {
         console.log(e.message)
       }
-
+      await handleDataMenus()
       if (toPublish || republish) {
         console.log('publishing')
 
@@ -22594,6 +22594,7 @@ headers: {
     const handleDataMenus = async () => {
       console.log('---handling menus')
       const elements = document.querySelectorAll('[id^="data-menu_"]');
+      console.log('data menu elements are'+JSON.stringify(Array.from(elements)))
       for (const element of elements) {
         const type = element.id.replace('data-menu_', '')
         console.log('handling '+ type)

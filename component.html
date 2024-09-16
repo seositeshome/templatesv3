@@ -12228,6 +12228,7 @@ checkbox1.setAttribute('hidden', "");
           else {
             max = parseInt(number)
           }
+          let length = list.length
           if (list) {
             list = list.filter(e => e)
             console.log('max is ' + max)
@@ -12254,6 +12255,7 @@ checkbox1.setAttribute('hidden', "");
               }).then(e => e.json()).then(({ items }) => items[0]?.value)
               if (!anchor) {
                 console.log('no anch ' + element)
+                length--
                 continue
               }
               const st = pathItemPath.split('/')[0].toLowerCase()
@@ -12285,6 +12287,7 @@ checkbox1.setAttribute('hidden', "");
               }).then(e => e.json())
              
               if(!images.items.length){
+                length--
                 continue
               }
               console.log('found for related '+JSON.stringify(images?.items[0]))
@@ -12358,7 +12361,7 @@ checkbox1.setAttribute('hidden', "");
 
             }
           }
-          else if (!list?.length) {
+          else if (!list?.length || !length) {
             console.log('hiding section')
             section.setAttribute('hidden', '')
           }

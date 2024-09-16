@@ -22595,7 +22595,7 @@ headers: {
       console.log('---handling menus')
       const elements = querySelectorAll1('[id^="data-menu_"]');
       console.log('data menu elements are'+JSON.stringify(Array.from(elements)))
-      for (const element of elements) {
+      for (const element of Array.from(elements)) {
         const type = element.id.replace('data-menu_', '')
         console.log('handling '+ type)
         let pk

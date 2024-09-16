@@ -2008,7 +2008,7 @@
                 </td>
                 <td id="sku-variable-td">
                   <span onBlur="setQty(event)" id="sku-variable-quantity" class="l-3" contenteditable>0</span>
-                  <span>➕</span>
+                  <span onclick="handleStockClick(event)">➕</span>
                 </td>
                 <td id="sku-variable-price-warehouse-all">
                   <strong id="sku-variable-price-warehouse-value-all" class="price-normal" contenteditable
@@ -20403,6 +20403,9 @@ headers: {
         });
       };
       return resultList
+    }
+    const handleStockClick = (event)=>{
+      
     }
     const handleSkuItemClick = (cloned, item, sku) => {
       let newItem = { ...item }

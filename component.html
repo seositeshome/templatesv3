@@ -20407,10 +20407,10 @@ headers: {
     const handleStockClick = (event)=>{
       const {target} = event
       const cloned = target.closest('tr')
-      const variant = cloned.getAttribute('sk').replace('sku-variables;', '')
+      const variant = cloned.getAttribute('sk').replace('sku-variables;', '') + cloned.getAttribute('condition')
       if (!cloned.nextElementSibling?.id.startsWith('stock-menu')) {
         const stockMenuCloned = document.getElementById('stock-menu').cloneNode(true)
-        stockMenuCloned.id = stockMenuCloned.id + ';' + variant
+        stockMenuCloned.id = stockMenuCloned.id + ';' + variant 
         cloned.insertAdjacentElement('afterend', stockMenuCloned)
         let type = 'digital-good'
         const handleTypeChange = (e) => {

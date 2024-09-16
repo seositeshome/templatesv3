@@ -20476,8 +20476,7 @@ headers: {
         const handleAddStock = (e) => {
           if (!stockMenuCloned.nextElementSibling?.id.startsWith('add-stock-menu')) {
             const clonedAddStock = addStockMenu.cloneNode(true)
-            clonedAddStock.id = clonedAddStock.id + ';' + sku
-
+            clonedAddStock.id = clonedAddStock.id + ';' + variant
             const handleSaveStock = async (e) => {
               const input = clonedAddStock.querySelector('#add-stock-input').value
               const lines = input.split('\n').map(e => e.trim()).filter(line => line)
@@ -20485,7 +20484,7 @@ headers: {
 
                 const timeStamp = (new Date()).getTime().toString()
                 const body = {
-                  id: item.id,
+                  id:'sku:'+ pathItemSku,
                   sk: 'stock-item;' + variant + timeStamp,
                   lsi1: timeStamp + ':' + line,
                   ownerUUID: `free:${item.id};${variant}`,
@@ -20520,7 +20519,7 @@ headers: {
         const handleViewStock = async (e) => {
           if (!stockMenuCloned.nextElementSibling?.id.startsWith('view-stock')) {
             const clonedViewStock = viewStockMenu.cloneNode(true)
-            clonedViewStock.id = clonedViewStock.id + ';' + sku
+            clonedViewStock.id = clonedViewStock.id + ';' + variant
             const url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=${'stock-item;' + variant}&startsWith=true&descending=true&pageSize=100`
             const res = await fetch(url, {
               method: 'GET',
@@ -20550,7 +20549,7 @@ headers: {
         const handleStockLabel = async (e) => {
           if (!stockMenuCloned.nextElementSibling?.id.startsWith('stock-label')) {
             const clonedstockLabel = stockLabelMenu.cloneNode(true)
-            clonedstockLabel.id = clonedstockLabel.id + ';' + sku
+            clonedstockLabel.id = clonedstockLabel.id + ';' + variant
             clonedstockLabel.querySelector('#stock-label-input').value = newItem.label || ''
             clonedstockLabel.querySelector('#update-label').addEventListener('click', async (e) => {
               const newLabel = clonedstockLabel.querySelector('#stock-label-input').value

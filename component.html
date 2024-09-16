@@ -20432,10 +20432,23 @@ headers: {
       };
       return resultList
     }
-    const handleStockClick = (event)=>{
+    const handleStockClick = async(event)=>{
       const {target} = event
       const cloned = target.closest('tr')
+      const checkedWareHouse = querySelectorAll1('#warehouse-zd[checked]')[0]?.parentNode.id 
+          
       const variant = cloned.getAttribute('sk').replace('sku-variables;', '') + cloned.getAttribute('condition')
+      const getItem = {
+        id: 'sku:' + pathItemSku,
+        sk: 'warehouse_price_qty:' + cloned.getAttribute('condition') + ';' + cloned.getAttribute('sk').replace('sku-variables;', '') + checkedWareHouse,
+       
+      }
+      const newItem = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${getItem.id}&sk=${getItem.sk}&startsWith=true`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json()).then(res => res.items[0])
       if (!cloned.nextElementSibling?.id.startsWith('stock-menu')) {
         const stockMenuCloned = document.getElementById('stock-menu').cloneNode(true)
         stockMenuCloned.id = stockMenuCloned.id + ';' + variant 

@@ -7502,6 +7502,7 @@
       )
       
       //await runScripts()
+      await handleDataMenus()
       try {
         console.log('---handling onload')
         await onLoad()
@@ -7510,7 +7511,7 @@
       catch (e) {
         console.log(e.message)
       }
-      await handleDataMenus()
+      
       if (toPublish || republish) {
         console.log('publishing')
 
@@ -12474,6 +12475,7 @@ checkbox1.setAttribute('hidden', "");
             has[k] = v
           }
           has.name = hasName
+          console.log('name is '+ name)
           has.description = hasDescription
           const priceItem = skuSiteValue.find(e => e.sk.endsWith(sp.join(';') + ';'))
           has.offers.price = parseFloat(priceItem.price)
@@ -12527,6 +12529,7 @@ checkbox1.setAttribute('hidden', "");
         multiple && multiple.remove()
         single.setAttribute('data-transfer-receiver', 'product-schema-org')
         const singleV = JSON.parse(single.innerHTML)
+        console.log('name is '+ name)
         singleV.name = name
         singleV.description = description
         const url = pathToUrl()// getElementById1("published-site-label").getAttribute('href')

@@ -22592,9 +22592,11 @@ headers: {
     }
 
     const handleDataMenus = async () => {
+      console.log('---handling menus')
       const elements = document.querySelectorAll('[id^="data-menu_"]');
       for (const element of elements) {
         const type = element.id.replace('data-menu_', '')
+        console.log('handling '+ type)
         let pk
         if (type === 'sku') {
           if (!pathItem.hub_items?.menus?.sku_menu_toggle) {

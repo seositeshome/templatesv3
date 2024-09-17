@@ -7200,6 +7200,18 @@
       });
     }
     const checkImages = async () => {
+
+      await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/checkImages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({id:headContentItem.id,pathItemPath}),
+        });
+
+        return
+
+      
       const crop1 = await fetch(`${backend_url}?id=${headContentItem.id}&sk=manual-crops&startsWith=true`, {
         method: 'GET',
         headers: {

@@ -3243,7 +3243,9 @@
         const ids = items1.map(e=>e.id)
         console.log('ids are '+JSON.stringify(ids) )
         for(const id of ids){
+          
           const url = `./component.html?id=${id}`;
+          console.log('opening '+url)
           window.open(url, '_blank');
           await new Promise(resolve => setTimeout(resolve, 100));
         }

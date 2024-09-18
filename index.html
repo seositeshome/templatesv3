@@ -3247,7 +3247,7 @@
           const url = `./component.html?id=${id}`;
           console.log('opening '+url)
           window.open(url, '_blank');
-          await new Promise(resolve => setTimeout(resolve, 500));
+          await new Promise(resolve => setTimeout(resolve, 100));
         }
       }
       addMenuEntry(menu, '✏️ Edit', (e) => edit(id, path))

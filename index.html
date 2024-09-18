@@ -3229,7 +3229,7 @@
       const ownerid = localStorage.getItem('ownerid')
       const helperid = localStorage.getItem('helperid')
 
-      const openHubs = async(e,id,path)=>{
+      const openHubs = async (e, id, path) => {
         const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
         //list of sub paths
         const data1 = await response1.json();
@@ -3239,15 +3239,19 @@
         const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
         //list of sub paths
         const data2 = await response2.json();
-        const items1 = [...data1.items.filter(e=>e.lsi1.split(';')[0].endsWith('|Hub')), ...data2.items]
-        const ids = items1.map(e=>e.id)
-        console.log('ids are '+JSON.stringify(ids) )
-        for(const id of ids){
-          
+        const items1 = [...data1.items.filter(e => e.lsi1.split(';')[0].endsWith('|Hub')), ...data2.items]
+        const ids = items1.map(e => e.id)
+        console.log('ids are ' + JSON.stringify(ids))
+        for (const id of ids) {
+
           const url = `./component.html?id=${id}`;
-          console.log('opening '+url)
-          window.open(url, '_blank');
-          await new Promise(resolve => setTimeout(resolve, 200));
+          console.log('opening ' + url)
+          ids.forEach((id, index) => {
+            const url = `./component.html?id=${id}`;
+            setTimeout(() => {
+              window.open(url, '_blank');
+            }, index * 100); // Delay of 100 ms for each tab
+          });
         }
       }
       addMenuEntry(menu, '✏️ Edit', (e) => edit(id, path))
@@ -3537,8 +3541,8 @@
         // get style
         const hubItems = await response.json()
         console.log(JSON.stringify(hubItems))
-        const style = hubItems.items[0].hub_items.style  || 'SeoSitesHome.com'
-        console.log('style '+ style)
+        const style = hubItems.items[0].hub_items.style || 'SeoSitesHome.com'
+        console.log('style ' + style)
         const copyFrom = style + '/Products/Seed-Product/'
         const splitedPath = copyFrom.replace('|', "/").split('/')
         const last = splitedPath[splitedPath.length - 2]

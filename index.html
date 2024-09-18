@@ -3516,7 +3516,7 @@
         // get style
         const hubItems = await response.json()
         console.log(JSON.stringify(hubItems))
-        const style = hubItems.items[0].hub_items.style
+        const style = hubItems.items[0].hub_items.style  || 'seositeshome.com'
         console.log('style '+ style)
 
         const elements = document.querySelectorAll('[data-element="file-pathpattached"]')
@@ -3589,7 +3589,7 @@
         // get style
         const hubItems = await response.json()
         console.log(JSON.stringify(hubItems))
-        const style = hubItems.items[0].hub_items.style
+        const style = hubItems.items[0].hub_items.style || 'seositeshome.com'
         const copyFrom = style + '/Blog/Seed-Article/'
         const splitedPath = copyFrom.replace('|', "/").split('/')
         const last = splitedPath[splitedPath.length - 2]

@@ -3245,6 +3245,7 @@
         for(const id of ids){
           const url = `./component.html?id=${id}`;
           window.open(url, '_blank');
+          await new Promise(resolve => setTimeout(resolve, 100));
         }
       }
       addMenuEntry(menu, '✏️ Edit', (e) => edit(id, path))

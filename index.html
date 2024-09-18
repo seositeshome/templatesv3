@@ -3518,7 +3518,13 @@
         console.log(JSON.stringify(hubItems))
         const style = hubItems.items[0].hub_items.style  || 'SeoSitesHome.com'
         console.log('style '+ style)
-
+        const copyFrom = style + '/Products/Seed-Product/'
+        const splitedPath = copyFrom.replace('|', "/").split('/')
+        const last = splitedPath[splitedPath.length - 2]
+        const p = path.endsWith('/') ? path : path + '/'
+        await updateFolder(copyFrom, p, last, new Date())
+        path ? loadUsingPath() : loadFileList()
+        return
         const elements = document.querySelectorAll('[data-element="file-pathpattached"]')
         const folders = Array.from(elements).filter(e => e.hasAttribute('folder')).map(e => e.getAttribute('folder'))
         const components = Array.from(elements).filter(e => e.hasAttribute('component')).map(e => { return { lsi1: e.getAttribute('component'), id: e.id } })

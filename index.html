@@ -3229,7 +3229,23 @@
       const ownerid = localStorage.getItem('ownerid')
       const helperid = localStorage.getItem('helperid')
 
-
+      const openHubs = async(e,id,path)=>{
+        const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
+        //list of sub paths
+        const data1 = await response1.json();
+        const splited = path.split('/')
+        splited.pop()
+        const fpath = splited.join('/') + '|Hub'
+        const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
+        //list of sub paths
+        const data2 = await response2.json();
+        const items1 = [...data1.items.filter(e=>e.lsi1.split(';')[0].endsWith('|Hub')), ...data2.items]
+        const ids = items1.map(e=>e.id)
+        for(const id of ids){
+          const url = `./component.html?id=${id}`;
+          window.open(url, '_blank');
+        }
+      }
       addMenuEntry(menu, '✏️ Edit', (e) => edit(id, path))
       addMenuEntry(menu, '🗑️ Delete', (e) => openRemove1(id, path))
       addMenuEntry(menu, '⧉ Copy', (e) => copy(id, path))
@@ -3238,6 +3254,7 @@
       addMenuEntry(menu, '✅ Protection +', (e) => setProtected(id, path, true))
       addMenuEntry(menu, '❌ Protection -', (e) => setProtected(id, path, false))
       addMenuEntry(menu, '🗑️ Remove Except content', (e) => removeButContent(e, id, path))
+      addMenuEntry(menu, 'Open Hubs', (e) => openHubs(e, id, path))
 
 
       const publishFolder = async (id, path) => {

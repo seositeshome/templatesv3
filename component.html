@@ -402,7 +402,8 @@
         style="margin-right: 5px;">🔄</button>
       <button onclick="removeAndInvalidate(event)" hidden id="published-remove" class="b-1"
         style="margin-right: 5px;">🗑️️</button>
-     <input id="priorityInput" onBlur="changePriority(event)" type="number" min="0" max="100" style="position: absolute; right: 80px; width: 60px; height: 40px; text-align: center; font-size: 20px; -moz-appearance: textfield; appearance: textfield;" />
+      <input id="priorityInput" onBlur="changePriority(event)" type="number" min="0" max="100"
+        style="position: absolute; right: 80px; width: 60px; height: 40px; text-align: center; font-size: 20px; -moz-appearance: textfield; appearance: textfield;" />
       <button id="published-update-content" class="b-1" style="margin-right: 5px; position: absolute; right: 20px;"
         onclick="publish(event,true)">🗞️</button>
 
@@ -1864,7 +1865,7 @@
               <textarea data-text-value class="textdata" id="textdata" rows="50"></textarea>
             </details>
 
-            
+
 
           </details>
           <details hidden id="details-1" style="margin-left: 30px; margin-top: 10px;">
@@ -4583,13 +4584,13 @@
                 item['picture_buttons_sku_variables' + s][key] = []
               }
               else {
-                if(item['picture_buttons_sku_variables' + s]){
+                if (item['picture_buttons_sku_variables' + s]) {
                   item['picture_buttons_sku_variables' + s][key] = selectedValues
                 }
-                else{
-                  item['picture_buttons_sku_variables' + s]={[key] :selectedValues}
+                else {
+                  item['picture_buttons_sku_variables' + s] = { [key]: selectedValues }
                 }
-                
+
               }
 
               postToDb(item)
@@ -4600,11 +4601,11 @@
                 item['gallery_variables_sku_variables' + s][key] = []
               }
               else {
-                if(item['gallery_variables_sku_variables' + s]){
+                if (item['gallery_variables_sku_variables' + s]) {
                   item['gallery_variables_sku_variables' + s][key] = selectedValues
                 }
-                else{
-                  item['gallery_variables_sku_variables' + s]={[key] :selectedValues}
+                else {
+                  item['gallery_variables_sku_variables' + s] = { [key]: selectedValues }
                 }
                 //item['gallery_variables_sku_variables' + s][key] = selectedValues
               }
@@ -4869,7 +4870,7 @@
         if (flag) {
           const { src, data_src } = await resizeApi(name, imageSrc, defaultRes)
           src1 = src
-          data_src1 = getRealSrcSet(data_src,src)
+          data_src1 = getRealSrcSet(data_src, src)
           crop[imageUUID] = data_src.split(',').map(src => {
             const splited = src1.split('_')
             splited.pop()
@@ -5078,7 +5079,7 @@
       el3.removeAttribute('href')
       pSiteLabel.removeAttribute('href')
     }
-    const changePriority = async (e)=>{
+    const changePriority = async (e) => {
       pathItem.hub_items.priority = e.target.value
       postToDb(pathItem)
     }
@@ -5719,7 +5720,7 @@
           })
         }
         const combinations = generateCombinations(data)
-        const alt =  element.alt  || element['alt:' + site] || element['alt:global']
+        const alt = element.alt || element['alt:' + site] || element['alt:global']
         for (const combination of combinations) {
           const r = skToPic(element.sk)
           if (picsWithCondition[combination]?.length) {
@@ -5744,7 +5745,7 @@
           })
         }
         const combinations = generateCombinations(data)
-        const alt =  element.alt  || element['alt:' + site] || element['alt:global']
+        const alt = element.alt || element['alt:' + site] || element['alt:global']
         for (const combination of combinations) {
           const r = skToPic(element.sk)
           if (mainpicsWithCondition[combination]?.length) {
@@ -5796,9 +5797,9 @@
         return { combination: sku + ';' + combination, pics: transformedPics }
       })
       */
-      const mainpicsWithCondition1 ={...mainpicsWithCondition}
+      const mainpicsWithCondition1 = { ...mainpicsWithCondition }
       delete mainpicsWithCondition1.alt
-      console.log('main with cond'+ JSON.stringify(mainpicsWithCondition))
+      console.log('main with cond' + JSON.stringify(mainpicsWithCondition))
       let keys = Object.keys(mainpicsWithCondition1)
       function filterObjectByIndex(obj, index) {
         let result = {};
@@ -5845,7 +5846,7 @@
           action: 'setAttribute',
           target_element: lastEl,
           key: 'alt',
-          value: mainpicsWithCondition[keys[0]].alt 
+          value: mainpicsWithCondition[keys[0]].alt
 
         }
         await pushAction(payload4)
@@ -7206,16 +7207,16 @@
     const checkImages = async () => {
 
       await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/checkImages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({id:headContentItem.id,pathItemPath}),
-        });
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: headContentItem.id, pathItemPath }),
+      });
 
-        return
+      return
 
-      
+
       const crop1 = await fetch(`${backend_url}?id=${headContentItem.id}&sk=manual-crops&startsWith=true`, {
         method: 'GET',
         headers: {
@@ -7256,8 +7257,8 @@
                 const t = await response.text()
                 const contentType = response.headers.get('Content-Type');
                 if (contentType && contentType.includes('text/html')) {
-                    return true
-                    // Process the HTML content here
+                  return true
+                  // Process the HTML content here
                 }
                 if (t.includes('404')) {
 
@@ -7279,9 +7280,9 @@
               return true
             });
           if (flag) {
-            console.log('keys problem ' +key + ' not found '+first)
-            const a =  c[key][c[key].length -1].split(' ')
-            const splited =a[0].split('/')
+            console.log('keys problem ' + key + ' not found ' + first)
+            const a = c[key][c[key].length - 1].split(' ')
+            const splited = a[0].split('/')
             const last = splited[splited.length - 1]
             const [fname, ext] = last.split('.')
             const splited2 = fname.split('_')
@@ -7290,8 +7291,8 @@
             //const def = querySelectorAll1(`[srcset^="${c[key][0]}"]`)[0].getAttribute('srcset').split(' ').pop()
             const { src, data_src } = await resizeApi(newName, `https://s3.amazonaws.com/checkout-admin-panel/pics${key}.${ext}`, "3000w")
             src1 = src
-            console.log('data_src is '+data_src)
-            data_src1 =  getRealSrcSet(data_src,src)
+            console.log('data_src is ' + data_src)
+            data_src1 = getRealSrcSet(data_src, src)
             /*
             c[key] = data_src.split(',').map(src => {
               const splited = src1.split('_')
@@ -7436,11 +7437,11 @@
       }
       console.log('---loading from db')
       await loadFromDb()
-     
+
 
       console.log('---handling menus')
       await handleMenus()
-      if(pathItem.hub_items?.priority){
+      if (pathItem.hub_items?.priority) {
         getElementById1('priorityInput').value = pathItem.hub_items.priority
       }
       if (pathItem.hub_items?.menus?.import_menu_toggle) {
@@ -7519,7 +7520,7 @@
           }
         }
       )
-      
+
       //await runScripts()
       await handleDataMenus()
       try {
@@ -7530,7 +7531,7 @@
       catch (e) {
         console.log(e.message)
       }
-      
+
       if (toPublish || republish) {
         console.log('publishing')
 
@@ -12088,7 +12089,7 @@ checkbox1.setAttribute('hidden', "");
         //get related products
         let list
         console.log('name ' + name)
-        
+
         const site = pathItemPath.split('/')[0].toLowerCase()
         //console.log('getting1 ' + leadPUrl)
 
@@ -12190,71 +12191,82 @@ checkbox1.setAttribute('hidden', "");
         else {
           url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=${name}:${ownerid}&gsi1lsi1=true&lsi1=${name}`;
 
-          const res = await fetch(url).then(res => res.json())
+          const res1 = await fetch(url).then(res => res.json())
             .then(async ({ items }) => {
-              return items[0]
+              return items
 
             })
-          console.log('for name ' + name + ' ' + JSON.stringify(res))
-          if (!res) {
+          if (!res1.length) {
             continue
           }
-          const colId = res.id
-          const d = await fetch(`${backend_url}?id=${colId}&sk=selected&startsWith=true`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then(e => e.json())
-          console.log('colId ' + colId)
-          console.log('fx ' + JSON.stringify(d))
-          const items = d.items[0].items
-          console.log('for name2' + JSON.stringify(items))
-          list = items
-          const leadPUrl = `${backend_url}?id=${colId}&sk=data_leadP:${site}&startsWith=true`
+          for (const res of res1) {
+            console.log('for name ' + name + ' ' + JSON.stringify(res))
+            if (!res) {
+              continue
+            }
+            const colId = res.id
+            const anchorUrl = `${backend_url}?id=${colId}&sk=addedSite:${site}&startsWith=true`
+            console.log('getting3 ' + anchorUrl)
+            const anchor = await fetch(anchorUrl, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(e => e.json()).then(({ items }) => items[0]?.value)
+            if(!anchor){
+              continue
+            }
+            const d = await fetch(`${backend_url}?id=${colId}&sk=selected&startsWith=true`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(e => e.json())
+            console.log('colId ' + colId)
+            console.log('fx ' + JSON.stringify(d))
+            const items = d.items[0].items
+            console.log('for name2' + JSON.stringify(items))
+            list = items
+            const leadPUrl = `${backend_url}?id=${colId}&sk=data_leadP:${site}&startsWith=true`
 
-          const leadP = await fetch(leadPUrl, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then(e => e.json()).then(({ items }) => items[0]?.value)
+            const leadP = await fetch(leadPUrl, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(e => e.json()).then(({ items }) => items[0]?.value)
 
 
-          const headingUrl = `${backend_url}?id=${colId}&sk=data_heading:${site}&startsWith=true`
-          console.log('getting1 ' + headingUrl)
-          const heading = await fetch(headingUrl, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then(e => e.json()).then(({ items }) => items[0]?.value)
+            const headingUrl = `${backend_url}?id=${colId}&sk=data_heading:${site}&startsWith=true`
+            console.log('getting1 ' + headingUrl)
+            const heading = await fetch(headingUrl, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(e => e.json()).then(({ items }) => items[0]?.value)
 
-          const anchorUrl = `${backend_url}?id=${colId}&sk=addedSite:${pathItemPath.split('/')[0].toLowerCase()}&startsWith=true`
-          console.log('getting3 ' + anchorUrl)
-          const anchor = await fetch(anchorUrl, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then(e => e.json()).then(({ items }) => items[0]?.value)
-          console.log(anchor)
-          const a = section.querySelector('.anchor_collection_products')
-          if (anchor && a) {
-            const wAnchor = anchor.startsWith('https://') ? anchor : 'https://' + anchor
-            console.log('setting anchor1' + wAnchor)
-            console.log('setting to  ' + +a.id + ' ' + wAnchor)
-            section.querySelectorAll('.anchor_collection_products').forEach(e => e.setAttribute('href', wAnchor))
+            
+            console.log(anchor)
+            const a = section.querySelector('.anchor_collection_products')
+            if (anchor && a) {
+              const wAnchor = anchor.startsWith('https://') ? anchor : 'https://' + anchor
+              console.log('setting anchor1' + wAnchor)
+              console.log('setting to  ' + +a.id + ' ' + wAnchor)
+              section.querySelectorAll('.anchor_collection_products').forEach(e => e.setAttribute('href', wAnchor))
+            }
+
+            const h = section.querySelector('.collection_products_heading')
+            h && (h.textContent = heading)
+            const l = section.querySelector('.collection_products_lead_paragraph')
+            l && (l.textContent = leadP)
+            if(anchor){
+              break;
+            }
           }
 
-          const h = section.querySelector('.collection_products_heading')
-          h && (h.textContent = heading)
-          const l = section.querySelector('.collection_products_lead_paragraph')
-          l && (l.textContent = leadP)
-
-
         }
-        console.log('list is '+JSON.stringify(list))
+        console.log('list is ' + JSON.stringify(list))
         console.log('list is' + JSON.stringify(list))
         try {
 
@@ -12322,12 +12334,12 @@ checkbox1.setAttribute('hidden', "");
                   'Content-Type': 'application/json',
                 },
               }).then(e => e.json())
-             
-              if(!images.items.length){
+
+              if (!images.items.length) {
                 length--
                 continue
               }
-              console.log('found for related '+JSON.stringify(images?.items[0]))
+              console.log('found for related ' + JSON.stringify(images?.items[0]))
               const src = images.items[0].crops?.split(',')[0].split(' ')[0]
               const imgEl = art ? cloned.querySelector('.article_lead_img') : cloned.querySelector('.product_lead_img')
               imgEl && imgEl.setAttribute('src', src)
@@ -12402,7 +12414,7 @@ checkbox1.setAttribute('hidden', "");
             console.log('hiding section')
             section.setAttribute('hidden', '')
           }
-          console.log('length 1 is '+length)
+          console.log('length 1 is ' + length)
           console.log('removing original cart')
           originalCart && originalCart.remove()
         }
@@ -12494,7 +12506,7 @@ checkbox1.setAttribute('hidden', "");
             has[k] = v
           }
           has.name = hasName
-          console.log('name is '+ name)
+          console.log('name is ' + name)
           has.description = hasDescription
           const priceItem = skuSiteValue.find(e => e.sk.endsWith(sp.join(';') + ';'))
           has.offers.price = parseFloat(priceItem.price)
@@ -12548,7 +12560,7 @@ checkbox1.setAttribute('hidden', "");
         multiple && multiple.remove()
         single.setAttribute('data-transfer-receiver', 'product-schema-org')
         const singleV = JSON.parse(single.innerHTML)
-        console.log('name is '+ name)
+        console.log('name is ' + name)
         singleV.name = name
         singleV.description = description
         const url = pathToUrl()// getElementById1("published-site-label").getAttribute('href')
@@ -18356,9 +18368,9 @@ elementsToRemove.forEach(element => element.remove());
       return map
 
     }
-    const getRealSrcSet = (data_src,src) => {
+    const getRealSrcSet = (data_src, src) => {
       const resolutions = data_src.split(',').map(e => e.split('.')[0])
-      
+
       const splited = src.split('/')
       const fName = splited.pop()
       const [name, ext] = fName.split('.')
@@ -18733,7 +18745,7 @@ elementsToRemove.forEach(element => element.remove());
         if (flag) {
           const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
           src1 = src
-          data_src1 = getRealSrcSet(data_src,src)
+          data_src1 = getRealSrcSet(data_src, src)
           crop[imageUUID] = data_src.split(',').map(src => {
             const splited = src1.split('_')
             splited.pop()
@@ -18753,7 +18765,7 @@ elementsToRemove.forEach(element => element.remove());
       else {
         const { src, data_src } = await resizeApi(newName, imageSrc, defaultRes, custom)
         src1 = src
-        data_src1 = getRealSrcSet(data_src,src)
+        data_src1 = getRealSrcSet(data_src, src)
         crop[imageUUID] = data_src.split(',').map(src => {
           const splited = src1.split('_')
           splited.pop()
@@ -20451,16 +20463,16 @@ headers: {
       };
       return resultList
     }
-    const handleStockClick = async(event)=>{
-      const {target} = event
+    const handleStockClick = async (event) => {
+      const { target } = event
       const cloned = target.closest('tr')
-      const checkedWareHouse = querySelectorAll1('#warehouse-zd[checked]')[0]?.parentNode.id 
-          
+      const checkedWareHouse = querySelectorAll1('#warehouse-zd[checked]')[0]?.parentNode.id
+
       const variant = cloned.getAttribute('sk').replace('sku-variables;', '') + cloned.getAttribute('condition')
       const getItem = {
         id: 'sku:' + pathItemSku,
         sk: 'warehouse_price_qty:' + cloned.getAttribute('condition') + ';' + cloned.getAttribute('sk').replace('sku-variables;', '') + checkedWareHouse,
-       
+
       }
       const newItem = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${getItem.id}&sk=${getItem.sk}&startsWith=true`, {
         method: 'GET',
@@ -20470,7 +20482,7 @@ headers: {
       }).then(e => e.json()).then(res => res.items[0])
       if (!cloned.nextElementSibling?.id.startsWith('stock-menu')) {
         const stockMenuCloned = document.getElementById('stock-menu').cloneNode(true)
-        stockMenuCloned.id = stockMenuCloned.id + ';' + variant 
+        stockMenuCloned.id = stockMenuCloned.id + ';' + variant
         cloned.insertAdjacentElement('afterend', stockMenuCloned)
         let type = 'digital-good'
         const handleTypeChange = (e) => {
@@ -20503,7 +20515,7 @@ headers: {
         stockMenuCloned.querySelectorAll('input[type="radio"][name="choose-goods-type"]').forEach(e => e.addEventListener('change', handleTypeChange));
         const qtyMenu = document.getElementById('stock-qty')
 
-        
+
         const addStockMenu = document.getElementById('add-stock-menu')
         const handleAddStock = (e) => {
           if (!stockMenuCloned.nextElementSibling?.id.startsWith('add-stock-menu')) {
@@ -20516,7 +20528,7 @@ headers: {
 
                 const timeStamp = (new Date()).getTime().toString()
                 const body = {
-                  id:'sku:'+ pathItemSku,
+                  id: 'sku:' + pathItemSku,
                   sk: 'stock-item;' + variant + timeStamp,
                   lsi1: timeStamp + ':' + line,
                   ownerUUID: `free:${pathItemSku};${variant}`,
@@ -22797,10 +22809,10 @@ headers: {
     const handleDataMenus = async () => {
       console.log('---handling menus')
       const elements = querySelectorAll1('[id^="data-menu_"]');
-      console.log('data menu elements are'+JSON.stringify(Array.from(elements)))
+      console.log('data menu elements are' + JSON.stringify(Array.from(elements)))
       for (const element of Array.from(elements)) {
         const type = element.id.replace('data-menu_', '')
-        console.log('handling '+ type)
+        console.log('handling ' + type)
         let pk
         if (type === 'sku') {
           if (!pathItem.hub_items?.menus?.sku_menu_toggle) {

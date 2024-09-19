@@ -12201,9 +12201,7 @@ checkbox1.setAttribute('hidden', "");
           }
           for (const res of res1) {
             console.log('for name ' + name + ' ' + JSON.stringify(res))
-            if (!res) {
-              continue
-            }
+            
             const colId = res.id
             const anchorUrl = `${backend_url}?id=${colId}&sk=addedSite:${site}&startsWith=true`
             console.log('getting3 ' + anchorUrl)

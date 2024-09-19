@@ -12210,7 +12210,7 @@ checkbox1.setAttribute('hidden', "");
               headers: {
                 'Content-Type': 'application/json',
               },
-            }).then(e => e.json()).then(({ items }) => items[0])
+            }).then(e => e.json()).then(({ items }) => items)
             console.log('anchor items length '+anchorItems.length)
             const anchor = anchorItems[0]?.value
             

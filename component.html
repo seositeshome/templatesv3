@@ -11951,6 +11951,9 @@ checkbox1.setAttribute('hidden', "");
       let mainCrop
       let promoCrop
       let catalogCrop
+      let mainAlt
+      let promoAlt
+      let catalogAlt
       for (const element of picitems) {
         const sk = element.sk
         const imageUUID = sk.split('.')[0].replace('pics', '')
@@ -11981,12 +11984,15 @@ checkbox1.setAttribute('hidden', "");
           if (!flag) {
             if ((element.main || element['main:' + site] || element['main:global']) && !mainCrop) {
               mainCrop = crop[imageUUID].join(',')
+              mainAlt = element.alt || element['alt:' + site] || element['alt:global']
             }
             if ((element.promo || element['promo:' + site] || element['promo:global']) && !promoCrop) {
               promoCrop = crop[imageUUID].join(',')
+              promoAlt = element.alt || element['alt:' + site] || element['alt:global']
             }
             if ((element.catalogue || element['catalogue:' + site] || element['catalogue:global']) && !catalogCrop) {
               catalogCrop = crop[imageUUID].join(',')
+              catalogAlt = element.alt || element['alt:' + site] || element['alt:global']
 
             }
 
@@ -12028,9 +12034,9 @@ checkbox1.setAttribute('hidden', "");
       }
       postToDb(crop)
 
-      postToDb({ id, sk: 'data_lead-image:' + site, crops: mainCrop })
-      postToDb({ id, sk: 'data_catalog-image:' + site, crops: catalogCrop || mainCrop })
-      postToDb({ id, sk: 'data_promo-image:' + site, crops: promoCrop || mainCrop })
+      postToDb({ id, sk: 'data_lead-image:' + site, crops: mainCrop,alt:mainAlt })
+      postToDb({ id, sk: 'data_catalog-image:' + site, crops: catalogCrop || mainCrop,alt: catalogAlt||mainAlt })
+      postToDb({ id, sk: 'data_promo-image:' + site, crops: promoCrop || mainCrop,alt:promoAlt || mainAlt })
       article ? (await articleToPicturesApi(crop)) : (await skuToPicturesApi(crop))
 
     }

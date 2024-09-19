@@ -4478,7 +4478,9 @@
       //const id = pathItemSku || pathItem.id
       let mergedItems = []
       const ids = [...Object.keys(cache)]
+      let defaultAlt = 'product image'
       if (pathItemArticle) {
+        defaultAlt = 'article image'
         ids.push('article:' + pathItemArticle)
       }
       else if (pathItemSku) {
@@ -4632,9 +4634,11 @@
           }
 
         }
-        if (item['alt' + s]) {
-          clonedRow.querySelector('#alt-input').textContent = item['alt' + s]
+        if (!item['alt' + s]) {
+          item['alt' + s]= defaultAlt
+          postToDb(item)
         }
+        clonedRow.querySelector('#alt-input').textContent = item['alt' + s]
         if (item['picNumber' + s]) {
           clonedRow.querySelector('#pic_number').textContent = item['picNumber' + s]
         }

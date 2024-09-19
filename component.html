@@ -12205,13 +12205,14 @@ checkbox1.setAttribute('hidden', "");
             const colId = res.id
             const anchorUrl = `${backend_url}?id=${colId}&sk=addedSite:${site}&startsWith=true`
             console.log('getting3 ' + anchorUrl)
-            const anchor = await fetch(anchorUrl, {
+            const anchorItems = await fetch(anchorUrl, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
               },
-            }).then(e => e.json()).then(({ items }) => items[0]?.value)
-            
+            }).then(e => e.json()).then(({ items }) => items[0])
+            console.log('anchor items length '+anchorItems.length)
+            const anchor = anchorItems[0]?.value
             
             const leadPUrl = `${backend_url}?id=${colId}&sk=data_leadP:${site}&startsWith=true`
 
@@ -12235,9 +12236,7 @@ checkbox1.setAttribute('hidden', "");
             
             console.log(anchor)
             const a = section.querySelector('.anchor_collection_products')
-            if(!(anchor || heading || leadP)){
-              continue
-            }
+            
             if (anchor && a) {
               const wAnchor = anchor.startsWith('https://') ? anchor : 'https://' + anchor
               console.log('setting anchor1' + wAnchor)

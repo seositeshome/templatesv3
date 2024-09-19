@@ -12211,20 +12211,8 @@ checkbox1.setAttribute('hidden', "");
                 'Content-Type': 'application/json',
               },
             }).then(e => e.json()).then(({ items }) => items[0]?.value)
-            if(!anchor){
-              continue
-            }
-            const d = await fetch(`${backend_url}?id=${colId}&sk=selected&startsWith=true`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            }).then(e => e.json())
-            console.log('colId ' + colId)
-            console.log('fx ' + JSON.stringify(d))
-            const items = d.items[0].items
-            console.log('for name2' + JSON.stringify(items))
-            list = items
+            
+            
             const leadPUrl = `${backend_url}?id=${colId}&sk=data_leadP:${site}&startsWith=true`
 
             const leadP = await fetch(leadPUrl, {
@@ -12247,6 +12235,9 @@ checkbox1.setAttribute('hidden', "");
             
             console.log(anchor)
             const a = section.querySelector('.anchor_collection_products')
+            if(!(anchor || heading || leadP)){
+              continue
+            }
             if (anchor && a) {
               const wAnchor = anchor.startsWith('https://') ? anchor : 'https://' + anchor
               console.log('setting anchor1' + wAnchor)
@@ -12258,9 +12249,21 @@ checkbox1.setAttribute('hidden', "");
             h && (h.textContent = heading)
             const l = section.querySelector('.collection_products_lead_paragraph')
             l && (l.textContent = leadP)
-            if(anchor){
+            const d = await fetch(`${backend_url}?id=${colId}&sk=selected&startsWith=true`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(e => e.json())
+            console.log('colId ' + colId)
+            console.log('fx ' + JSON.stringify(d))
+            const items = d.items[0].items
+            console.log('for name2' + JSON.stringify(items))
+            list = items
+            if(anchor || heading || leadP){
               break;
             }
+            
           }
 
         }

@@ -12350,6 +12350,7 @@ checkbox1.setAttribute('hidden', "");
               const imgEl = art ? cloned.querySelector('.article_lead_img') : cloned.querySelector('.product_lead_img')
               if(imgEl){  
                 imgEl.setAttribute('src', src) ;
+                console.log('setting alt')
                imgEl.setAttribute('alt', images.items[0].alt)}
               const heading = art ? cloned.querySelector('.article_heading') : cloned.querySelector('.product_heading')
               const pleadE = cloned.querySelector('.article_p_lead')

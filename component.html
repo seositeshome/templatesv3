@@ -12348,7 +12348,9 @@ checkbox1.setAttribute('hidden', "");
               console.log('found for related ' + JSON.stringify(images?.items[0]))
               const src = images.items[0].crops?.split(',')[0].split(' ')[0]
               const imgEl = art ? cloned.querySelector('.article_lead_img') : cloned.querySelector('.product_lead_img')
-              imgEl && imgEl.setAttribute('src', src) && imgEl.setAttribute('alt', images.items[0].alt)
+              if(imgEl){  
+                imgEl.setAttribute('src', src) ;
+               imgEl.setAttribute('alt', images.items[0].alt)}
               const heading = art ? cloned.querySelector('.article_heading') : cloned.querySelector('.product_heading')
               const pleadE = cloned.querySelector('.article_p_lead')
               if (plead && pleadE) {

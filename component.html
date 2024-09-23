@@ -22981,9 +22981,9 @@ headers: {
                 return
               }
               target.textContent = '🟠'
-              if (details.id === 'data_product-search') {
+              if (detail.id === 'data_product-search') {
 
-                await generateSearch(details)
+                await generateSearch(detail)
 
                 const sk = global.checked ? (id1 + ':global') : id1 + ':' + pathItemPath.split('/')[0].toLowerCase()
                 const dbItems = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${pk}&sk=${sk}&startsWith=true`)

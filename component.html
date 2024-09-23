@@ -4652,7 +4652,7 @@
 
         }
         if (!item['alt' + s]) {
-          item['alt' + s]= defaultAlt
+          item['alt' + s] = defaultAlt
           postToDb(item)
         }
         clonedRow.querySelector('#alt-input').textContent = item['alt' + s]
@@ -10706,7 +10706,7 @@
                     //fileNameSpan.removeAttribute('hidden'); // Make the file name span visible
                     let id
                     if (pathItemArticle) {
-                     
+
                       id = "article:" + pathItemArticle
                     }
                     else if (pathItemSku) {
@@ -12059,9 +12059,9 @@ checkbox1.setAttribute('hidden', "");
       }
       postToDb(crop)
 
-      postToDb({ id, sk: 'data_lead-image:' + site, crops: mainCrop,alt:mainAlt })
-      postToDb({ id, sk: 'data_catalog-image:' + site, crops: catalogCrop || mainCrop,alt: catalogAlt||mainAlt })
-      postToDb({ id, sk: 'data_promo-image:' + site, crops: promoCrop || mainCrop,alt:promoAlt || mainAlt })
+      postToDb({ id, sk: 'data_lead-image:' + site, crops: mainCrop, alt: mainAlt })
+      postToDb({ id, sk: 'data_catalog-image:' + site, crops: catalogCrop || mainCrop, alt: catalogAlt || mainAlt })
+      postToDb({ id, sk: 'data_promo-image:' + site, crops: promoCrop || mainCrop, alt: promoAlt || mainAlt })
       article ? (await articleToPicturesApi(crop)) : (await skuToPicturesApi(crop))
 
     }
@@ -12232,7 +12232,7 @@ checkbox1.setAttribute('hidden', "");
           }
           for (const res of res1) {
             console.log('for name ' + name + ' ' + JSON.stringify(res))
-            
+
             const colId = res.id
             const anchorUrl = `${backend_url}?id=${colId}&sk=addedSite:${site}&startsWith=true`
             console.log('getting3 ' + anchorUrl)
@@ -12242,9 +12242,9 @@ checkbox1.setAttribute('hidden', "");
                 'Content-Type': 'application/json',
               },
             }).then(e => e.json()).then(({ items }) => items)
-            console.log('anchor items length '+anchorItems.length)
+            console.log('anchor items length ' + anchorItems.length)
             const anchor = anchorItems[0]?.value
-            
+
             const leadPUrl = `${backend_url}?id=${colId}&sk=data_leadP:${site}&startsWith=true`
 
             const leadP = await fetch(leadPUrl, {
@@ -12264,10 +12264,10 @@ checkbox1.setAttribute('hidden', "");
               },
             }).then(e => e.json()).then(({ items }) => items[0]?.value)
 
-            
+
             console.log(anchor)
             const a = section.querySelector('.anchor_collection_products')
-            
+
             if (anchor && a) {
               const wAnchor = anchor.startsWith('https://') ? anchor : 'https://' + anchor
               console.log('setting anchor1' + wAnchor)
@@ -12290,10 +12290,10 @@ checkbox1.setAttribute('hidden', "");
             const items = d.items[0].items
             console.log('for name2' + JSON.stringify(items))
             list = items
-            if(anchor || heading || leadP){
+            if (anchor || heading || leadP) {
               break;
             }
-            
+
           }
 
         }
@@ -12373,10 +12373,11 @@ checkbox1.setAttribute('hidden', "");
               console.log('found for related ' + JSON.stringify(images?.items[0]))
               const src = images.items[0].crops?.split(',')[0].split(' ')[0]
               const imgEl = art ? cloned.querySelector('.article_lead_img') : cloned.querySelector('.product_lead_img')
-              if(imgEl){  
-                imgEl.setAttribute('src', src) ;
+              if (imgEl) {
+                imgEl.setAttribute('src', src);
                 console.log('setting alt')
-               imgEl.setAttribute('alt', images.items[0].alt)}
+                imgEl.setAttribute('alt', images.items[0].alt)
+              }
               const heading = art ? cloned.querySelector('.article_heading') : cloned.querySelector('.product_heading')
               const pleadE = cloned.querySelector('.article_p_lead')
               if (plead && pleadE) {
@@ -22839,22 +22840,42 @@ headers: {
       // Return the matches (or an empty array if no matches found)
       return matches || [];
     }
-    const generateSearch = (event)=>{
+    const generateSearch = async (event) => {
       const details = event.target.closest('details')
       const value = details.querySelector('textarea').value
       const splited = value.split(' ')
       const combs = []
-      for(let i=0;i<splited.length;i++){
+      for (let i = 0; i < splited.length; i++) {
         const n = splited.slice(i)
         combs.push(n.join(''))
       }
-      combs.map(element=>{
+      const items = await fetch(`${backend_url}?id=${'sku:' + pathItemSku}&sk=${'search:' + site + ':'}&startsWith=true`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json()).then(e => e.items)
+      await Promise.all(
+        items.map(
+          item => {
+            return
+            fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item.id}:${item.sk}`, {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json',
+                // Add any additional headers if needed
+              },
+            })
+          }
+        )
+      )
+      combs.map(element => {
         const site = pathItemPath.split('/')[0].toLowerCase()
-        const p ={
-          id:'sku:'+pathItemSku,
-          sk:'search:'+site+':'+generateUUID(),
-          lsi1:element,
-          ownerUUID:site
+        const p = {
+          id: 'sku:' + pathItemSku,
+          sk: 'search:' + site + ':' + generateUUID(),
+          lsi1: element,
+          ownerUUID: site
         }
         postToDb(p)
       })

@@ -1867,7 +1867,7 @@
 
             <details id="data_product-search" class="data-menu">
               <summary class="summary-L-3">
-                <span id="import-satus" class="l-2">🔴</span>
+                <span id="import-satus" class="l-2" onclick="generateSearch(event)">🔴</span>
                 <span class="l-3">search string</span>
                 <span id="data-satus" class="l-2" data-empty-status="🌑" data-filled-status=" 🌕"> 🌑</span>
               </summary>
@@ -22839,7 +22839,26 @@ headers: {
       // Return the matches (or an empty array if no matches found)
       return matches || [];
     }
-
+    const generateSearch = (event)=>{
+      const details = event.target.closest('details')
+      const value = details.querySelector('textarea').value
+      const splited = value.split(' ')
+      const combs = []
+      for(let i=0;i<splited.length;i++){
+        const n = splited.slice(i)
+        combs.push(n.join(''))
+      }
+      combs.map(element=>{
+        const site = pathItemPath.split('/')[0].toLowerCase()
+        const p ={
+          id:'sku:'+pathItemSku,
+          sk:'search:'+site+':'+generateUUID(),
+          lsi1:element,
+          ownerUUID:site
+        }
+        postToDb(p)
+      })
+    }
     const handleDataMenus = async () => {
       console.log('---handling menus')
       const elements = querySelectorAll1('[id^="data-menu_"]');

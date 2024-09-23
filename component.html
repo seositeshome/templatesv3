@@ -1867,7 +1867,7 @@
 
             <details id="data_product-search" class="data-menu">
               <summary class="summary-L-3">
-                <span id="import-satus" class="l-2" onclick="generateSearch(event)">🔴</span>
+                <span id="import-satus" class="l-2">🔴</span>
                 <span class="l-3">search string</span>
                 <span id="data-satus" class="l-2" data-empty-status="🌑" data-filled-status=" 🌕"> 🌑</span>
               </summary>
@@ -22840,8 +22840,7 @@ headers: {
       // Return the matches (or an empty array if no matches found)
       return matches || [];
     }
-    const generateSearch = async (event) => {
-      const details = event.target.closest('details')
+    const generateSearch = async (details) => {
       const value = details.querySelector('textarea').value
       const splited = value.split(' ')
       const combs = []
@@ -22982,6 +22981,19 @@ headers: {
                 return
               }
               target.textContent = '🟠'
+              if (details.id === 'data_product-search') {
+
+                await generateSearch(details)
+
+                const sk = global.checked ? (id1 + ':global') : id1 + ':' + pathItemPath.split('/')[0].toLowerCase()
+                const dbItems = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${pk}&sk=${sk}&startsWith=true`)
+                  .then(response => response.json()).then(res => res.items)
+                if (dbItems.length) {
+                  await postToDb({ ...dbItems[0], runned: (new Date()).getTime() })
+                }
+                target.textContent = '🟢'
+                return
+              }
               const importI = pathItem.hub_items?.import_items?.find(e => e.name === attribute)
               console.log('tsx ' + JSON.stringify(importI))
               const absolutePath = getAbsolutePath(pathItemPath, importI.componentPath)

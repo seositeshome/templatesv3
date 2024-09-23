@@ -22843,6 +22843,8 @@ headers: {
     const generateSearch = async (details) => {
       const value = details.querySelector('textarea').value
       const splited = value.split(' ')
+      
+      const site = pathItemPath.split('/')[0].toLowerCase()
       const combs = []
       for (let i = 0; i < splited.length; i++) {
         const n = splited.slice(i)
@@ -22869,7 +22871,6 @@ headers: {
         )
       )
       combs.map(element => {
-        const site = pathItemPath.split('/')[0].toLowerCase()
         const p = {
           id: 'sku:' + pathItemSku,
           sk: 'search:' + site + ':' + generateUUID(),

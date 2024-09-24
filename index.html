@@ -660,6 +660,8 @@
                 }
                 tooltip.textContent = `key : ${value}`
                 tooltip.parentNode.append(clonedSpan)
+                const br = document.createElement('br')
+                tooltip.parentNode.append(br)
               } 
               tooltip.remove()
               if (item.ttl) {

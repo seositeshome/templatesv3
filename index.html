@@ -658,7 +658,7 @@
                 if(typeof value !=='string'){
                   value = JSON.stringify(value)
                 }
-                tooltip.textContent = `key : ${value}`
+                tooltip.textContent = `${key} : ${value}`
                 tooltip.parentNode.append(clonedSpan)
                 const br = document.createElement('br')
                 tooltip.parentNode.append(br)

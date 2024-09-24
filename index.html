@@ -569,9 +569,9 @@
                 z-index: 1000;
                 max-height: 400px;
                 overflow-y: auto;
-                width: 555px;
+                width: 90%; /* Ширина 90% от родительского элемента */
                 top: calc(100% + 5px);
-                left: 0;
+                left: 5%; /* Чтобы расположить tooltip по центру относительно родителя */
               }
             
               .tooltip-parent {
@@ -583,7 +583,7 @@
                 display: block;
               }
             </style>
-            
+                        
 
 
             <tr hidden id="order-item" class="tooltip-parent">

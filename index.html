@@ -652,7 +652,16 @@
               const removeRow = cloned.querySelector('#remove-row')
               const restoreRow = cloned.querySelector('#restore-row')
               const tooltip = cloned.querySelector('.tooltip').querySelector('span')
-              tooltip.textContent = JSON.stringify(item)
+              for(const key of Object.keys(item)){
+                const clonedSpan = tooltip.cloneNode(true)
+                let value = item[value]
+                if(typeof value !=='string'){
+                  value = JSON.stringify(value)
+                }
+                tooltip.textContent = `key : ${value}`
+                tooltip.parentNode.append(clonedSpan)
+              } 
+              tooltip.remove()
               if (item.ttl) {
                 restoreRow.removeAttribute('hidden')
                 removeRow.setAttribute('hidden', '')

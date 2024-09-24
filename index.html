@@ -651,6 +651,8 @@
               cloned.querySelector('[data-order-status-value]').textContent = item.email
               const removeRow = cloned.querySelector('#remove-row')
               const restoreRow = cloned.querySelector('#restore-row')
+              const tooltip = cloned.querySelector('.tooltip')
+              tooltip.textContent = JSON.stringify(item)
               if (item.ttl) {
                 restoreRow.removeAttribute('hidden')
                 removeRow.setAttribute('hidden', '')

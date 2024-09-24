@@ -654,7 +654,7 @@
               const tooltip = cloned.querySelector('.tooltip').querySelector('span')
               for(const key of Object.keys(item)){
                 const clonedSpan = tooltip.cloneNode(true)
-                let value = item[value]
+                let value = item[key]
                 if(typeof value !=='string'){
                   value = JSON.stringify(value)
                 }

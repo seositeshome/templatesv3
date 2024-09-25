@@ -18444,7 +18444,7 @@ elementsToRemove.forEach(element => element.remove());
       removeAttributesStartWith: ["data-visual", "data-builder", "data-replaceid", "data-transfer", "data-b", "data-import", "data-parentid"]
     }
     const publish = async (e, updateContent, entireSite) => {
-
+      const site = pathItemPath.split('/')[0].toLowerCase()
       const date = new Date()
       if (visualOn) {
         localStorage.removeItem('visualOn')
@@ -18566,25 +18566,36 @@ elementsToRemove.forEach(element => element.remove());
       el3.removeAttribute('hidden')
       el3.setAttribute('href', r.link)
       pSiteLabel.removeAttribute('hidden')
-      pSiteLabel.setAttribute('href', r.link?.replace('s3.amazonaws.com/', '').replace('index.html', ''))
+      const dLink = r.link?.replace('s3.amazonaws.com/', '').replace('index.html', '')
+      pSiteLabel.setAttribute('href', dLink)
       postToDb({
         id: 'sku:' + pathItemSku,
-        sk: 'addedSite:' + pathItemPath.split('/')[0].toLowerCase(),
-        value: r.link?.replace('s3.amazonaws.com/', '').replace('index.html', ''),
+        sk: 'addedSite:' + site,
+        value: dLink,
         addDate: (new Date()).getTime()
       })
       postToDb({
         id: pathItemCollection,
-        sk: 'addedSite:' + pathItemPath.split('/')[0].toLowerCase(),
-        value: r.link?.replace('s3.amazonaws.com/', '').replace('index.html', ''),
+        sk: 'addedSite:' + site,
+        value: dLink,
         addDate: (new Date()).getTime()
       })
       postToDb({
         id: pathItemArticleCollection,
-        sk: 'addedSite:' + pathItemPath.split('/')[0].toLowerCase(),
-        value: r.link?.replace('s3.amazonaws.com/', '').replace('index.html', ''),
+        sk: 'addedSite:' + site,
+        value: dLink,
         addDate: (new Date()).getTime()
       })
+      if (pathItemPath.includes('Products') && pathItemSku) {
+        fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/searchDb', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ site,sku:pathItemSku,link:dLink }),
+        });
+      }
+      
       el4.removeAttribute('hidden', '')
       el5.removeAttribute('hidden', '')
 
@@ -22843,7 +22854,7 @@ headers: {
     const generateSearch = async (details) => {
       const value = details.querySelector('textarea').value
       const splited = value.split(' ')
-      
+
       const site = pathItemPath.split('/')[0].toLowerCase()
       const combs = []
       for (let i = 0; i < splited.length; i++) {

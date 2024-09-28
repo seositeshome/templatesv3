@@ -1201,7 +1201,7 @@ font-size: 18px; /* Размер шрифта номера */
 
 .tooltip-parent {
   position: relative;
-  padding: 0px;
+  padding: 4px;
 }
 
 .tooltip-parent:hover .tooltip {

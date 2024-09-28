@@ -1173,3 +1173,9 @@ font-size: 18px; /* Размер шрифта номера */
   float: right;
 }
 
+
+
+.value-center {
+  float: center;
+}
+

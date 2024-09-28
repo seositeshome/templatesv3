@@ -1113,7 +1113,7 @@ font-size: 18px; /* Размер шрифта номера */
   border-radius: 10px; /* Rounded corners */
 }
 .table-info th, td {
-  text-align: left;
+  text-align: center;
 }
 
 .table-info tbody tr:nth-child(odd) {

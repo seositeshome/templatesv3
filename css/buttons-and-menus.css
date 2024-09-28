@@ -1103,3 +1103,63 @@ font-size: 18px; /* Размер шрифта номера */
   padding-top: 10px;
 }
 
+
+
+
+.table-info {
+  max-width: 100%;
+  width: auto;
+  border-collapse: collapse;
+  border-radius: 10px; /* Rounded corners */
+}
+.table-info th, td {
+  text-align: left;
+}
+
+.table-info tbody tr:nth-child(odd) {
+  background-color:  #ffffff; 
+}
+
+.table-info tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.table-info tbody tr:hover {
+  background-color:  #dddddd; /* A darker color on hover */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+
+/* Стили для элемента caption */
+.table-info caption {
+  caption-side: top; /* Расположение caption сверху таблицы */
+  text-align: left; /* Выравнивание текста caption слева */
+  font-size: 1.5em; /* Размер шрифта для caption */
+  font-weight: bold; /* Жирный шрифт для caption */
+  padding: 10px 0; /* Отступы сверху и снизу для caption */
+  color: darkblue; /* Цвет текста */
+}
+
+/* Стили для текста внутри caption */
+.table-info caption .l-2 {
+  color: darkblue; /* Цвет текста */
+  font-weight: bold; /* Жирный шрифт */
+}
+
+/* Стили для кнопки внутри caption */
+.table-info caption .b-2 {
+  font-size: 1em; /* Размер шрифта */
+  padding: 5px 10px; /* Отступы внутри кнопки */
+  background-color: #007bff; /* Фоновый цвет кнопки */
+  color: white; /* Цвет текста кнопки */
+  border: none; /* Убираем границу */
+  border-radius: 5px; /* Скругленные углы */
+  cursor: pointer; /* Курсор в виде руки при наведении */
+  margin-left: 10px; /* Отступ слева */
+}
+
+.table-info caption .b-2:hover {
+  background-color: #0056b3; /* Темнее цвет кнопки при наведении */
+  transition: background-color 0.3s; /* Плавный переход при наведении */
+}
+

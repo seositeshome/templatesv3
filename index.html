@@ -10,6 +10,36 @@
 
 </head>
 
+<style>
+
+
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+  width: 80%; /* Ширина 90% от родительского элемента */
+  top: calc(100% + 5px);
+  left: 0; /* Начинается от левого края родителя */
+}
+
+.tooltip-parent {
+  position: relative;
+  padding: 4px;
+}
+
+.tooltip-parent:hover .tooltip {
+  display: block;
+}
+
+</style>
+
 <body class="body">
 
   <div class="login" id="login">
@@ -862,7 +892,7 @@
                 <div class="tooltip">
                   <span class="l-3"></span>
                 </div> 
-  </td>
+              </td>
               <td><span class="l-3">24.09.10 13:57</span></td>
               <td><span class="l-3 value-left" id="total-trans">10</span>
                 <span clas="l-1 value-separator">⚇</span>

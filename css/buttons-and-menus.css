@@ -1164,3 +1164,12 @@ font-size: 18px; /* Размер шрифта номера */
 }
 
 
+.value-left {
+  float: left;
+}
+
+
+.value-right {
+  float: right;
+}
+

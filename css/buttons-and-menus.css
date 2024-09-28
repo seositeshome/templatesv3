@@ -1175,7 +1175,9 @@ font-size: 18px; /* Размер шрифта номера */
 
 
 
-.value-center {
+.value-separator {
   float: center;
+  margin-left:5px; 
+  margin-right: 5px;
 }
 

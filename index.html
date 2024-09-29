@@ -685,7 +685,7 @@
         <script>
           const addPaypal = async (event) => {
             const body = {
-                  id: 'paypal:' + generateUUID,
+                  id: 'paypal:' + generateUUID(),
                   sk: 'created:' + new Date().getTime(),
                   ownerUUID: 'paypal:' + localStorage.getItem('ownerid')
 
@@ -711,6 +711,7 @@
                 'Content-Type': 'application/json',
               },
             }).then(e => e.json())
+            console.log(JSON.stringifyitems)
             for (const item of items) {
               const cloned = original.cloneNode(true)
               cloned.removeAttribute('hidden')

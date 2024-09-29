@@ -540,6 +540,7 @@
             type === "orders" && load()
             type === "invoices" && loadInvoices()
             type === 'settings' && loadGpt()
+            type = 'paypals' && loadPaypals()
             //type ==="invoices" && load()
             //type ==="sku" && load()
           }
@@ -682,7 +683,36 @@
 
         </div>
         <script>
+          const addPaypal = async(event)=>{
+            await fetch(backend_url , {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(
+                {
+                  id:'paypal:'+generateUUID,
+                  sk:'created:'+new Date().getTime(),
+                  ownerUUID:'paypal:'+localStorage.getItem('ownerid')
 
+                }
+              ),
+            })
+            loadPaypals()
+          }
+          const loadPaypals = async ()=>{
+            const original = document.getElementById('paypal-item')
+            const { items } = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=paypal:${localStorage.getItem('ownerid')}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then(e => e.json())
+            for(const item of items){
+              const cloned = original.cloneNode(true)
+
+            }
+          }
           const load = async () => {
             const orderItem = document.getElementById("order-item")
             const { items } = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=order:${localStorage.getItem('ownerid')}`, {
@@ -926,7 +956,7 @@
       </section>
 
       <section hidden data-brains="paypals">
-        <button class="b-1" style="margin-left:25px; margin-top: 10px;">➕</button>
+        <button class="b-1" style="margin-left:25px; margin-top: 10px;" onclick="addPaypal(event)">➕</button>
         <table class="table-info table-row-number" style="margin-left:25px; margin-top: 10px; ">
           <thead>
             <tr>
@@ -945,7 +975,7 @@
           </thead>
           <tbody>
 
-            <tr id="paypal-item" class="tooltip-parent">
+            <tr id="paypal-item" class="tooltip-parent" hidden>
               <td>
                 <span id="paypal-email" class="l-3" contenteditable>work@mogobuy.com</span>
               </td>
@@ -2526,7 +2556,7 @@
           }
           let data1 = fetch(url).then(e => e.json())
           //get folders
-          if (path.split('/').length > 3) {
+          if (true) {
             //normal
             if (localStorage.getItem('helperid')) {
               url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;

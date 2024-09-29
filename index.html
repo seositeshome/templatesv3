@@ -68,34 +68,33 @@
 
 -->
 <style>
+  .tooltip {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    width: 80%;
+    /* Ширина 90% от родительского элемента */
+    top: calc(100% + 0px);
+    left: 0;
+    /* Начинается от левого края родителя */
+    text-align: left !important;
+  }
 
+  .tooltip-parent {
+    position: relative;
+    padding: 4px;
+  }
 
-.tooltip {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  max-height: 400px;
-  overflow-y: auto;
-  width: 80%; /* Ширина 90% от родительского элемента */
-  top: calc(100% + 0px);
-  left: 0; /* Начинается от левого края родителя */
-  text-align: left !important;
-}
-
-.tooltip-parent {
-  position: relative;
-  padding: 4px;
-}
-
-.tooltip-parent:hover .tooltip {
-  display: block;
-}
-
+  .tooltip-parent:hover .tooltip {
+    display: block;
+  }
 </style>
 
 <body class="body">
@@ -234,7 +233,7 @@
           style="margin-right: 5px;"><label class="l-1">🛍️</label><label class="l-2">Orders</label></button>
         <button onclick="showBrain(event,'invoices')" data-brains-button="invoices" class="b-4 "
           style="margin-right: 5px;"><label class="l-1">🧾</label><label class="l-2">Invoices</label></button>
-          <button onclick="showBrain(event,'paypals')" data-brains-button="paypals" class="b-4 "
+        <button onclick="showBrain(event,'paypals')" data-brains-button="paypals" class="b-4 "
           style="margin-right: 5px;"><label class="l-1">🅿️</label><label class="l-2">Paypals</label></button>
 
         <button onclick="showBrain(event,'helpers')" data-brains-button="helpers" class="b-4 "
@@ -651,17 +650,18 @@
 
             <style>
             </style>
-                                    
+
 
 
             <tr hidden id="order-item" class="tooltip-parent">
               <td data-order-date><span data-order-date-value class="l-3"></span></td>
-              <td data-order-site  >
-                <span data-order-site-value class="l-3">         
+              <td data-order-site>
+                <span data-order-site-value class="l-3">
                 </span>
                 <div class="tooltip">
                   <span class="l-3"></span>
-                </div>   </td>
+                </div>
+              </td>
               <td data-order-total><span data-order-total-value class="l-3"></span></td>
               <td data-order-status><span data-order-status-value class="l-3"></span></td>
               <td data-order-status><span data-order-email-value class="l-3"></span></td>
@@ -683,24 +683,24 @@
 
         </div>
         <script>
-          const addPaypal = async(event)=>{
-            await fetch(backend_url , {
+          const addPaypal = async (event) => {
+            await fetch(backend_url, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(
                 {
-                  id:'paypal:'+generateUUID,
-                  sk:'created:'+new Date().getTime(),
-                  ownerUUID:'paypal:'+localStorage.getItem('ownerid')
+                  id: 'paypal:' + generateUUID,
+                  sk: 'created:' + new Date().getTime(),
+                  ownerUUID: 'paypal:' + localStorage.getItem('ownerid')
 
                 }
               ),
             })
             loadPaypals()
           }
-          const loadPaypals = async ()=>{
+          const loadPaypals = async () => {
             const original = document.getElementById('paypal-item')
             const { items } = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=paypal:${localStorage.getItem('ownerid')}`, {
               method: 'GET',
@@ -708,9 +708,38 @@
                 'Content-Type': 'application/json',
               },
             }).then(e => e.json())
-            for(const item of items){
+            for (const item of items) {
               const cloned = original.cloneNode(true)
-              
+              const email = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=email&startsWith=true`, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }).then(e => e.json()).then(({ items }) => {
+                return items[0]?.sk.replace('email:', '') || 'enter email'
+              })
+              const emailEl = cloned.querySelector('#paypal-email')
+              emailEl.textContent = email
+              emailEl.onblur = async (e) => {
+                const { target } = e
+                const value = target.value
+                await fetch(backend_url, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(
+                    {
+                      id: item.id,
+                      sk: 'email:' + value,
+
+                    }
+                  ),
+                })
+
+              }
+
+
             }
           }
           const load = async () => {
@@ -750,17 +779,17 @@
               const removeRow = cloned.querySelector('#remove-row')
               const restoreRow = cloned.querySelector('#restore-row')
               const tooltip = cloned.querySelector('.tooltip').querySelector('span')
-              for(const key of Object.keys(item)){
+              for (const key of Object.keys(item)) {
                 const clonedSpan = tooltip.cloneNode(true)
                 let value = item[key]
-                if(typeof value !=='string'){
+                if (typeof value !== 'string') {
                   value = JSON.stringify(value)
                 }
                 tooltip.textContent = `${key} : ${value}`
                 tooltip.parentNode.append(clonedSpan)
                 const br = document.createElement('br')
                 tooltip.parentNode.append(br)
-              } 
+              }
               tooltip.remove()
               if (item.ttl) {
                 restoreRow.removeAttribute('hidden')
@@ -961,14 +990,14 @@
           <thead>
             <tr>
               <td>
-              <span class="l-2 b-dark-blue">Email</span>
-            </td>
-            <td >
-              <span class="l-2 b-dark-blue">Last</span>
-            </td>
-            <td >
-              <span class="l-2 b-dark-blue">Total</span>
-            </td>
+                <span class="l-2 b-dark-blue">Email</span>
+              </td>
+              <td>
+                <span class="l-2 b-dark-blue">Last</span>
+              </td>
+              <td>
+                <span class="l-2 b-dark-blue">Total</span>
+              </td>
 
             </tr>
 
@@ -979,44 +1008,44 @@
               <td>
                 <span id="paypal-email" class="l-3" contenteditable>work@mogobuy.com</span>
               </td>
-              <td><span class="l-3">24.09.10 13:57</span>
-                </td>
+              <td><span class="l-3" id="paypal-last">24.09.10 13:57</span>
+              </td>
               <td><span class="l-3 value-left" id="total-trans">10</span>
                 <span clas="l-1 value-separator">⚇</span>
                 <span class="l-3 value-right" id="total-amount">
                   10290
-                  </span>
-                  <div class="tooltip">
-                    <ul>
-                      <li>
-                        <span class="l-3">🆔</span>
-                        <span class="l-3" contenteditable>~</span>
-                      </li>
-                      <li>
-                        <span class="l-3">🔑</span>
-                        <span class="l-3" contenteditable>~</span>
-                      </li>
-                      <li>
-                        <span class="l-3">🌐</span>
-                        <span class="l-3" contenteditable>~</span>
-                      </li>
-                      <li>
-                        <span class="l-3">🛒</span>
-                        <span class="l-3" contenteditable>~</span>
-                      </li>
-                      <li>
-                        <span class="l-3">✅</span>
-                        <span class="l-3" contenteditable>~</span>
-                      </li>
-                    </li>                   
-                     <li>
+                </span>
+                <div class="tooltip">
+                  <ul>
+                    <li>
+                      <span class="l-3">🆔</span>
+                      <span class="l-3" contenteditable>~</span>
+                    </li>
+                    <li>
+                      <span class="l-3">🔑</span>
+                      <span class="l-3" contenteditable>~</span>
+                    </li>
+                    <li>
+                      <span class="l-3">🌐</span>
+                      <span class="l-3" contenteditable>~</span>
+                    </li>
+                    <li>
+                      <span class="l-3">🛒</span>
+                      <span class="l-3" contenteditable>~</span>
+                    </li>
+                    <li>
+                      <span class="l-3">✅</span>
+                      <span class="l-3" contenteditable>~</span>
+                    </li>
+                    </li>
+                    <li>
                       <span class="l-3">❌</span>
                       <span class="l-3" contenteditable>~</span>
                     </li>
-                    </ul>
-                  </div> 
-  
-                  </td>
+                  </ul>
+                </div>
+
+              </td>
             </tr>
 
 
@@ -3441,7 +3470,7 @@
       const ownerid = localStorage.getItem('ownerid')
       const helperid = localStorage.getItem('helperid')
 
-      const openHubs = async(e,id,path)=>{
+      const openHubs = async (e, id, path) => {
         const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
         //list of sub paths
         const data1 = await response1.json();
@@ -3451,13 +3480,13 @@
         const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
         //list of sub paths
         const data2 = await response2.json();
-        const items1 = [...data1.items.filter(e=>e.lsi1.split(';')[0].endsWith('|Hub')), ...data2.items]
-        const ids = items1.map(e=>e.id)
-        console.log('ids are '+JSON.stringify(ids) )
-        for(const id of ids){
-          
+        const items1 = [...data1.items.filter(e => e.lsi1.split(';')[0].endsWith('|Hub')), ...data2.items]
+        const ids = items1.map(e => e.id)
+        console.log('ids are ' + JSON.stringify(ids))
+        for (const id of ids) {
+
           const url = `./component.html?id=${id}`;
-          console.log('opening '+url)
+          console.log('opening ' + url)
           window.open(url, '_blank');
           await new Promise(resolve => setTimeout(resolve, 100));
         }
@@ -3749,8 +3778,8 @@
         // get style
         const hubItems = await response.json()
         console.log(JSON.stringify(hubItems))
-        const style = hubItems.items[0].hub_items.style  || 'SeoSitesHome.com'
-        console.log('style '+ style)
+        const style = hubItems.items[0].hub_items.style || 'SeoSitesHome.com'
+        console.log('style ' + style)
         const copyFrom = style + '/Products/Seed-Product/'
         const splitedPath = copyFrom.replace('|', "/").split('/')
         const last = splitedPath[splitedPath.length - 2]

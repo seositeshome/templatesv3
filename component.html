@@ -7454,7 +7454,6 @@
         await onOpen1()
       }
       catch (e) {
-        throw e 
         console.log(e.message)
       }
       console.log('---loading from db')
@@ -7551,6 +7550,7 @@
 
       }
       catch (e) {
+        throw e
         console.log(e.message)
       }
 

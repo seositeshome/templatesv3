@@ -4609,7 +4609,7 @@
             let data2 = fetch(url2).then(e => e.json())
             data1 = await data1
             data2 = await data2
-            if (!data1.items.length && !data2.items.length) {
+            if (!data1.items?.length && !data2.items?.length) {
               console.log(url)
               const sk = `folder:${helperid ? helperid : ownerid}:lvl${path.split('/').length}:${path}${folder}`
               const encoded = `${ownerid}:${sk}`.replaceAll('/', '~')

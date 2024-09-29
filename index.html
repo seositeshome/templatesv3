@@ -711,7 +711,7 @@
                 'Content-Type': 'application/json',
               },
             }).then(e => e.json())
-            console.log(JSON.stringifyitems)
+            console.log(JSON.stringify(items))
             for (const item of items) {
               const cloned = original.cloneNode(true)
               cloned.removeAttribute('hidden')

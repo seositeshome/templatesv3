@@ -313,7 +313,6 @@ details > summary::-webkit-details-marker {
   }
 
 
-
 .table-1 {
     max-width: 100%;
     width: auto;
@@ -323,7 +322,6 @@ details > summary::-webkit-details-marker {
 .table-1 th, td {
     text-align: left;
     padding-right: 50px;
-
 }
 
 .table-1 tbody tr:nth-child(odd) {
@@ -372,7 +370,6 @@ details > summary::-webkit-details-marker {
     background-color: #0056b3; /* Темнее цвет кнопки при наведении */
     transition: background-color 0.3s; /* Плавный переход при наведении */
 }
-
 
 
 /* table files */
@@ -1102,8 +1099,6 @@ font-size: 18px; /* Размер шрифта номера */
   margin-left: 30px; 
   padding-top: 10px;
 }
-
-
 
 
 .table-info {

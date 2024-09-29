@@ -685,12 +685,12 @@
         <script>
           const addPaypal = async (event) => {
             const body = {
-                  id: 'paypal:' + generateUUID(),
-                  sk: 'created:' + new Date().getTime(),
-                  ownerUUID: 'paypal:' + localStorage.getItem('ownerid')
+              id: 'paypal:' + generateUUID(),
+              sk: 'created:' + new Date().getTime(),
+              ownerUUID: 'paypal:' + localStorage.getItem('ownerid')
 
-                }
-                console.log(JSON.stringify(body))
+            }
+            console.log(JSON.stringify(body))
             await fetch(backend_url, {
               method: 'POST',
               headers: {
@@ -700,7 +700,7 @@
                 body
               ),
             })
-            
+
             loadPaypals()
           }
           const loadPaypals = async () => {
@@ -728,17 +728,19 @@
               emailEl.onblur = async (e) => {
                 const { target } = e
                 const value = target.value
+                const p = {
+                  id: item.id,
+                  sk: 'email:' + value,
+
+                }
+                console.log(JSON.stringify(p))
                 await fetch(backend_url, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
                   },
                   body: JSON.stringify(
-                    {
-                      id: item.id,
-                      sk: 'email:' + value,
-
-                    }
+                    p
                   ),
                 })
 

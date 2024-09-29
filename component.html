@@ -12621,7 +12621,7 @@ checkbox1.setAttribute('hidden', "");
 
         const uuid = image.sk.replace('pics', '').split('.')[0]
         console.log('uuid:' + uuid)
-        const croped = await fetch(`${backend_url}?id=sku:${pathItemSku}&sk=crop:&startsWith=true`, {
+        const croped = await fetch(`${backend_url}?id=${headContentItem.id}&sk=crop:&startsWith=true`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

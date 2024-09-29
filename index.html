@@ -684,20 +684,23 @@
         </div>
         <script>
           const addPaypal = async (event) => {
+            const body = {
+                  id: 'paypal:' + generateUUID,
+                  sk: 'created:' + new Date().getTime(),
+                  ownerUUID: 'paypal:' + localStorage.getItem('ownerid')
+
+                }
+                console.log(JSON.stringify(body))
             await fetch(backend_url, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(
-                {
-                  id: 'paypal:' + generateUUID,
-                  sk: 'created:' + new Date().getTime(),
-                  ownerUUID: 'paypal:' + localStorage.getItem('ownerid')
-
-                }
+                body
               ),
             })
+            
             loadPaypals()
           }
           const loadPaypals = async () => {
@@ -710,6 +713,7 @@
             }).then(e => e.json())
             for (const item of items) {
               const cloned = original.cloneNode(true)
+              cloned.removeAttribute('hidden')
               const email = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=email&startsWith=true`, {
                 method: 'GET',
                 headers: {

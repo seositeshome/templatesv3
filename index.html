@@ -727,7 +727,7 @@
               emailEl.textContent = email
               emailEl.onblur = async (e) => {
                 const { target } = e
-                const value = target.value
+                const value = target.textContent
                 const p = {
                   id: item.id,
                   sk: 'email:' + value,

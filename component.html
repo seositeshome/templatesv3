@@ -7550,7 +7550,7 @@
 
       }
       catch (e) {
-        throw e
+        
         console.log(e.message)
       }
 
@@ -7861,7 +7861,7 @@
         return responseData;
       } catch (error) {
         console.error(`Error fetching data for id: ${id}`, error);
-        throw error; // Re-throw the error to let the caller handle it
+        rror; // Re-throw the error to let the caller handle it
       }
     };
     //document.addEventListener('DOMContentLoaded', loadFirst);
@@ -13171,7 +13171,7 @@ checkbox1.setAttribute('hidden', "");
           await funcDictionary[item.name]()
         }
         catch (e) {
-          throw e
+          
           console.error(item.name + ' errored ' + e.message)
           return
         }

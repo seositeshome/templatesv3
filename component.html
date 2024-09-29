@@ -12516,7 +12516,7 @@ checkbox1.setAttribute('hidden', "");
             'Content-Type': 'application/json',
           },
         }).then(e => e.json())
-        console.log(JSON.stringify(croped))
+        console.log('crops is '+JSON.stringify(croped))
         const src = croped.items[0][uuid][0].split(' ')[0]
         multiV[0].image = src
         const hasVariantItem = { ...multiV[0].hasVariant[0] }

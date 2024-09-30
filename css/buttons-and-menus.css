@@ -1104,3 +1104,43 @@ font-size: 18px; /* Размер шрифта номера */
 }
 
 
+.table-entity {
+  max-width: 100%;
+  width: auto;
+  border-collapse: collapse;
+  border-radius: 10px; 
+}
+
+.table-entity thead td {
+  background-color: #f0f0f0; /* Light background for header */
+  font-weight: bold;
+  padding: 8px;
+  border-bottom: 1px solid #dddddd; 
+  font-size: 21px;
+}
+
+
+.table-entity {
+max-width: 100%;
+  width: auto;
+  border-collapse: collapse;
+  border-radius: 10px; 
+}
+
+.table-entity tbody tr:nth-child(odd) {
+  background-color:  #ffffff; 
+}
+
+.table-entity tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.table-entity tbody tr:hover {
+  background-color:  #dddddd; /* A darker color on hover */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.table-entity span {
+font-size: 21px;
+ 
+}

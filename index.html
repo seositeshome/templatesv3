@@ -714,6 +714,7 @@
             console.log(JSON.stringify(items))
             for (const item of items) {
               const cloned = original.cloneNode(true)
+              
               cloned.removeAttribute('hidden')
               const email = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=email&startsWith=true`, {
                 method: 'GET',

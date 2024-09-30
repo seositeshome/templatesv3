@@ -138,8 +138,14 @@
       }
       const savePP = async (name, text) => {
         // Create a new object to only send the updated field to the server
+        console.log('previous '+ JSON.stringify(pp_response))
         pp_response[name] = text
+        if(name === 'pp_secret' || name ==='pp_id'){
+          delete pp_response.access_token
+          delete pp_response.expires_in
+        }
         pp_response.ownerUUID = 'pp_creds:' + localStorage.getItem('ownerid')
+        console.log('new '+ JSON.stringify(pp_response))
         const res1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {

@@ -994,72 +994,69 @@
       </section>
 
       <section hidden data-brains="paypals">
-        <button class="b-1" style="margin-left:25px; margin-top: 10px;" onclick="addPaypal(event)">➕</button>
-        <table class="table-entity" style="margin-left:25px; margin-top: 10px; ">
+
+        <table class="table-entity" data-entity="paypal">
+          <button id="add-entity" class="b-1" style="margin-bottom: 10px; margin-left: 25px;">➕</button>
+
           <thead>
             <tr>
               <td>
-                <span class="l-2 b-dark-blue">Email</span>
+                <span>Email</span>
               </td>
               <td>
-                <span class="l-2 b-dark-blue">Last</span>
+                <span>Last</span>
               </td>
               <td>
-                <span class="l-2 b-dark-blue">Total</span>
+                <span>Total</span>
               </td>
-
             </tr>
-
           </thead>
           <tbody>
-
-            <tr id="paypal-item" class="tooltip-parent" hidden>
+            <tr class="tooltip-parent" id="entity-row">
               <td>
-                <span id="paypal-email" class="l-3" contenteditable>work@mogobuy.com</span>
+                <span  contenteditable data-entity-value="paypalEmail">work@mogobuy.com</span>
               </td>
-              <td><span class="l-3" id="paypal-last">24.09.10 13:57</span>
+              <td>
+                <span data-entity-value="lastTransDate">24.09.10 13:57</span>
               </td>
-              <td><span class="l-3 value-left" id="total-trans">10</span>
-                <span clas="l-1 value-separator">⚇</span>
-                <span class="l-3 value-right" id="total-amount">
-                  10290
-                </span>
+              <td>
+                <label class="l-3"><input data-entity-boleen="status" type="checkbox">false</label>
+
                 <div class="tooltip">
                   <ul>
                     <li>
-                      <span class="l-3">🆔</span>
-                      <span class="l-3" contenteditable>~</span>
+                      <span>🆔</span>
+                      <span  contenteditable="" data-entity-value="paypalApiId">~</span>
                     </li>
                     <li>
-                      <span class="l-3">🔑</span>
-                      <span class="l-3" contenteditable>~</span>
+                      <span>🔑</span>
+                      <span contenteditable="" data-entity-value="paypalApiKey">~</span>
                     </li>
                     <li>
-                      <span class="l-3">🌐</span>
-                      <span class="l-3" contenteditable>~</span>
+                      <span >🌐</span>
+                      <span class="l-3" contenteditable="" data-entity-value="paypalDomain">~</span>
                     </li>
                     <li>
-                      <span class="l-3">🛒</span>
-                      <span class="l-3" contenteditable>~</span>
+                      <span >🛒</span>
+                      <span class="l-3" contenteditable="" data-entity-value="paypalCartPath">~</span>
                     </li>
                     <li>
-                      <span class="l-3">✅</span>
-                      <span class="l-3" contenteditable>~</span>
+                      <span >✅</span>
+                      <span  contenteditable="" data-entity-value="paypalSucessPath">~</span>
                     </li>
-                    </li>
+                    
                     <li>
-                      <span class="l-3">❌</span>
-                      <span class="l-3" contenteditable>~</span>
+                      <span>❌</span>
+                      <span contenteditable="" data-entity-value="paypalFailPath">~</span>
                     </li>
                   </ul>
                 </div>
-
               </td>
             </tr>
 
-
-          </tbody>
+        </tbody>
         </table>
+
 
       </section>
       <section hidden data-brains="helpers">

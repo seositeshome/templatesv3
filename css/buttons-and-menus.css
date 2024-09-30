@@ -1109,6 +1109,7 @@ font-size: 18px; /* Размер шрифта номера */
   width: auto;
   border-collapse: collapse;
   border-radius: 10px; 
+  margin-left: 25px;
 }
 
 .table-entity thead td {

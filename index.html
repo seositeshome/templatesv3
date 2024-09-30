@@ -995,8 +995,8 @@
 
       <section hidden data-brains="paypals">
 
-        <button data-add-entity-row="add-entity-row" class="b-1" style="margin-bottom: 10px; margin-left: 25px;">➕</button>
-        <table class="table-entity" data-entity="paypal">
+        <button data-add-entity-row="paypal" class="b-1" style="margin-bottom: 10px; margin-left: 25px;">➕</button>
+        <table class="table-entity" data-entity-table="paypal">
           <thead>
             <tr>
               <td>
@@ -1004,6 +1004,12 @@
               </td>
               <td>
                 <span>Last</span>
+              </td>
+              <td>
+                <span>Total trans</span>
+              </td>
+              <td>
+                <span>Total Amount</span>
               </td>
               <td>
                 <span>Status</span>
@@ -1019,8 +1025,14 @@
                 <span data-entity-value="lastTransDate">24.09.10 13:57</span>
               </td>
               <td>
+                <span data-entity-value="totalTrans">10</span>
+              </td>
+              <td>
+                <span data-entity-value="totalAmount">$</span>
+                <span data-entity-value="totalAmount">129</span>
+              </td>
+              <td>
                 <label class="l-3"><input data-entity-boleen="status" type="checkbox">False</label>
-
                 <div class="tooltip">
                   <ul>
                     <li>

@@ -1107,10 +1107,20 @@ font-size: 18px; /* Размер шрифта номера */
 .table-entity {
   max-width: 100%;
   width: auto;
-  border-collapse: collapse;
+  border-collapse: separate; /* Set this to 'separate' so borders are not merged */
+  border-spacing: 0; /* Optional: removes space between cells */
   border-radius: 10px; 
   margin-left: 25px;
 }
+
+.table-entity th, 
+.table-entity td {
+  border: 1px solid #ddd; /* Add border between columns and rows */
+  padding: 8px; /* Adjust padding to your needs */
+}
+
+
+
 
 .table-entity thead td {
   background-color: #f0f0f0; /* Light background for header */

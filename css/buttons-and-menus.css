@@ -1164,6 +1164,11 @@ font-size: 21px;
   text-align: center;
   font-size: 24px; 
   height: 20px;
+  white-space: nowrap; /* Запрещает перенос текста */
+  overflow: hidden; /* Обрезает текст, если он выходит за пределы ячейки */
+  text-overflow: ellipsis; /* Добавляет троеточие в случае обрезки текста */
+  max-width: 100px; /* Установите необходимую максимальную ширину для ячеек */
+
 
   }
   

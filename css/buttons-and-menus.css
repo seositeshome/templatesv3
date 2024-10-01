@@ -1178,7 +1178,7 @@ font-size: 21px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; /* Добавляет "..." */
-  max-width: 200px; /* Максимальная ширина для обрезки текста */
+  max-width: 40px; /* Максимальная ширина для обрезки текста */
   display: inline-block;
   vertical-align: middle;
 }

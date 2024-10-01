@@ -1163,7 +1163,6 @@ font-size: 21px;
 .table-entity td  {
   text-align: center;
   font-size: 24px; 
-  height: 20px;
   white-space: nowrap; /* Запрещает перенос текста */
   overflow: hidden; /* Обрезает текст, если он выходит за пределы ячейки */
   text-overflow: ellipsis; /* Добавляет троеточие в случае обрезки текста */

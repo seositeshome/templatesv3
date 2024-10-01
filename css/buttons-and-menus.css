@@ -1111,6 +1111,8 @@ font-size: 18px; /* Размер шрифта номера */
   border-spacing: 0; /* Optional: removes space between cells */
   border-radius: 10px; 
   margin-left: 25px;
+  overflow-x: auto;  /* Enables horizontal scroll */
+
 }
 
 .table-entity th, 
@@ -1161,7 +1163,7 @@ font-size: 21px;
    
   }
   
-  
+
 
   .entity-shorted-value {
     width: 40px; /* Фиксированная ширина */

@@ -1183,6 +1183,11 @@ font-size: 21px;
   vertical-align: middle;
 }
 
+.short-text {
+  max-width: 40px; /* Максимальная ширина для обрезки текста */
+}
+
+
   
 
 

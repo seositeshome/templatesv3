@@ -1112,6 +1112,8 @@ font-size: 18px; /* Размер шрифта номера */
   border-radius: 10px; 
   margin-left: 25px;
   overflow-x: auto;  /* Enables horizontal scroll */
+  overflow-y: auto;  /* Enables horizontal scroll */
+
 
 }
 

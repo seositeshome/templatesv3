@@ -235,6 +235,8 @@
           style="margin-right: 5px;"><label class="l-1">🧾</label><label class="l-2">Invoices</label></button>
         <button onclick="showBrain(event,'paypal')" data-entity-button="paypal" class="b-4 "
           style="margin-right: 5px;"><label class="l-1">🅿️</label><label class="l-2">Paypals</label></button>
+          <button onclick="showBrain(event,'paypal-trans')" data-entity-button="paypal-trans" class="b-4 "
+          style="margin-right: 5px;"><label class="l-1">🅿️</label><label class="l-2">Paypals trans</label></button>
 
         <button onclick="showBrain(event,'helpers')" data-entity-button="helpers" class="b-4 "
           style="margin-right: 5px;"><label class="l-1">👶</label><label class="l-2">Helpers</label></button>
@@ -1052,6 +1054,24 @@
 
 
       </section>
+      <section hidden data-entity="paypal-trans">
+
+        <table class="table-entity" id="entity-table">
+          <thead>
+            <tr class="tooltip-parent">
+          </thead>
+          <tbody>
+            <tr  id="entity-row">
+              <td>
+                <span data-entity-load-value>work@mogobuy.com</span>
+              </td>
+            </tr>
+        </tbody>
+        </table>
+
+
+      </section>
+
       <section hidden data-entity="helpers">
         <div class="tooltip">
           <ul>

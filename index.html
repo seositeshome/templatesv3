@@ -249,7 +249,7 @@
         <label class="top-selector" ><input   type="radio" name="table-show-input">🅿️ Paypals</label>
       </div>
         
-      <div id="table-controls" style="margin-left: 25px;">
+      <div id="table-controls" style="margin-left: 25">
         <button class="b-1">💾</button>
         <span class="l-2" id="entity-save-status">🟢</span>
 
@@ -276,7 +276,7 @@
                </tr>
               </thead>
               <tbody>
-                <tr id="column-settings">
+                <tr id="entity-column-settings">
                   <td contenteditable>email</td>
                   <td><label><input type="checkbox">🙈</label></td>
                   <td><label><input type="checkbox">✂️</label></td>
@@ -288,7 +288,7 @@
                         <option>date ISO 8601 UTC </option>
                         <option>string</option>
                   </select>
-                </td>
+          </td>
     
                   <td><label><input type="checkbox">🗑️</label></td>
                 </tr>
@@ -308,14 +308,14 @@
                </tr>
               </thead>
               <tbody>
-                <tr id="tableRow">
-                  <td id="tableTD">testdata@testdata.com</td>
-                  <td id="tableTD">testdata@testdata.com</td>
-                  <td id="tableTD">testdata@testdata.com</td>
-                  <td id="tableTD">testdata@testdata.com</td>
-                  <td id="tableTD">testdata@testdata.com</td>
-                  <td id="tableTD">testdata@testdata.com</td>
-                  <td id="tableTD">testdata@testdata.com</td>
+                <tr id="entity-row">
+                  <td  data-entity-value="email">testdata@testdata.com</td>
+                  <td  data-entity-value="cartPath">testdata.com/testdata/testdata/</td>
+                  <td  data-entity-value="successPath">testdata.com/testdata/testdata/</td>
+                  <td  data-entity-value="failedPath">testdata.com/testdata/testdata/</td>
+                  <td  data-entity-value="apiID" class="short">testdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdata</td>
+                  <td  data-entity-value="apiKey" class="short">testdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdata</td>
+                  <td  data-entity-value="status">$</td>
                 </tr>
               </tbody>
             </table>

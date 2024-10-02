@@ -1272,46 +1272,42 @@
 
     // Разбиваем данные на строки по символу новой строки
     let rows = clipboardData.split('\n');
-
+    
     // Получаем строку и индекс ячейки для вставки данных
     let startRow = activeCell.parentElement;
     let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
 
-    // Получаем таблицу для вставки
-    let tableBody = document.getElementById('entity-table').querySelector('tbody');
-    let totalColumns = document.getElementById('entity-table').querySelector('thead').rows[0].cells.length;
+    let currentRow = startRow; // Текущая строка для вставки
 
-    // Обрабатываем каждую строку
+    // Проходим по каждой строке вставляемых данных
     rows.forEach(function(rowData, rowIndex) {
-      let cells = rowData.split('\t'); // Разделяем строки по табуляции
-
-      // Если это первая строка, используем текущую строку, иначе ищем или создаём новую строку
-      let targetRow = (rowIndex === 0) ? startRow : startRow.nextElementSibling;
-
-      // Если новой строки нет, создаём её
-      if (!targetRow) {
-        targetRow = tableBody.insertRow();
-        for (let i = 0; i < totalColumns; i++) {
-          targetRow.insertCell(); // Добавляем пустые ячейки
-        }
+      if (!currentRow) {
+        // Если строк больше, чем есть в таблице, выходим из цикла
+        console.log("Пропускаем строку, т.к. выходим за пределы имеющихся строк");
+        return;
       }
 
-      // Обрабатываем каждую ячейку в строке
-      cells.forEach(function(cellText, cellIndex) {
-        let targetCell = targetRow.cells[startCellIndex + cellIndex];
+      let cells = rowData.split('\t'); // Разделяем данные по табуляции
 
-        // Если ячейки нет, создаём её
+      // Проходим по каждой ячейке в строке
+      cells.forEach(function(cellText, cellIndex) {
+        let targetCell = currentRow.cells[startCellIndex + cellIndex];
+
+        // Если ячейки нет, значит вышли за пределы таблицы, пропускаем
         if (!targetCell) {
-          targetCell = targetRow.insertCell(startCellIndex + cellIndex);
+          console.log("Пропускаем ячейку, т.к. выходим за пределы имеющихся ячеек");
+          return;
         }
 
         // Устанавливаем текст в ячейку
         targetCell.textContent = cellText || ''; // Вставляем пустую строку, если значение пустое
       });
+
+      // Переходим к следующей строке для вставки
+      currentRow = currentRow.nextElementSibling;
     });
   });
 </script>
-
 
 
         

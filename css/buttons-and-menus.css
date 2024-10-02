@@ -21,8 +21,8 @@
   transform: scale(1.05);
 }
 
-.top-selector input[type="radio"]:checked + .top-selector,
-input[type="radio"]:checked ~ .top-selector {
+/* Активное состояние - это то, что мы будем применять через JavaScript */
+.top-selector-label.active {
   border-width: 2.5px;
   background-color: #c4c4c4;
   transform: scale(1.05);

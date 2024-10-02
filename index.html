@@ -252,6 +252,20 @@
 
           </script>
           
+          <script>
+              const labels = document.querySelectorAll('.top-selector-label');
+
+labels.forEach(label => {
+  // На каждую радио-кнопку вешаем событие клика
+  label.addEventListener('click', function() {
+    // Удаляем класс active со всех label
+    labels.forEach(l => l.classList.remove('active'));
+    // Добавляем класс active на выбранный label
+    this.classList.add('active');
+  });
+});
+
+          </script>
       </div>
         
           <section hidden data-table-name="paypals">

@@ -1166,39 +1166,7 @@ font-size: 21px;
 
   }
 
-  /* Полное отображение текста без переноса */
-.full-text {
-  white-space: nowrap;
-  overflow: visible;
-  text-overflow: clip; /* Без обрезки текста */
-}
-
-/* Сокращённое отображение текста с обрезкой */
-.short-text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; /* Добавляет "..." */
-  max-width: 40px; /* Максимальная ширина для обрезки текста */
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.short-text {
-  max-width: 40px; /* Максимальная ширина для обрезки текста */
-}
-
 
   
 
-
-  .entity-shorted-value {
-    width: 40px; /* Фиксированная ширина */
-    height: 20px; /* Фиксированная высота */
-    display: inline-block;  
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    direction: ltr;
-    text-align: left;
-  }
   

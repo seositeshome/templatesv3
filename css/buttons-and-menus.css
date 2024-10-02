@@ -1106,6 +1106,8 @@ font-size: 18px; /* Размер шрифта номера */
 
 .table-entity {
   max-width: 100%;
+  max-height: 1000px;
+
   width: auto;
   border-collapse: separate; /* Set this to 'separate' so borders are not merged */
   border-spacing: 0; /* Optional: removes space between cells */

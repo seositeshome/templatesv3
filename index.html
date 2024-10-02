@@ -1232,69 +1232,73 @@
         </table>
 
         <script>
-          let currentCell; // Переменная для хранения текущей ячейки
-        
-          // Функция для активации редактирования
+          // Function to make a table cell editable on double-click
           function makeEditable(element) {
             element.setAttribute('contenteditable', 'true');
-            element.focus(); // Фокусируем на элементе для редактирования
-            currentCell = element; // Сохраняем текущую ячейку для вставки данных
+            element.focus(); // Focus on the element so the user can start typing
         
-            // Удаляем contenteditable при потере фокуса
+            // Remove contenteditable attribute when focus is lost (blur event)
             element.addEventListener('blur', function () {
               element.removeAttribute('contenteditable');
-            }, { once: true }); // Обработчик вызывается только один раз
+            }, { once: true }); // The listener runs only once per event
           }
-        
-          // Обработка события вставки
-          document.addEventListener('paste', function (event) {
-            if (!currentCell) return; // Проверяем, что есть текущая ячейка для вставки
-        
-            event.preventDefault(); // Останавливаем стандартную вставку
-        
-            let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
-            
-            // Разбиваем данные на строки (разделитель - новая строка)
-            let rows = clipboardData.trim().split('\n');
-            
-            let currentRow = currentCell.parentElement; // Получаем текущую строку
-            let currentCellIndex = Array.from(currentRow.children).indexOf(currentCell); // Индекс текущей ячейки
-        
-            rows.forEach((row, rowIndex) => {
-              let cells = row.split('\t'); // Разбиваем строки на ячейки (разделитель - табуляция)
-              
-              // Если это не первая строка, переходим к следующей строке
-              if (rowIndex > 0) {
-                currentRow = currentRow.nextElementSibling;
-                if (!currentRow) {
-                  // Если строк не хватает, добавляем новую строку
-                  currentRow = document.getElementById("entity-table").querySelector('tbody').insertRow();
-                  for (let i = 0; i < document.getElementById("entity-table").querySelector('thead').rows[0].cells.length; i++) {
-                    currentRow.insertCell(); // Заполняем пустыми ячейками
-                  }
-                }
-              }
-        
-              // Обрабатываем каждую ячейку в строке, включая пустые
-              cells.forEach((cellText, cellIndex) => {
-                let targetCell = currentRow.cells[currentCellIndex + cellIndex];
-                if (!targetCell) {
-                  // Если целевая ячейка не существует, создаём её
-                  targetCell = currentRow.insertCell(currentCellIndex + cellIndex);
-                }
-        
-                // Устанавливаем текст в ячейку, даже если он пустой
-                targetCell.textContent = cellText || ''; // Вставляем пустую строку, если значение пустое
-              });
-        
-              // Если в строке меньше ячеек, чем столбцов, добавляем пустые
-              while (currentRow.cells.length < document.getElementById("entity-table").querySelector('thead').rows[0].cells.length) {
-                currentRow.insertCell().textContent = ''; // Добавляем пустую ячейку
-              }
-            });
-          });
         </script>
-        
+
+
+<script>
+  document.addEventListener('paste', function (event) {
+    // Get the active cell where the paste is happening
+    let activeCell = document.activeElement;
+    
+    // Ensure that the active element is a table cell
+    if (activeCell.tagName !== 'TD') return;
+
+    event.preventDefault(); // Prevent default paste behavior
+
+    // Get the pasted data from clipboard (tab-delimited for Excel data)
+    let clipboardData = event.clipboardData.getData('text');
+    
+    // Split the pasted data by rows (each row is separated by a newline)
+    let rows = clipboardData.split('\n');
+
+    // Get the table's <tbody> and number of columns (to ensure we handle all cells)
+    let table = document.getElementById('entity-table').querySelector('tbody');
+    let totalColumns = document.getElementById('entity-table').querySelector('thead').rows[0].cells.length;
+
+    let startRow = activeCell.parentElement; // The row where the paste started
+    let startCellIndex = Array.from(startRow.children).indexOf(activeCell); // Starting cell index
+
+    // Loop through each row from the pasted data
+    rows.forEach((rowData, rowIndex) => {
+      let cells = rowData.split('\t'); // Split the row by tab characters (for Excel data)
+
+      // If we are pasting into a new row
+      let targetRow = (rowIndex === 0) ? startRow : startRow.nextElementSibling;
+
+      // If there is no row to paste into, create a new one
+      if (!targetRow) {
+        targetRow = table.insertRow();
+        for (let i = 0; i < totalColumns; i++) {
+          targetRow.insertCell(); // Create cells for the new row
+        }
+      }
+
+      // Now handle each cell in the current row of data
+      cells.forEach((cellText, cellIndex) => {
+        let targetCell = targetRow.cells[startCellIndex + cellIndex]; // Determine the target cell
+
+        // If there is no target cell, create one
+        if (!targetCell) {
+          targetCell = targetRow.insertCell(startCellIndex + cellIndex);
+        }
+
+        // Set the text content of the cell, even if it's empty
+        targetCell.textContent = cellText || '';
+      });
+    });
+  });
+</script>
+
 
         
       </section>

@@ -1163,8 +1163,9 @@ font-size: 21px;
 .table-entity td  {
   text-align: center;
   font-size: 24px; 
+  white-space: nowrap; /* Предотвращает перенос текста на новую строку */
+}
 
-  }
 
 
   

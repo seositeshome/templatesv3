@@ -361,70 +361,70 @@
             </script>
             
     
-    <script>
-      let activeCell = null; // Переменная для хранения текущей ячейки
-    
-      // Отслеживание клика по любой ячейке таблицы
-      document.querySelectorAll('td').forEach(function(cell) {
-        cell.addEventListener('click', function() {
-          activeCell = cell; // Сохраняем ячейку как активную
-          console.log("Активная ячейка установлена: ", activeCell);
-        });
-      });
-    
-      // Обработка события вставки
-      document.addEventListener('paste', function(event) {
-        // Проверяем, что активная ячейка выбрана
-        if (!activeCell) {
-          console.log("Ячейка не выбрана для вставки!");
-          return;
-        }
-    
-        event.preventDefault(); // Останавливаем стандартную вставку
-    
-        // Получаем данные из буфера обмена
-        let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
-        console.log("Вставляемые данные:", clipboardData);
-    
-        // Разбиваем данные на строки по символу новой строки
-        let rows = clipboardData.split('\n');
-        
-        // Получаем строку и индекс ячейки для вставки данных
-        let startRow = activeCell.parentElement;
-        let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
-    
-        let currentRow = startRow; // Текущая строка для вставки
-    
-        // Проходим по каждой строке вставляемых данных
-        rows.forEach(function(rowData, rowIndex) {
-          if (!currentRow) {
-            // Если строк больше, чем есть в таблице, выходим из цикла
-            console.log("Пропускаем строку, т.к. выходим за пределы имеющихся строк");
-            return;
-          }
-    
-          let cells = rowData.split('\t'); // Разделяем данные по табуляции
-    
-          // Проходим по каждой ячейке в строке
-          cells.forEach(function(cellText, cellIndex) {
-            let targetCell = currentRow.cells[startCellIndex + cellIndex];
-    
-            // Если ячейки нет, значит вышли за пределы таблицы, пропускаем
-            if (!targetCell) {
-              console.log("Пропускаем ячейку, т.к. выходим за пределы имеющихся ячеек");
-              return;
-            }
-    
-            // Устанавливаем текст в ячейку
-            targetCell.textContent = cellText || ''; // Вставляем пустую строку, если значение пустое
-          });
-    
-          // Переходим к следующей строке для вставки
-          currentRow = currentRow.nextElementSibling;
-        });
-      });
-    </script>
-    
+            <script>
+              let activeCell = null; // Variable to store the currently active cell
+            
+              // Track clicks only on <td> elements within the <tbody> of #tableData
+              document.querySelectorAll('#tableData tbody td').forEach(function(cell) {
+                cell.addEventListener('click', function() {
+                  activeCell = cell; // Set the clicked cell as the active one
+                  console.log("Active cell set: ", activeCell);
+                });
+              });
+            
+              // Handle paste event
+              document.addEventListener('paste', function(event) {
+                // Check if an active cell is selected
+                if (!activeCell) {
+                  console.log("No cell selected for pasting!");
+                  return;
+                }
+            
+                event.preventDefault(); // Stop the default paste behavior
+            
+                // Get data from clipboard
+                let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
+                console.log("Pasting data:", clipboardData);
+            
+                // Split clipboard data by newline to get rows
+                let rows = clipboardData.split('\n');
+            
+                // Get the row and cell index for starting the paste
+                let startRow = activeCell.parentElement;
+                let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
+            
+                let currentRow = startRow; // Track the current row for pasting
+            
+                // Loop through each row of clipboard data
+                rows.forEach(function(rowData, rowIndex) {
+                  if (!currentRow) {
+                    // If we run out of rows in the table, stop
+                    console.log("Skipping row, as it exceeds available table rows.");
+                    return;
+                  }
+            
+                  let cells = rowData.split('\t'); // Split the row by tab to get cell values
+            
+                  // Loop through each cell in the row
+                  cells.forEach(function(cellText, cellIndex) {
+                    let targetCell = currentRow.cells[startCellIndex + cellIndex];
+            
+                    // If we run out of cells in the row, skip the rest
+                    if (!targetCell) {
+                      console.log("Skipping cell, as it exceeds available table cells.");
+                      return;
+                    }
+            
+                    // Set the text of the cell
+                    targetCell.textContent = cellText || ''; // Insert empty string if cell is empty
+                  });
+            
+                  // Move to the next row in the table for the next line of data
+                  currentRow = currentRow.nextElementSibling;
+                });
+              });
+            </script>
+                
     
             
           </section>

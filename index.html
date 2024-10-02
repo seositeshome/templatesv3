@@ -314,49 +314,6 @@
             </table>
     
     
-            <script>
-    function toggleTables(event) {
-      // Get the clicked radio button
-      const clickedRadio = event.target;
-    
-      // Find the closest container with the 'data-entity' attribute
-      const entityContainer = clickedRadio.closest('[data-table-name]');
-    
-      // Find the two tables inside the 'data-entity' container
-      const dataTable = entityContainer.querySelector('#entity-table-data');
-      const settingsTable = entityContainer.querySelector('#entity-table-settings');
-    
-      // Toggle visibility based on the clicked radio button
-      if (clickedRadio.id === 'data-table') {
-        // Show the data table and hide the settings table
-        dataTable.removeAttribute('hidden');
-        settingsTable.setAttribute('hidden', true);
-      } else if (clickedRadio.id === 'settings-table') {
-        // Show the settings table and hide the data table
-        settingsTable.removeAttribute('hidden');
-        dataTable.setAttribute('hidden', true);
-      }
-    }
-    
-    // Attach event listeners to all radio buttons with the name "table-settings"
-    document.querySelectorAll('input[name="table-settings"]').forEach(radio => {
-      radio.addEventListener('click', toggleTables);
-    });
-    
-    // Initialize visibility on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('[data-entity]').forEach(container => {
-        // Find the checked radio button within each 'data-entity' container
-        const checkedRadio = container.querySelector('input[name="table-settings"]:checked');
-    
-        // Trigger the toggleTables function if a radio button is checked
-        if (checkedRadio) {
-          toggleTables({ target: checkedRadio });
-        }
-      });
-    });
-    
-            </script>
     
             <script>
               // Function to make table cells editable on double-click
@@ -382,7 +339,7 @@
               }
             
               // Watch for all table cells with 'data-entity-value' attribute
-              document.querySelectorAll('td[data-entity-value]').forEach(function (cell) {
+              document.querySelectorAll('td[tableTD]').forEach(function (cell) {
                 // Make cell editable on double-click
                 cell.addEventListener('dblclick', function () {
                   makeEditable(cell);

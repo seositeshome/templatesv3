@@ -1140,6 +1140,9 @@ max-width: 100%;
   width: auto;
   border-collapse: collapse;
   border-radius: 10px; 
+  table-layout: auto; /* Используем автоширину */
+
+
 }
 
 .table-entity tbody tr:nth-child(odd) {

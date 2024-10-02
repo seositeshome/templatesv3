@@ -1,5 +1,5 @@
  
-/* Общий стиль для всех селекторов с классом top-selector-label */
+/* Общий стиль для всех селекторов с классом top-selector */
 
 .top-selector-panel {
     background: rgb(235, 234, 234); /* Optional: Change as needed */
@@ -16,7 +16,7 @@
 
 
 
-.top-selector-label {
+.top-selector {
   user-select: none;
   cursor: pointer;
   padding: 10px 20px;
@@ -30,13 +30,13 @@
 }
 
 /* Эффект при наведении */
-.top-selector-label:hover {
+.top-selector:hover {
   background-color: #c4c4c4;
   transform: scale(1.05);
 }
 
 /* Активное состояние - это то, что мы будем применять через JavaScript */
-.top-selector-label.active {
+.top-selector.active {
   border-width: 2.5px;
   background-color: #c4c4c4;
   transform: scale(1.05);

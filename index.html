@@ -339,7 +339,7 @@
               }
             
               // Watch for all table cells with 'data-entity-value' attribute
-              document.querySelectorAll('td[id="tableTD"]').forEach(function (cell) {
+              document.querySelectorAll('#tableData td').forEach(function (cell) {
                 // Make cell editable on double-click
                 cell.addEventListener('dblclick', function () {
                   makeEditable(cell);

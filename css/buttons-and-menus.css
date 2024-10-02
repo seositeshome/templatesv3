@@ -1170,16 +1170,10 @@ font-size: 21px;
 }
 
 
-th.sync, td.sync {
-  white-space: nowrap; /* Не переносим текст */
-  overflow: hidden; /* Скрываем лишний текст */
+.short {
+  max-width: 40px;
+  text-overflow: ellipsis;
 }
-
-/* Пример для адаптивности */
-th.sync {
-  width: auto; /* Ширина заголовка зависит от содержимого */
-}
-
 
   
 

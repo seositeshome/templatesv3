@@ -1109,6 +1109,7 @@ font-size: 18px; /* Размер шрифта номера */
   max-height: 1000px;
   will-change: transform;
 
+  
 
   width: auto;
   border-collapse: separate; /* Set this to 'separate' so borders are not merged */

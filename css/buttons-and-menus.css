@@ -1197,6 +1197,18 @@ max-width: 100%;
 }
 
 
+
+.input-remove-entity {
+  width: 100px; /* Width for exactly 3 digits */
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 25px; 
+  text-align: center; 
+  margin-right: 25px;
+
+}
+
 .input-add-entity::-webkit-outer-spin-button,
 .input-add-entity::-webkit-inner-spin-button {
     -webkit-appearance: none;

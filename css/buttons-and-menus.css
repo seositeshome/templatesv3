@@ -1,4 +1,41 @@
  
+/* Общий стиль для всех селекторов с классом table-selector */
+.table-selector {
+  display: inline-block;
+  user-select: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-right: 10px; /* Отступ справа между элементами */
+  margin-bottom: 10px; /* Отступ снизу для многострочной разметки */
+  font-size: 18px;
+  border: 1px solid #4A90E2;
+  border-radius: 10px;
+  background-color: rgb(235, 234, 234);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+}
+
+/* Эффект при наведении */
+.table-selector:hover {
+  background-color: #c4c4c4;
+  transform: scale(1.05);
+}
+
+/* Когда input внутри выбран */
+.table-selector input[type="radio"]:checked + .table-selector,
+.table-selector input[type="checkbox"]:checked + .table-selector {
+  border-width: 2.5px;
+  background-color: #c4c4c4;
+  transform: scale(1.05);
+}
+
+/* Скрываем input */
+.table-selector input[type="radio"], 
+.table-selector input[type="checkbox"] {
+  display: none;
+}
+
+
 #pics-menu #remove-galeryMenu,
 #pics-menu [data-select-image],
 [data-pics-head] #pics-menu-choose-save-destination,

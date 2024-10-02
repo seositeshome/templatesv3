@@ -1195,6 +1195,18 @@ max-width: 100%;
 }
 
 
+.input-add-entity::-webkit-outer-spin-button,
+.input-add-entity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Для Firefox */
+.input-add-entity {
+    -moz-appearance: textfield;
+}
+
+
 
 .input-table {
   width: 50px; /* Width for exactly 3 digits */

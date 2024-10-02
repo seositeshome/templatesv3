@@ -1203,4 +1203,17 @@ max-width: 100%;
   border-radius: 5px;   
   font-size: 19px; 
   margin-bottom: 7px;
+  
 }
+
+.input-table::-webkit-outer-spin-button,
+.input-table::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Для Firefox */
+.input-table {
+    -moz-appearance: textfield;
+}
+

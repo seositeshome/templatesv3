@@ -1199,7 +1199,7 @@ max-width: 100%;
 
 
 .input-remove-entity {
-  width: 100px; /* Width for exactly 3 digits */
+  width: 400px; /* Width for exactly 3 digits */
   padding: 5px; 
   border: 2px solid #4A90E2;   
   border-radius: 5px;   

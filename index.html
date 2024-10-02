@@ -1052,6 +1052,47 @@
         </table>
 
 
+        <script>
+          function toggleTables(event) {
+  // Get the clicked radio button
+  const clickedRadio = event.target;
+  
+  // Find the corresponding form (parent of the clicked radio button)
+  const form = clickedRadio.closest('form');
+  
+  // Get the value from the data attribute of the clicked radio button
+  const tableType = clickedRadio.getAttribute('data-table');
+  
+  // Find all tables within the same form context
+  const tables = form.querySelectorAll('.table-entity');
+
+  // Loop through all tables in the form and toggle their visibility
+  tables.forEach(table => {
+    if (table.getAttribute('data-table') === tableType) {
+      table.removeAttribute('hidden');
+    } else {
+      table.setAttribute('hidden', true);
+    }
+  });
+}
+
+// Attach event listeners to all radio buttons dynamically
+document.querySelectorAll('input[name="table-settings"]').forEach(radio => {
+  radio.addEventListener('click', toggleTables);
+});
+
+// Initialize visibility on page load (optional)
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('form').forEach(form => {
+    // Trigger click event on the first checked radio button in each form
+    const checkedRadio = form.querySelector('input[name="table-settings"]:checked');
+    if (checkedRadio) {
+      toggleTables({ target: checkedRadio });
+    }
+  });
+});
+
+        </script>
 
         <script>
           // Function to make table cells editable on double-click

@@ -350,7 +350,7 @@ labels.forEach(label => {
       const clickedRadio = event.target;
     
       // Find the closest container with the 'data-entity' attribute
-      const entityContainer = clickedRadio.closest('[data-entity]');
+      const entityContainer = clickedRadio.closest('[data-table-name]');
     
       // Find the two tables inside the 'data-entity' container
       const dataTable = entityContainer.querySelector('#entity-table-data');

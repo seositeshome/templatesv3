@@ -1246,40 +1246,44 @@
 
 
 <script>
-  // Функция для отладки: отслеживаем событие вставки
-  document.addEventListener('paste', function(event) {
-    // Проверяем, есть ли активная ячейка
-    let activeCell = document.activeElement;
-    console.log("Active cell: ", activeCell); // Отладочный вывод
+  let activeCell = null; // Переменная для хранения текущей ячейки
 
-    // Убедимся, что активный элемент — это ячейка таблицы (td)
-    if (activeCell.tagName !== 'TD') {
-      console.log("Вставка не в ячейку таблицы!");
+  // Отслеживание клика по любой ячейке таблицы
+  document.querySelectorAll('td').forEach(function(cell) {
+    cell.addEventListener('click', function() {
+      activeCell = cell; // Сохраняем ячейку как активную
+      console.log("Активная ячейка установлена: ", activeCell);
+    });
+  });
+
+  // Обработка события вставки
+  document.addEventListener('paste', function(event) {
+    // Проверяем, что активная ячейка выбрана
+    if (!activeCell) {
+      console.log("Ячейка не выбрана для вставки!");
       return;
     }
 
-    // Предотвращаем стандартное поведение вставки
-    event.preventDefault();
+    event.preventDefault(); // Останавливаем стандартную вставку
 
     // Получаем данные из буфера обмена
     let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
-    console.log("Pasted data: ", clipboardData); // Отладочный вывод
+    console.log("Вставляемые данные:", clipboardData);
 
-    // Разбиваем данные на строки по символу новой строки (\n)
+    // Разбиваем данные на строки по символу новой строки
     let rows = clipboardData.split('\n');
-    console.log("Rows: ", rows); // Отладочный вывод
 
-    // Получаем таблицу и количество столбцов
+    // Получаем строку и индекс ячейки для вставки данных
+    let startRow = activeCell.parentElement;
+    let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
+
+    // Получаем таблицу для вставки
     let tableBody = document.getElementById('entity-table').querySelector('tbody');
     let totalColumns = document.getElementById('entity-table').querySelector('thead').rows[0].cells.length;
 
-    let startRow = activeCell.parentElement; // Строка, с которой начинается вставка
-    let startCellIndex = Array.from(startRow.children).indexOf(activeCell); // Индекс начальной ячейки
-
-    // Обрабатываем каждую строку из буфера обмена
-    rows.forEach((rowData, rowIndex) => {
-      let cells = rowData.split('\t'); // Разбиваем строки по табуляции
-      console.log("Row " + rowIndex + " cells: ", cells); // Отладочный вывод
+    // Обрабатываем каждую строку
+    rows.forEach(function(rowData, rowIndex) {
+      let cells = rowData.split('\t'); // Разделяем строки по табуляции
 
       // Если это первая строка, используем текущую строку, иначе ищем или создаём новую строку
       let targetRow = (rowIndex === 0) ? startRow : startRow.nextElementSibling;
@@ -1292,8 +1296,8 @@
         }
       }
 
-      // Обрабатываем каждую ячейку в текущей строке
-      cells.forEach((cellText, cellIndex) => {
+      // Обрабатываем каждую ячейку в строке
+      cells.forEach(function(cellText, cellIndex) {
         let targetCell = targetRow.cells[startCellIndex + cellIndex];
 
         // Если ячейки нет, создаём её
@@ -1302,11 +1306,12 @@
         }
 
         // Устанавливаем текст в ячейку
-        targetCell.textContent = cellText || ''; // Пустые значения тоже вставляем
+        targetCell.textContent = cellText || ''; // Вставляем пустую строку, если значение пустое
       });
     });
   });
 </script>
+
 
 
         

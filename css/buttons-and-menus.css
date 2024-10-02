@@ -1152,7 +1152,7 @@ font-size: 18px; /* Размер шрифта номера */
 
 
 
-.table-entity {
+.table {
   max-width: 100%;
   will-change: transform;
   width: auto;
@@ -1166,8 +1166,8 @@ font-size: 18px; /* Размер шрифта номера */
 
 }
 
-.table-entity th, 
-.table-entity td {
+.table th, 
+.table td {
   border: 1px solid #ddd; /* Add border between columns and rows */
   padding: 8px; /* Adjust padding to your needs */
 }
@@ -1175,7 +1175,7 @@ font-size: 18px; /* Размер шрифта номера */
 
 
 
-.table-entity thead td {
+.table thead td {
   background-color: #f0f0f0; /* Light background for header */
   font-weight: bold;
   padding: 8px;
@@ -1184,7 +1184,7 @@ font-size: 18px; /* Размер шрифта номера */
 }
 
 
-.table-entity {
+.table {
 max-width: 100%;
   width: auto;
   border-collapse: collapse;
@@ -1194,21 +1194,21 @@ max-width: 100%;
 
 }
 
-.table-entity tbody tr:nth-child(odd) {
+.table tbody tr:nth-child(odd) {
   background-color:  #ffffff; 
 }
 
-.table-entity tbody tr:nth-child(even) {
+.table tbody tr:nth-child(even) {
   background-color: #f0f0f0;
 }
 
-.table-entity tbody tr:hover {
+.table tbody tr:hover {
   background-color:  #dddddd; /* A darker color on hover */
   transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 
-.table-entity td  {
+.table td  {
   text-align: center;
   font-size: 24px; 
   white-space: nowrap; /* Предотвращает перенос текста на новую строку */

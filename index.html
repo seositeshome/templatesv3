@@ -1056,21 +1056,28 @@
                 currentRow = table.insertRow();
               }
               
+              // Обработка всех ячеек, включая пустые
               cells.forEach((cellText, cellIndex) => {
                 let targetCell = currentRow.cells[cellIndex];
                 if (!targetCell) {
                   // Если целевая ячейка не существует, создаём её
                   targetCell = currentRow.insertCell();
                 }
-                targetCell.textContent = cellText; // Заполняем ячейку текстом
+        
+                // Устанавливаем текст в ячейку, даже если он пустой
+                targetCell.textContent = cellText || ''; // Вставляем пустую строку, если значение пустое
               });
+        
+              // Если в строке меньше ячеек, чем столбцов, добавляем пустые
+              while (currentRow.cells.length < table.rows[0].cells.length) {
+                currentRow.insertCell().textContent = ''; // Добавляем пустую ячейку
+              }
             });
         
             event.preventDefault(); // Отменяем стандартную вставку
           });
         </script>
         
-
       </section>
       <section hidden data-entity="paypal-trans">
 

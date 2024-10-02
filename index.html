@@ -330,7 +330,7 @@
               // Function to toggle the 'cell-checked' class when a cell is clicked
               function toggleCellChecked(cell) {
                 // Remove 'cell-checked' class from any other cell
-                document.querySelectorAll('.table-entity td.cell-checked').forEach(function (checkedCell) {
+                document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
                   checkedCell.classList.remove('cell-checked');
                 });
             
@@ -354,7 +354,7 @@
             
               // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
               document.addEventListener('click', function () {
-                document.querySelectorAll('.table-entity td.cell-checked').forEach(function (checkedCell) {
+                document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
                   checkedCell.classList.remove('cell-checked');
                 });
               });
@@ -1205,7 +1205,7 @@
 
       <section hidden data-entity="paypal-trans">
 
-        <table class="table-entity" id="entity-table">
+        <table class="table" id="entity-table">
           <tbody>
             <tr  id="entity-row">
               <td>

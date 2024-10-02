@@ -1158,10 +1158,6 @@ max-width: 100%;
   transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-.table-entity span {
-font-size: 21px;
- 
-}
 
 .table-entity td  {
   text-align: center;
@@ -1174,7 +1170,6 @@ font-size: 21px;
 .short {
   max-width: 40px;
   text-overflow: ellipsis;
-
 }
 
   

@@ -2,49 +2,46 @@
 /* Общий стиль для всех селекторов с классом top-selector */
 
 .top-selector-panel {
-    background: rgb(235, 234, 234); /* Optional: Change as needed */
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.2); /* Optional: Adds shadow for depth */
-    border-radius: 10px;
-    margin-left: 5px;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-
+  background: rgb(235, 234, 234); /* Optional: Change as needed */
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2); /* Optional: Adds shadow for depth */
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  padding-top: 20px; /* Увеличен padding */
+  padding-bottom: 20px; /* Увеличен padding */
+  padding-right: 20px; /* Увеличен padding */
+  padding-left: 20px; /* Увеличен padding */
 }
 
-
-
 .top-selector {
-  user-select: none;
-  cursor: pointer;
-  padding: 10px 20px;
-  margin: 8px 10px; /* Отступ сверху и снизу по 8px, справа 10px */
-  font-size: 18px;
-  border: 1px solid #4A90E2;
-  border-radius: 10px;
-  background-color: rgb(235, 234, 234);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: all 0.1s ease;
+user-select: none;
+cursor: pointer;
+padding: 10px 20px;
+margin: 4px 0; /* Уменьшен margin между метками */
+font-size: 18px;
+border: 1px solid #4A90E2;
+border-radius: 10px;
+background-color: rgb(235, 234, 234);
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+transition: all 0.1s ease;
 }
 
 /* Эффект при наведении */
 .top-selector:hover {
-  background-color: #c4c4c4;
-  transform: scale(1.05);
+background-color: #c4c4c4;
+transform: scale(1.05);
 }
 
 /* Активное состояние - это то, что мы будем применять через JavaScript */
 .top-selector.active {
-  border-width: 2.5px;
-  background-color: #c4c4c4;
-  transform: scale(1.05);
+border-width: 2.5px;
+background-color: #c4c4c4;
+transform: scale(1.05);
 }
 
 /* Скрываем input */
-input[type="radio"] {
-  display: none;
+.top-selector input[type="radio"] {
+display: none;
 }
 
 

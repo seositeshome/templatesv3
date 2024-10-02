@@ -1006,7 +1006,7 @@
 
         </form>
 
-        <table class="table-entity" id="entity-table">
+        <table class="table-entity" id="entity-table" hidden>
           <thead>
             <tr >
               <th>Email                  </th>
@@ -1030,13 +1030,14 @@
             </tr>
           </tbody>
         </table>
-        <table hidden class="table-entity" id="entity-table-settings">
+        <table  class="table-entity" id="entity-table-settings">
           <thead>
             <tr>
               <th>Column Name</th>
               <th>Visible</th>
               <th>Full data</th>
               <th>Position</th>
+              <th>data-type</th>
               <th>Remove</th>
            </tr>
           </thead>
@@ -1046,6 +1047,14 @@
               <td><label><input type="checkbox">👁️</label></td>
               <td><label><input type="checkbox">🐖</label></td>
               <td><span>🔀</span><span contenteditable>1</span></td>
+              <td><select id="owners-select" class="select-1" style="display: inline-block; margin-bottom: 7px;">
+                <option> ⬇️ select</option>
+                <option>number</option>
+                <option>date ISO 8601 UTC </option>
+                <option>string</option>
+              </select>
+      </td>
+
               <td><label><input type="checkbox">🗑️</label></td>
             </tr>
           </tbody>

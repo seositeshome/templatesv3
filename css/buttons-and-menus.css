@@ -1231,7 +1231,7 @@ max-width: 100%;
   
 
 
-.input-add-entity {
+.input-add-row {
   width: 60px; /* Width for exactly 3 digits */
   padding: 5px; 
   border: 2px solid #4A90E2;   
@@ -1244,7 +1244,7 @@ max-width: 100%;
 
 
 
-.input-remove-entity {
+.input-remove-row {
   width: 400px; /* Width for exactly 3 digits */
   padding: 5px; 
   border: 2px solid #4A90E2;   
@@ -1255,14 +1255,14 @@ max-width: 100%;
 
 }
 
-.input-add-entity::-webkit-outer-spin-button,
-.input-add-entity::-webkit-inner-spin-button {
+.input-add-row::-webkit-outer-spin-button,
+.input-add-row::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
 /* Для Firefox */
-.input-add-entity {
+.input-add-row {
     -moz-appearance: textfield;
 }
 

@@ -1103,12 +1103,6 @@ font-size: 18px; /* Размер шрифта номера */
   padding-top: 10px;
 }
 
-.table-container {
-  max-width: 100%;         /* Максимальная ширина контейнера */
-  max-height: 1000px;      /* Ограничение по высоте для вертикальной прокрутки */
-  overflow-x: auto;        /* Включает горизонтальную прокрутку */
-  overflow-y: auto;        /* Включает вертикальную прокрутку */
-}
 
 
 
@@ -1182,5 +1176,12 @@ max-width: 100%;
 }
 
   
+
+.cell-checked {
+  background-color: #ffd700; /* Highlight the selected cell with a gold color */
+  color: #000000; /* Change text color if needed */
+  font-weight: bold; /* Make text bold */
+  border: 2px solid #ff8c00; /* Thicker border to indicate selection */
+}
 
   

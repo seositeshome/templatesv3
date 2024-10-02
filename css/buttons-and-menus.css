@@ -2,14 +2,15 @@
 /* Общий стиль для всех селекторов с классом top-selector-label */
 
 .top-selector-panel {
-
-
     background: rgb(235, 234, 234); /* Optional: Change as needed */
     box-shadow: 0px 2px 5px rgba(0,0,0,0.2); /* Optional: Adds shadow for depth */
     border-radius: 10px;
     margin-left: 5px;
     margin-bottom: 10px;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 
 }
 

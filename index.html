@@ -219,22 +219,31 @@
 
 
       <script>
-      const toggleTableData = () => {
+  const toggleTableData = () => {
+    const s = localStorage.getItem('toggleTableData');
 
-      const s = localStorage.getItem('toggleTableData');
+    // Получаем все элементы с id="tableSettings"
+    const elements = document.querySelectorAll('[id="tableSettings"]');
 
-      if (!s) {
-        localStorage.setItem('toggleTableData', 'true');
-        document.getElementById('toggleTableData').classList.add('b-selected');
+    if (!s) {
+      localStorage.setItem('toggleTableData', 'true');
+      document.getElementById('toggleTableData').classList.add('b-selected');
 
-      } else {
-        localStorage.removeItem('toggleTableData');
-        document.getElementById('toggleTableData').classList.remove('b-selected');
+      // Показываем все элементы с id="tableSettings"
+      elements.forEach(el => {
+        el.classList.remove('hidden'); // Убираем скрытие
+      });
 
-      }
+    } else {
+      localStorage.removeItem('toggleTableData');
+      document.getElementById('toggleTableData').classList.remove('b-selected');
+
+      // Скрываем все элементы с id="tableSettings"
+      elements.forEach(el => {
+        el.classList.add('hidden'); // Добавляем класс скрытия
+      });
     }
-
-    
+  }
 
       </script>
 
@@ -347,7 +356,7 @@ labels.forEach(label => {
 
           <section hidden data-table-name="paypals">
 
-            <table  class="table-entity" hidden id="entity-table-settings">
+            <table  hidden class="table-entity" id="tableSettings">
               <thead>
                 <tr>
                   <th>Column Name</th>
@@ -378,7 +387,7 @@ labels.forEach(label => {
               </tbody>
             </table>
 
-            <table class="table-entity" id="entity-table-data" >
+            <table hidden class="table-entity" id="tableData" >
               <thead>
                 <tr >
                   <th>Email                  </th>

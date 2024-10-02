@@ -1193,3 +1193,14 @@ max-width: 100%;
   font-size: 24px; 
   margin-bottom: 7px;
 }
+
+
+
+.input-table {
+  width: 50px; /* Width for exactly 3 digits */
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 19px; 
+  margin-bottom: 7px;
+}

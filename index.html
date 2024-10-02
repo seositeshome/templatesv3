@@ -136,6 +136,8 @@
 
     <div class="panel left">
       <div id="nav-buttons">
+        <button data-section-button="tables" style="display: none" class="b-1">📋</button>
+
         <button data-section-button="brains" style="display: none" class="b-1">🧠</button>
         <script>
           document.addEventListener('DOMContentLoaded', function () {
@@ -225,6 +227,9 @@
 
 
   <main hidden class="main" id="main_element">
+    <section hidden data-section="tables" >
+
+    </section>
     <section hidden data-section="brains">
       <div class="panel horizontal-menu">
         <button onclick="showBrain(event,'sites')" data-entity-button="sites" class="b-4 " style="margin-right: 5px;"

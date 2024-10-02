@@ -225,11 +225,11 @@
 
       if (!s) {
         localStorage.setItem('toggleTableData', 'true');
-        getElementById1('toggleTableData').classList.add('b-selected');
+        document.getElementById('toggleTableData').classList.add('b-selected');
 
       } else {
         localStorage.removeItem('toggleTableData');
-        getElementById1('toggleTableData').classList.remove('b-selected');
+        document.getElementById('toggleTableData').classList.remove('b-selected');
 
       }
     }

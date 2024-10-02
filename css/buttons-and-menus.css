@@ -1183,3 +1183,13 @@ max-width: 100%;
   box-sizing: border-box; /* Prevents the element from growing when borders or padding are added */
 }
   
+
+
+
+.input-add-entity {
+  min-width: 50px; 
+  padding: 5px; 
+  border: 2px solid #4A90E2;   
+  border-radius: 5px;   
+  font-size: 18px; margin-bottom: 7px;
+}

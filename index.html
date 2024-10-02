@@ -215,7 +215,7 @@
         <button class="b-1" id="toggleTableData" onclick="toggleTableData()">📋</button>
         <button class="b-1" id="toggleTableSettings" onclick="toggleTableSettings()">⚙️</button>
 
-      </div>
+      </div>herehere
 
 
       <script>
@@ -347,30 +347,6 @@ labels.forEach(label => {
 
           <section hidden data-table-name="paypals">
 
-            <table class="table-entity" id="entity-table-data" >
-              <thead>
-                <tr >
-                  <th>Email                  </th>
-                  <th>Cart</th>
-                  <th>Success</th>
-                  <th>Fail</th>
-                  <th>Paypal Api ID</th>
-                  <th>Paypal Api Key</th>
-                  <th>Status</th>
-               </tr>
-              </thead>
-              <tbody>
-                <tr id="entity-row">
-                  <td  data-entity-value="email">testdata@testdata.com</td>
-                  <td  data-entity-value="cartPath">testdata.com/testdata/testdata/</td>
-                  <td  data-entity-value="successPath">testdata.com/testdata/testdata/</td>
-                  <td  data-entity-value="failedPath">testdata.com/testdata/testdata/</td>
-                  <td  data-entity-value="apiID" class="short">testdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdata</td>
-                  <td  data-entity-value="apiKey" class="short">testdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdata</td>
-                  <td  data-entity-value="status">$</td>
-                </tr>
-              </tbody>
-            </table>
             <table  class="table-entity" hidden id="entity-table-settings">
               <thead>
                 <tr>
@@ -398,6 +374,31 @@ labels.forEach(label => {
           </td>
     
                   <td><label><input type="checkbox">🗑️</label></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="table-entity" id="entity-table-data" >
+              <thead>
+                <tr >
+                  <th>Email                  </th>
+                  <th>Cart</th>
+                  <th>Success</th>
+                  <th>Fail</th>
+                  <th>Paypal Api ID</th>
+                  <th>Paypal Api Key</th>
+                  <th>Status</th>
+               </tr>
+              </thead>
+              <tbody>
+                <tr id="entity-row">
+                  <td  data-entity-value="email">testdata@testdata.com</td>
+                  <td  data-entity-value="cartPath">testdata.com/testdata/testdata/</td>
+                  <td  data-entity-value="successPath">testdata.com/testdata/testdata/</td>
+                  <td  data-entity-value="failedPath">testdata.com/testdata/testdata/</td>
+                  <td  data-entity-value="apiID" class="short">testdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdata</td>
+                  <td  data-entity-value="apiKey" class="short">testdatatestdatatestdatatestdatatestdatatestdatatestdatatestdatatestdata</td>
+                  <td  data-entity-value="status">$</td>
                 </tr>
               </tbody>
             </table>

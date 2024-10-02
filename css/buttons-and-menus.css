@@ -1,6 +1,5 @@
  
 .table-selector {
-  display: inline-block;
   user-select: none;
   cursor: pointer;
   padding: 10px 20px;

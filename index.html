@@ -1027,16 +1027,49 @@
         <script>
           // Функция для активации редактирования
           function makeEditable(element) {
-              element.setAttribute('contenteditable', 'true');
-              element.focus(); // Фокусируем на элементе для редактирования
-  
-              // Удаляем contenteditable при потере фокуса
-              element.addEventListener('blur', function() {
-                  element.removeAttribute('contenteditable');
-              }, { once: true }); // Обработчик вызывается только один раз
+            element.setAttribute('contenteditable', 'true');
+            element.focus(); // Фокусируем на элементе для редактирования
+        
+            // Удаляем contenteditable при потере фокуса
+            element.addEventListener('blur', function () {
+              element.removeAttribute('contenteditable');
+            }, { once: true }); // Обработчик вызывается только один раз
           }
-      </script>
-
+        
+          // Обработка события вставки
+          document.addEventListener('paste', function (event) {
+            // Получаем данные из буфера обмена
+            let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
+            
+            // Разбиваем данные на строки (разделитель - новая строка)
+            let rows = clipboardData.trim().split('\n');
+            
+            let table = document.getElementById('entity-table').querySelector('tbody');
+            let firstRow = table.querySelector('tr'); // Получаем первую строку таблицы для вставки
+        
+            rows.forEach((row, rowIndex) => {
+              let cells = row.split('\t'); // Разбиваем строки на ячейки (разделитель - табуляция)
+              let currentRow = firstRow; // Начинаем с первой строки
+              
+              if (rowIndex > 0) {
+                // Если вставлено больше одной строки, создаём новые строки
+                currentRow = table.insertRow();
+              }
+              
+              cells.forEach((cellText, cellIndex) => {
+                let targetCell = currentRow.cells[cellIndex];
+                if (!targetCell) {
+                  // Если целевая ячейка не существует, создаём её
+                  targetCell = currentRow.insertCell();
+                }
+                targetCell.textContent = cellText; // Заполняем ячейку текстом
+              });
+            });
+        
+            event.preventDefault(); // Отменяем стандартную вставку
+          });
+        </script>
+        
 
       </section>
       <section hidden data-entity="paypal-trans">

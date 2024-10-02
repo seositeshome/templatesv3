@@ -218,68 +218,6 @@
       </div>
 
 
-      <script>
-  const toggleTableData = () => {
-    const s = localStorage.getItem('toggleTableData');
-
-    // Получаем все элементы с id="tableSettings"
-    const elements = document.querySelectorAll('[id="tableSettings"]');
-
-    if (!s) {
-      localStorage.setItem('toggleTableData', 'true');
-      document.getElementById('toggleTableData').classList.add('b-selected');
-
-      // Показываем все элементы с id="tableSettings"
-      elements.forEach(el => {
-        el.classList.remove('hidden'); // Убираем скрытие
-      });
-
-    } else {
-      localStorage.removeItem('toggleTableData');
-      document.getElementById('toggleTableData').classList.remove('b-selected');
-
-      // Скрываем все элементы с id="tableSettings"
-      elements.forEach(el => {
-        el.classList.add('hidden'); // Добавляем класс скрытия
-      });
-    }
-  }
-
-      </script>
-
-<script>
-
-const toggleTableSettings = () => {
-    const s = localStorage.getItem('toggleTableSettings');
-
-    // Получаем все элементы с id="tableSettings"
-    const elements = document.querySelectorAll('[id="tableSettings"]');
-
-    if (!s) {
-      localStorage.setItem('toggleTableSettings', 'true');
-      document.getElementById('toggleTableSettingsBtn').classList.add('b-selected');
-
-      // Показываем все элементы с id="tableSettings"
-      elements.forEach(el => {
-        el.classList.remove('hidden'); // Убираем скрытие
-      });
-
-    } else {
-      localStorage.removeItem('toggleTableSettings');
-      document.getElementById('toggleTableSettingsBtn').classList.remove('b-selected');
-
-      // Скрываем все элементы с id="tableSettings"
-      elements.forEach(el => {
-        el.classList.add('hidden'); // Добавляем класс скрытия
-      });
-    }
-  }
-
-
-  </script>
-
-
-
         <div hidden data-section-aside="brains" class="local-buttons" style="margin-top: 30px;">
 
           <div data-section-aside="helpers" class="local-buttons" style="margin-top: 30px;">

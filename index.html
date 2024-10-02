@@ -248,20 +248,6 @@
       <div class="top-selector-panel">
         <label class="top-selector" hidden><input type="radio" hidden name="table-show-input">🌐Sites</label>
         <label class="top-selector" ><input   type="radio" name="table-show-input">🅿️ Paypals</label>
-        <label class="top-selector"><input  type="radio" name="table-show-input"><span>🅿️ test</label>          
-          <script>
-              const labels = document.querySelectorAll('.top-selector');
-                  labels.forEach(label => {
-                    // На каждую радио-кнопку вешаем событие клика
-                    label.addEventListener('click', function() {
-                      // Удаляем класс active со всех label
-                      labels.forEach(l => l.classList.remove('active'));
-                      // Добавляем класс active на выбранный label
-                      this.classList.add('active');
-                    });
-                  });
-
-          </script>
       </div>
         
       <div id="table-controls">

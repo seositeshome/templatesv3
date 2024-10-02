@@ -5243,7 +5243,7 @@ blablabla
           });
 
           // Переключение видимости связанных элементов aside
-          const asides = document.querySelectorAll('div[data-section-aside="brains"], div[data-section-aside="files"]');
+          const asides = document.querySelectorAll('div[data-section-aside="brains"], div[data-section-aside="files"], div[data-section-aside="tables"]');
           asides.forEach(aside => {
             if (aside.getAttribute('data-section-aside') === sectionToShow) {
               aside.hidden = false;

@@ -20,8 +20,8 @@
   transform: scale(1.05);
 }
 
-/* Стиль для метки, когда input внутри нее выбран */
-.top-selector input[type="radio"]:checked + .top-selector {
+.top-selector input[type="radio"]:checked + .top-selector,
+input[type="radio"]:checked ~ .top-selector {
   border-width: 2.5px;
   background-color: #c4c4c4;
   transform: scale(1.05);

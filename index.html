@@ -1006,7 +1006,7 @@
 
         </form>
 
-        <table class="table-entity" id="entity-table" hidden>
+        <table class="table-entity" id="entity-table-data" hidden>
           <thead>
             <tr >
               <th>Email                  </th>
@@ -1062,39 +1062,41 @@
 
 
         <script>
-          function toggleTables(event) {
+function toggleTables(event) {
   // Get the clicked radio button
   const clickedRadio = event.target;
-  
-  // Find the corresponding form (parent of the clicked radio button)
-  const form = clickedRadio.closest('form');
-  
-  // Get the value from the data attribute of the clicked radio button
-  const tableType = clickedRadio.getAttribute('data-table');
-  
-  // Find all tables within the same form context
-  const tables = form.querySelectorAll('.table-entity');
 
-  // Loop through all tables in the form and toggle their visibility
-  tables.forEach(table => {
-    if (table.getAttribute('data-table') === tableType) {
-      table.removeAttribute('hidden');
-    } else {
-      table.setAttribute('hidden', true);
-    }
-  });
+  // Find the closest container with the 'data-entity' attribute
+  const entityContainer = clickedRadio.closest('[data-entity]');
+
+  // Find the two tables inside the 'data-entity' container
+  const dataTable = entityContainer.querySelector('#entity-table-data');
+  const settingsTable = entityContainer.querySelector('#entity-table-settings');
+
+  // Toggle visibility based on the clicked radio button
+  if (clickedRadio.id === 'data-table') {
+    // Show the data table and hide the settings table
+    dataTable.removeAttribute('hidden');
+    settingsTable.setAttribute('hidden', true);
+  } else if (clickedRadio.id === 'settings-table') {
+    // Show the settings table and hide the data table
+    settingsTable.removeAttribute('hidden');
+    dataTable.setAttribute('hidden', true);
+  }
 }
 
-// Attach event listeners to all radio buttons dynamically
+// Attach event listeners to all radio buttons with the name "table-settings"
 document.querySelectorAll('input[name="table-settings"]').forEach(radio => {
   radio.addEventListener('click', toggleTables);
 });
 
-// Initialize visibility on page load (optional)
+// Initialize visibility on page load
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('form').forEach(form => {
-    // Trigger click event on the first checked radio button in each form
-    const checkedRadio = form.querySelector('input[name="table-settings"]:checked');
+  document.querySelectorAll('[data-entity]').forEach(container => {
+    // Find the checked radio button within each 'data-entity' container
+    const checkedRadio = container.querySelector('input[name="table-settings"]:checked');
+
+    // Trigger the toggleTables function if a radio button is checked
     if (checkedRadio) {
       toggleTables({ target: checkedRadio });
     }

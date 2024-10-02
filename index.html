@@ -1232,7 +1232,7 @@
         </table>
 
         <script>
-          // Function to make a table cell editable on double-click
+          // Function to make table cells editable on double-click
           function makeEditable(element) {
             element.setAttribute('contenteditable', 'true');
             element.focus(); // Focus on the element so the user can start typing
@@ -1242,8 +1242,40 @@
               element.removeAttribute('contenteditable');
             }, { once: true }); // The listener runs only once per event
           }
+        
+          // Function to toggle the 'cell-checked' class when a cell is clicked
+          function toggleCellChecked(cell) {
+            // Remove 'cell-checked' class from any other cell
+            document.querySelectorAll('.table-entity td.cell-checked').forEach(function (checkedCell) {
+              checkedCell.classList.remove('cell-checked');
+            });
+        
+            // Add 'cell-checked' class to the clicked cell
+            cell.classList.add('cell-checked');
+          }
+        
+          // Watch for all table cells with 'data-entity-value' attribute
+          document.querySelectorAll('td[data-entity-value]').forEach(function (cell) {
+            // Make cell editable on double-click
+            cell.addEventListener('dblclick', function () {
+              makeEditable(cell);
+            });
+        
+            // Add 'cell-checked' class on single click
+            cell.addEventListener('click', function (event) {
+              toggleCellChecked(cell);
+              event.stopPropagation(); // Prevent click event from bubbling up
+            });
+          });
+        
+          // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
+          document.addEventListener('click', function () {
+            document.querySelectorAll('.table-entity td.cell-checked').forEach(function (checkedCell) {
+              checkedCell.classList.remove('cell-checked');
+            });
+          });
         </script>
-
+        
 
 <script>
   let activeCell = null; // Переменная для хранения текущей ячейки

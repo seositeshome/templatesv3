@@ -5190,7 +5190,7 @@ document.addEventListener('DOMContentLoaded', function() {
           });
 
           // Переключение видимости секций
-          const sections = document.querySelectorAll('section[data-section="brains"], section[data-section="files"]');
+          const sections = document.querySelectorAll('section[data-section="brains"], section[data-section="files"], section[data-section="tables"]');
           sections.forEach(section => {
             if (section.getAttribute('data-section') === sectionToShow) {
               section.hidden = false;

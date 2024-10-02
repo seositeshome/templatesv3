@@ -1246,54 +1246,56 @@
 
 
 <script>
-  document.addEventListener('paste', function (event) {
-    // Get the active cell where the paste is happening
+  document.addEventListener('paste', function(event) {
+    // Получаем активную ячейку, в которую происходит вставка
     let activeCell = document.activeElement;
-    
-    // Ensure that the active element is a table cell
+
+    // Проверяем, что активный элемент — это ячейка таблицы <td>
     if (activeCell.tagName !== 'TD') return;
 
-    event.preventDefault(); // Prevent default paste behavior
+    // Останавливаем стандартное поведение вставки
+    event.preventDefault();
 
-    // Get the pasted data from clipboard (tab-delimited for Excel data)
-    let clipboardData = event.clipboardData.getData('text');
-    
-    // Split the pasted data by rows (each row is separated by a newline)
+    // Получаем данные из буфера обмена (например, данные из Excel)
+    let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
+
+    // Разбиваем данные на строки (разделитель — новая строка)
     let rows = clipboardData.split('\n');
 
-    // Get the table's <tbody> and number of columns (to ensure we handle all cells)
-    let table = document.getElementById('entity-table').querySelector('tbody');
+    // Получаем таблицу и количество столбцов
+    let tableBody = document.getElementById('entity-table').querySelector('tbody');
     let totalColumns = document.getElementById('entity-table').querySelector('thead').rows[0].cells.length;
 
-    let startRow = activeCell.parentElement; // The row where the paste started
-    let startCellIndex = Array.from(startRow.children).indexOf(activeCell); // Starting cell index
+    let startRow = activeCell.parentElement; // Строка, с которой начинается вставка
+    let startCellIndex = Array.from(startRow.children).indexOf(activeCell); // Индекс начальной ячейки
 
-    // Loop through each row from the pasted data
+    // Обрабатываем каждую строку из буфера обмена
     rows.forEach((rowData, rowIndex) => {
-      let cells = rowData.split('\t'); // Split the row by tab characters (for Excel data)
+      let cells = rowData.split('\t'); // Разбиваем строки по табуляции
 
-      // If we are pasting into a new row
+      // Если это первая строка, используем текущую строку, иначе ищем или создаём новую
       let targetRow = (rowIndex === 0) ? startRow : startRow.nextElementSibling;
 
-      // If there is no row to paste into, create a new one
+      // Если новой строки нет, создаём её
       if (!targetRow) {
-        targetRow = table.insertRow();
+        targetRow = tableBody.insertRow();
+        // Добавляем ячейки в новую строку
         for (let i = 0; i < totalColumns; i++) {
-          targetRow.insertCell(); // Create cells for the new row
+          targetRow.insertCell();
         }
       }
 
-      // Now handle each cell in the current row of data
+      // Обрабатываем каждую ячейку в текущей строке
       cells.forEach((cellText, cellIndex) => {
-        let targetCell = targetRow.cells[startCellIndex + cellIndex]; // Determine the target cell
+        let targetCell = targetRow.cells[startCellIndex + cellIndex];
 
-        // If there is no target cell, create one
+        // Если ячейки нет, создаём её
         if (!targetCell) {
           targetCell = targetRow.insertCell(startCellIndex + cellIndex);
         }
 
-        // Set the text content of the cell, even if it's empty
-        targetCell.textContent = cellText || '';
+        // Устанавливаем текст в ячейку, даже если он пустой
+        targetCell.textContent = cellText || ''; // Пустые ячейки тоже обрабатываются
       });
     });
   });

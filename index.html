@@ -212,12 +212,29 @@
 
       </div>
       <div data-section-aside="tables" class="local-buttons" style="margin-top: 30px;">
-        <button class="b-1" onclick="toggleComponentTree()">📋</button>
-        <button class="b-1" onclick="herehere">⚙️</button>
+        <button class="b-1" id="toggleTableData" onclick="toggleTableData()">📋</button>
+        <button class="b-1" onclick="toggleTableSettings()">⚙️</button>
 
       </div>
 
 
+      <script>
+      const toggleTableData = () => {
+
+      const s = localStorage.getItem('toggleTableData');
+
+      if (!s) {
+        localStorage.setItem('toggleTableData', 'true');
+        getElementById1('toggle-component-tree').classList.add('b-selected');
+
+      } else {
+        localStorage.removeItem('toggleTableData');
+        getElementById1('toggle-component-tree').classList.remove('b-selected');
+
+      }
+    }
+
+      </script>
 
         <div hidden data-section-aside="brains" class="local-buttons" style="margin-top: 30px;">
 

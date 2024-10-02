@@ -1232,10 +1232,13 @@
         </table>
 
         <script>
+          let currentCell; // Переменная для хранения текущей ячейки
+        
           // Функция для активации редактирования
           function makeEditable(element) {
             element.setAttribute('contenteditable', 'true');
             element.focus(); // Фокусируем на элементе для редактирования
+            currentCell = element; // Сохраняем текущую ячейку для вставки данных
         
             // Удаляем contenteditable при потере фокуса
             element.addEventListener('blur', function () {
@@ -1245,30 +1248,39 @@
         
           // Обработка события вставки
           document.addEventListener('paste', function (event) {
-            // Получаем данные из буфера обмена
+            if (!currentCell) return; // Проверяем, что есть текущая ячейка для вставки
+        
+            event.preventDefault(); // Останавливаем стандартную вставку
+        
             let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
             
             // Разбиваем данные на строки (разделитель - новая строка)
             let rows = clipboardData.trim().split('\n');
             
-            let table = document.getElementById('entity-table').querySelector('tbody');
-            let firstRow = table.querySelector('tr'); // Получаем первую строку таблицы для вставки
+            let currentRow = currentCell.parentElement; // Получаем текущую строку
+            let currentCellIndex = Array.from(currentRow.children).indexOf(currentCell); // Индекс текущей ячейки
         
             rows.forEach((row, rowIndex) => {
               let cells = row.split('\t'); // Разбиваем строки на ячейки (разделитель - табуляция)
-              let currentRow = firstRow; // Начинаем с первой строки
               
+              // Если это не первая строка, переходим к следующей строке
               if (rowIndex > 0) {
-                // Если вставлено больше одной строки, создаём новые строки
-                currentRow = table.insertRow();
+                currentRow = currentRow.nextElementSibling;
+                if (!currentRow) {
+                  // Если строк не хватает, добавляем новую строку
+                  currentRow = document.getElementById("entity-table").querySelector('tbody').insertRow();
+                  for (let i = 0; i < document.getElementById("entity-table").querySelector('thead').rows[0].cells.length; i++) {
+                    currentRow.insertCell(); // Заполняем пустыми ячейками
+                  }
+                }
               }
-              
-              // Обработка всех ячеек, включая пустые
+        
+              // Обрабатываем каждую ячейку в строке, включая пустые
               cells.forEach((cellText, cellIndex) => {
-                let targetCell = currentRow.cells[cellIndex];
+                let targetCell = currentRow.cells[currentCellIndex + cellIndex];
                 if (!targetCell) {
                   // Если целевая ячейка не существует, создаём её
-                  targetCell = currentRow.insertCell();
+                  targetCell = currentRow.insertCell(currentCellIndex + cellIndex);
                 }
         
                 // Устанавливаем текст в ячейку, даже если он пустой
@@ -1276,12 +1288,10 @@
               });
         
               // Если в строке меньше ячеек, чем столбцов, добавляем пустые
-              while (currentRow.cells.length < table.rows[0].cells.length) {
+              while (currentRow.cells.length < document.getElementById("entity-table").querySelector('thead').rows[0].cells.length) {
                 currentRow.insertCell().textContent = ''; // Добавляем пустую ячейку
               }
             });
-        
-            event.preventDefault(); // Отменяем стандартную вставку
           });
         </script>
         

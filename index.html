@@ -1246,21 +1246,28 @@
 
 
 <script>
+  // Функция для отладки: отслеживаем событие вставки
   document.addEventListener('paste', function(event) {
-    // Получаем активную ячейку, в которую происходит вставка
+    // Проверяем, есть ли активная ячейка
     let activeCell = document.activeElement;
+    console.log("Active cell: ", activeCell); // Отладочный вывод
 
-    // Проверяем, что активный элемент — это ячейка таблицы <td>
-    if (activeCell.tagName !== 'TD') return;
+    // Убедимся, что активный элемент — это ячейка таблицы (td)
+    if (activeCell.tagName !== 'TD') {
+      console.log("Вставка не в ячейку таблицы!");
+      return;
+    }
 
-    // Останавливаем стандартное поведение вставки
+    // Предотвращаем стандартное поведение вставки
     event.preventDefault();
 
-    // Получаем данные из буфера обмена (например, данные из Excel)
+    // Получаем данные из буфера обмена
     let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
+    console.log("Pasted data: ", clipboardData); // Отладочный вывод
 
-    // Разбиваем данные на строки (разделитель — новая строка)
+    // Разбиваем данные на строки по символу новой строки (\n)
     let rows = clipboardData.split('\n');
+    console.log("Rows: ", rows); // Отладочный вывод
 
     // Получаем таблицу и количество столбцов
     let tableBody = document.getElementById('entity-table').querySelector('tbody');
@@ -1272,16 +1279,16 @@
     // Обрабатываем каждую строку из буфера обмена
     rows.forEach((rowData, rowIndex) => {
       let cells = rowData.split('\t'); // Разбиваем строки по табуляции
+      console.log("Row " + rowIndex + " cells: ", cells); // Отладочный вывод
 
-      // Если это первая строка, используем текущую строку, иначе ищем или создаём новую
+      // Если это первая строка, используем текущую строку, иначе ищем или создаём новую строку
       let targetRow = (rowIndex === 0) ? startRow : startRow.nextElementSibling;
 
       // Если новой строки нет, создаём её
       if (!targetRow) {
         targetRow = tableBody.insertRow();
-        // Добавляем ячейки в новую строку
         for (let i = 0; i < totalColumns; i++) {
-          targetRow.insertCell();
+          targetRow.insertCell(); // Добавляем пустые ячейки
         }
       }
 
@@ -1294,8 +1301,8 @@
           targetCell = targetRow.insertCell(startCellIndex + cellIndex);
         }
 
-        // Устанавливаем текст в ячейку, даже если он пустой
-        targetCell.textContent = cellText || ''; // Пустые ячейки тоже обрабатываются
+        // Устанавливаем текст в ячейку
+        targetCell.textContent = cellText || ''; // Пустые значения тоже вставляем
       });
     });
   });

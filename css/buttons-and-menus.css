@@ -1,5 +1,4 @@
  
-/* Общий стиль для всех селекторов с классом table-selector */
 .table-selector {
   display: inline-block;
   user-select: none;
@@ -21,19 +20,20 @@
   transform: scale(1.05);
 }
 
-/* Когда input внутри выбран */
-.table-selector input[type="radio"]:checked + .table-selector,
-.table-selector input[type="checkbox"]:checked + .table-selector {
+/* Стиль для метки, когда input внутри нее выбран */
+input[type="radio"]:checked + label.table-selector,
+input[type="checkbox"]:checked + label.table-selector {
   border-width: 2.5px;
   background-color: #c4c4c4;
   transform: scale(1.05);
 }
 
 /* Скрываем input */
-.table-selector input[type="radio"], 
-.table-selector input[type="checkbox"] {
+input[type="radio"], 
+input[type="checkbox"] {
   display: none;
 }
+
 
 
 #pics-menu #remove-galeryMenu,

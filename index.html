@@ -1002,11 +1002,11 @@
         <span class="l-2" id="entity-save-status">🟢</span>
 
         <form style="display: inline-block; margin-left: 30px;">
-          <label class="l-3"><input type="radio" id="data" name="table-settings" >📋data</label><label class="l-3"><input type="radio" name="table-settings" id="settings">⚙️settings</label>
+          <label class="l-3"><input  checked type="radio" id="data" name="table-settings" >📋data</label><label class="l-3"><input type="radio" name="table-settings" id="settings">⚙️settings</label>
 
         </form>
 
-        <table class="table-entity" id="entity-table" hidden>
+        <table class="table-entity" id="entity-table">
           <thead>
             <tr >
               <th>Email                  </th>
@@ -1030,7 +1030,7 @@
             </tr>
           </tbody>
         </table>
-        <table class="table-entity" id="entity-table-settings">
+        <table hidden class="table-entity" id="entity-table-settings">
           <thead>
             <tr>
               <th>Column Name</th>
@@ -1051,7 +1051,6 @@
           </tbody>
         </table>
 
-      </div>
 
 
         <script>

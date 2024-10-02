@@ -1181,7 +1181,7 @@ max-width: 100%;
   background-color: #ffd700; /* Highlight the selected cell with a gold color */
   color: #000000; /* Change text color if needed */
   font-weight: bold; /* Make text bold */
-  border: 2px solid #ff8c00; /* Thicker border to indicate selection */
+  border: 1px solid #ff8c00; /* Thicker border to indicate selection */
 }
 
   

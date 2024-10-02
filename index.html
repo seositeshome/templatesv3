@@ -248,21 +248,32 @@
       </script>
 
 <script>
-  const toggleTableSettings = () => {
 
-  const s = localStorage.getItem('toggleTableSettings');
+const toggleTableSettings = () => {
+    const s = localStorage.getItem('toggleTableSettings');
 
-  if (!s) {
-    localStorage.setItem('toggleTableSettings', 'true');
-    document.getElementById('toggleTableSettings').classList.add('b-selected');
+    // Получаем все элементы с id="tableSettings"
+    const elements = document.querySelectorAll('[id="tableSettings"]');
 
-  } else {
-    localStorage.removeItem('toggleTableSettings');
-    document.getElementById('toggleTableSettings').classList.remove('b-selected');
+    if (!s) {
+      localStorage.setItem('toggleTableSettings', 'true');
+      document.getElementById('toggleTableSettingsBtn').classList.add('b-selected');
 
+      // Показываем все элементы с id="tableSettings"
+      elements.forEach(el => {
+        el.classList.remove('hidden'); // Убираем скрытие
+      });
+
+    } else {
+      localStorage.removeItem('toggleTableSettings');
+      document.getElementById('toggleTableSettingsBtn').classList.remove('b-selected');
+
+      // Скрываем все элементы с id="tableSettings"
+      elements.forEach(el => {
+        el.classList.add('hidden'); // Добавляем класс скрытия
+      });
+    }
   }
-}
-
 
 
   </script>

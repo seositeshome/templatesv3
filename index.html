@@ -5175,7 +5175,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.addEventListener('DOMContentLoaded', function () {
       // Определяем кнопки, которые будут переключать секции
-      const buttons = document.querySelectorAll('button[data-section-button="brains"], button[data-section-button="files"]');
+      const buttons = document.querySelectorAll('button[data-section-button="brains"], button[data-section-button="files"], button[data-section-button="tables"]');
       buttons.forEach(button => {
         button.addEventListener('click', function () {
           const sectionToShow = this.getAttribute('data-section-button');

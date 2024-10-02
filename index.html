@@ -213,7 +213,7 @@
       </div>
       <div hidden data-section-aside="tables" class="local-buttons" style="margin-top: 30px;">
         <button class="b-1" id="toggleTableData" onclick="toggleTableData()">📋</button>
-        <button class="b-1" onclick="toggleTableSettings()">⚙️</button>
+        <button class="b-1" id="toggleTableSettings" onclick="toggleTableSettings()">⚙️</button>
 
       </div>
 
@@ -234,7 +234,31 @@
       }
     }
 
+    
+
       </script>
+
+<script>
+  const toggleTableSettings = () => {
+
+  const s = localStorage.getItem('toggleTableSettings');
+
+  if (!s) {
+    localStorage.setItem('toggleTableSettings', 'true');
+    document.getElementById('toggleTableSettings').classList.add('b-selected');
+
+  } else {
+    localStorage.removeItem('toggleTableSettings');
+    document.getElementById('toggleTableSettings').classList.remove('b-selected');
+
+  }
+}
+
+
+
+  </script>
+
+
 
         <div hidden data-section-aside="brains" class="local-buttons" style="margin-top: 30px;">
 

@@ -289,7 +289,7 @@
               </tbody>
             </table>
 
-            <table   id="tableData" class="table-entity">
+            <table  id="tableData" class="table-entity">
               <thead>
                 <tr >
                   <th>Email                  </th>
@@ -339,7 +339,7 @@
               }
             
               // Watch for all table cells with 'data-entity-value' attribute
-              document.querySelectorAll('td[tableTD]').forEach(function (cell) {
+              document.querySelectorAll('td[id="tableTD"]').forEach(function (cell) {
                 // Make cell editable on double-click
                 cell.addEventListener('dblclick', function () {
                   makeEditable(cell);

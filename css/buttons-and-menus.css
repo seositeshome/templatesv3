@@ -1172,6 +1172,9 @@ font-size: 18px; /* Размер шрифта номера */
   padding: 8px; /* Adjust padding to your needs */
 }
 
+.table td {
+  position: relative;
+}
 
 
 

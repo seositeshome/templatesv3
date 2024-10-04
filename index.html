@@ -3907,7 +3907,7 @@
       original.setAttribute('hidden',"")
       for(const table of tableNames){
         const cloned = original.cloneNode(true)
-        cloned.querySelector('input').textContent = table
+        cloned.querySelector('input').innerHTML = cloned.querySelector('input').innerHTML.replace('🅿️Paypals',table)
         cloned.removeAttribute('hidden')
         cloned.id = 'table;'+table
         original.parentNode.append(cloned)

@@ -3904,7 +3904,7 @@
         childs[i].remove()
       }
 
-      original.setAttribute('hidden')
+      original.setAttribute('hidden',"")
       for(const table of tableNames){
         const cloned = original.cloneNode(true)
         cloned.querySelector('input').textContent = table

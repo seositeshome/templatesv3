@@ -3879,7 +3879,7 @@
       event.target.closest('[data-menu]').setAttribute('hidden', '')
       generateTables()
     }
-    const generateMainTable = async (records,tableName) => {
+    const generateMainTable = async (records, tableName) => {
       const table = document.getElementById('tableData')
       const theadtr = table.querySelector('thead tr')
 
@@ -3898,7 +3898,7 @@
 
             }
           ),
-        })
+        }).then(e => e.json())
         console.log(JSON.stringify(results))
       }
       theadtr.innerHTML = ''
@@ -3913,21 +3913,21 @@
         const th = document.createElement('th')
         th.textContent = record.name
         theadtr.append(th)
-        if(record.hidden){
-          th.setAttribute('hidden','')
+        if (record.hidden) {
+          th.setAttribute('hidden', '')
         }
       }
       const tbody = table.querySelector('tbody')
-      for(const records of mainRecords){
+      for (const records of mainRecords) {
         const tr = document.createElement('tr')
-        for(const r of records){
+        for (const r of records) {
           const td = document.createElement('td')
-          if(r.hidden){
-            td.setAttribute('hidden','')
+          if (r.hidden) {
+            td.setAttribute('hidden', '')
 
           }
           td.textContent = records[r.name]
-          if(r.cut){
+          if (r.cut) {
             td.classList.add('short')
           }
           tr.append(td)
@@ -3943,7 +3943,37 @@
       const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
       const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
+      const generateFromRecord = (record) => {
+        const cloned = original.cloneNode(true);
+        cloned.hidden = false; // Unhide the cloned row
+        cloned.id = record.id
+        // Populate the cloned row with record data
+        const tds = cloned.querySelectorAll('td');
+        const setModified = (e) => {
+          cloned.setAttribute('data-changed', '')
+        }
+        tds[0].textContent = record.name; // Fill 'name' in the first column
+        tds[0].onblur = setModified
+        // Set the checkbox states for 'hidden' and 'cut'
+        tds[1].querySelector('input[type="checkbox"]').checked = record.hidden;
+        tds[1].querySelector('input[type="checkbox"]').onchange = setModified
+        tds[2].querySelector('input[type="checkbox"]').checked = record.cut;
+        tds[2].querySelector('input[type="checkbox"]').onchange = setModified
 
+        // Set the position in the input element
+        tds[3].querySelector('input').value = record.position;
+        tds[3].querySelector('input').onchange = setModified
+        // Set the correct option in the dropdown based on 'type'
+        const select = tds[4].querySelector('select');
+        select.onchange = setModified
+        const typeOption = Array.from(select.options).find(option => option.text.toLowerCase() === record.type?.toLowerCase());
+        if (typeOption) {
+          select.value = typeOption.value;
+        }
+
+        // Append the cloned row to the table
+        tableSettings.querySelector('tbody').appendChild(cloned);
+      }
       tableSettingsC.querySelector('#addSettings').onclick = async (e) => {
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',
@@ -3956,8 +3986,8 @@
 
             }
           ),
-        })
-        console.log(JSON.stringify(results))
+        }).then(e => e.json())
+        generateFromRecord({id:results[0][0]})
       }
       tableSettingsC.querySelector('#saveSettings').onclick = async (e) => {
 
@@ -4020,35 +4050,7 @@
 
 
       for (const record of records) {
-        const cloned = original.cloneNode(true);
-        cloned.hidden = false; // Unhide the cloned row
-        cloned.id = record.id
-        // Populate the cloned row with record data
-        const tds = cloned.querySelectorAll('td');
-        const setModified = (e) => {
-          cloned.setAttribute('data-changed', '')
-        }
-        tds[0].textContent = record.name; // Fill 'name' in the first column
-        tds[0].onblur = setModified
-        // Set the checkbox states for 'hidden' and 'cut'
-        tds[1].querySelector('input[type="checkbox"]').checked = record.hidden;
-        tds[1].querySelector('input[type="checkbox"]').onchange = setModified
-        tds[2].querySelector('input[type="checkbox"]').checked = record.cut;
-        tds[2].querySelector('input[type="checkbox"]').onchange = setModified
-
-        // Set the position in the input element
-        tds[3].querySelector('input').value = record.position;
-        tds[3].querySelector('input').onchange = setModified
-        // Set the correct option in the dropdown based on 'type'
-        const select = tds[4].querySelector('select');
-        select.onchange = setModified
-        const typeOption = Array.from(select.options).find(option => option.text.toLowerCase() === record.type?.toLowerCase());
-        if (typeOption) {
-          select.value = typeOption.value;
-        }
-
-        // Append the cloned row to the table
-        tableSettings.querySelector('tbody').appendChild(cloned);
+        generateFromRecord(record)
       }
       generateMainTable(records, table)
 

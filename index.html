@@ -3888,17 +3888,11 @@
     }
     async function generateTables(){
       console.log('generating tables')
-      const r = await fetch('https://api.seositeshome.com/query', {
-        method: 'POST',
+      const r = await fetch('https://api.seositeshome.com/tables', {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(
-          {
-            query:'SHOW TABLES',
-
-          }
-        ),
       })
       console.log('tables '+JSON.stringify(r))
 

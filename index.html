@@ -3889,13 +3889,13 @@
     }
     async function generateTables(){
       console.log('generating tables')
-      const {tables} = await fetch('https://api.seositeshome.com/tables', {
+      const res = await fetch('https://api.seositeshome.com/tables', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      console.log(JSON.stringify(tables))
+      console.log(JSON.stringify(res))
       const tableNames = tables.map(e=>e.tableName).filter(e=>!e.endsWith('settings'))
       const original = document.getElementById('tableSelector')
       const childs =Array.from(original.parentNode.children)

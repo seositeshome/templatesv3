@@ -3893,7 +3893,23 @@
 
       const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
-      tableSettingsC.querySelector('addSettings').onclick = async(e) => {
+      tableSettingsC.querySelector('#addSettings').onclick = async(e) => {
+        const {results} = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              items: [{}],
+
+            }
+          ),
+        })
+        console.log(JSON.stringify(results))
+      }
+      tableSettingsC.querySelector('#saveSettings').onclick = async(e) => {
+        return
         const {results} = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',
           headers: {

@@ -3893,10 +3893,8 @@
 
       const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
-      const childs = tableSettings.querySelector('tbody').children
-      for (let i = 1; i < childs.length; i++) {
-        childs[i].remove()
-      }
+      const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e=>e.remove())
+      
       tableSettingsC.querySelector('#addSettings').onclick = async (e) => {
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',

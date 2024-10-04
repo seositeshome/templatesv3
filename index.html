@@ -429,7 +429,20 @@
         });
       </script>
 
+      <div hidden data-element="create-new-table" data-menu style="margin-bottom: 30px;">
+        <button style="margin-bottom: 5px; margin-top: 5px; display:block;" onclick="cancel2(event)" class="b-4"
+          data-action="create-new-file-path-cancel">❌</button>
 
+
+        <span class="l-3" style="margin-right: 3px;">🆕</span>
+        <input type="text" placeholder="📂path" data-input="create-new-table-input" class="input-1"
+          style="margin-top: 7px;" oninput="adjustWidthToContent(this)">
+
+
+        <div style="margin-left:30px;">
+          <button data-action="create-new-file-path-save" onclick="saveTable(event)" class="b-4">💾 Save</button>
+        </div>
+      </div>
 
     </section>
 
@@ -1351,20 +1364,7 @@
 
 
 
-      <div hidden data-element="create-new-table" data-menu style="margin-bottom: 30px;">
-        <button style="margin-bottom: 5px; margin-top: 5px; display:block;" onclick="cancel2(event)" class="b-4"
-          data-action="create-new-file-path-cancel">❌</button>
 
-
-        <span class="l-3" style="margin-right: 3px;">🆕</span>
-        <input type="text" placeholder="📂path" data-input="create-new-table-input" class="input-1"
-          style="margin-top: 7px;" oninput="adjustWidthToContent(this)">
-
-
-        <div style="margin-left:30px;">
-          <button data-action="create-new-file-path-save" onclick="saveTable(event)" class="b-4">💾 Save</button>
-        </div>
-      </div>
       <div hidden data-element="create-new-file-path" data-menu style="margin-bottom: 30px;">
         <button style="margin-bottom: 5px; margin-top: 5px; display:block;" onclick="cancel2(event)" class="b-4"
           data-action="create-new-file-path-cancel">❌</button>
@@ -3903,7 +3903,7 @@
         },
         body: JSON.stringify(
           {
-            query:query2,
+            query: query2,
 
           }
         ),

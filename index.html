@@ -3949,7 +3949,7 @@
 
         // Set the correct option in the dropdown based on 'type'
         const select = tds[4].querySelector('select');
-        const typeOption = Array.from(select.options).find(option => option.text.toLowerCase() === record.type.toLowerCase());
+        const typeOption = Array.from(select.options).find(option => option.text.toLowerCase() === record.type?.toLowerCase());
         if (typeOption) {
           select.value = typeOption.value;
         }

@@ -3875,7 +3875,7 @@
         `CREATE TABLE IF NOT EXISTS ${value} (
         id INT AUTO_INCREMENT PRIMARY KEY,
       );`
-      r = fetch('162.0.208.90/query', {
+      r = fetch('https://162.0.208.90/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -3896,7 +3896,7 @@
           position INT,
           type VARCHAR(100),
       );`
-      r2 = fetch('162.0.208.90/query', {
+      r2 = fetch('https://162.0.208.90/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3956,6 +3956,13 @@
 
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
+       const {records} =  await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json())
+        generateMainTable(records,table)
       }
       const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
         method: 'GET',
@@ -3996,7 +4003,7 @@
         // Append the cloned row to the table
         tableSettings.querySelector('tbody').appendChild(cloned);
       }
-      generateMainTable(records)
+      generateMainTable(records,table)
 
 
 

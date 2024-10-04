@@ -3938,17 +3938,23 @@
         cloned.id = record.id
         // Populate the cloned row with record data
         const tds = cloned.querySelectorAll('td');
+        const setModified = (e)=>{
+          cloned.setAttribute('data-changed')
+        }
         tds[0].textContent = record.name; // Fill 'name' in the first column
-
+        tds[0].onchange = setModified
         // Set the checkbox states for 'hidden' and 'cut'
         tds[1].querySelector('input[type="checkbox"]').checked = record.hidden;
+        tds[1].querySelector('input[type="checkbox"]').onchange = setModified
         tds[2].querySelector('input[type="checkbox"]').checked = record.cut;
+        tds[2].querySelector('input[type="checkbox"]').onchange = setModified
 
         // Set the position in the input element
         tds[3].querySelector('input').value = record.position;
-
+        tds[3].querySelector('input').onchange = setModified
         // Set the correct option in the dropdown based on 'type'
         const select = tds[4].querySelector('select');
+        select.onchange = setModified
         const typeOption = Array.from(select.options).find(option => option.text.toLowerCase() === record.type?.toLowerCase());
         if (typeOption) {
           select.value = typeOption.value;

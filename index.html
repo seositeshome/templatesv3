@@ -3872,7 +3872,7 @@
     const saveTable = async (event) => {
       const { value } = document.querySelector('[data-input="create-new-table-input"]')
      
-      r = fetch('https://api.seositeshome.com/table', {
+      r =await  fetch('https://api.seositeshome.com/table', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -3885,6 +3885,7 @@
         ),
       })
       event.target.closest('[data-menu]').setAttribute('hidden','')
+      generateTables()
     }
     async function generateTables(){
       console.log('generating tables')
@@ -3896,6 +3897,10 @@
       })
       const tableNames = tables.map(e=>e.tableName).filter(e=>!e.endsWith('settings'))
       const original = document.getElementById('tableSelector')
+      const childs =Array.from(original.parentNode.children)
+      for(let i=1;i<childs.length;i++){
+        childs[i].remove()
+      }
 
       original.setAttribute('hidden')
       for(const table of tableNames){

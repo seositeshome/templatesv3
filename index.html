@@ -3871,10 +3871,7 @@
     }
     const saveTable = async (event) => {
       const { value } = document.querySelector('[data-input="create-new-table-input"]')
-      const query =
-        `CREATE TABLE IF NOT EXISTS ${value} (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-      );`
+     
       r = fetch('https://162.0.208.90/query', {
         method: 'POST',
         headers: {
@@ -3882,32 +3879,12 @@
         },
         body: JSON.stringify(
           {
-            query,
+            table:value,
 
           }
         ),
       })
-      const query2 =
-        `CREATE TABLE IF NOT EXISTS ${value}-settings (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          name VARCHAR(100),
-          hidden TINYINT(1),
-          cut TINYINT(1),
-          position INT,
-          type VARCHAR(100),
-      );`
-      r2 = fetch('https://162.0.208.90/query', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(
-          {
-            query: query2,
-
-          }
-        ),
-      })
+      
     }
     function createNewTable() {
 

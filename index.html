@@ -3888,13 +3888,24 @@
     }
     async function generateTables(){
       console.log('generating tables')
-      const r = await fetch('https://api.seositeshome.com/tables', {
+      const {tables} = await fetch('https://api.seositeshome.com/tables', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       })
-      console.log('tables '+JSON.stringify(r))
+      const tableNames = tables.map(e=>e.tableName).filter(e=>!e.endsWith('settings'))
+      const original = document.getElementById('tableSelector')
+
+      original.setAttribute('hidden')
+      for(const table of tableNames){
+        const cloned = original.cloneNode(true)
+        cloned.querySelector('input').textContent = table
+        cloned.removeAttribute('hidden')
+        cloned.id = 'table;'+table
+        original.parentNode.append(cloned)
+      }
+
 
     }
     function createNewTable() {

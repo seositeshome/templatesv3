@@ -250,9 +250,9 @@
         <label class="top-selector" id="tableSelector"><input type="radio" name="table-show-input">🅿️Paypals</label>
       </div>
       <div id="tableSettingsControls" class="table-controls">
-        <button class="b-1">💾</button>
+        <button class="b-1" id="saveSettings">💾</button>
         <span class="l-2">🟢</span>
-        <button class="b-1">➕</button>
+        <button class="b-1" id="addSettings">➕</button>
         <input type="number" value="1" class="input-add-row">
       </div>
 
@@ -3889,6 +3889,23 @@
     }
     const generateTable = async (table) => {
       //generate setting table
+      const tableSettingsC = document.getElementById('tableSettingsControls')
+      const original = tableSettings.querySelector('tbody').querySelector('tr')
+      tableSettingsC.querySelector('addSettings').onclick = async(e) => {
+        const {results} = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              items: [{}],
+
+            }
+          ),
+        })
+        console.log(JSON.stringify(results))
+      }
       const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
         method: 'GET',
         headers: {
@@ -3896,11 +3913,12 @@
         },
       }).then(e => e.json())
       const tableSettings = document.getElementById('tableSettings')
-      const original = tableSettings.querySelector('tbody').querySelector('tr')
+      
+
       for (const record of records) {
         const cloned = original.cloneNode(true);
         cloned.hidden = false; // Unhide the cloned row
-
+        cloned.id = record.id
         // Populate the cloned row with record data
         const tds = cloned.querySelectorAll('td');
         tds[0].textContent = record.name; // Fill 'name' in the first column

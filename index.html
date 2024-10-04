@@ -3887,6 +3887,17 @@
       event.target.closest('[data-menu]').setAttribute('hidden', '')
       generateTables()
     }
+    const generateMainTable = async(records)=>{
+      const table = document.getElementById('tableData')
+      const theadtr = table.querySelector('thead tr')
+      theadtr.innerHTML =''
+      for(const record of records){
+        const th = document.createElement('th')
+        th.textContent = record.name
+        theadtr.append(th)
+      }
+
+    }
     const generateSettingTable = async (table) => {
       //generate setting table
       const tableSettings = document.getElementById('tableSettings')
@@ -3985,6 +3996,7 @@
         // Append the cloned row to the table
         tableSettings.querySelector('tbody').appendChild(cloned);
       }
+      generateMainTable(records)
 
 
 

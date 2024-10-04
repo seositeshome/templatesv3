@@ -257,9 +257,9 @@
       </div>
 
       <div id="tableDataControls" class="table-controls">
-        <button class="b-1">💾</button>
+        <button class="b-1" id="save">💾</button>
         <span class="l-2">🟢</span>
-        <button class="b-1">➕</button>
+        <button class="b-1" id="add">➕</button>
         <input type="number" value="1" class="input-add-row">
       </div>
       <table id="tableSettings" class="table">
@@ -3882,6 +3882,25 @@
     const generateMainTable = async (records,tableName) => {
       const table = document.getElementById('tableData')
       const theadtr = table.querySelector('thead tr')
+
+      const tableSettingsC = document.getElementById('tableDataControls')
+      const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
+
+      tableSettingsC.querySelector('#add').onclick = async (e) => {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              items: [{}],
+
+            }
+          ),
+        })
+        console.log(JSON.stringify(results))
+      }
       theadtr.innerHTML = ''
       const res = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
         method: 'GET',

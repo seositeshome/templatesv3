@@ -3887,6 +3887,7 @@
       event.target.closest('[data-menu]').setAttribute('hidden','')
     }
     async function generateTables(){
+      console.log('generating tables')
       const r = await fetch('https://api.seositeshome.com/query', {
         method: 'POST',
         headers: {
@@ -5222,6 +5223,7 @@
               section.hidden = true;
             }
           });
+          console.log(sectionToShow)
           if(sectionToShow ==='tables'){
             generateTables()
           }

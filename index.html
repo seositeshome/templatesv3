@@ -3959,7 +3959,7 @@
         // Populate the cloned row with record data
         const tds = cloned.querySelectorAll('td');
         const setModified = (e) => {
-          cloned.setAttribute('data-changed')
+          cloned.setAttribute('data-changed','')
         }
         tds[0].textContent = record.name; // Fill 'name' in the first column
         tds[0].onchange = setModified

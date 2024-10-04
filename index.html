@@ -3879,11 +3879,11 @@
       event.target.closest('[data-menu]').setAttribute('hidden', '')
       generateTables()
     }
-    const generateMainTable = async (records) => {
+    const generateMainTable = async (records,tableName) => {
       const table = document.getElementById('tableData')
       const theadtr = table.querySelector('thead tr')
       theadtr.innerHTML = ''
-      const res = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+      const res = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

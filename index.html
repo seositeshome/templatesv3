@@ -3887,7 +3887,7 @@
       event.target.closest('[data-menu]').setAttribute('hidden', '')
       generateTables()
     }
-    const generateTable = async (table) => {
+    const generateSettingTable = async (table) => {
       //generate setting table
       const tableSettings = document.getElementById('tableSettings')
 
@@ -3962,7 +3962,7 @@
           cloned.setAttribute('data-changed','')
         }
         tds[0].textContent = record.name; // Fill 'name' in the first column
-        tds[0].onchange = setModified
+        tds[0].onblur= setModified
         // Set the checkbox states for 'hidden' and 'cut'
         tds[1].querySelector('input[type="checkbox"]').checked = record.hidden;
         tds[1].querySelector('input[type="checkbox"]').onchange = setModified
@@ -4011,11 +4011,11 @@
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
         cloned.onclick = (e) => {
-          generateTable(table)
+          generateSettingTable(table)
         }
         original.parentNode.append(cloned)
       }
-      generateTable(tableNames[0])
+      generateSettingTable(tableNames[0])
 
 
     }

@@ -3889,6 +3889,8 @@
     }
     const generateTable = async (table) => {
       //generate setting table
+      const tableSettings = document.getElementById('tableSettings')
+
       const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
       tableSettingsC.querySelector('addSettings').onclick = async(e) => {
@@ -3912,7 +3914,6 @@
           'Content-Type': 'application/json',
         },
       }).then(e => e.json())
-      const tableSettings = document.getElementById('tableSettings')
       
 
       for (const record of records) {

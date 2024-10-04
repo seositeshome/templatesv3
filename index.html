@@ -212,35 +212,35 @@
 
       </div>
       <div hidden data-section-aside="tables" class="local-buttons" style="margin-top: 30px;">
-        <button class="b-1">➕</button>
+        <button class="b-1" onclick="createNewTable(event)">➕</button>
         <button class="b-1">📋</button>
         <button class="b-1">⚙️</button>
 
       </div>
 
 
-        <div hidden data-section-aside="brains" class="local-buttons" style="margin-top: 30px;">
+      <div hidden data-section-aside="brains" class="local-buttons" style="margin-top: 30px;">
 
-          <div data-section-aside="helpers" class="local-buttons" style="margin-top: 30px;">
-            <button class="b-1" onclick="createNewHelper()">➕</button>
-          </div>
-
+        <div data-section-aside="helpers" class="local-buttons" style="margin-top: 30px;">
+          <button class="b-1" onclick="createNewHelper()">➕</button>
         </div>
 
       </div>
 
+    </div>
 
-      <div class="panel bottom">
-        <button class="b-1" onclick="removeTokenAndReload()">📴</button>
-        <script>function removeTokenAndReload() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('ownerid');
-            localStorage.removeItem('helperid');
 
-            window.location.href = '/templatesv3/';
-          }
-        </script>
-      </div>
+    <div class="panel bottom">
+      <button class="b-1" onclick="removeTokenAndReload()">📴</button>
+      <script>function removeTokenAndReload() {
+          localStorage.removeItem('token');
+          localStorage.removeItem('ownerid');
+          localStorage.removeItem('helperid');
+
+          window.location.href = '/templatesv3/';
+        }
+      </script>
+    </div>
   </aside>
 
 
@@ -253,186 +253,186 @@
         <button class="b-1">💾</button>
         <span class="l-2">🟢</span>
         <button class="b-1">➕</button>
-        <input  type="number"  value="1" class="input-add-row">
+        <input type="number" value="1" class="input-add-row">
       </div>
 
       <div id="tableDataControls" class="table-controls">
         <button class="b-1">💾</button>
         <span class="l-2">🟢</span>
         <button class="b-1">➕</button>
-        <input  type="number"  value="1" class="input-add-row">
+        <input type="number" value="1" class="input-add-row">
       </div>
-            <table id="tableSettings" class="table">
-              <thead>
-                <tr>
-                  <th>Column Name</th>
-                  <th>Hidden column</th>
-                  <th>Cut long cell</th>
-                  <th>Position</th>
-                  <th>Data type</th>
-                  <th>Remove</th>
-               </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td contenteditable>email</td>
-                  <td><label><input type="checkbox">🙈</label></td>
-                  <td><label><input type="checkbox">✂️</label></td>
-                  <td><input class="input-table"type="number" value="0"></td>
-                  <td>
-                    <select class="select-1">
-                        <option> ⬇️ select</option>
-                        <option>number</option>
-                        <option>date ISO 8601 UTC </option>
-                        <option>string</option>
-                  </select>
-              </td>
-                  <td><label><input type="checkbox">🗑️</label></td>
-                </tr>
-              </tbody>
-            </table>
+      <table id="tableSettings" class="table">
+        <thead>
+          <tr>
+            <th>Column Name</th>
+            <th>Hidden column</th>
+            <th>Cut long cell</th>
+            <th>Position</th>
+            <th>Data type</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td contenteditable>email</td>
+            <td><label><input type="checkbox">🙈</label></td>
+            <td><label><input type="checkbox">✂️</label></td>
+            <td><input class="input-table" type="number" value="0"></td>
+            <td>
+              <select class="select-1">
+                <option> ⬇️ select</option>
+                <option>number</option>
+                <option>date ISO 8601 UTC </option>
+                <option>string</option>
+              </select>
+            </td>
+            <td><label><input type="checkbox">🗑️</label></td>
+          </tr>
+        </tbody>
+      </table>
 
-            <table  id="tableData" class="table">
-              <thead>
-                <tr >
-                  <th>Email</th>
-                  <th>Cart</th>
-                  <th>Success</th>
-                  <th>Fail</th>
-                  <th>Paypal Api ID</th>
-                  <th>Paypal Api Key</th>
-                  <th>Status</th>
-               </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>testdata@testdata.com</td>
+      <table id="tableData" class="table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Cart</th>
+            <th>Success</th>
+            <th>Fail</th>
+            <th>Paypal Api ID</th>
+            <th>Paypal Api Key</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>testdata@testdata.com</td>
 
-                  <td>testdata@testdata.com</td>
-                  <td>testdata@testdata.com</td>
-                  <td>testdata@testdata.com</td>
-                  <td>testdata@testdata.com</td>
-                  <td>testdata@testdata.com</td>
-                </tr>
-              </tbody>
-            </table>
-    
-    
-    
-            <script>
-              // Function to make table cells editable on double-click
-              function makeEditable(element) {
-                element.setAttribute('contenteditable', 'true');
-                element.focus(); // Focus on the element so the user can start typing
-            
-                // Remove contenteditable attribute when focus is lost (blur event)
-                element.addEventListener('blur', function () {
-                  element.removeAttribute('contenteditable');
-                }, { once: true }); // The listener runs only once per event
+            <td>testdata@testdata.com</td>
+            <td>testdata@testdata.com</td>
+            <td>testdata@testdata.com</td>
+            <td>testdata@testdata.com</td>
+            <td>testdata@testdata.com</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+      <script>
+        // Function to make table cells editable on double-click
+        function makeEditable(element) {
+          element.setAttribute('contenteditable', 'true');
+          element.focus(); // Focus on the element so the user can start typing
+
+          // Remove contenteditable attribute when focus is lost (blur event)
+          element.addEventListener('blur', function () {
+            element.removeAttribute('contenteditable');
+          }, { once: true }); // The listener runs only once per event
+        }
+
+        // Function to toggle the 'cell-checked' class when a cell is clicked
+        function toggleCellChecked(cell) {
+          // Remove 'cell-checked' class from any other cell
+          document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+            checkedCell.classList.remove('cell-checked');
+          });
+
+          // Add 'cell-checked' class to the clicked cell
+          cell.classList.add('cell-checked');
+        }
+
+        // Watch for all table cells with 'data-entity-value' attribute
+        document.querySelectorAll('#tableData td').forEach(function (cell) {
+          // Make cell editable on double-click
+          cell.addEventListener('dblclick', function () {
+            makeEditable(cell);
+          });
+
+          // Add 'cell-checked' class on single click
+          cell.addEventListener('click', function (event) {
+            toggleCellChecked(cell);
+            event.stopPropagation(); // Prevent click event from bubbling up
+          });
+        });
+
+        // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
+        document.addEventListener('click', function () {
+          document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+            checkedCell.classList.remove('cell-checked');
+          });
+        });
+      </script>
+
+
+      <script>
+        let activeCell = null; // Variable to store the currently active cell
+
+        // Track clicks only on <td> elements within the <tbody> of #tableData
+        document.querySelectorAll('#tableData tbody td').forEach(function (cell) {
+          cell.addEventListener('click', function () {
+            activeCell = cell; // Set the clicked cell as the active one
+            console.log("Active cell set: ", activeCell);
+          });
+        });
+
+        // Handle paste event
+        document.addEventListener('paste', function (event) {
+          // Check if an active cell is selected
+          if (!activeCell) {
+            console.log("No cell selected for pasting!");
+            return;
+          }
+
+          event.preventDefault(); // Stop the default paste behavior
+
+          // Get data from clipboard
+          let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
+          console.log("Pasting data:", clipboardData);
+
+          // Split clipboard data by newline to get rows
+          let rows = clipboardData.split('\n');
+
+          // Get the row and cell index for starting the paste
+          let startRow = activeCell.parentElement;
+          let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
+
+          let currentRow = startRow; // Track the current row for pasting
+
+          // Loop through each row of clipboard data
+          rows.forEach(function (rowData, rowIndex) {
+            if (!currentRow) {
+              // If we run out of rows in the table, stop
+              console.log("Skipping row, as it exceeds available table rows.");
+              return;
+            }
+
+            let cells = rowData.split('\t'); // Split the row by tab to get cell values
+
+            // Loop through each cell in the row
+            cells.forEach(function (cellText, cellIndex) {
+              let targetCell = currentRow.cells[startCellIndex + cellIndex];
+
+              // If we run out of cells in the row, skip the rest
+              if (!targetCell) {
+                console.log("Skipping cell, as it exceeds available table cells.");
+                return;
               }
-            
-              // Function to toggle the 'cell-checked' class when a cell is clicked
-              function toggleCellChecked(cell) {
-                // Remove 'cell-checked' class from any other cell
-                document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
-                  checkedCell.classList.remove('cell-checked');
-                });
-            
-                // Add 'cell-checked' class to the clicked cell
-                cell.classList.add('cell-checked');
-              }
-            
-              // Watch for all table cells with 'data-entity-value' attribute
-              document.querySelectorAll('#tableData td').forEach(function (cell) {
-                // Make cell editable on double-click
-                cell.addEventListener('dblclick', function () {
-                  makeEditable(cell);
-                });
-            
-                // Add 'cell-checked' class on single click
-                cell.addEventListener('click', function (event) {
-                  toggleCellChecked(cell);
-                  event.stopPropagation(); // Prevent click event from bubbling up
-                });
-              });
-            
-              // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
-              document.addEventListener('click', function () {
-                document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
-                  checkedCell.classList.remove('cell-checked');
-                });
-              });
-            </script>
-            
-    
-            <script>
-              let activeCell = null; // Variable to store the currently active cell
-            
-              // Track clicks only on <td> elements within the <tbody> of #tableData
-              document.querySelectorAll('#tableData tbody td').forEach(function(cell) {
-                cell.addEventListener('click', function() {
-                  activeCell = cell; // Set the clicked cell as the active one
-                  console.log("Active cell set: ", activeCell);
-                });
-              });
-            
-              // Handle paste event
-              document.addEventListener('paste', function(event) {
-                // Check if an active cell is selected
-                if (!activeCell) {
-                  console.log("No cell selected for pasting!");
-                  return;
-                }
-            
-                event.preventDefault(); // Stop the default paste behavior
-            
-                // Get data from clipboard
-                let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
-                console.log("Pasting data:", clipboardData);
-            
-                // Split clipboard data by newline to get rows
-                let rows = clipboardData.split('\n');
-            
-                // Get the row and cell index for starting the paste
-                let startRow = activeCell.parentElement;
-                let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
-            
-                let currentRow = startRow; // Track the current row for pasting
-            
-                // Loop through each row of clipboard data
-                rows.forEach(function(rowData, rowIndex) {
-                  if (!currentRow) {
-                    // If we run out of rows in the table, stop
-                    console.log("Skipping row, as it exceeds available table rows.");
-                    return;
-                  }
-            
-                  let cells = rowData.split('\t'); // Split the row by tab to get cell values
-            
-                  // Loop through each cell in the row
-                  cells.forEach(function(cellText, cellIndex) {
-                    let targetCell = currentRow.cells[startCellIndex + cellIndex];
-            
-                    // If we run out of cells in the row, skip the rest
-                    if (!targetCell) {
-                      console.log("Skipping cell, as it exceeds available table cells.");
-                      return;
-                    }
-            
-                    // Set the text of the cell
-                    targetCell.textContent = cellText || ''; // Insert empty string if cell is empty
-                  });
-            
-                  // Move to the next row in the table for the next line of data
-                  currentRow = currentRow.nextElementSibling;
-                });
-              });
-            </script>
-        
-    
-            
-          </section>
-          
+
+              // Set the text of the cell
+              targetCell.textContent = cellText || ''; // Insert empty string if cell is empty
+            });
+
+            // Move to the next row in the table for the next line of data
+            currentRow = currentRow.nextElementSibling;
+          });
+        });
+      </script>
+
+
+
+    </section>
+
     </section>
     <section hidden data-section="brains">
       <div class="panel horizontal-menu">
@@ -444,7 +444,7 @@
           style="margin-right: 5px;"><label class="l-1">🧾</label><label class="l-2">Invoices</label></button>
         <button onclick="showBrain(event,'paypal')" data-entity-button="paypal" class="b-4 "
           style="margin-right: 5px;"><label class="l-1">🅿️</label><label class="l-2">Paypals</label></button>
-          <button onclick="showBrain(event,'paypal-trans')" data-entity-button="paypal-trans" class="b-4 "
+        <button onclick="showBrain(event,'paypal-trans')" data-entity-button="paypal-trans" class="b-4 "
           style="margin-right: 5px;"><label class="l-1">🅿️</label><label class="l-2">PP trans</label></button>
 
         <button onclick="showBrain(event,'helpers')" data-entity-button="helpers" class="b-4 "
@@ -928,7 +928,7 @@
             console.log(JSON.stringify(items))
             for (const item of items) {
               const cloned = original.cloneNode(true)
-              
+
               cloned.removeAttribute('hidden')
               const email = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=email&startsWith=true`, {
                 method: 'GET',
@@ -1211,12 +1211,12 @@
 
         <table class="table" id="entity-table">
           <tbody>
-            <tr  id="entity-row">
+            <tr id="entity-row">
               <td>
                 <span data-entity-load-value>work@mogobuy.com</span>
               </td>
             </tr>
-        </tbody>
+          </tbody>
         </table>
 
 
@@ -1226,14 +1226,14 @@
         <div class="tooltip">
           <ul>
 
-            
+
             <li>
               <span>🆔</span>
-              <span  data-entity-value="entityID">~</span>
+              <span data-entity-value="entityID">~</span>
             </li>
             <li>
               <span>🔒</span>
-              <span  contenteditable="" data-entity-value="paypalApiId">~</span>
+              <span contenteditable="" data-entity-value="paypalApiId">~</span>
             </li>
             <li>
               <span>🔑</span>
@@ -1241,7 +1241,8 @@
             </li>
             <li>
               <span>🌐🆔</span>
-              <span class="l-3" contenteditable="" data-linked-entity="domain">domain:4141-414141-41412412-4141241</span>
+              <span class="l-3" contenteditable=""
+                data-linked-entity="domain">domain:4141-414141-41412412-4141241</span>
             </li>
             <li>
               <span>🌐</span>
@@ -1253,14 +1254,14 @@
             </li>
 
             <li>
-              <span >🛒</span>
+              <span>🛒</span>
               <span class="l-3" contenteditable="" data-entity-value="paypalCartPath"></span>
             </li>
             <li>
-              <span >✅</span>
-              <span  contenteditable="" data-entity-value="paypalSucessPath">~</span>
+              <span>✅</span>
+              <span contenteditable="" data-entity-value="paypalSucessPath">~</span>
             </li>
-            
+
             <li>
               <span>❌</span>
               <span contenteditable="" data-entity-value="paypalFailPath">~</span>
@@ -1350,7 +1351,20 @@
 
 
 
+      <div hidden data-element="create-new-table" data-menu style="margin-bottom: 30px;">
+        <button style="margin-bottom: 5px; margin-top: 5px; display:block;" onclick="cancel2(event)" class="b-4"
+          data-action="create-new-file-path-cancel">❌</button>
 
+
+        <span class="l-3" style="margin-right: 3px;">🆕</span>
+        <input type="text" placeholder="📂path" data-input="create-new-table-input" class="input-1"
+          style="margin-top: 7px;" oninput="adjustWidthToContent(this)">
+
+
+        <div style="margin-left:30px;">
+          <button data-action="create-new-file-path-save" onclick="saveTable(event)" class="b-4">💾 Save</button>
+        </div>
+      </div>
       <div hidden data-element="create-new-file-path" data-menu style="margin-bottom: 30px;">
         <button style="margin-bottom: 5px; margin-top: 5px; display:block;" onclick="cancel2(event)" class="b-4"
           data-action="create-new-file-path-cancel">❌</button>
@@ -3853,6 +3867,52 @@
         pathE.setAttribute('hidden', '')
       }
 
+
+    }
+    const saveTable = async (event) => {
+      const { value } = document.querySelector('[data-input="create-new-table-input"]')
+      const query =
+        `CREATE TABLE IF NOT EXISTS ${value} (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+      );`
+      r = fetch('162.0.208.90/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            query,
+
+          }
+        ),
+      })
+      const query2 =
+        `CREATE TABLE IF NOT EXISTS ${value}-settings (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(100),
+          hidden TINYINT(1),
+          cut TINYINT(1),
+          position INT,
+          type VARCHAR(100),
+      );`
+      r2 = fetch('162.0.208.90/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            query:query2,
+
+          }
+        ),
+      })
+    }
+    function createNewTable() {
+
+      var fieldset2 = document.querySelector('[data-element="create-new-table"]');
+      fieldset2.removeAttribute('hidden');
 
     }
     function createNew() {

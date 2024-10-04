@@ -3886,6 +3886,22 @@
       })
       event.target.closest('[data-menu]').setAttribute('hidden','')
     }
+    async function generateTables(){
+      const r = await fetch('https://api.seositeshome.com/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            query:'SHOW TABLES',
+
+          }
+        ),
+      })
+      console.log('tables '+JSON.stringify(r))
+
+    }
     function createNewTable() {
 
       var fieldset2 = document.querySelector('[data-element="create-new-table"]');
@@ -5187,7 +5203,7 @@
       buttons.forEach(button => {
         button.addEventListener('click', function () {
           const sectionToShow = this.getAttribute('data-section-button');
-
+          
           // Переключение класса 'b-selected' для кнопок
           buttons.forEach(btn => {
             if (btn.getAttribute('data-section-button') === sectionToShow) {
@@ -5206,7 +5222,9 @@
               section.hidden = true;
             }
           });
-
+          if(sectionToShow ==='tables'){
+            generateTables()
+          }
           // Переключение видимости связанных элементов aside
           const asides = document.querySelectorAll('div[data-section-aside="brains"], div[data-section-aside="files"], div[data-section-aside="tables"]');
           asides.forEach(aside => {

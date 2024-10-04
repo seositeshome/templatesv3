@@ -3893,8 +3893,8 @@
 
       const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
-      tableSettingsC.querySelector('#addSettings').onclick = async(e) => {
-        const {results} = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+      tableSettingsC.querySelector('#addSettings').onclick = async (e) => {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -3908,21 +3908,41 @@
         })
         console.log(JSON.stringify(results))
       }
-      tableSettingsC.querySelector('#saveSettings').onclick = async(e) => {
-        return
-        const {results} = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+      tableSettingsC.querySelector('#saveSettings').onclick = async (e) => {
+
+        const tableSettingsC = document.getElementById('tableSettingsControls');
+        const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
+
+        // Prepare an array to hold the updated records
+        const updatedItems = Array.from(changedRows).map(row => {
+          const tds = row.querySelectorAll('td');
+
+          return {
+            id: row.id, // The id of the row (record)
+            name: tds[0].textContent.trim(), // Get the name from the first column
+            hidden: tds[1].querySelector('input[type="checkbox"]').checked, // Get the 'hidden' checkbox value
+            cut: tds[2].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
+            position: parseInt(tds[3].querySelector('input').value, 10) || 0, // Get the position, default to 0
+            type: tds[4].querySelector('select').value // Get the selected type from the dropdown
+          };
+        });
+
+        // Now send the updated data to the server via a PUT request
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(
-            {
-              items: [{}],
+          body: JSON.stringify({
+            items: updatedItems, // Send the array of updated records
+          }),
+        });
 
-            }
-          ),
-        })
-        console.log(JSON.stringify(results))
+        // Log the server response
+        console.log(JSON.stringify(results));
+
+        // Optional: Clear the 'data-changed' attribute from rows after successful update
+        changedRows.forEach(row => row.removeAttribute('data-changed'));
       }
       const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
         method: 'GET',
@@ -3930,7 +3950,7 @@
           'Content-Type': 'application/json',
         },
       }).then(e => e.json())
-      
+
 
       for (const record of records) {
         const cloned = original.cloneNode(true);
@@ -3938,7 +3958,7 @@
         cloned.id = record.id
         // Populate the cloned row with record data
         const tds = cloned.querySelectorAll('td');
-        const setModified = (e)=>{
+        const setModified = (e) => {
           cloned.setAttribute('data-changed')
         }
         tds[0].textContent = record.name; // Fill 'name' in the first column

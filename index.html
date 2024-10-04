@@ -3887,11 +3887,11 @@
       event.target.closest('[data-menu]').setAttribute('hidden', '')
       generateTables()
     }
-    const generateMainTable = async(records)=>{
+    const generateMainTable = async (records) => {
       const table = document.getElementById('tableData')
       const theadtr = table.querySelector('thead tr')
-      theadtr.innerHTML =''
-      for(const record of records){
+      theadtr.innerHTML = ''
+      for (const record of records) {
         const th = document.createElement('th')
         th.textContent = record.name
         theadtr.append(th)
@@ -3904,8 +3904,8 @@
 
       const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
-      const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e=>e.remove())
-      
+      const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
+
       tableSettingsC.querySelector('#addSettings').onclick = async (e) => {
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',
@@ -3956,13 +3956,13 @@
 
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
-       const {records} =  await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then(e => e.json())
-        generateMainTable(records,table)
+        const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }).then(e => e.json())
+        generateMainTable(records, table)
       }
       const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
         method: 'GET',
@@ -3979,10 +3979,10 @@
         // Populate the cloned row with record data
         const tds = cloned.querySelectorAll('td');
         const setModified = (e) => {
-          cloned.setAttribute('data-changed','')
+          cloned.setAttribute('data-changed', '')
         }
         tds[0].textContent = record.name; // Fill 'name' in the first column
-        tds[0].onblur= setModified
+        tds[0].onblur = setModified
         // Set the checkbox states for 'hidden' and 'cut'
         tds[1].querySelector('input[type="checkbox"]').checked = record.hidden;
         tds[1].querySelector('input[type="checkbox"]').onchange = setModified
@@ -4003,7 +4003,7 @@
         // Append the cloned row to the table
         tableSettings.querySelector('tbody').appendChild(cloned);
       }
-      generateMainTable(records,table)
+      generateMainTable(records, table)
 
 
 

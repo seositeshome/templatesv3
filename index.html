@@ -274,7 +274,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr hidden>
             <td contenteditable>email</td>
             <td><label><input type="checkbox">🙈</label></td>
             <td><label><input type="checkbox">✂️</label></td>
@@ -3887,7 +3887,43 @@
       event.target.closest('[data-menu]').setAttribute('hidden', '')
       generateTables()
     }
-    const generateTable = (e) => {
+    const generateTable = async (table) => {
+      //generate setting table
+      const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json())
+      const tableSettings = document.getElementById('tableSettings')
+      const original = tableSettings.querySelector('tbody').querySelector('tr')
+      for (const record of records) {
+        const cloned = original.cloneNode(true);
+        cloned.hidden = false; // Unhide the cloned row
+
+        // Populate the cloned row with record data
+        const tds = cloned.querySelectorAll('td');
+        tds[0].textContent = record.name; // Fill 'name' in the first column
+
+        // Set the checkbox states for 'hidden' and 'cut'
+        tds[1].querySelector('input[type="checkbox"]').checked = record.hidden;
+        tds[2].querySelector('input[type="checkbox"]').checked = record.cut;
+
+        // Set the position in the input element
+        tds[3].querySelector('input').value = record.position;
+
+        // Set the correct option in the dropdown based on 'type'
+        const select = tds[4].querySelector('select');
+        const typeOption = Array.from(select.options).find(option => option.text.toLowerCase() === record.type.toLowerCase());
+        if (typeOption) {
+          select.value = typeOption.value;
+        }
+
+        // Append the cloned row to the table
+        tableSettings.querySelector('tbody').appendChild(cloned);
+      }
+
+
 
     }
     async function generateTables() {
@@ -3918,6 +3954,7 @@
         }
         original.parentNode.append(cloned)
       }
+      generateTable(tables[0])
 
 
     }

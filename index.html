@@ -3894,9 +3894,9 @@
         headers: {
           'Content-Type': 'application/json',
         },
-      })
+      }).then(e=>e.json())
       console.log('res'+JSON.stringify(res))
-      return
+      
       const tableNames = res.tables.map(e=>e.tableName).filter(e=>!e.endsWith('settings'))
       const original = document.getElementById('tableSelector')
       const childs =Array.from(original.parentNode.children)

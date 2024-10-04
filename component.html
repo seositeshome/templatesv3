@@ -12517,7 +12517,7 @@ checkbox1.setAttribute('hidden', "");
           },
         }).then(e => e.json())
         console.log('crops is ' + JSON.stringify(croped))
-        const src = croped.items[0][uuid][0].split(' ')[0]
+        let src = croped.items[0][uuid][0].split(' ')[0]
         multiV[0].image = src
         const hasVariantItem = { ...multiV[0].hasVariant[0] }
         multiV[0].hasVariant = []
@@ -12585,6 +12585,7 @@ checkbox1.setAttribute('hidden', "");
             },
           }).then(e => e.json())
           console.log(JSON.stringify(croped))
+          let src
           if (croped.items[0][uuid]) {
 
             src = croped.items[0][uuid][0].split(' ')[0]

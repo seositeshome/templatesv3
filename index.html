@@ -305,7 +305,7 @@
           </tr>
         </thead>
         <tbody>
-          
+
         </tbody>
       </table>
 
@@ -3883,10 +3883,37 @@
       const table = document.getElementById('tableData')
       const theadtr = table.querySelector('thead tr')
       theadtr.innerHTML = ''
+      const res = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json())
+      const mainRecords = res.records
       for (const record of records) {
         const th = document.createElement('th')
         th.textContent = record.name
         theadtr.append(th)
+        if(record.hidden){
+          th.setAttribute('hidden','')
+        }
+      }
+      const tbody = table.querySelector('tbody')
+      for(const records of mainRecords){
+        const tr = document.createElement('tr')
+        for(const r of records){
+          const td = document.createElement('td')
+          if(r.hidden){
+            td.setAttribute('hidden','')
+
+          }
+          td.textContent = records[r.name]
+          if(r.cut){
+            td.classList.add('short')
+          }
+          tr.append(td)
+        }
+        tbody.append(tr)
       }
 
     }

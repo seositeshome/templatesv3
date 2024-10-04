@@ -3969,6 +3969,15 @@
             items: updatedItems, // Send the array of updated records
           }),
         });
+        await fetch(`https://api.seositeshome.com/tables/${table}/alter`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            items: updatedItems, // Send the array of updated records
+          }),
+        });
 
         // Log the server response
         console.log(JSON.stringify(results));

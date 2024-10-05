@@ -3984,6 +3984,11 @@
         generateRecord(record)
       }
       table.querySelector('#add').onclick = async (e) => {
+        const inputV = table.querySelector('.input-add-row').value
+        const p =[]
+        for (i=0;i<parseInt(inputV);i++){
+          p.push({})
+        }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
           method: 'PUT',
           headers: {
@@ -3991,7 +3996,7 @@
           },
           body: JSON.stringify(
             {
-              items: [{}],
+              items: p,
 
             }
           ),

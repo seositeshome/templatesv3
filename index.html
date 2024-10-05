@@ -3887,7 +3887,7 @@
       const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
 
       tableSettingsC.querySelector('#add').onclick = async (e) => {
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}`, {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

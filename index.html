@@ -3881,6 +3881,7 @@
       generateTables()
     }
     const generateMainTable = async ( tableName) => {
+
       const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'GET',
           headers: {
@@ -3888,6 +3889,7 @@
           },
         }).then(e => e.json())
       const table = document.getElementById('tableData')
+      table.removeAttribute('hidden')
       const theadtr = table.querySelector('thead tr')
 
       const tableSettingsC = document.getElementById('tableDataControls')
@@ -4002,7 +4004,7 @@
     const generateSettingTable = async (table) => {
       //generate setting table
       const tableSettings = document.getElementById('tableSettings')
-
+      tableSettings.removeAttribute('hidden')
       const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
       const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
@@ -4151,17 +4153,20 @@
       }
 
       original.setAttribute('hidden', "")
+      const stored = localStorage.getItem('showTable')
       for (const table of tableNames) {
         const cloned = original.cloneNode(true)
         cloned.innerHTML = cloned.innerHTML.replace('Loading..', table)
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
         cloned.onclick = (e) => {
-          generateSettingTable(table)
+          stored==='main' && generateMainTable(table)
+          stored==='settings' && generateSettingTable(table)
         }
         original.parentNode.append(cloned)
       }
-      generateSettingTable(tableNames[0])
+      stored==='main' && generateMainTable(tableNames[0])
+      stored==='settings' && generateSettingTable(tableNames[0])
 
 
     }

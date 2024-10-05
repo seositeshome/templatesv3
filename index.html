@@ -3931,7 +3931,9 @@
           if (r.cut) {
             td.classList.add('short')
           }
+          td.onchange =()=>tr.setAttribute('data-changed','')
           tr.append(td)
+          
         }
         tbody.append(tr)
       }

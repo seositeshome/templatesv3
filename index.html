@@ -3894,7 +3894,7 @@
       const theadtr = table.querySelector('thead tr')
 
       const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
-      tableSettings.querySelector('#save').onclick = async (e) => {
+      table.querySelector('#save').onclick = async (e) => {
 
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
@@ -3982,7 +3982,7 @@
       for (const record of mainRecords) {
         generateRecord(record)
       }
-      tableSettings.querySelector('#add').onclick = async (e) => {
+      table.querySelector('#add').onclick = async (e) => {
         const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
           method: 'PUT',
           headers: {

@@ -253,6 +253,7 @@
         <button class="b-1" id="saveSettings">💾</button>
         <span class="l-2" id="saveSettingsStatus">🟢</span>
         <button class="b-1" id="addSettings">➕</button>
+        <button class="b-1" id="removeTable">🗑️</button>
         <input type="number" value="1" class="input-add-row">
 
         <table class="table">
@@ -4071,6 +4072,17 @@
         else {
           tableSettings.querySelector('tbody').appendChild(cloned);
         }
+      }
+      tableSettings.querySelector('#removeTable').onclick = async (e) => {
+        await fetch(`https://api.seositeshome.com/tables/${table}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const e = document.getElementById('table;'+table)
+        e.remove()
+        tableSettings.setAttribute('hidden','')
       }
       tableSettings.querySelector('#addSettings').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value

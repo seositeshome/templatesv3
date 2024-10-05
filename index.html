@@ -3961,7 +3961,7 @@
         }
       }
       const tbody = table.querySelector('tbody')
-      const generateRecord =(record)=>{
+      const generateRecord =(record,first)=>{
         const tr = document.createElement('tr')
         for (const r of records) {
           const td = document.createElement('td')
@@ -3981,7 +3981,14 @@
 
         }
         tr.id = record.id
-        tbody.append(tr)
+        if(first){
+          tbody.insertBefore(tr, tbody.firstChild); // Insert `tr` as the first child
+
+        }
+        else{
+          tbody.append(tr)
+
+        }
       }
       for (const record of mainRecords) {
         generateRecord(record)
@@ -4005,7 +4012,10 @@
           ),
         }).then(e => e.json())
         console.log(JSON.stringify(results))
-        generateRecord({id:results[0][0]})
+        for(const r of results){
+          generateRecord({id:r[0]},true)
+        }
+        
       }
       
 

@@ -4154,7 +4154,7 @@
       original.setAttribute('hidden', "")
       for (const table of tableNames) {
         const cloned = original.cloneNode(true)
-        cloned.innerHTML = cloned.innerHTML.replace('🅿️Paypals', table)
+        cloned.innerHTML = cloned.innerHTML.replace('Loading..', table)
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
         cloned.onclick = (e) => {

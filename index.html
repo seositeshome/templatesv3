@@ -251,7 +251,7 @@
       </div>
       <div hidden id="tableSettings" class="table-controls">
         <button class="b-1" id="saveSettings">💾</button>
-        <span class="l-2">🟢</span>
+        <span class="l-2" id="saveSettingsStatus">🟢</span>
         <button class="b-1" id="addSettings">➕</button>
         <input type="number" value="1" class="input-add-row">
 
@@ -288,7 +288,7 @@
 
       <div hidden id="tableData" class="table-controls">
         <button class="b-1" id="save">💾</button>
-        <span class="l-2">🟢</span>
+        <span class="l-2" id="saveStatus">🟢</span>
         <button class="b-1" id="add">➕</button>
         <input type="number" value="1" class="input-add-row">
     
@@ -3895,7 +3895,8 @@
 
       const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
       table.querySelector('#save').onclick = async (e) => {
-
+        const status = document.getElementById('saveStatus')
+        status.textContent = '🟠'
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
         // Prepare an array to hold the updated records
@@ -3936,7 +3937,7 @@
 
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
-        
+        status.textContent = '🟢'
         
       }
 
@@ -4056,7 +4057,8 @@
         generateFromRecord({ id: results[0][0] })
       }
       tableSettings.querySelector('#saveSettings').onclick = async (e) => {
-
+         const status = document.getElementById('saveSettingsStatus')
+        status.textContent = '🟠'
         const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
         // Prepare an array to hold the updated records
@@ -4118,7 +4120,7 @@
 
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
-        
+        status.textContent = '🟢'
       }
       const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
         method: 'GET',

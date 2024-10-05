@@ -3895,7 +3895,17 @@
 
           const obj ={id :parseInt(row.id)}
           for(const td of tds){
-            obj[td.getAttribute('name')] = td.textContent
+            const type = td.getAttribute('type')
+            if(type ==='string'){
+              obj[td.getAttribute('name')] = td.textContent
+            }
+            else if(type==='number'){
+              obj[td.getAttribute('name')] = parseFloat(td.textContent)
+            }
+            else{
+              obj[td.getAttribute('name')] = new Date(td.textContent)
+            }
+
           }
           return obj
         });
@@ -3949,6 +3959,7 @@
           }
           td.textContent = record[r.name]
           td.setAttribute('name',r.name)
+          td.setAttribute('type',r.type)
           if (r.cut) {
             td.classList.add('short')
           }

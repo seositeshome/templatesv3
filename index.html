@@ -3918,7 +3918,7 @@
         }
       }
       const tbody = table.querySelector('tbody')
-      for (const records of mainRecords) {
+      for (const record of mainRecords) {
         const tr = document.createElement('tr')
         for (const r of records) {
           const td = document.createElement('td')
@@ -3926,7 +3926,7 @@
             td.setAttribute('hidden', '')
 
           }
-          td.textContent = records[r.name]
+          td.textContent = record[r.name]
           td.name = r.name
           if (r.cut) {
             td.classList.add('short')

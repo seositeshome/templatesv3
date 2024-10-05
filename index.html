@@ -4163,6 +4163,7 @@
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
         cloned.onclick = (e) => {
+          const stored = localStorage.getItem('showTable')
           stored==='main' && generateMainTable(table)
           stored==='settings' && generateSettingTable(table)
         }

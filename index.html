@@ -4028,7 +4028,7 @@
       document.getElementById('tableData').setAttribute('hidden','')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
       const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
-      const generateFromRecord = (record) => {
+      const generateFromRecord = (record,first) => {
         const cloned = original.cloneNode(true);
         cloned.hidden = false; // Unhide the cloned row
         cloned.id = record.id
@@ -4057,9 +4057,21 @@
         }
 
         // Append the cloned row to the table
+        if(first){
+          const tbody = tableSettings.querySelector('tbody')
+          tbody.insertBefore(cloned, tbody.firstChild); // Insert `tr` as the first child
+
+        }
+        else{
         tableSettings.querySelector('tbody').appendChild(cloned);
-      }
+        }
+        }
       tableSettings.querySelector('#addSettings').onclick = async (e) => {
+        const inputV = tableSettings.querySelector('.input-add-row').value
+        const p =[]
+        for (i=0;i<parseInt(inputV);i++){
+          p.push({})
+        }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',
           headers: {
@@ -4067,12 +4079,14 @@
           },
           body: JSON.stringify(
             {
-              items: [{}],
+              items: p,
 
             }
           ),
         }).then(e => e.json())
-        generateFromRecord({ id: results[0][0] })
+        for(const r of results){
+          generateFromRecord({id:r[0]},true)
+        }
       }
       tableSettings.querySelector('#saveSettings').onclick = async (e) => {
          const status = document.getElementById('saveSettingsStatus')

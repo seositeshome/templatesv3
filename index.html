@@ -4156,14 +4156,21 @@
 
       original.setAttribute('hidden', "")
       const stored = localStorage.getItem('showTable')
+      let first = true
       for (const table of tableNames) {
         const cloned = original.cloneNode(true)
+        if(first){
+          cloned.classList.add('active')
+          first = false
+        }
         cloned.innerHTML = cloned.innerHTML.replace('Loading..', table)
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
         let generating = 0
         cloned.querySelector('input').onclick = async(e) => {
           e.preventDefault()
+          cloned.parentNode.childNodes.forEach(e=>e.classList.remove('active'))
+          cloned.classList.add('active')
           e.stopPropagation()
           console.log('clicked')
           if(generating){

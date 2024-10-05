@@ -4018,7 +4018,8 @@
         for (const r of results) {
           generateRecord({ id: r[0] }, true)
         }
-
+        runScript1()
+        runScript2()
       }
       runScript1()
       runScript2()
@@ -4092,6 +4093,8 @@
         for (const r of results) {
           generateFromRecord({ id: r[0] }, true)
         }
+        runScript1()
+        runScript2()
       }
       tableSettings.querySelector('#saveSettings').onclick = async (e) => {
         const status = document.getElementById('saveSettingsStatus')

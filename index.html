@@ -4164,6 +4164,8 @@
         cloned.id = 'table;' + table
         let generating = 0
         cloned.querySelector('input').onclick = async(e) => {
+          e.preventDefault()
+          e.stopPropagation()
           console.log('clicked')
           if(generating){
             return

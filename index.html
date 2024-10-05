@@ -3885,6 +3885,41 @@
 
       const tableSettingsC = document.getElementById('tableDataControls')
       const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
+      tableSettingsC.querySelector('#save').onclick = async (e) => {
+
+        const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
+
+        // Prepare an array to hold the updated records
+        const updatedItems = Array.from(changedRows).map(row => {
+          const tds = row.querySelectorAll('td');
+
+          const obj ={id :row.id}
+          for(const td of tds){
+            obj[td.getAttribute('name')] = td.textContent
+          }
+          return obj
+        });
+
+        // Now send the updated data to the server via a PUT request
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            items: updatedItems, // Send the array of updated records
+          }),
+        });
+        
+
+        // Log the server response
+        console.log(JSON.stringify(results));
+
+        // Optional: Clear the 'data-changed' attribute from rows after successful update
+        changedRows.forEach(row => row.removeAttribute('data-changed'));
+        
+        
+      }
 
       tableSettingsC.querySelector('#add').onclick = async (e) => {
         const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
@@ -3931,9 +3966,9 @@
           if (r.cut) {
             td.classList.add('short')
           }
-          td.onchange =()=>tr.setAttribute('data-changed','')
+          td.onchange = () => tr.setAttribute('data-changed', '')
           tr.append(td)
-          
+
         }
         tbody.append(tr)
       }
@@ -3990,7 +4025,7 @@
             }
           ),
         }).then(e => e.json())
-        generateFromRecord({id:results[0][0]})
+        generateFromRecord({ id: results[0][0] })
       }
       tableSettingsC.querySelector('#saveSettings').onclick = async (e) => {
 

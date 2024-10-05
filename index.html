@@ -4035,6 +4035,7 @@
       document.getElementById('tableData').setAttribute('hidden', '')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
       const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
+      let remove = 0
       const generateFromRecord = (record, first) => {
         const cloned = original.cloneNode(true);
         cloned.hidden = false; // Unhide the cloned row
@@ -4074,15 +4075,9 @@
         }
       }
       tableSettings.querySelector('#removeTable').onclick = async (e) => {
-        await fetch(`https://api.seositeshome.com/tables/${table}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const e = document.getElementById('table;'+table)
-        e.remove()
-        tableSettings.setAttribute('hidden','')
+        e.target.classList.add('active')
+        remove = 1
+
       }
       tableSettings.querySelector('#addSettings').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value
@@ -4111,6 +4106,17 @@
       tableSettings.querySelector('#saveSettings').onclick = async (e) => {
         const status = document.getElementById('saveSettingsStatus')
         status.textContent = '🟠'
+        if (remove) {
+          await fetch(`https://api.seositeshome.com/tables/${table}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const e = document.getElementById('table;' + table)
+          e.remove()
+          tableSettings.setAttribute('hidden', '')
+        }
         const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
         // Prepare an array to hold the updated records
@@ -4185,7 +4191,7 @@
       for (const record of records) {
         generateFromRecord(record)
       }
-      
+
       runScript1()
       runScript2()
 

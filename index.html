@@ -3893,9 +3893,8 @@
       document.getElementById('tableSettings').setAttribute('hidden','')
       const theadtr = table.querySelector('thead tr')
 
-      const tableSettingsC = document.getElementById('tableDataControls')
       const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
-      tableSettingsC.querySelector('#save').onclick = async (e) => {
+      tableSettings.querySelector('#save').onclick = async (e) => {
 
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
@@ -3983,7 +3982,7 @@
       for (const record of mainRecords) {
         generateRecord(record)
       }
-      tableSettingsC.querySelector('#add').onclick = async (e) => {
+      tableSettings.querySelector('#add').onclick = async (e) => {
         const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
           method: 'PUT',
           headers: {
@@ -4008,7 +4007,6 @@
       tableSettings.removeAttribute('hidden')
       
       document.getElementById('tableData').setAttribute('hidden','')
-      const tableSettingsC = document.getElementById('tableSettingsControls')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
       const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
       const generateFromRecord = (record) => {
@@ -4042,7 +4040,7 @@
         // Append the cloned row to the table
         tableSettings.querySelector('tbody').appendChild(cloned);
       }
-      tableSettingsC.querySelector('#addSettings').onclick = async (e) => {
+      tableSettings.querySelector('#addSettings').onclick = async (e) => {
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'PUT',
           headers: {
@@ -4057,9 +4055,8 @@
         }).then(e => e.json())
         generateFromRecord({ id: results[0][0] })
       }
-      tableSettingsC.querySelector('#saveSettings').onclick = async (e) => {
+      tableSettings.querySelector('#saveSettings').onclick = async (e) => {
 
-        const tableSettingsC = document.getElementById('tableSettingsControls');
         const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
         // Prepare an array to hold the updated records

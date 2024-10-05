@@ -4039,9 +4039,15 @@
         const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
         // Prepare an array to hold the updated records
+        const toDIds = []
         const updatedItems = Array.from(changedRows).map(row => {
           const tds = row.querySelectorAll('td');
-
+          const toDelete = tds[5].querySelector('input').checked
+          if(toDelete){
+          toDelete.push(row.id)
+          return undefined
+          }
+          else{
           return {
             id: row.id, // The id of the row (record)
             name: tds[0].textContent.trim(), // Get the name from the first column
@@ -4050,7 +4056,21 @@
             position: parseInt(tds[3].querySelector('input').value, 10) || 0, // Get the position, default to 0
             type: tds[4].querySelector('select').value // Get the selected type from the dropdown
           };
+        }
         });
+        await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+          method: 'DELEYE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ids:toDIds , // Send the array of updated records
+          }),
+        });
+        for(const id of toDIds){
+          tableSettings.querySelector('tbody').querySelector('#'+id).remove()
+
+        }
 
         // Now send the updated data to the server via a PUT request
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
@@ -4059,7 +4079,7 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            items: updatedItems, // Send the array of updated records
+            items: updatedItems.filter(e=>e), // Send the array of updated records
           }),
         });
         await fetch(`https://api.seositeshome.com/tables/${table}/alter`, {

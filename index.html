@@ -3913,7 +3913,10 @@
               obj[td.getAttribute('name')] = parseFloat(td.textContent)
             }
             else{
-              obj[td.getAttribute('name')] = new Date(td.textContent)
+              if(td.getAttribute('name')){
+                obj[td.getAttribute('name')] = new Date(td.textContent)
+              }
+              
             }
 
           }

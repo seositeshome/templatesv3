@@ -3952,7 +3952,7 @@
           if (r.cut) {
             td.classList.add('short')
           }
-          td.onchange = () => tr.setAttribute('data-changed', '')
+          td.onblur = () => tr.setAttribute('data-changed', '')
           tr.append(td)
 
         }

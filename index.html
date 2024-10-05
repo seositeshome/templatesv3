@@ -3921,21 +3921,6 @@
         
       }
 
-      tableSettingsC.querySelector('#add').onclick = async (e) => {
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(
-            {
-              items: [{}],
-
-            }
-          ),
-        }).then(e => e.json())
-        console.log(JSON.stringify(results))
-      }
       theadtr.innerHTML = ''
       const res = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
         method: 'GET',
@@ -3953,10 +3938,11 @@
         }
       }
       const tbody = table.querySelector('tbody')
-      for (const record of mainRecords) {
+      const generateRecord =(record)=>{
         const tr = document.createElement('tr')
         for (const r of records) {
           const td = document.createElement('td')
+          td.setAttribute('contenteditable', 'true');
           if (r.hidden) {
             td.setAttribute('hidden', '')
 
@@ -3972,6 +3958,26 @@
         }
         tbody.append(tr)
       }
+      for (const record of mainRecords) {
+        generateRecord(record)
+      }
+      tableSettingsC.querySelector('#add').onclick = async (e) => {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              items: [{}],
+
+            }
+          ),
+        }).then(e => e.json())
+        console.log(JSON.stringify(results))
+        generateRecord({id:results[0][0]})
+      }
+      
 
     }
     const generateSettingTable = async (table) => {

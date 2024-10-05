@@ -4163,7 +4163,7 @@
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
         let generating = 0
-        cloned.onclick = async(e) => {
+        cloned.querySelector('input').onclick = async(e) => {
           console.log('clicked')
           if(generating){
             return

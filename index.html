@@ -3948,7 +3948,7 @@
 
           }
           td.textContent = record[r.name]
-          td.name = r.name
+          td.setAttribute('name',r.name)
           if (r.cut) {
             td.classList.add('short')
           }

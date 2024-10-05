@@ -255,171 +255,175 @@
         <button class="b-1" id="addSettings">➕</button>
         <input type="number" value="1" class="input-add-row">
 
-      <table  class="table">
-        <thead>
-          <tr>
-            <th>Column Name</th>
-            <th>Hidden column</th>
-            <th>Cut long cell</th>
-            <th>Position</th>
-            <th>Data type</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr hidden>
-            <td >email</td>
-            <td><label><input type="checkbox">🙈</label></td>
-            <td><label><input type="checkbox">✂️</label></td>
-            <td><input class="input-table" type="number" value="0"></td>
-            <td>
-              <select class="select-1">
-                <option> ⬇️ select</option>
-                <option>number</option>
-                <option>date ISO 8601 UTC </option>
-                <option>string</option>
-              </select>
-            </td>
-            <td><label><input type="checkbox">🗑️</label></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Column Name</th>
+              <th>Hidden column</th>
+              <th>Cut long cell</th>
+              <th>Position</th>
+              <th>Data type</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr hidden>
+              <td>email</td>
+              <td><label><input type="checkbox">🙈</label></td>
+              <td><label><input type="checkbox">✂️</label></td>
+              <td><input class="input-table" type="number" value="0"></td>
+              <td>
+                <select class="select-1">
+                  <option> ⬇️ select</option>
+                  <option>number</option>
+                  <option>date ISO 8601 UTC </option>
+                  <option>string</option>
+                </select>
+              </td>
+              <td><label><input type="checkbox">🗑️</label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div hidden id="tableData" class="table-controls">
         <button class="b-1" id="save">💾</button>
         <span class="l-2" id="saveStatus">🟢</span>
         <button class="b-1" id="add">➕</button>
         <input type="number" value="1" class="input-add-row">
-    
 
-      <table   class="table">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Cart</th>
-            <th>Success</th>
-            <th>Fail</th>
-            <th>Paypal Api ID</th>
-            <th>Paypal Api Key</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
 
-        </tbody>
-      </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Cart</th>
+              <th>Success</th>
+              <th>Fail</th>
+              <th>Paypal Api ID</th>
+              <th>Paypal Api Key</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
 
-    </div>
+          </tbody>
+        </table>
+
+      </div>
 
       <script>
         // Function to make table cells editable on double-click
-        function makeEditable(element) {
-          element.setAttribute('contenteditable', 'true');
-          element.focus(); // Focus on the element so the user can start typing
+        const runScript1 = () => {
+          function makeEditable(element) {
+            element.setAttribute('contenteditable', 'true');
+            element.focus(); // Focus on the element so the user can start typing
 
-          // Remove contenteditable attribute when focus is lost (blur event)
-          element.addEventListener('blur', function () {
-            element.removeAttribute('contenteditable');
-          }, { once: true }); // The listener runs only once per event
+            // Remove contenteditable attribute when focus is lost (blur event)
+            element.addEventListener('blur', function () {
+              element.removeAttribute('contenteditable');
+            }, { once: true }); // The listener runs only once per event
+          }
+
+          // Function to toggle the 'cell-checked' class when a cell is clicked
+          function toggleCellChecked(cell) {
+            // Remove 'cell-checked' class from any other cell
+            document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+              checkedCell.classList.remove('cell-checked');
+            });
+
+            // Add 'cell-checked' class to the clicked cell
+            cell.classList.add('cell-checked');
+          }
+
+          // Watch for all table cells with 'data-entity-value' attribute
+          document.querySelectorAll('#tableData td').forEach(function (cell) {
+            // Make cell editable on double-click
+            cell.addEventListener('dblclick', function () {
+              makeEditable(cell);
+            });
+
+            // Add 'cell-checked' class on single click
+            cell.addEventListener('click', function (event) {
+              toggleCellChecked(cell);
+              event.stopPropagation(); // Prevent click event from bubbling up
+            });
+          });
+
+          // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
+          document.addEventListener('click', function () {
+            document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+              checkedCell.classList.remove('cell-checked');
+            });
+          });
         }
-
-        // Function to toggle the 'cell-checked' class when a cell is clicked
-        function toggleCellChecked(cell) {
-          // Remove 'cell-checked' class from any other cell
-          document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
-            checkedCell.classList.remove('cell-checked');
-          });
-
-          // Add 'cell-checked' class to the clicked cell
-          cell.classList.add('cell-checked');
-        }
-
-        // Watch for all table cells with 'data-entity-value' attribute
-        document.querySelectorAll('#tableData td').forEach(function (cell) {
-          // Make cell editable on double-click
-          cell.addEventListener('dblclick', function () {
-            makeEditable(cell);
-          });
-
-          // Add 'cell-checked' class on single click
-          cell.addEventListener('click', function (event) {
-            toggleCellChecked(cell);
-            event.stopPropagation(); // Prevent click event from bubbling up
-          });
-        });
-
-        // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
-        document.addEventListener('click', function () {
-          document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
-            checkedCell.classList.remove('cell-checked');
-          });
-        });
       </script>
 
 
       <script>
-        let activeCell = null; // Variable to store the currently active cell
+        const runScript2 = () => {
+          let activeCell = null; // Variable to store the currently active cell
 
-        // Track clicks only on <td> elements within the <tbody> of #tableData
-        document.querySelectorAll('#tableData tbody td').forEach(function (cell) {
-          cell.addEventListener('click', function () {
-            activeCell = cell; // Set the clicked cell as the active one
-            console.log("Active cell set: ", activeCell);
+          // Track clicks only on <td> elements within the <tbody> of #tableData
+          document.querySelectorAll('#tableData tbody td').forEach(function (cell) {
+            cell.addEventListener('click', function () {
+              activeCell = cell; // Set the clicked cell as the active one
+              console.log("Active cell set: ", activeCell);
+            });
           });
-        });
 
-        // Handle paste event
-        document.addEventListener('paste', function (event) {
-          // Check if an active cell is selected
-          if (!activeCell) {
-            console.log("No cell selected for pasting!");
-            return;
-          }
-
-          event.preventDefault(); // Stop the default paste behavior
-
-          // Get data from clipboard
-          let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
-          console.log("Pasting data:", clipboardData);
-
-          // Split clipboard data by newline to get rows
-          let rows = clipboardData.split('\n');
-
-          // Get the row and cell index for starting the paste
-          let startRow = activeCell.parentElement;
-          let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
-
-          let currentRow = startRow; // Track the current row for pasting
-
-          // Loop through each row of clipboard data
-          rows.forEach(function (rowData, rowIndex) {
-            if (!currentRow) {
-              // If we run out of rows in the table, stop
-              console.log("Skipping row, as it exceeds available table rows.");
+          // Handle paste event
+          document.addEventListener('paste', function (event) {
+            // Check if an active cell is selected
+            if (!activeCell) {
+              console.log("No cell selected for pasting!");
               return;
             }
 
-            let cells = rowData.split('\t'); // Split the row by tab to get cell values
+            event.preventDefault(); // Stop the default paste behavior
 
-            // Loop through each cell in the row
-            cells.forEach(function (cellText, cellIndex) {
-              let targetCell = currentRow.cells[startCellIndex + cellIndex];
+            // Get data from clipboard
+            let clipboardData = (event.clipboardData || window.clipboardData).getData('text');
+            console.log("Pasting data:", clipboardData);
 
-              // If we run out of cells in the row, skip the rest
-              if (!targetCell) {
-                console.log("Skipping cell, as it exceeds available table cells.");
+            // Split clipboard data by newline to get rows
+            let rows = clipboardData.split('\n');
+
+            // Get the row and cell index for starting the paste
+            let startRow = activeCell.parentElement;
+            let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
+
+            let currentRow = startRow; // Track the current row for pasting
+
+            // Loop through each row of clipboard data
+            rows.forEach(function (rowData, rowIndex) {
+              if (!currentRow) {
+                // If we run out of rows in the table, stop
+                console.log("Skipping row, as it exceeds available table rows.");
                 return;
               }
 
-              // Set the text of the cell
-              targetCell.textContent = cellText || ''; // Insert empty string if cell is empty
-            });
+              let cells = rowData.split('\t'); // Split the row by tab to get cell values
 
-            // Move to the next row in the table for the next line of data
-            currentRow = currentRow.nextElementSibling;
+              // Loop through each cell in the row
+              cells.forEach(function (cellText, cellIndex) {
+                let targetCell = currentRow.cells[startCellIndex + cellIndex];
+
+                // If we run out of cells in the row, skip the rest
+                if (!targetCell) {
+                  console.log("Skipping cell, as it exceeds available table cells.");
+                  return;
+                }
+
+                // Set the text of the cell
+                targetCell.textContent = cellText || ''; // Insert empty string if cell is empty
+              });
+
+              // Move to the next row in the table for the next line of data
+              currentRow = currentRow.nextElementSibling;
+            });
           });
-        });
+        }
       </script>
 
       <div hidden data-element="create-new-table" data-menu style="margin-bottom: 30px;">
@@ -3880,17 +3884,17 @@
       event.target.closest('[data-menu]').setAttribute('hidden', '')
       generateTables()
     }
-    const generateMainTable = async ( tableName) => {
+    const generateMainTable = async (tableName) => {
 
       const { records } = await fetch(`https://api.seositeshome.com/tables/${tableName}settings`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }).then(e => e.json())
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then(e => e.json())
       const table = document.getElementById('tableData')
       table.removeAttribute('hidden')
-      document.getElementById('tableSettings').setAttribute('hidden','')
+      document.getElementById('tableSettings').setAttribute('hidden', '')
       const theadtr = table.querySelector('thead tr')
 
       const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
@@ -3903,20 +3907,20 @@
         const updatedItems = Array.from(changedRows).map(row => {
           const tds = row.querySelectorAll('td');
 
-          const obj ={id :parseInt(row.id)}
-          for(const td of tds){
+          const obj = { id: parseInt(row.id) }
+          for (const td of tds) {
             const type = td.getAttribute('type')
-            if(type ==='string'){
+            if (type === 'string') {
               obj[td.getAttribute('name')] = td.textContent
             }
-            else if(type==='number'){
+            else if (type === 'number') {
               obj[td.getAttribute('name')] = parseFloat(td.textContent)
             }
-            else{
-              if(td.getAttribute('name')){
+            else {
+              if (td.getAttribute('name')) {
                 obj[td.getAttribute('name')] = new Date(td.textContent)
               }
-              
+
             }
 
           }
@@ -3933,7 +3937,7 @@
             items: updatedItems, // Send the array of updated records
           }),
         });
-        
+
 
         // Log the server response
         console.log(JSON.stringify(results));
@@ -3941,7 +3945,7 @@
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
         status.textContent = '🟢'
-        
+
       }
 
       theadtr.innerHTML = ''
@@ -3961,7 +3965,7 @@
         }
       }
       const tbody = table.querySelector('tbody')
-      const generateRecord =(record,first)=>{
+      const generateRecord = (record, first) => {
         const tr = document.createElement('tr')
         for (const r of records) {
           const td = document.createElement('td')
@@ -3970,8 +3974,8 @@
 
           }
           td.textContent = record[r.name]
-          td.setAttribute('name',r.name)
-          td.setAttribute('type',r.type)
+          td.setAttribute('name', r.name)
+          td.setAttribute('type', r.type)
           if (r.cut) {
             td.classList.add('short')
           }
@@ -3980,11 +3984,11 @@
 
         }
         tr.id = record.id
-        if(first){
+        if (first) {
           tbody.insertBefore(tr, tbody.firstChild); // Insert `tr` as the first child
 
         }
-        else{
+        else {
           tbody.append(tr)
 
         }
@@ -3994,8 +3998,8 @@
       }
       table.querySelector('#add').onclick = async (e) => {
         const inputV = table.querySelector('.input-add-row').value
-        const p =[]
-        for (i=0;i<parseInt(inputV);i++){
+        const p = []
+        for (i = 0; i < parseInt(inputV); i++) {
           p.push({})
         }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
@@ -4011,23 +4015,25 @@
           ),
         }).then(e => e.json())
         console.log(JSON.stringify(results))
-        for(const r of results){
-          generateRecord({id:r[0]},true)
+        for (const r of results) {
+          generateRecord({ id: r[0] }, true)
         }
-        
+
       }
-      
+      runScript1()
+      runScript2()
+
 
     }
     const generateSettingTable = async (table) => {
       //generate setting table
       const tableSettings = document.getElementById('tableSettings')
       tableSettings.removeAttribute('hidden')
-      
-      document.getElementById('tableData').setAttribute('hidden','')
+
+      document.getElementById('tableData').setAttribute('hidden', '')
       const original = tableSettings.querySelector('tbody').querySelector('tr')
       const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
-      const generateFromRecord = (record,first) => {
+      const generateFromRecord = (record, first) => {
         const cloned = original.cloneNode(true);
         cloned.hidden = false; // Unhide the cloned row
         cloned.id = record.id
@@ -4056,19 +4062,19 @@
         }
 
         // Append the cloned row to the table
-        if(first){
+        if (first) {
           const tbody = tableSettings.querySelector('tbody')
           tbody.insertBefore(cloned, tbody.firstChild); // Insert `tr` as the first child
 
         }
-        else{
-        tableSettings.querySelector('tbody').appendChild(cloned);
+        else {
+          tableSettings.querySelector('tbody').appendChild(cloned);
         }
-        }
+      }
       tableSettings.querySelector('#addSettings').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value
-        const p =[]
-        for (i=0;i<parseInt(inputV);i++){
+        const p = []
+        for (i = 0; i < parseInt(inputV); i++) {
           p.push({})
         }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
@@ -4083,12 +4089,12 @@
             }
           ),
         }).then(e => e.json())
-        for(const r of results){
-          generateFromRecord({id:r[0]},true)
+        for (const r of results) {
+          generateFromRecord({ id: r[0] }, true)
         }
       }
       tableSettings.querySelector('#saveSettings').onclick = async (e) => {
-         const status = document.getElementById('saveSettingsStatus')
+        const status = document.getElementById('saveSettingsStatus')
         status.textContent = '🟠'
         const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
@@ -4097,20 +4103,20 @@
         const updatedItems = Array.from(changedRows).map(row => {
           const tds = row.querySelectorAll('td');
           const toDelete = tds[5].querySelector('input').checked
-          if(toDelete){
-          toDelete.push(row.id)
-          return undefined
+          if (toDelete) {
+            toDelete.push(row.id)
+            return undefined
           }
-          else{
-          return {
-            id: row.id, // The id of the row (record)
-            name: tds[0].textContent.trim(), // Get the name from the first column
-            hidden: tds[1].querySelector('input[type="checkbox"]').checked, // Get the 'hidden' checkbox value
-            cut: tds[2].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
-            position: parseInt(tds[3].querySelector('input').value, 10) || 0, // Get the position, default to 0
-            type: tds[4].querySelector('select').value // Get the selected type from the dropdown
-          };
-        }
+          else {
+            return {
+              id: row.id, // The id of the row (record)
+              name: tds[0].textContent.trim(), // Get the name from the first column
+              hidden: tds[1].querySelector('input[type="checkbox"]').checked, // Get the 'hidden' checkbox value
+              cut: tds[2].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
+              position: parseInt(tds[3].querySelector('input').value, 10) || 0, // Get the position, default to 0
+              type: tds[4].querySelector('select').value // Get the selected type from the dropdown
+            };
+          }
         });
         await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'DELETE',
@@ -4118,11 +4124,11 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            ids:toDIds , // Send the array of updated records
+            ids: toDIds, // Send the array of updated records
           }),
         });
-        for(const id of toDIds){
-          tableSettings.querySelector('tbody').querySelector('#'+id).remove()
+        for (const id of toDIds) {
+          tableSettings.querySelector('tbody').querySelector('#' + id).remove()
 
         }
 
@@ -4133,7 +4139,7 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            items: updatedItems.filter(e=>e), // Send the array of updated records
+            items: updatedItems.filter(e => e), // Send the array of updated records
           }),
         });
         await fetch(`https://api.seositeshome.com/tables/${table}/alter`, {
@@ -4164,7 +4170,9 @@
       for (const record of records) {
         generateFromRecord(record)
       }
-
+      
+      runScript1()
+      runScript2()
 
 
     }
@@ -4190,7 +4198,7 @@
       let first = true
       for (const table of tableNames) {
         const cloned = original.cloneNode(true)
-        if(first){
+        if (first) {
           cloned.classList.add('active')
           first = false
         }
@@ -4198,51 +4206,51 @@
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
         let generating = 0
-        cloned.querySelector('input').onclick = async(e) => {
+        cloned.querySelector('input').onclick = async (e) => {
           e.preventDefault()
           Array.from(original.parentNode.children).forEach(e => e.classList?.remove('active'));
 
           cloned.classList.add('active')
           e.stopPropagation()
           console.log('clicked')
-          if(generating){
+          if (generating) {
             return
           }
           generating = true
           const stored = localStorage.getItem('showTable')
-          stored==='main' && (await generateMainTable(table))
-          stored==='settings' && (await generateSettingTable(table))
+          stored === 'main' && (await generateMainTable(table))
+          stored === 'settings' && (await generateSettingTable(table))
           generating = false
         }
         original.parentNode.append(cloned)
       }
-      stored==='main' && generateMainTable(tableNames[0])
-      stored==='settings' && generateSettingTable(tableNames[0])
+      stored === 'main' && generateMainTable(tableNames[0])
+      stored === 'settings' && generateSettingTable(tableNames[0])
 
 
     }
-    const setShowTable = (type)=>{
+    const setShowTable = (type) => {
       const stored = localStorage.getItem('showTable')
       const showMain = document.getElementById('showMainTables')
       const showSettings = document.getElementById('showSettingsTables')
-      if(type==='main'){
-        if(stored ==='main'){
+      if (type === 'main') {
+        if (stored === 'main') {
           localStorage.removeItem('showTable')
           showMain.classList.remove('b-selected')
         }
-        else{
-          localStorage.setItem('showTable','main')
+        else {
+          localStorage.setItem('showTable', 'main')
           showMain.classList.add('b-selected')
           showSettings.classList.remove('b-selected')
         }
       }
-      else{
-        if(stored ==='settings'){
+      else {
+        if (stored === 'settings') {
           localStorage.removeItem('showTable')
           showSettings.classList.remove('b-selected')
         }
-        else{
-          localStorage.setItem('showTable','settings')
+        else {
+          localStorage.setItem('showTable', 'settings')
           showSettings.classList.add('b-selected')
           showMain.classList.remove('b-selected')
         }
@@ -5499,11 +5507,11 @@
       const stored = localStorage.getItem('showTable')
       const showMain = document.getElementById('showMainTables')
       const showSettings = document.getElementById('showSettingsTables')
-      
-      if(stored==='main'){
+
+      if (stored === 'main') {
         showMain.classList.add('b-selected')
       }
-      else{
+      else {
         showSettings.classList.add('b-selected')
       }
       setSorting()

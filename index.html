@@ -268,7 +268,7 @@
         </thead>
         <tbody>
           <tr hidden>
-            <td contenteditable>email</td>
+            <td >email</td>
             <td><label><input type="checkbox">🙈</label></td>
             <td><label><input type="checkbox">✂️</label></td>
             <td><input class="input-table" type="number" value="0"></td>
@@ -3965,7 +3965,6 @@
         const tr = document.createElement('tr')
         for (const r of records) {
           const td = document.createElement('td')
-          td.setAttribute('contenteditable', 'true');
           if (r.hidden) {
             td.setAttribute('hidden', '')
 

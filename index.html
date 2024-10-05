@@ -4162,11 +4162,17 @@
         cloned.innerHTML = cloned.innerHTML.replace('Loading..', table)
         cloned.removeAttribute('hidden')
         cloned.id = 'table;' + table
-        cloned.onclick = (e) => {
+        let generating = 0
+        cloned.onclick = async(e) => {
           console.log('clicked')
+          if(generating){
+            return
+          }
+          generating = true
           const stored = localStorage.getItem('showTable')
-          stored==='main' && generateMainTable(table)
-          stored==='settings' && generateSettingTable(table)
+          stored==='main' && (await generateMainTable(table))
+          stored==='settings' && (await generateSettingTable(table))
+          generating = false
         }
         original.parentNode.append(cloned)
       }

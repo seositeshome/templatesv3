@@ -3893,7 +3893,7 @@
         const updatedItems = Array.from(changedRows).map(row => {
           const tds = row.querySelectorAll('td');
 
-          const obj ={id :row.id}
+          const obj ={id :parseInt(row.id)}
           for(const td of tds){
             obj[td.getAttribute('name')] = td.textContent
           }

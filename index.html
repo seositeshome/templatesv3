@@ -389,7 +389,7 @@
 
             // Split clipboard data by newline to get rows
             let rows = clipboardData.split('\n');
-
+            activeCell.closest('tr').setAttribute('data-changed')
             // Get the row and cell index for starting the paste
             let startRow = activeCell.parentElement;
             let startCellIndex = Array.from(startRow.children).indexOf(activeCell);

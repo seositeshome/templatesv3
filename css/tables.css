@@ -1,0 +1,161 @@
+/* Body settings */
+.body {
+    margin: 0;
+    padding: 0;
+    display: flex; /* Flexbox для создания двух колонок */
+    height: 100vh; /* Занимает всю высоту экрана */
+    background: #1e1e1e; /* Темно-серый фон */
+    overflow: hidden; /* Запрещаем прокрутку body */
+}
+
+/* Left navigation (Sticky behavior) */
+.left-nav {
+    width: 60px; /* Ширина левой панели */
+    background: #2a2a2a;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    position: sticky; /* Остается на месте при прокрутке */
+    top: 0; /* Прилипает к верхней части экрана */
+    height: 100vh; /* Высота панели на весь экран */
+    padding: 10px 0;
+    display: flex; /* Flexbox для вертикального расположения элементов */
+    flex-direction: column;
+    align-items: center; /* Центрируем все элементы по горизонтали */
+    z-index: 10;
+}
+
+/* Button styles (aligned and spaced like the left-nav-labels) */
+.loading-btn {
+    width: 50px;
+    height: 50px;
+    background-color: #2a2a2a; /* Темный фон для кнопки */
+    border: none;
+    border-radius: 50%; /* Круглая кнопка */
+    color: #fff; /* Белый значок */
+    font-size: 1.4em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Тень для глубины */
+    transition: background-color 0.3s, transform 0.3s;
+    margin-bottom: 20px; /* Отступ снизу для разделения с другими элементами */
+}
+
+/* Hover effect */
+.loading-btn:hover {
+    background-color: #333; /* Немного светлее при наведении */
+}
+
+/* Active effect */
+.loading-btn:active {
+    transform: scale(0.95); /* Легкое уменьшение при нажатии */
+}
+
+/* Loading state (spin animation) */
+.loading-btn.loading {
+    animation: spin 2s infinite linear; /* Вращение значка */
+}
+
+/* Spin animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Left label styles */
+.left-nav-label {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px auto; /* Отступ снизу и выравнивание */
+    background: #333;
+    color: #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover effect for left-nav labels */
+.left-nav-label:hover {
+    background: #444;
+}
+
+/* Checked state for left-nav labels */
+.left-nav-input:checked + .left-nav-label {
+    background: #666;
+    color: #fff;
+}
+
+/* Main container */
+.main {
+    flex-grow: 1; /* Занимает всё оставшееся место справа от левой панели */
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Занимает всю высоту экрана */
+    overflow: hidden; /* Запрещаем прокрутку для всего main */
+    background: #1e1e1e; /* Темно-серый фон для основной части */
+}
+
+/* Top navigation inside main (Sticky behavior) */
+.top-nav {
+    position: sticky; /* Прилипает к верхней части экрана */
+    top: 0;
+    height: 50px; /* Высота верхней панели */
+    background: #2a2a2a; /* Темный фон верхней панели */
+    display: flex;
+    align-items: center;
+    z-index: 9;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    box-sizing: border-box; /* Учитываем padding в ширине */
+}
+
+/* Scrollable content in main */
+.main section {
+    flex-grow: 1; /* Занимает всё оставшееся пространство после top-nav */
+    overflow-y: auto; /* Прокрутка содержимого секций */
+    padding: 20px;
+    background: #1e1e1e;
+    color: #fff;
+    width: 100%; /* Секции занимают всю ширину */
+    box-sizing: border-box;
+}
+
+/* Hide radio input */
+.left-nav-input, .top-nav-input {
+    display: none; /* Скрываем radio-инпуты */
+}
+
+/* Top label styles */
+.top-nav-label {
+    padding: 2px 8px;
+    height: 40px;
+    background: #333;
+    color: #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover effect for top-nav labels */
+.top-nav-label:hover {
+    background: #444;
+}
+
+/* Checked state for top-nav labels */
+.top-nav-input:checked + .top-nav-label {
+    background: #666;
+    color: #fff;
+}

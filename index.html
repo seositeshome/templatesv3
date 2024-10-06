@@ -4063,7 +4063,16 @@
         if (typeOption) {
           select.value = typeOption.value;
         }
-
+        tds[5].querySelector('input').onchange = (e)=>{
+          setModified(e);
+          if(e.target.hasAttribute('checked')){
+            e.target.removeAttribute('checked')
+          }
+          else{
+            e.target.setAttribute('checked','')
+          }
+          
+        }
         // Append the cloned row to the table
         if (first) {
           const tbody = tableSettings.querySelector('tbody')
@@ -4079,15 +4088,7 @@
         remove = 1
 
       }
-      tableSettings.querySelectorAll('input').onchange =(e)=>{
-        const {target} = e
-        if(target.hasAttribute('checked')){
-          target.removeAttribute('checked')
-        }
-        else{
-          target.setAttribute('checked','true')
-        }
-      }
+      
       tableSettings.querySelector('#addSettings').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value
         const p = []

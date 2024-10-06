@@ -409,7 +409,7 @@
                 console.log("Skipping row, as it exceeds available table rows.");
                 return;
               }
-
+              rowData.closest('tr').setAttribute('data-changed','true')
               let cells = rowData.split('\t'); // Split the row by tab to get cell values
 
               // Loop through each cell in the row

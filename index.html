@@ -4125,7 +4125,7 @@
           const tds = row.querySelectorAll('td');
           const toDelete = tds[5].querySelector('input').checked
           if (toDelete) {
-            toDelete.push(row.id)
+            toDIds.push(row.id)
             return undefined
           }
           else {

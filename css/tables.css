@@ -159,3 +159,121 @@
     background: #666;
     color: #fff;
 }
+
+
+
+
+
+
+
+/* Table styling */
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+    background-color: #2a2a2a; /* Темный фон для таблицы, как и у верхней панели */
+    color: #fff; /* Светлый текст */
+    margin-bottom: 20px; /* Отступ снизу */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Тень для глубины */
+}
+
+/* Table headers */
+.table thead {
+    background-color: #333; /* Темный фон для заголовков таблицы (сочетается с top-nav) */
+    text-align: left;
+}
+
+.table th {
+    padding: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #ccc; /* Светло-серый текст заголовков */
+    background-color: #2a2a2a; /* Темный фон заголовков таблицы */
+    border-bottom: 2px solid #444; /* Линия под заголовками */
+    text-align: left;
+}
+
+/* Style for select dropdowns in filter */
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Custom style for select dropdowns with arrow */
+.table th select {
+    width: 50px; /* Компактная ширина для символов */
+    padding: 2px;
+    background-color: #333; /* Темный фон для выпадающего списка */
+    color: #ccc; /* Светлый текст */
+    border: 1px solid #444; /* Граница */
+    border-radius: 5px; /* Скругленные углы */
+    text-align: center; /* Центрирование текста */
+    appearance: none; /* Убираем стандартную стрелку браузера */
+    -webkit-appearance: none; /* Для поддержки в Safari */
+    -moz-appearance: none; /* Для Firefox */
+    position: relative;
+    margin-right: 5px; /* Отступ справа между селектором и полем ввода */
+}
+
+/* Add custom arrow to select */
+.table th select::after {
+    content: '▼'; /* Стрелка вниз */
+    font-size: 0.7em;
+    color: #ccc; /* Цвет стрелки */
+    position: absolute;
+    right: 10px; /* Расположение стрелки справа */
+    pointer-events: none; /* Стрелка не должна блокировать клик */
+}
+
+/* Style for input fields in filter */
+.table th input {
+    width: 90px; /* Ширина текстового поля */
+    padding: 2px;
+    background-color: #333; /* Темный фон текстового поля */
+    color: #ccc; /* Светлый текст */
+    border: 1px solid #444; /* Граница */
+    border-radius: 5px; /* Скругленные углы */
+}
+/* Table rows */
+.table tbody tr {
+    border-bottom: 1px solid #444; /* Линия между строками */
+    transition: background-color 0.3s; /* Плавная смена фона при наведении */
+}
+
+.table tbody tr:hover {
+    background-color: #3a3a3a; /* Фон при наведении на строку */
+}
+
+/* Table cells */
+.table tbody td {
+    padding: 6px; /* Минимальный padding для компактности */
+    color: #ccc; /* Светло-серый текст */
+    font-size: 0.9em; /* Немного уменьшенный шрифт для данных */
+    border-bottom: 1px solid #444; /* Линия под ячейками */
+    text-align: left; /* Выравнивание по левому краю */
+}
+
+/* First column (for specific styling, if needed) */
+.table tbody td:first-child {
+    font-weight: bold;
+}
+
+/* Optional: Alternating row colors for readability */
+.table tbody tr:nth-child(odd) {
+    background-color: #2a2a2a; /* Темный фон для нечетных строк */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #1f1f1f; /* Чуть темнее для четных строк */
+}
+
+
+.table tbody td[contenteditable="true"],
+.table tbody td.checked {
+    background-color: #0056b3; /* Темно-синий фон */
+    color: #fff; /* Белый текст */
+    transition: background-color 0.3s, color 0.3s ease-in-out; /* Плавный переход */
+}
+
+
+

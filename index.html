@@ -411,7 +411,7 @@
                 console.log("Skipping row, as it exceeds available table rows.");
                 return;
               }
-
+              rowData
               let cells = rowData.split('\t'); // Split the row by tab to get cell values
 
               // Loop through each cell in the row
@@ -423,7 +423,7 @@
                   console.log("Skipping cell, as it exceeds available table cells.");
                   return;
                 }
-
+                targetCell.closest('tr').setAttribute('data-changed','true')
                 // Set the text of the cell
                 targetCell.textContent = cellText || ''; // Insert empty string if cell is empty
               });

@@ -4079,6 +4079,15 @@
         remove = 1
 
       }
+      tableSettings.querySelectorAll('input').onchange =(e)=>{
+        const {target} = e
+        if(target.checked){
+          target.checked = false
+        }
+        else{
+          target.checked = true
+        }
+      }
       tableSettings.querySelector('#addSettings').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value
         const p = []

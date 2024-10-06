@@ -4124,6 +4124,7 @@
         const updatedItems = Array.from(changedRows).map(row => {
           const tds = row.querySelectorAll('td');
           const toDelete = tds[5].querySelector('input').checked
+          console.log(tds[5].querySelector('input'));
           if (toDelete) {
             toDIds.push(row.id)
             return undefined

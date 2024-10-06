@@ -4139,7 +4139,8 @@
             };
           }
         });
-        await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+        if(toDIds.length){
+          await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -4148,6 +4149,8 @@
             ids: toDIds, // Send the array of updated records
           }),
         });
+        }
+        
         for (const id of toDIds) {
           tableSettings.querySelector('tbody').querySelector('#' + id).remove()
 

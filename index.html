@@ -4081,11 +4081,11 @@
       }
       tableSettings.querySelectorAll('input').onclick =(e)=>{
         const {target} = e
-        if(target.checked){
-          target.checked = false
+        if(target.hasAttribute('checked')){
+          target.removeAttribute('checked')
         }
         else{
-          target.checked = true
+          target.setAttribute('checked','true')
         }
       }
       tableSettings.querySelector('#addSettings').onclick = async (e) => {

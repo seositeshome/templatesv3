@@ -1,5 +1,5 @@
 const t = document.getElementById('dtable')
-const sButton = document.querySelector('.loading-btn loading')
+const sButton = document.querySelector('.loading-btn')
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 

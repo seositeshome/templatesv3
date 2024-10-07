@@ -101,13 +101,6 @@
     transition: background 0.3s, color 0.3s;
 }
 
-.top-nav-label img {
-    display: inline-block;
-    vertical-align: middle; 
-        width: 30px; /* Фиксированная ширина */
-        height: 30px; /* Фиксированная высота */
-    
-  }
   
 
 /* Hover effect for top-nav labels */
@@ -248,4 +241,16 @@
     padding: 5px 10px;
     border-radius: 5px;
     display: inline-block; /* Для правильного размещения */
+}
+
+
+
+
+#add-row::before {
+    content: "➕"; /* Добавляем эмодзи через псевдоэлемент */
+    filter: invert(100%);
+}
+
+#remove-row::before {
+    content: "🗑️"; /* Добавляем эмодзи через псевдоэлемент */
 }

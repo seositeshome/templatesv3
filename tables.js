@@ -549,7 +549,7 @@ const runScript2 = () => {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded',async function () {
 
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -561,11 +561,12 @@ document.addEventListener('DOMContentLoaded', function () {
         window.localion.href = './'
     }
     if (show === 'settings') {
-        generateSettingTable(table, token)
+        await generateSettingTable(table, token)
     }
     else {
-        generateMainTable(table, token)
+        await generateMainTable(table, token)
     }
+    document.querySelector('.loading-btn loading').classList.add('loaded')
 
 
 })

@@ -231,11 +231,12 @@ const generateSettingTable = async (table, token) => {
             tableSettings.querySelector('tbody').appendChild(cloned);
         }
     }
-    tableSettings.querySelector('#removeTable')?.onclick = async (e) => {
+    const removeTButton = tableSettings.querySelector('#removeTable')
+    removeTButton && (removeTButton.onclick = async (e) => {
         e.target.classList.add('active')
         remove = 1
 
-    }
+    })
 
     tableSettings.querySelector('#add-row').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value
@@ -263,7 +264,7 @@ const generateSettingTable = async (table, token) => {
         }
     }
     sButton.onclick = async (e) => {
-        
+
         if (remove) {
             await fetch(`https://api.seositeshome.com/tables/${table}`, {
                 method: 'DELETE',
@@ -342,7 +343,7 @@ const generateSettingTable = async (table, token) => {
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
         sButton.classList.remove('save')
-       
+
     }
 
     console.log('generating records')
@@ -547,7 +548,7 @@ const runScript2 = () => {
     });
 }
 
-document.addEventListener('DOMContentLoaded',async function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
     const urlParams = new URLSearchParams(window.location.search);
 

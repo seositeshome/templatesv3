@@ -134,7 +134,7 @@ const generateMainTable = async (tableName, token) => {
     for (const record of mainRecords) {
         generateRecord(record)
     }
-    table.querySelector('#add').onclick = async (e) => {
+    table.querySelector('#add-row').onclick = async (e) => {
         const inputV = table.querySelector('.input-add-row').value
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
@@ -158,6 +158,7 @@ const generateMainTable = async (tableName, token) => {
         }
         runScript1()
         runScript2()
+        sButton.classList.remove('save')
     }
     runScript1()
     runScript2()
@@ -260,12 +261,9 @@ const generateSettingTable = async (table, token) => {
         for (const r of results) {
             generateFromRecord({ id: r[0] }, true)
         }
-        runScript1()
-        runScript2()
     }
-    tableSettings.querySelector('#saveSettings').onclick = async (e) => {
-        const status = document.getElementById('saveSettingsStatus')
-        status.textContent = '🟠'
+    sButton.onclick = async (e) => {
+        
         if (remove) {
             await fetch(`https://api.seositeshome.com/tables/${table}`, {
                 method: 'DELETE',
@@ -343,7 +341,8 @@ const generateSettingTable = async (table, token) => {
 
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
-        status.textContent = '🟢'
+        sButton.classList.remove('save')
+       
     }
 
     console.log('generating records')
@@ -351,8 +350,6 @@ const generateSettingTable = async (table, token) => {
         generateFromRecord(record)
     }
 
-    runScript1()
-    runScript2()
 
     t.parentNode.append(table)
 

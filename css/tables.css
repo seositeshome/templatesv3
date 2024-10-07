@@ -2,134 +2,73 @@
 .body {
     margin: 0;
     padding: 0;
-    display: flex; /* Flexbox для создания двух колонок */
-    height: 100vh; /* Занимает всю высоту экрана */
-    background: #1e1e1e; /* Темно-серый фон */
-    overflow: hidden; /* Запрещаем прокрутку body */
-}
-
-/* Left navigation (Sticky behavior) */
-.left-nav {
-    width: 60px; /* Ширина левой панели */
-    background: #2a2a2a;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
-    position: sticky; /* Остается на месте при прокрутке */
-    top: 0; /* Прилипает к верхней части экрана */
-    height: 100vh; /* Высота панели на весь экран */
-    padding: 10px 0;
-    display: flex; /* Flexbox для вертикального расположения элементов */
-    flex-direction: column;
-    align-items: center; /* Центрируем все элементы по горизонтали */
-    z-index: 10;
-}
-
-/* Button styles (aligned and spaced like the left-nav-labels) */
-.loading-btn {
-    width: 50px;
-    height: 50px;
-    background-color: #2a2a2a; /* Темный фон для кнопки */
-    border: none;
-    border-radius: 50%; /* Круглая кнопка */
-    color: #fff; /* Белый значок */
-    font-size: 1.4em;
-    cursor: pointer;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Тень для глубины */
-    transition: background-color 0.3s, transform 0.3s;
-    margin-bottom: 20px; /* Отступ снизу для разделения с другими элементами */
-}
-
-/* Hover effect */
-.loading-btn:hover {
-    background-color: #333; /* Немного светлее при наведении */
-}
-
-/* Active effect */
-.loading-btn:active {
-    transform: scale(0.95); /* Легкое уменьшение при нажатии */
-}
-
-/* Loading state (spin animation) */
-.loading-btn.loading {
-    animation: spin 2s infinite linear; /* Вращение значка */
-}
-
-/* Spin animation */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Left label styles */
-.left-nav-label {
-    display: block;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 20px auto; /* Отступ снизу и выравнивание */
-    background: #333;
-    color: #ccc;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 1.4em;
-    font-weight: bold;
-    transition: background 0.3s, color 0.3s;
-}
-
-/* Hover effect for left-nav labels */
-.left-nav-label:hover {
-    background: #444;
-}
-
-/* Checked state for left-nav labels */
-.left-nav-input:checked + .left-nav-label {
-    background: #666;
-    color: #fff;
+    flex-direction: column; /* Ensure vertical layout */
+    height: 100vh; /* Full height of the viewport */
+    background: #1e1e1e; /* Dark grey background */
+    overflow: hidden; /* No scroll on body */
 }
 
 /* Main container */
 .main {
-    flex-grow: 1; /* Занимает всё оставшееся место справа от левой панели */
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Занимает всю высоту экрана */
-    overflow: hidden; /* Запрещаем прокрутку для всего main */
-    background: #1e1e1e; /* Темно-серый фон для основной части */
+    flex-grow: 1; /* Make main take up all the remaining space */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    white-space: nowrap; /* Prevent content from wrapping */
+    padding: 20px;
+    background: #1e1e1e; /* Dark grey background */
 }
 
 /* Top navigation inside main (Sticky behavior) */
 .top-nav {
-    position: sticky; /* Прилипает к верхней части экрана */
+    position: sticky;
     top: 0;
-    height: 50px; /* Высота верхней панели */
-    background: #2a2a2a; /* Темный фон верхней панели */
+    background: #2a2a2a; /* Dark background for the top navigation */
     display: flex;
     align-items: center;
     z-index: 9;
     padding: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
     width: 100%;
-    box-sizing: border-box; /* Учитываем padding в ширине */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
-/* Scrollable content in main */
-.main section {
-    flex-grow: 1; /* Занимает всё оставшееся пространство после top-nav */
-    overflow-y: auto; /* Прокрутка содержимого секций */
-    padding: 20px;
-    background: #1e1e1e;
-    color: #fff;
-    width: 100%; /* Секции занимают всю ширину */
-    box-sizing: border-box;
+/* Button styles (aligned and spaced like the top-nav labels) */
+.loading-btn {
+    width: 50px;
+    height: 50px;
+    background-color: #555454; /* Dark background for the button */
+    border: none;
+    border-radius: 50%; /* Round button */
+    color: #fff; /* White icon */
+    font-size: 1.4em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    transition: background-color 0.3s, transform 0.3s;
+    margin-right: 10px; /* Spacing between button and labels */
 }
 
-/* Hide radio input */
-.left-nav-input, .top-nav-input {
-    display: none; /* Скрываем radio-инпуты */
+/* Hover effect */
+.loading-btn:hover {
+    background-color: #333; /* Slightly lighter on hover */
+}
+
+/* Active effect */
+.loading-btn:active {
+    transform: scale(0.95); /* Slight shrink on press */
+}
+
+/* Loading state (spin animation) */
+.loading-btn.loading {
+    animation: spin 2s infinite linear; /* Icon rotation */
+}
+
+/* Spin animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Top label styles */
@@ -149,6 +88,15 @@
     transition: background 0.3s, color 0.3s;
 }
 
+.top-nav-label img {
+    display: inline-block;
+    vertical-align: middle; 
+        width: 30px; /* Фиксированная ширина */
+        height: 30px; /* Фиксированная высота */
+    
+  }
+  
+
 /* Hover effect for top-nav labels */
 .top-nav-label:hover {
     background: #444;
@@ -156,29 +104,27 @@
 
 /* Checked state for top-nav labels */
 .top-nav-input:checked + .top-nav-label {
-    background: #666;
-    color: #fff;
+    border-color: #0056b3; /* Set the border color */
+    border-width: 2px; /* Set the border width */
+    border-style: solid; /* Make sure the border is solid */
 }
 
-
-
-
-
-
-
+.top-nav-input {
+    display: none; /* Скрываем radio-инпуты */
+}
 /* Table styling */
 .table {
-    width: 100%;
-    border-collapse: collapse; /* Убираем промежутки между ячейками */
-    background-color: #2a2a2a; /* Темный фон для таблицы, как и у верхней панели */
-    color: #fff; /* Светлый текст */
-    margin-bottom: 20px; /* Отступ снизу */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Тень для глубины */
+    width: 100%; /* Занимает 100% ширины */
+    border-collapse: collapse;
+    background-color: #2a2a2a; /* Dark background for the table */
+    color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
 }
 
 /* Table headers */
 .table thead {
-    background-color: #333; /* Темный фон для заголовков таблицы (сочетается с top-nav) */
+    background-color: #333; /* Dark background for table headers */
     text-align: left;
 }
 
@@ -186,94 +132,107 @@
     padding: 8px;
     font-size: 1em;
     font-weight: bold;
-    color: #ccc; /* Светло-серый текст заголовков */
-    background-color: #2a2a2a; /* Темный фон заголовков таблицы */
-    border-bottom: 2px solid #444; /* Линия под заголовками */
+    color: #ccc;
+    background-color: #2a2a2a; /* Dark background for headers */
+    border-bottom: 2px solid #444;
     text-align: left;
 }
 
-/* Style for select dropdowns in filter */
+/* Контейнер фильтра */
 .filter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; /* Flexbox для выравнивания элементов в одну строку */
+    align-items: center; /* Центрируем элементы по вертикали */
+    width: 100%; /* Контейнер занимает всю ширину */
+    flex-wrap: nowrap; /* Запрещаем перенос элементов на следующую строку */
 }
 
-/* Custom style for select dropdowns with arrow */
-.table th select {
-    width: 50px; /* Компактная ширина для символов */
-    padding: 2px;
-    background-color: #333; /* Темный фон для выпадающего списка */
-    color: #ccc; /* Светлый текст */
-    border: 1px solid #444; /* Граница */
-    border-radius: 5px; /* Скругленные углы */
-    text-align: center; /* Центрирование текста */
-    appearance: none; /* Убираем стандартную стрелку браузера */
-    -webkit-appearance: none; /* Для поддержки в Safari */
-    -moz-appearance: none; /* Для Firefox */
-    position: relative;
-    margin-right: 5px; /* Отступ справа между селектором и полем ввода */
+/* Стиль для селектора */
+.filter select {
+    flex-shrink: 0; /* Селектор не сжимается */
+    width: auto; /* Ширина подстраивается под содержимое */
+    height: 32px; /* Высота совпадает с инпутом */
+    padding: 2px 5px; /* Уменьшенный внутренний отступ */
+    background-color: #333;
+    color: #ccc;
+    border: 1px solid #444;
+    border-radius: 3px 0 0 3px; /* Закругляем только левую сторону */
+    appearance: none; /* Оставляем стандартный вид */
 }
 
-/* Add custom arrow to select */
-.table th select::after {
-    content: '▼'; /* Стрелка вниз */
-    font-size: 0.7em;
-    color: #ccc; /* Цвет стрелки */
-    position: absolute;
-    right: 10px; /* Расположение стрелки справа */
-    pointer-events: none; /* Стрелка не должна блокировать клик */
+/* Стиль для инпута */
+.filter input {
+    flex-grow: 1; /* Инпут растягивается на всю оставшуюся ширину */
+    height: 32px; /* Одинаковая высота с селектором */
+    padding: 2px 5px; /* Уменьшенный внутренний отступ */
+    background-color: #333;
+    color: #ccc;
+    border: 1px solid #444;
+    border-left: none; /* Убираем левую границу, чтобы соединить с селектором */
+    border-radius: 0 3px 3px 0; /* Закругляем только правую сторону */
 }
 
-/* Style for input fields in filter */
-.table th input {
-    width: 90px; /* Ширина текстового поля */
-    padding: 2px;
-    background-color: #333; /* Темный фон текстового поля */
-    color: #ccc; /* Светлый текст */
-    border: 1px solid #444; /* Граница */
-    border-radius: 5px; /* Скругленные углы */
-}
-/* Table rows */
+/* Table body rows */
 .table tbody tr {
-    border-bottom: 1px solid #444; /* Линия между строками */
-    transition: background-color 0.3s; /* Плавная смена фона при наведении */
+    border-bottom: 1px solid #444;
+    transition: background-color 0.3s;
 }
 
 .table tbody tr:hover {
-    background-color: #3a3a3a; /* Фон при наведении на строку */
+    background-color: #3a3a3a; /* Row hover background */
 }
 
-/* Table cells */
+/* Table body cells */
 .table tbody td {
-    padding: 6px; /* Минимальный padding для компактности */
-    color: #ccc; /* Светло-серый текст */
-    font-size: 0.9em; /* Немного уменьшенный шрифт для данных */
-    border-bottom: 1px solid #444; /* Линия под ячейками */
-    text-align: left; /* Выравнивание по левому краю */
+    padding: 6px;
+    color: #ccc; /* Light text */
+    font-size: 0.9em; /* Slightly smaller text */
+    border-bottom: 1px solid #444;
+    text-align: left; /* Left alignment */
 }
 
-/* First column (for specific styling, if needed) */
-.table tbody td:first-child {
-    font-weight: bold;
+.filter input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Chrome, Safari, and Edge */
 }
 
-/* Optional: Alternating row colors for readability */
+/* Hides the arrows in Chrome, Safari, and Edge */
+.filter input[type="number"]::-webkit-outer-spin-button,
+.filter input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hides the arrows in Firefox */
+.filter input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+/* Editable cells */
+.table tbody td[contenteditable="true"],
+.cell-checked {
+    background-color: #0056b3; /* Dark blue background */
+    color: #fff; /* White text */
+    transition: background-color 0.3s, color 0.3s ease-in-out;
+}
+
+/* Alternating row colors */
 .table tbody tr:nth-child(odd) {
-    background-color: #2a2a2a; /* Темный фон для нечетных строк */
+    background-color: #2a2a2a; /* Darker background for odd rows */
 }
 
 .table tbody tr:nth-child(even) {
-    background-color: #1f1f1f; /* Чуть темнее для четных строк */
+    background-color: #1f1f1f; /* Slightly darker for even rows */
 }
 
 
-.table tbody td[contenteditable="true"],
-.table tbody td.checked {
-    background-color: #0056b3; /* Темно-синий фон */
-    color: #fff; /* Белый текст */
-    transition: background-color 0.3s, color 0.3s ease-in-out; /* Плавный переход */
+.current-table {
+    color: #ccc; /* Цвет текста */
+    font-size: 1.2em; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    margin-left: 10px; /* Отступ слева */
+    background-color: #2a2a2a; /* Фон для выделения */
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block; /* Для правильного размещения */
 }
-
-
-

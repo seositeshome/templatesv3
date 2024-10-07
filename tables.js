@@ -1,5 +1,7 @@
 const t = document.getElementById('dtable')
 const sButton = document.querySelector('.loading-btn')
+const dataButton = document.getElementById('data-table')
+const settingsButton = document.getElementById('settings-table')
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 
@@ -611,6 +613,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     if (show === 'settings') {
         await generateSettingTable(table, token)
+        
     }
     else {
         await generateMainTable(table, token)

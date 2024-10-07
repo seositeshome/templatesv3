@@ -97,7 +97,7 @@ const generateMainTable = async (tableName, token) => {
         },
     }).then(e => e.json())
     const mainRecords = res.records
-    const originalFilter = tableSettings.querySelector('#filterHead')
+    const originalFilter = table.querySelector('#filterHead')
     
         
     for (const record of records) {

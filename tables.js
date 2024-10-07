@@ -604,20 +604,28 @@ const runScript2 = () => {
 document.addEventListener('DOMContentLoaded', async function () {
 
     const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const table = urlParams.get('table');
+    const show = urlParams.get('show');
     settingsButton.onclick = (e) => {
         if(e.target.checked){
             generateSettingTable(table, token)
+            
+            const value = 'data'
+            urlParams.set('show', value);
+            history.pushState({}, '', `${window.location.pathname}?${urlParams}`);
         }
     }
     dataButton.onclick = (e) => {
         if(e.target.checked){
             generateMainTable(table, token)
+            const value = 'data'
+            urlParams.set('show', value);
+            history.pushState({}, '', `${window.location.pathname}?${urlParams}`);
         }
     }
     // Extract the query parameters
-    const token = urlParams.get('token');
-    const table = urlParams.get('table');
-    const show = urlParams.get('show');
+    
     if (!token) {
         window.localion.href = './'
     }

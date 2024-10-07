@@ -205,15 +205,15 @@ const generateSettingTable = async (table, token) => {
     const headers = ["Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
-    headers.forEach(headerText => {
+    for(constheaderText of headers) {
         let th = document.createElement("th");
         th.textContent = headerText; // Set the text content for <th>
         tr.appendChild(th); // Append the <th> to the <tr>
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = headerText.toLocaleLowerCase()
         originalFilter.parentNode.append(clonedFilter)
-    });
-    //originalFilter.remove()
+    }
+    originalFilter.remove()
     tableSettings.querySelector('thead').append(tr)
     tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
     let remove = 0

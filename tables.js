@@ -505,6 +505,7 @@ function createNewTable() {
 
 }
 const runScript1 = () => {
+    console.log('running script 1')
     function makeEditable(element) {
         element.setAttribute('contenteditable', 'true');
         element.focus(); // Focus on the element so the user can start typing
@@ -548,6 +549,7 @@ const runScript1 = () => {
     });
 }
 const runScript2 = () => {
+    console.log('running script 2')
     let activeCell = null; // Variable to store the currently active cell
 
     // Track clicks only on <td> elements within the <tbody> of #tableData

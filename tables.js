@@ -200,7 +200,7 @@ const generateSettingTable = async (table, token) => {
     const original = document.getElementById('settingsRow')
     const clonedHead = document.getElementById('settingsHead').cloneNode(true)
     clonedHead.removeAttribute('hidden')
-    tableSettings.querySelector('thead').innerHTML =''
+    //tableSettings.querySelector('thead').innerHTML =''
     //tableSettings.querySelector('thead').append(clonedHead)
     tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
     let remove = 0

@@ -268,6 +268,8 @@ const generateSettingTable = async (table, token) => {
     })
 
     document.getElementById('add').onclick = async (e) => {
+        
+        let userInput = prompt("Enter table name to add table \nEnter number to add rows");
         let inputV = userInput.parseInt(userInput)
         if(!inputV){
             r = await fetch('https://api.seositeshome.com/table', {

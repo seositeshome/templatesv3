@@ -205,7 +205,7 @@ const generateSettingTable = async (table, token) => {
     const headers = ["Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
-    for(constheaderText of headers) {
+    for(const headerText of headers) {
         let th = document.createElement("th");
         th.textContent = headerText; // Set the text content for <th>
         tr.appendChild(th); // Append the <th> to the <tr>

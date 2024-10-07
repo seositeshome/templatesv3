@@ -210,7 +210,6 @@ const generateSettingTable = async (table, token) => {
         th.textContent = headerText; // Set the text content for <th>
         tr.appendChild(th); // Append the <th> to the <tr>
     });
-    clonedHead.removeAttribute('hidden')
     tableSettings.querySelector('thead').append(tr)
     tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
     let remove = 0

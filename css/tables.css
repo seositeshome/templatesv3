@@ -144,37 +144,36 @@
     text-align: left;
 }
 
-/* Контейнер фильтра */
-.filter {
-    display: flex; /* Flexbox для выравнивания элементов в одну строку */
-    align-items: center; /* Центрируем элементы по вертикали */
-    width: 100%; /* Контейнер занимает всю ширину */
-    flex-wrap: nowrap; /* Запрещаем перенос элементов на следующую строку */
+.filter-select {
+    display: inline-block;
+    width: auto; /* Ширина под содержимое */
+    height: 32px; /* Высота селектора */
+    padding: 2px 5px; /* Отступы внутри */
+    background-color: #333; /* Тёмный фон */
+    color: #ccc; /* Светлый текст */
+    border: 1px solid #444; /* Тёмная граница */
+    border-radius: 3px 0 0 3px; /* Закругление слева */
+    appearance: none; /* Отключаем стандартный стиль браузера */
+    margin-right: -5px; /* Убираем лишний зазор между селектором и инпутом */
 }
 
-/* Стиль для селектора */
-.filter select {
-    flex-shrink: 0; /* Селектор не сжимается */
-    width: auto; /* Ширина подстраивается под содержимое */
-    height: 32px; /* Высота совпадает с инпутом */
-    padding: 2px 5px; /* Уменьшенный внутренний отступ */
-    background-color: #333;
-    color: #ccc;
-    border: 1px solid #444;
-    border-radius: 3px 0 0 3px; /* Закругляем только левую сторону */
-    appearance: none; /* Оставляем стандартный вид */
-}
-
-/* Стиль для инпута */
-.filter input {
-    flex-grow: 1; /* Инпут растягивается на всю оставшуюся ширину */
+/* Стили для инпута */
+.filter-input {
+    display: inline-block;
+    width: calc(100% - 50px); /* Подстраиваем ширину, чтобы учесть селектор */
     height: 32px; /* Одинаковая высота с селектором */
-    padding: 2px 5px; /* Уменьшенный внутренний отступ */
+    padding: 2px 5px;
     background-color: #333;
     color: #ccc;
     border: 1px solid #444;
-    border-left: none; /* Убираем левую границу, чтобы соединить с селектором */
-    border-radius: 0 3px 3px 0; /* Закругляем только правую сторону */
+    border-left: none; /* Убираем левую границу */
+    border-radius: 0 3px 3px 0; /* Закругление справа */
+}
+
+/* Дополнительное стилизованное состояние фокуса для инпута */
+.filter-input:focus {
+    outline: none;
+    border-color: #0056b3; /* Синий цвет при фокусе */
 }
 
 /* Table body rows */

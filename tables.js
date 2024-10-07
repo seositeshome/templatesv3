@@ -2,6 +2,7 @@ const t = document.getElementById('dtable')
 const sButton = document.querySelector('.loading-btn')
 const dataButton = document.getElementById('data-table')
 const settingsButton = document.getElementById('settings-table')
+
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 
@@ -139,7 +140,7 @@ const generateMainTable = async (tableName, token) => {
     document.getElementById('add').onclick = async (e) => {
         let userInput = prompt("Enter table name to add table \nEnter number to add rows");
         let inputV = parseInt(userInput)
-        if(!inputV){
+        if (!inputV) {
             r = await fetch('https://api.seositeshome.com/table', {
                 method: 'POST',
                 headers: {
@@ -148,7 +149,7 @@ const generateMainTable = async (tableName, token) => {
                 body: JSON.stringify(
                     {
                         table: userInput,
-        
+
                     }
                 ),
             })
@@ -207,7 +208,7 @@ const generateSettingTable = async (table, token) => {
     const headers = ["Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
-    for(const headerText of headers) {
+    for (const headerText of headers) {
         let th = document.createElement("th");
         th.textContent = headerText; // Set the text content for <th>
         tr.appendChild(th); // Append the <th> to the <tr>
@@ -274,10 +275,10 @@ const generateSettingTable = async (table, token) => {
     })
 
     document.getElementById('add').onclick = async (e) => {
-        
+
         let userInput = prompt("Enter table name to add table \nEnter number to add rows");
         let inputV = parseInt(userInput)
-        if(!inputV){
+        if (!inputV) {
             r = await fetch('https://api.seositeshome.com/table', {
                 method: 'POST',
                 headers: {
@@ -286,7 +287,7 @@ const generateSettingTable = async (table, token) => {
                 body: JSON.stringify(
                     {
                         table: userInput,
-        
+
                     }
                 ),
             })
@@ -603,7 +604,16 @@ const runScript2 = () => {
 document.addEventListener('DOMContentLoaded', async function () {
 
     const urlParams = new URLSearchParams(window.location.search);
-
+    settingsButton.onclick = (e) => {
+        if(e.target.checked){
+            generateSettingTable(table, token)
+        }
+    }
+    dataButton.onclick = (e) => {
+        if(e.target.checked){
+            generateMainTable(table, token)
+        }
+    }
     // Extract the query parameters
     const token = urlParams.get('token');
     const table = urlParams.get('table');
@@ -613,10 +623,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
     if (show === 'settings') {
         await generateSettingTable(table, token)
-        
+        settingsButton.checked = true
+
     }
     else {
         await generateMainTable(table, token)
+        dataButton.checked = true
     }
     sButton.classList.add('loaded')
 

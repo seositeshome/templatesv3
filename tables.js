@@ -134,7 +134,7 @@ const generateMainTable = async (tableName, token) => {
     for (const record of mainRecords) {
         generateRecord(record)
     }
-    document.getElementById('add-row').onclick = async (e) => {
+    document.getElementById('add').onclick = async (e) => {
         const inputV = table.querySelector('.input-add-row').value
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
@@ -238,7 +238,7 @@ const generateSettingTable = async (table, token) => {
 
     })
 
-    document.getElementById('add-row').onclick = async (e) => {
+    document.getElementById('add').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {

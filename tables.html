@@ -45,7 +45,29 @@
         </tr>
         </tbody>
       </table>
-      
+      <tr id="settingsHead" hidden>
+        <th>Column Name</th>
+        <th>Hidden column</th>
+        <th>Cut long cell</th>
+        <th>Position</th>
+        <th>Data type</th>
+        <th>Remove</th>
+      </tr>
+      <tr id="settingsRow" hidden>
+        <td contenteditable="true">email</td>
+        <td><label><input type="checkbox">🙈</label></td>
+        <td><label><input type="checkbox">✂️</label></td>
+        <td><input class="input-table" type="number" value="0"></td>
+        <td>
+          <select class="select-1">
+            <option> ⬇️ select</option>
+            <option>number</option>
+            <option>date ISO 8601 UTC </option>
+            <option>string</option>
+          </select>
+        </td>
+        <td><label><input type="checkbox">🗑️</label></td>
+      </tr>
       </section>
   </main>
   <script src="./tables.js"></script>

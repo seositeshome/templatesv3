@@ -39,7 +39,7 @@ const generateMainTable = async (tableName, token) => {
     const theadtr = table.querySelector('thead tr')
 
     const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
-    table.querySelector('#save').onclick = async (e) => {
+    sButton.onclick = async (e) => {
         const status = document.getElementById('saveStatus')
         status.textContent = '🟠'
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
@@ -97,10 +97,16 @@ const generateMainTable = async (tableName, token) => {
         },
     }).then(e => e.json())
     const mainRecords = res.records
+    const originalFilter = tableSettings.querySelector('#filterHead')
+    
+        
     for (const record of records) {
         const th = document.createElement('th')
         th.textContent = record.name
         theadtr.append(th)
+        const clonedFilter = originalFilter.cloneNode(true)
+        clonedFilter.id = headerText.toLocaleLowerCase()
+        originalFilter.parentNode.append(clonedFilter)
         if (record.hidden) {
             th.setAttribute('hidden', '')
         }

@@ -531,6 +531,7 @@ const runScript1 = () => {
     document.querySelectorAll('#table td').forEach(function (cell) {
         // Make cell editable on double-click
         cell.addEventListener('dblclick', function () {
+            console.log('double click')
             makeEditable(cell);
         });
 

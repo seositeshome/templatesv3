@@ -623,7 +623,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         if(e.target.checked){
             generateSettingTable(table, token)
             
-            const value = 'data'
+            const value = 'settings'
             urlParams.set('show', value);
             history.pushState({}, '', `${window.location.pathname}?${urlParams}`);
         }

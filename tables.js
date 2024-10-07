@@ -1,5 +1,5 @@
 const t = document.getElementById('dtable')
-const sButton = document.querySelector('.loading-btn loading')
+const sButton = document.querySelector('.loading-btn')
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 
@@ -134,8 +134,24 @@ const generateMainTable = async (tableName, token) => {
     for (const record of mainRecords) {
         generateRecord(record)
     }
-    document.getElementById('add-row').onclick = async (e) => {
-        const inputV = table.querySelector('.input-add-row').value
+    document.getElementById('add').onclick = async (e) => {
+        let userInput = prompt("Enter table name to add table \nEnter number to add rows");
+        let inputV = parseInt(userInput)
+        if(!inputV){
+            r = await fetch('https://api.seositeshome.com/table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    {
+                        table: userInput,
+        
+                    }
+                ),
+            })
+            return
+        }
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
             p.push({})
@@ -181,8 +197,21 @@ const generateSettingTable = async (table, token) => {
     const tableSettings = t.cloneNode(true)
     tableSettings.removeAttribute('hidden')
     tableSettings.id = 'tableToShow'
-    const original = tableSettings.querySelector('tbody').querySelector('tr')
-    const childs = tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
+    const original = document.getElementById('settingsRow')
+    let tr = document.createElement("tr");
+    tr.id = "settingsHead";
+
+    // Define the table header names
+    const headers = ["Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
+
+    // Loop through the headers and create each <th> element
+    headers.forEach(headerText => {
+        let th = document.createElement("th");
+        th.textContent = headerText; // Set the text content for <th>
+        tr.appendChild(th); // Append the <th> to the <tr>
+    });
+    tableSettings.querySelector('thead').append(tr)
+    tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
     let remove = 0
     const generateFromRecord = (record, first) => {
         const cloned = original.cloneNode(true);
@@ -238,8 +267,25 @@ const generateSettingTable = async (table, token) => {
 
     })
 
-    document.getElementById('add-row').onclick = async (e) => {
-        const inputV = tableSettings.querySelector('.input-add-row').value
+    document.getElementById('add').onclick = async (e) => {
+        
+        let userInput = prompt("Enter table name to add table \nEnter number to add rows");
+        let inputV = parseInt(userInput)
+        if(!inputV){
+            r = await fetch('https://api.seositeshome.com/table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    {
+                        table: userInput,
+        
+                    }
+                ),
+            })
+            return
+        }
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
             p.push({})
@@ -352,7 +398,7 @@ const generateSettingTable = async (table, token) => {
     }
 
 
-    t.parentNode.append(table)
+    t.parentNode.append(tableSettings)
 
 }
 async function generateTables() {

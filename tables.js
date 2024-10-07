@@ -211,7 +211,7 @@ const generateSettingTable = async (table, token) => {
         tr.appendChild(th); // Append the <th> to the <tr>
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = headerText.toLocaleLowerCase()
-        originalFilter.parentNode.Appen(clonedFilter)
+        originalFilter.parentNode.append(clonedFilter)
     });
     originalFilter.remove()
     tableSettings.querySelector('thead').append(tr)

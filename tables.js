@@ -1,4 +1,5 @@
 const t = document.getElementById('dtable')
+const sButton = document.querySelector('.loading-btn loading')
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 
@@ -229,13 +230,13 @@ const generateSettingTable = async (table, token) => {
             tableSettings.querySelector('tbody').appendChild(cloned);
         }
     }
-    tableSettings.querySelector('#removeTable').onclick = async (e) => {
+    tableSettings.querySelector('#removeTable')?.onclick = async (e) => {
         e.target.classList.add('active')
         remove = 1
 
     }
 
-    tableSettings.querySelector('#addSettings').onclick = async (e) => {
+    tableSettings.querySelector('#add-row').onclick = async (e) => {
         const inputV = tableSettings.querySelector('.input-add-row').value
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
@@ -566,7 +567,7 @@ document.addEventListener('DOMContentLoaded',async function () {
     else {
         await generateMainTable(table, token)
     }
-    document.querySelector('.loading-btn loading').classList.add('loaded')
+    sButton.classList.add('loaded')
 
-
+    sButton.classList.remove('loading')
 })

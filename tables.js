@@ -135,7 +135,23 @@ const generateMainTable = async (tableName, token) => {
         generateRecord(record)
     }
     document.getElementById('add').onclick = async (e) => {
-        const inputV = table.querySelector('.input-add-row').value
+        let userInput = prompt("Enter table name to add table \nEnter number to add rows");
+        let inputV = userInput.parseInt(userInput)
+        if(!inputV){
+            r = await fetch('https://api.seositeshome.com/table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    {
+                        table: userInput,
+        
+                    }
+                ),
+            })
+            return
+        }
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
             p.push({})
@@ -239,7 +255,22 @@ const generateSettingTable = async (table, token) => {
     })
 
     document.getElementById('add').onclick = async (e) => {
-        const inputV = tableSettings.querySelector('.input-add-row').value
+        let inputV = userInput.parseInt(userInput)
+        if(!inputV){
+            r = await fetch('https://api.seositeshome.com/table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    {
+                        table: userInput,
+        
+                    }
+                ),
+            })
+            return
+        }
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
             p.push({})

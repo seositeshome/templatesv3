@@ -50,16 +50,16 @@
     margin-right: 10px; /* Spacing between button and labels */
 }
 
-.loading-btn .loading::before {
+.loading-btn.loading::before {
     content: "⏳";
 }
 
-.loading-btn .done::before {
+.loading-btn.done::before {
     content: "✅";
 }
 
 
-.loading-btn .save::before {
+.loading-btn.save::before {
     content: "💾";
 }
 

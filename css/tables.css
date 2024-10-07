@@ -54,7 +54,7 @@
     content: "⏳";
 }
 
-.loading-btn.done::before {
+.loading-btn.loaded::before {
     content: "✅";
 }
 

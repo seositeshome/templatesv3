@@ -40,8 +40,8 @@ const generateMainTable = async (tableName, token) => {
 
     const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
     sButton.onclick = async (e) => {
-        const status = document.getElementById('saveStatus')
-        status.textContent = '🟠'
+        sButton.classList.add('loading')
+        sButton.classList.remove('save')
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
         // Prepare an array to hold the updated records
@@ -85,7 +85,7 @@ const generateMainTable = async (tableName, token) => {
 
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
-        status.textContent = '🟢'
+        sButton.classList.remove('loading')
 
     }
 
@@ -126,7 +126,9 @@ const generateMainTable = async (tableName, token) => {
             if (r.cut) {
                 td.classList.add('short')
             }
-            td.onblur = () => tr.setAttribute('data-changed', '')
+            td.onblur = () => {tr.setAttribute('data-changed', '')
+                sButton.classList.add('save')
+            }
             tr.append(td)
 
         }
@@ -234,6 +236,7 @@ const generateSettingTable = async (table, token) => {
         const tds = cloned.querySelectorAll('td');
         const setModified = (e) => {
             cloned.setAttribute('data-changed', '')
+            sButton.classList.add('save')
         }
         tds[0].textContent = record.name; // Fill 'name' in the first column
         tds[0].onblur = setModified
@@ -323,7 +326,8 @@ const generateSettingTable = async (table, token) => {
         }
     }
     sButton.onclick = async (e) => {
-
+        sButton.classList.add('loading')
+        sButton.classList.remove('save')
         if (remove) {
             await fetch(`https://api.seositeshome.com/tables/${table}`, {
                 method: 'DELETE',
@@ -401,7 +405,7 @@ const generateSettingTable = async (table, token) => {
 
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
-        sButton.classList.remove('save')
+        sButton.classList.remove('loading')
 
     }
 
@@ -571,6 +575,7 @@ const runScript2 = () => {
         // Split clipboard data by newline to get rows
         let rows = clipboardData.split('\n');
         activeCell.closest('tr').setAttribute('data-changed', 'true')
+        sButton.classList.add('save')
         // Get the row and cell index for starting the paste
         let startRow = activeCell.parentElement;
         let startCellIndex = Array.from(startRow.children).indexOf(activeCell);
@@ -597,6 +602,7 @@ const runScript2 = () => {
                     return;
                 }
                 targetCell.closest('tr').setAttribute('data-changed', 'true')
+                sButton.classList.add('save')
                 // Set the text of the cell
                 targetCell.textContent = cellText || ''; // Insert empty string if cell is empty
             });

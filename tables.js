@@ -187,9 +187,10 @@ const generateMainTable = async (tableName, token) => {
         runScript2()
         sButton.classList.remove('save')
     }
+    
+    t.parentNode.append(table)
     await runScript1()
     await runScript2()
-    t.parentNode.append(table)
 
 
 }
@@ -418,59 +419,7 @@ const generateSettingTable = async (table, token) => {
     t.parentNode.append(tableSettings)
 
 }
-async function generateTables() {
-    console.log('generating tables')
-    const res = await fetch('https://api.seositeshome.com/tables', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(e => e.json())
-    console.log('res' + JSON.stringify(res))
 
-    const tableNames = res.tables.map(e => e.tableName).filter(e => !e.endsWith('settings'))
-    const original = document.getElementById('tableSelector')
-    const childs = Array.from(original.parentNode.children)
-    for (let i = 1; i < childs.length; i++) {
-        childs[i].remove()
-    }
-
-    original.setAttribute('hidden', "")
-    const stored = localStorage.getItem('showTable')
-    let first = true
-    for (const table of tableNames) {
-        const cloned = original.cloneNode(true)
-        if (first) {
-            cloned.classList.add('active')
-            first = false
-        }
-        cloned.innerHTML = cloned.innerHTML.replace('Loading..', table)
-        cloned.removeAttribute('hidden')
-        cloned.id = 'table;' + table
-        let generating = 0
-        cloned.querySelector('input').onclick = async (e) => {
-            e.preventDefault()
-            Array.from(original.parentNode.children).forEach(e => e.classList?.remove('active'));
-
-            cloned.classList.add('active')
-            e.stopPropagation()
-            console.log('clicked')
-            if (generating) {
-                return
-            }
-            generating = true
-            const stored = localStorage.getItem('showTable')
-            stored === 'main' && (await generateMainTable(table))
-            stored === 'settings' && (await generateSettingTable(table))
-            generating = false
-        }
-        original.parentNode.append(cloned)
-    }
-    stored === 'main' && generateMainTable(tableNames[0])
-    stored === 'settings' && generateSettingTable(tableNames[0])
-
-
-}
 const setShowTable = (type) => {
     const stored = localStorage.getItem('showTable')
     const showMain = document.getElementById('showMainTables')

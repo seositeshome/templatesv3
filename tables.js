@@ -178,7 +178,7 @@ const generateMainTable = async (tableName, token) => {
     }
     runScript1()
     runScript2()
-    t.parentNode.append(table)
+    //t.parentNode.append(table)
 
 
 }

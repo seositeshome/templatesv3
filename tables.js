@@ -477,7 +477,7 @@ const runScript1 = () => {
     }
 
     // Watch for all table cells with 'data-entity-value' attribute
-    document.querySelectorAll('#table td').forEach(function (cell) {
+    document.querySelectorAll('#tableToShow td').forEach(function (cell) {
         // Make cell editable on double-click
         cell.addEventListener('dblclick', function () {
             console.log('double click')
@@ -503,7 +503,7 @@ const runScript2 = () => {
     let activeCell = null; // Variable to store the currently active cell
 
     // Track clicks only on <td> elements within the <tbody> of #tableData
-    document.querySelectorAll('table tbody td').forEach(function (cell) {
+    document.querySelectorAll('#tableToShow tbody td').forEach(function (cell) {
         cell.addEventListener('click', function () {
             activeCell = cell; // Set the clicked cell as the active one
             console.log("Active cell set: ", activeCell);

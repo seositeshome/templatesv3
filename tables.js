@@ -185,8 +185,8 @@ const generateMainTable = async (tableName, token) => {
         runScript2()
         sButton.classList.remove('save')
     }
-    runScript1()
-    runScript2()
+    await runScript1()
+    await runScript2()
     t.parentNode.append(table)
 
 

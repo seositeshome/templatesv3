@@ -64,7 +64,7 @@
 
 
 .loading-btn.save {
-    background-color: #333; !important
+    background-color: #333 !important;
 
 }
 .loading-btn.save::before {

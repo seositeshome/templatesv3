@@ -2,7 +2,7 @@ const t = document.getElementById('dtable')
 const sButton = document.querySelector('.loading-btn')
 const dataButton = document.getElementById('data-table')
 const settingsButton = document.getElementById('settings-table')
-
+const rButton = document.getElementById('remove')
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 
@@ -37,11 +37,23 @@ const generateMainTable = async (tableName, token) => {
     table.removeAttribute('hidden')
     table.id = 'tableToShow'
     const theadtr = table.querySelector('thead tr')
-
+    let remove = false
     const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
     sButton.onclick = async (e) => {
         sButton.classList.add('loading')
         sButton.classList.remove('save')
+        if (remove) {
+            await fetch(`https://api.seositeshome.com/tables/${table}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const e = document.getElementById('tableToShow')
+            e.remove()
+            sButton.classList.remove('loading')
+            return
+        }
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
 
         // Prepare an array to hold the updated records
@@ -88,7 +100,15 @@ const generateMainTable = async (tableName, token) => {
         sButton.classList.remove('loading')
 
     }
+    rButton.onclick = async (e) => {
+        let userInput = prompt("Enter 'table' to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
+        sButton.classList.add('save')
+        if(userInput ==='table'){
+            remove = true
+        }
+      
 
+    }
     theadtr.innerHTML = ''
     const res = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
         method: 'GET',
@@ -277,12 +297,7 @@ const generateSettingTable = async (table, token) => {
             tableSettings.querySelector('tbody').appendChild(cloned);
         }
     }
-    const removeTButton = tableSettings.querySelector('#removeTable')
-    removeTButton && (removeTButton.onclick = async (e) => {
-        e.target.classList.add('active')
-        remove = 1
-
-    })
+    
 
     document.getElementById('add').onclick = async (e) => {
 
@@ -326,6 +341,15 @@ const generateSettingTable = async (table, token) => {
             generateFromRecord({ id: r[0] }, true)
         }
     }
+    rButton.onclick = async (e) => {
+        let userInput = prompt("Enter 'table' to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
+        sButton.classList.add('save')
+        if(userInput ==='table'){
+            remove = true
+        }
+      
+
+    }
     sButton.onclick = async (e) => {
         sButton.classList.add('loading')
         sButton.classList.remove('save')
@@ -336,9 +360,11 @@ const generateSettingTable = async (table, token) => {
                     'Content-Type': 'application/json',
                 },
             });
-            const e = document.getElementById('table;' + table)
+            const e = document.getElementById('tableToShow')
             e.remove()
-            tableSettings.setAttribute('hidden', '')
+
+            sButton.classList.remove('loading')
+            return
         }
         const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
 

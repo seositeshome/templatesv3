@@ -105,7 +105,7 @@ const generateMainTable = async (tableName, token) => {
         th.textContent = record.name
         theadtr.append(th)
         const clonedFilter = originalFilter.cloneNode(true)
-        clonedFilter.id = headerText.toLocaleLowerCase()
+        clonedFilter.id = record.name.toLocaleLowerCase()
         originalFilter.parentNode.append(clonedFilter)
         if (record.hidden) {
             th.setAttribute('hidden', '')

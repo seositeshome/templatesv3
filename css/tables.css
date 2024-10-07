@@ -69,6 +69,8 @@
 }
 .loading-btn.save::before {
     content: "💾";
+    filter: invert(100%);
+
 }
 
 /* Hover effect */

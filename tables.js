@@ -121,9 +121,12 @@ const generateMainTable = async (tableName, token) => {
         },
     }).then(e => e.json())
     const mainRecords = res.records
+    let total = mainRecords.length
     const originalFilter = table.querySelector('#filterHead')
     
-        
+    const th = document.createElement('th')
+    th.textContent = 'row number'
+        theadtr.append(th)
     for (const record of records) {
         const th = document.createElement('th')
         th.textContent = record.name
@@ -136,8 +139,11 @@ const generateMainTable = async (tableName, token) => {
         }
     }
     const tbody = table.querySelector('tbody')
-    const generateRecord = (record, first) => {
+    const generateRecord = (record, first,elementIndex) => {
         const tr = document.createElement('tr')
+        const td = document.createElement('td')
+        td.textContent = elementIndex+1
+        tr.append(td)
         for (const r of records) {
             const td = document.createElement('td')
             if (r.hidden) {
@@ -166,8 +172,9 @@ const generateMainTable = async (tableName, token) => {
 
         }
     }
-    for (const record of mainRecords) {
-        generateRecord(record)
+    for (let i=0;i< total;i++) {
+        const record = mainRecords[i]
+        generateRecord(record,false,i)
     }
     document.getElementById('add').onclick = async (e) => {
         let userInput = prompt("Enter table name to add table \nEnter number to add rows");
@@ -204,9 +211,11 @@ const generateMainTable = async (tableName, token) => {
             ),
         }).then(e => e.json())
         console.log(JSON.stringify(results))
-        for (const r of results) {
-            generateRecord({ id: r[0] }, true)
+        for (let i=0;i<results.length;i++) {
+            const r = results[i]
+            generateRecord({ id: r[0] }, true,total+i)
         }
+        total+=results.length
         runScript1()
         runScript2()
         sButton.classList.remove('save')

@@ -74,7 +74,7 @@ const generateMainTable = async (tableName, token) => {
                     obj[td.getAttribute('name')] = parseFloat(td.textContent)
                 }
                 else {
-                    if (td.getAttribute('name') && td.textContent) {
+                    if (td.getAttribute('name') ) {
                         obj[td.getAttribute('name')] =td.textContent ? new Date(td.textContent) : undefined
                     }
 

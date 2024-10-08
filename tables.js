@@ -46,6 +46,7 @@ const generateMainTable = async (tableName, token) => {
     sButton.onclick = async (e) => {
         sButton.classList.add('loading')
         sButton.classList.remove('save')
+        sButton.classList.remove('loaded')
         if (remove) {
             await fetch(`https://api.seositeshome.com/tables/${table}`, {
                 method: 'DELETE',
@@ -102,6 +103,7 @@ const generateMainTable = async (tableName, token) => {
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
         sButton.classList.remove('loading')
+        sButton.classList.add('loaded')
 
     }
     rButton.onclick = async (e) => {
@@ -367,6 +369,7 @@ const generateSettingTable = async (table, token) => {
     sButton.onclick = async (e) => {
         sButton.classList.add('loading')
         sButton.classList.remove('save')
+        sButton.classList.remove('loaded')
         if (remove) {
             await fetch(`https://api.seositeshome.com/tables/${table}`, {
                 method: 'DELETE',
@@ -447,6 +450,7 @@ const generateSettingTable = async (table, token) => {
         // Optional: Clear the 'data-changed' attribute from rows after successful update
         changedRows.forEach(row => row.removeAttribute('data-changed'));
         sButton.classList.remove('loading')
+        sButton.classList.add('loaded')
 
     }
 
@@ -643,6 +647,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         dataButton.checked = true
     }
     sButton.classList.add('loaded')
-
+    
+    document.querySelector('.current').textContent = table
     sButton.classList.remove('loading')
 })

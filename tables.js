@@ -246,21 +246,23 @@ const generateSettingTable = async (table, token) => {
     tableSettings.removeAttribute('hidden')
     tableSettings.id = 'tableToShow'
     const original = document.getElementById('settingsRow')
-    let tr = document.createElement("tr");
+    let tr = tableSettings.querySelector('thead tr')
     tr.id = "settingsHead";
 
     // Define the table header names
     const headers = ["Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
+    const o =tr.querySelector('th')
     for (const headerText of headers) {
-        let th = document.createElement("th");
-        th.textContent = headerText; // Set the text content for <th>
+        let th = o.cloneNode(true)
+        th.querySelector('span').textContent = headerText; // Set the text content for <th>
         tr.appendChild(th); // Append the <th> to the <tr>
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = headerText.toLocaleLowerCase()
         originalFilter.parentNode.append(clonedFilter)
     }
+    o.remove()
     originalFilter.remove()
     tableSettings.querySelector('thead').append(tr)
     tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())

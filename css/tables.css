@@ -231,16 +231,15 @@
 }
 
 /* Table body cells */
-.table tbody td {
-    padding: 2px 6px; /* Компактные отступы */
-    color: #ccc; /* Светлый текст */
-    font-size: 18px; /* Фиксированный размер текста */
-    border-bottom: 1px solid #444;
-    text-align: left; /* Выравнивание текста по левому краю */
-    min-height: 24px; /* Фиксированная минимальная высота ячеек */
-    height: 24px; /* Устанавливаем фиксированную высоту ячеек */
-    line-height: 1.2em; /* Линия высоты для текста */
-    vertical-align: middle; /* Центрирование текста по вертикали */
+.table tbody td { 
+    border: 1px solid #444; /* Add border between columns and rows */
+    padding: 8px; /* Adjust padding to your needs */
+    text-align: center;
+    font-size: 18px; 
+    white-space: nowrap; /* Предотвращает перенос текста на новую строку */
+    overflow: hidden; 
+    
+      
 }
 
 .filter input[type="number"] {

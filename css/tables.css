@@ -168,7 +168,7 @@
 }
 
 /* Стили для инпута */
-.filterHead input {
+#filterHead input {
     display: block;
     width: auto; 
     height: 20px; /* Одинаковая высота с селектором */

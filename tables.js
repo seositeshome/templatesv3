@@ -1,3 +1,8 @@
+document.getElementById('reload').addEventListener('click', function() {
+    location.reload();
+});
+
+
 const t = document.getElementById('dtable')
 const sButton = document.querySelector('.loading-btn')
 const dataButton = document.getElementById('data-table')

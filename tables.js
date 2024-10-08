@@ -126,7 +126,7 @@ const generateMainTable = async (tableName, token) => {
     
     const th = document.createElement('th')
     th.textContent = 'row number'
-        theadtr.append(th)
+    theadtr.append(th)
     for (const record of records) {
         const th = document.createElement('th')
         th.textContent = record.name
@@ -141,6 +141,7 @@ const generateMainTable = async (tableName, token) => {
     const tbody = table.querySelector('tbody')
     const generateRecord = (record, first,elementIndex) => {
         const tr = document.createElement('tr')
+        tr.setAttribute('index',elementIndex+1)
         const td = document.createElement('td')
         td.textContent = elementIndex+1
         tr.append(td)

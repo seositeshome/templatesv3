@@ -264,7 +264,6 @@ const generateSettingTable = async (table, token) => {
     }
     o.remove()
     originalFilter.remove()
-    tableSettings.querySelector('thead').append(tr)
     tableSettings.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
     let remove = 0
     const generateFromRecord = (record, first) => {

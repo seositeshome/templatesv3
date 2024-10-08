@@ -154,7 +154,7 @@
     text-align: left;
 }
 
-#filterHead select {
+.filter-select {
     display: block;
     width: auto; /* Ширина под содержимое */
     height: 32px; /* Высота селектора */
@@ -168,7 +168,7 @@
 }
 
 /* Стили для инпута */
-#filterHead input {
+.filter-input {
     display: block;
     width: auto; 
     height: 20px; /* Одинаковая высота с селектором */

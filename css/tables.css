@@ -154,8 +154,8 @@
     text-align: left;
 }
 
-.filter-select {
-    display: inline-block;
+#filterHead select {
+    display: block;
     width: auto; /* Ширина под содержимое */
     height: 32px; /* Высота селектора */
     padding: 2px 5px; /* Отступы внутри */
@@ -168,9 +168,9 @@
 }
 
 /* Стили для инпута */
-.filter-input {
-    display: inline-block;
-    width: calc(100% - 50px); /* Подстраиваем ширину, чтобы учесть селектор */
+.filterHead input {
+    display: block;
+    width: auto; 
     height: 32px; /* Одинаковая высота с селектором */
     padding: 2px 5px;
     background-color: #333;

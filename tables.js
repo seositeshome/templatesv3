@@ -105,7 +105,7 @@ const generateMainTable = async (tableName, token) => {
 
     }
     rButton.onclick = async (e) => {
-        let userInput = prompt("Enter 'table' to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
+        let userInput = prompt("Enter table name to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
         sButton.classList.add('save')
         if(userInput ==='table'){
             remove = true

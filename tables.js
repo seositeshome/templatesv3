@@ -115,7 +115,7 @@ const generateMainTable = async (tableName, token) => {
       
 
     }
-    theadtr.innerHTML = ''
+    //theadtr.innerHTML = ''
     const res = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
         method: 'GET',
         headers: {
@@ -126,12 +126,12 @@ const generateMainTable = async (tableName, token) => {
     let total = mainRecords.length
     const originalFilter = table.querySelector('#filterHead')
     
-    const th = document.createElement('th')
-    th.textContent = 'row number'
-    theadtr.append(th)
+    const th1 = theadtr.querySelector('th')
+    th1.querySelector('span').textContent = 'row number'
+    theadtr.append(th1)
     for (const record of records) {
-        const th = document.createElement('th')
-        th.textContent = record.name
+        const th = th1.cloneNode(true)
+        th.querySelector('span').textContent = record.name
         theadtr.append(th)
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()

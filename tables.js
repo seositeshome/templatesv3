@@ -124,13 +124,9 @@ const generateMainTable = async (tableName, token) => {
         const th = document.createElement('th')
         const span = document.createElement('span')
         const button = document.createElement('button')
-
         span.textContent = record.name
-
-        th.appendChild(span);  
-        th.appendChild(button);  
-
-        
+        th.appendChild(span) 
+        th.appendChild(button) 
         theadtr.append(th)
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()

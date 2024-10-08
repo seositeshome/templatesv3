@@ -232,13 +232,14 @@
 
 /* Table body cells */
 .table tbody td {
-    padding: 2px 6px; /* Уменьшенные отступы: 2px сверху и снизу, 6px слева и справа */
-    color: #ccc; /* Light text */
+    padding: 2px 6px; /* Компактные отступы */
+    color: #ccc; /* Светлый текст */
     font-size: 18px; /* Фиксированный размер текста */
     border-bottom: 1px solid #444;
-    text-align: left; /* Left alignment */
-    min-height: 24px; /* Минимальная высота для всех ячеек */
-    line-height: 1.2em; /* Плотная линия для текста */
+    text-align: left; /* Выравнивание текста по левому краю */
+    min-height: 24px; /* Фиксированная минимальная высота ячеек */
+    height: 24px; /* Устанавливаем фиксированную высоту ячеек */
+    line-height: 1.2em; /* Линия высоты для текста */
     vertical-align: middle; /* Центрирование текста по вертикали */
 }
 

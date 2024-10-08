@@ -156,11 +156,6 @@
     text-align: left;
 }
 
-.sort-button {
-    content: "📶";
-}
-
-
 .filter-select {
     display: block;
     width: auto; /* Ширина под содержимое */
@@ -237,11 +232,14 @@
 
 /* Table body cells */
 .table tbody td {
-    padding: 6px;
+    padding: 2px 6px; /* Уменьшенные отступы: 2px сверху и снизу, 6px слева и справа */
     color: #ccc; /* Light text */
-    font-size: 0.9em; /* Slightly smaller text */
+    font-size: 18px; /* Фиксированный размер текста */
     border-bottom: 1px solid #444;
     text-align: left; /* Left alignment */
+    min-height: 24px; /* Минимальная высота для всех ячеек */
+    line-height: 1.2em; /* Плотная линия для текста */
+    vertical-align: middle; /* Центрирование текста по вертикали */
 }
 
 .filter input[type="number"] {

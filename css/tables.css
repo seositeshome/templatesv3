@@ -136,7 +136,7 @@
     width: 100%; /* Занимает 100% ширины */
     border-collapse: collapse;
     background-color: #2a2a2a; /* Dark background for the table */
-    color: #fff;
+    color: #e0e0e0;
     margin-bottom: 20px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
 }

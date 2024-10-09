@@ -157,9 +157,9 @@
     text-align: left;
 }
 
-thead tr:first-child th:first-child {
-    text-align: center; /* Выровнять текст по центру */
-    vertical-align: middle; /* Выровнять по вертикали */
+thead tr:first-child th {
+    text-align: center; /* Горизонтальное выравнивание по центру */
+    vertical-align: middle; /* Вертикальное выравнивание по центру */
 }
 
 

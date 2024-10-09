@@ -404,7 +404,7 @@ const generateSettingTable = async (table, token) => {
         const toDIds = []
         const updatedItems = Array.from(changedRows).map(row => {
             const tds = row.querySelectorAll('td');
-            const toDelete = tds[5].querySelector('input').checked
+            const toDelete = tds[6].querySelector('input').checked
             console.log(tds[5].querySelector('input'));
             if (toDelete) {
                 toDIds.push(row.id)
@@ -414,10 +414,11 @@ const generateSettingTable = async (table, token) => {
                 return {
                     id: row.id, // The id of the row (record)
                     name: tds[0].textContent.trim(), // Get the name from the first column
-                    hidden: tds[1].querySelector('input[type="checkbox"]').checked, // Get the 'hidden' checkbox value
-                    cut: tds[2].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
-                    position: parseInt(tds[3].querySelector('input').value, 10) || 0, // Get the position, default to 0
-                    type: tds[4].querySelector('select').value // Get the selected type from the dropdown
+                    columnName: tds[1].textContent.trim(),
+                    hidden: tds[2].querySelector('input[type="checkbox"]').checked, // Get the 'hidden' checkbox value
+                    cut: tds[3].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
+                    position: parseInt(tds[4].querySelector('input').value, 10) || 0, // Get the position, default to 0
+                    type: tds[5].querySelector('select').value // Get the selected type from the dropdown
                 };
             }
         });

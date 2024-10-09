@@ -137,6 +137,7 @@ const generateMainTable = async (tableName, token) => {
         originalFilter.parentNode.append(clonedFilter)
         if (record.hidden) {
             th.setAttribute('hidden', '')
+            clonedFilter.setAttribute('hidden', '')
         }
         const label = th.querySelector('label')
         th.querySelector('input').onclick = (e) => {

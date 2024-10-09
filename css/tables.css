@@ -190,7 +190,7 @@
 .filter-input:focus {
     outline: none;
     border-color: #0056b3; /* Синий цвет при фокусе */
-    border-left: 1px solid #0056b3; /* Возвращаем левую границу при фокусе */
+    border-left: 2px solid #0056b3; /* Возвращаем левую границу при фокусе */
 }
 /* Дополнительное стилизованное состояние фокуса для инпута */
 .filter-input:focus {

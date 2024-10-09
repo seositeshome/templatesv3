@@ -302,7 +302,7 @@ thead tr:first-child th {
 .table tbody td[contenteditable="true"],
 .cell-checked {
     background-color: #ffa500; /* Dark blue background */
-    color: #fff; /* White text */
+    color: #333333; /* White text */ 
     transition: background-color 0.3s, color 0.3s ease-in-out;
 }
 

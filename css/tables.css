@@ -280,6 +280,7 @@ thead tr:nth-child(2) th:first-child {
     text-align: right; /* Выравнивание текста по правому краю */
     user-select: none; /* Отключение возможности выделения текста */
     padding-right: 4px; /* Добавляем отступ справа */
+    color:#ffa500; 
 }
 
 

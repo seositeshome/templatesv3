@@ -346,11 +346,11 @@
 
 
 .sort-label.asc::before {
-    content: "▲"; /* Arrow up for ascending */
+    content: "⬆️"; /* Arrow up for ascending */
 }
 
 .sort-label.desc::before {
-    content: "▼"; /* Arrow down for descending */
+    content: "⬇️"; /* Arrow down for descending */
 }
 
 /* Checked state: border around the label */

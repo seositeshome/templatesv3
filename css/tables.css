@@ -286,7 +286,7 @@ thead tr:nth-child(2) th:first-child::before {
     padding-top: 8px; /* Adjust padding to your needs */
     padding-left: 8px; /* Adjust padding to your needs */
     padding-right: 8px; /* Adjust padding to your needs */
-    padding-bottom: 2px; /* Adjust padding to your needs */
+    padding-bottom: 3px; /* Adjust padding to your needs */
     text-align: left;
     font-size: 18px; 
     white-space: nowrap; /* Предотвращает перенос текста на новую строку */

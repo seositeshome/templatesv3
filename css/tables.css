@@ -120,9 +120,6 @@
     background: #444;
 }
 
-td:empty {
-    display: none;
-  }
 
   
 /* Checked state for top-nav labels */
@@ -137,7 +134,7 @@ td:empty {
 }
 /* Table styling */
 .table {
-    table-layout: auto;
+    
     will-change: transform;
     width: 100%; /* Занимает 100% ширины */
     border-collapse: collapse;

@@ -144,13 +144,13 @@ const generateMainTable = async (tableName, token) => {
         th.querySelector('.sort-label').onclick = (e) => {
             console.log('clicked')
             e.stopPropagation()
-            if (label.classList.contains('ask')) {
+            if (label.classList.contains('asc')) {
                 // Case where class list includes 'asc'
-                label.classList.remove('ask')
+                label.classList.remove('asc')
             } else if (label.classList.contains('desc')) {
                 // Case where class list includes 'desc'
                 label.classList.remove('desc')
-                label.classList.add('ask')
+                label.classList.add('asc')
                 console.log('The label has "desc" class');
             } else {
                 label.classList.add('desc')

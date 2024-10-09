@@ -122,9 +122,11 @@
 
 /* Checked state for top-nav labels */
 .top-nav-input:checked + .top-nav-label {
-    border-color: #0056b3; /* Set the border color */
-    border-width: 2px; /* Set the border width */
-    border-style: solid; /* Make sure the border is solid */
+    border-color: #0056b3; /* Синяя рамка при checked */
+    border-width: 2px;
+    border-style: solid;
+    color: #fff; /* Белый текст */
+    background-color: #0056b3; /* Синий фон при checked */
 }
 
 .top-nav-input {

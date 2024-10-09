@@ -279,7 +279,7 @@
 }
 
 
-.current-table {
+.current {
     color: #ccc; /* Цвет текста */
     font-size: 1.2em; /* Размер шрифта */
     font-weight: bold; /* Жирный шрифт */

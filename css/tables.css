@@ -408,4 +408,7 @@ thead tr:first-child th {
     transform: scale(0.95);
 }
 
-/* td:empty {  background-color: #8a8a8b; /* Устанавливаем светлый цвет для пустых ячеек */} 
+
+td:empty {
+    background-color: #8a8a8b; /* Устанавливаем светлый цвет для пустых ячеек */
+} 

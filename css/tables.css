@@ -283,10 +283,10 @@ thead tr:nth-child(2) th:first-child::before {
 /* Table body cells */
 .table tbody td { 
     border: 1px solid #444; /* Add border between columns and rows */
-    padding-top: 8px; /* Adjust padding to your needs */
+    padding-top: 6px; /* Adjust padding to your needs */
     padding-left: 8px; /* Adjust padding to your needs */
     padding-right: 8px; /* Adjust padding to your needs */
-    padding-bottom: 3px; /* Adjust padding to your needs */
+    padding-bottom: 5px; /* Adjust padding to your needs */
     text-align: left;
     font-size: 18px; 
     white-space: nowrap; /* Предотвращает перенос текста на новую строку */

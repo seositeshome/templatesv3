@@ -303,7 +303,7 @@ thead tr:first-child th {
 .cell-checked {
     background-color: #ffa500; /* Dark blue background */
     color: #333333; /* White text */ 
-    transition: background-color 0.3s, color 0.3s ease-in-out;
+    transition: background-color 0.1s, color 0.1s ease-in-out;
 }
 
 /* Alternating row colors */

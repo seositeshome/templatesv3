@@ -128,6 +128,7 @@ const generateMainTable = async (tableName, token) => {
 
     const th1 = theadtr.querySelector('th')
     theadtr.append(document.createElement('th'))
+    originalFilter.parentNode.append(document.createElement('th'))
     for (const record of records) {
         const th = th1.cloneNode(true)
         th.querySelector('span').textContent = record.columnName

@@ -185,6 +185,7 @@
 .filter-input:focus {
     outline: none;
     border-color: #0056b3; /* Синий цвет при фокусе */
+    color:#0056b3
 }
 /* Контейнер фильтра */
 .filter {

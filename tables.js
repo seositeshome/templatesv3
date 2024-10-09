@@ -259,9 +259,11 @@ const generateSettingTable = async (table, token) => {
         let th = o.cloneNode(true)
         th.querySelector('span').textContent = headerText; // Set the text content for <th>
         tr.appendChild(th); // Append the <th> to the <tr>
+        /*
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = headerText.toLocaleLowerCase()
         originalFilter.parentNode.append(clonedFilter)
+        */
     }
     o.remove()
     originalFilter.remove()

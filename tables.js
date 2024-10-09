@@ -131,10 +131,10 @@ const generateMainTable = async (tableName, token) => {
     for (const record of records) {
         const th = th1.cloneNode(true)
         th.querySelector('span').textContent = record.columnName
-        theadtr.append(th)
+        
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()
-        originalFilter.parentNode.append(clonedFilter)
+        
         if (record.hidden) {
             th.setAttribute('hidden', '')
             clonedFilter.setAttribute('hidden', '')
@@ -157,6 +157,8 @@ const generateMainTable = async (tableName, token) => {
                 console.log('The label has neither "asc" nor "desc" class');
             }
         }
+        theadtr.append(th)
+        originalFilter.parentNode.append(clonedFilter)
     }
     originalFilter.remove()
     th1.remove()

@@ -171,12 +171,6 @@ thead tr:first-child th {
 
 
 
-thead tr:first-child th:first-child,
-thead tr:nth-child(2) th:first-child {
-    visibility: hidden; /* Скрыть содержимое в первой ячейке первой и второй строки */
-}
-
-
 
 
 

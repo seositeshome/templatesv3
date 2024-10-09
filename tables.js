@@ -157,6 +157,7 @@ const generateMainTable = async (tableName, token) => {
             }
         }
     }
+    th1.remove()
     const tbody = table.querySelector('tbody')
     const generateRecord = (record, first, elementIndex) => {
         const tr = document.createElement('tr')

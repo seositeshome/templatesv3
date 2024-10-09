@@ -297,7 +297,7 @@ const generateSettingTable = async (table, token) => {
     tr.id = "settingsHead";
 
     // Define the table header names
-    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
+    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove","Foreign key"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
     const o = tr.querySelector('th')

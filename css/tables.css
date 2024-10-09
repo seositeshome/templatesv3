@@ -403,5 +403,5 @@ thead tr:first-child th {
 
 
 td:empty {
-    background-color: #a3a3a9; /* Устанавливаем светлый цвет для пустых ячеек */
+    background-color: #8a8a8b; /* Устанавливаем светлый цвет для пустых ячеек */
 }  

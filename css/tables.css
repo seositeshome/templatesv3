@@ -175,28 +175,25 @@
     width: 100%; 
     height: 28px; /* Одинаковая высота с селектором */
     padding: 2px 5px;
-    background-color: #333;
-    color: #e0e0e0; /* Немного светлее для контраста */
+    background-color: #222; /* Более темный фон */
+    color: #ffcc00; /* Яркий текст, например, желтый */
     font-size: 14px; /* Небольшой размер шрифта */
-    font-family: "Arial", sans-serif; /* Пространство для текста, другой шрифт */
-    font-weight: 400; /* Обычный вес шрифта (убираем полужирность) */
+    font-family: "Arial", sans-serif; /* Задаем другой шрифт */
+    font-weight: 400; /* Обычный вес шрифта */
     letter-spacing: 0.5px; /* Небольшой интервал между буквами */
-    border: 1px solid #444;
-    border-radius: 0 3px 3px 0; /* Закругление справа */
-    transition: border-color 0.3s; /* Плавный переход изменения цвета границы */
+    border: 1px solid #ffcc00; /* Яркая желтая граница */
+    border-radius: 3px; /* Закругление углов */
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s; /* Плавные переходы */
 }
 
 /* Состояние фокуса */
 .filter-input:focus {
     outline: none;
-    border-color: #0056b3; /* Синий цвет при фокусе */
-    border-left: 2px solid #0056b3; /* Возвращаем левую границу при фокусе */
+    border-color: #ffa500; /* Более яркая граница при фокусе */
+    background-color: #333; /* Меняем фон при фокусе */
+    color: #fff; /* Белый текст при фокусе */
 }
-/* Дополнительное стилизованное состояние фокуса для инпута */
-.filter-input:focus {
-    outline: none;
-    border-color: #0056b3; /* Синий цвет при фокусе */
-}
+
 /* Контейнер фильтра */
 .filter {
     display: flex; /* Flexbox для выравнивания элементов в одну строку */

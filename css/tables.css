@@ -270,13 +270,6 @@ thead tr:first-child th {
     overflow: hidden;    
 }
 
-.table tbody td:first-child { 
-    text-align: right; /* Выравнивание текста по правому краю */
-    user-select: none; /* Отключение возможности выделения текста */
-    padding-right: 4px; /* Добавляем отступ справа */
-    color:#ffa500; 
-    max-width: 50px;
-}
 
 
 
@@ -297,6 +290,14 @@ thead tr:first-child th {
     -moz-appearance: textfield;
 }
 
+
+.table tbody td:first-child { 
+    text-align: right; /* Выравнивание текста по правому краю */
+    user-select: none; /* Отключение возможности выделения текста */
+    padding-right: 4px; /* Добавляем отступ справа */
+    color:#ffa500; 
+    max-width: 50px;
+}
 
 /* Editable cells */
 .table tbody td[contenteditable="true"],

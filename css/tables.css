@@ -168,7 +168,7 @@ thead tr:first-child th:first-child {
 }
 thead tr:nth-child(2) th:first-child { /* Первая ячейка второй строки */
     border-top: none;  /* Убираем верхнюю границу */
-    align-items: center;
+    align-items: center !important;
 
 }
 

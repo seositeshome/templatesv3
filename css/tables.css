@@ -176,12 +176,12 @@
     height: 28px; /* Одинаковая высота с селектором */
     padding: 2px 5px;
     background-color: #222; /* Более темный фон */
-    color: #ffcc00; /* Яркий текст, например, желтый */
+    color: #ffa500; /* Яркий текст, например, желтый */
     font-size: 14px; /* Небольшой размер шрифта */
     font-family: "Arial", sans-serif; /* Задаем другой шрифт */
     font-weight: 400; /* Обычный вес шрифта */
     letter-spacing: 0.5px; /* Небольшой интервал между буквами */
-    border: 1px solid #ffcc00; /* Яркая желтая граница */
+    border: 1px solid #ffa500; /* Яркая желтая граница */
     border-radius: 3px; /* Закругление углов */
     transition: border-color 0.3s, background-color 0.3s, color 0.3s; /* Плавные переходы */
 }

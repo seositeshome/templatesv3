@@ -398,6 +398,8 @@ thead tr:nth-child(2) th:first-child { /* Первая ячейка второй
 /* Checked state: border around the label */
 .sort-input:checked + .sort-label {
     border-color:#0056b3; /* Синяя рамка при checked */
+    background-color:#0056b3; /* Синяя рамка при checked */
+
     border-width: 2px;
     border-style: solid;
     color: #fff; /* Белый текст */

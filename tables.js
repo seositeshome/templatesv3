@@ -339,7 +339,7 @@ const generateSettingTable = async (table, token) => {
         }
         const p = []
         const generateName = () => {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
             let name = '';
             const length = 10; // Adjust the length of the random string
 

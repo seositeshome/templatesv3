@@ -161,6 +161,7 @@ const generateMainTable = async (tableName, token) => {
             if (label.classList.contains('asc')) {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')
+                label.classList.add('desc')
             } else if (label.classList.contains('desc')) {
                 // Case where class list includes 'desc'
                 label.classList.remove('desc')

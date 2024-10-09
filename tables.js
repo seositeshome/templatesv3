@@ -158,6 +158,7 @@ const generateMainTable = async (tableName, token) => {
             }
         }
     }
+    originalFilter.remove()
     th1.remove()
     const tbody = table.querySelector('tbody')
     const generateRecord = (record, first, elementIndex) => {

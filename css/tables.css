@@ -162,7 +162,8 @@
 
 
 thead tr:first-child th {
-    text-align: center; /* Горизонтальное выравнивание по центру */
+    border-left: none;
+    border-top: none;
 }
 
 

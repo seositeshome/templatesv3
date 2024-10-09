@@ -206,6 +206,11 @@ thead tr:first-child th {
     transition: border-color 0.3s, background-color 0.3s, color 0.3s; /* Плавные переходы */
 }
 
+
+.column-name {
+    text-transform: capitalize; /* Делаем первую букву каждого слова заглавной */
+}
+
 /* Состояние фокуса */
 .filter-input:focus {
     outline: none;

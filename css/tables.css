@@ -175,7 +175,7 @@ thead tr:nth-child(2) th:first-child {
 thead tr:nth-child(2) th:first-child::before {
     content: "#️⃣";
     position: absolute; /* Позиционируем псевдоэлемент */
-    top: 0; /* Располагаем у верхней границы */
+    top: 5px; /* Располагаем у верхней границы */
     left: 50%; /* Смещаем псевдоэлемент по центру ячейки */
     transform: translateX(-50%); /* Корректируем позицию, чтобы текст был точно по центру */
 }

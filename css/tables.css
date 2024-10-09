@@ -321,18 +321,17 @@
     align-items: center;
     cursor: pointer;
     font-size: 0.9em;
+    margin-left: 5px;
     transition: background 0.3s, color 0.3s, border 0.3s;
 }
 
 /* Add up and down arrows as content */
 .sort-label.asc::before {
     content: "▲"; /* Arrow up for ascending */
-    margin-right: 5px;
 }
 
 .sort-label.desc::before {
     content: "▼"; /* Arrow down for descending */
-    margin-right: 5px;
 }
 
 /* Checked state: border around the label */

@@ -150,7 +150,7 @@ const generateMainTable = async (tableName, token) => {
             const ths = theadtr.querySelectorAll('th')
             for(const t of ths){
                 const input = t.querySelector('input')
-                if(!input.checked){
+                if(input && !input.checked){
                     const l = t.querySelector('label')
                     label.classList.remove('desc')
                     label.classList.remove('asc')

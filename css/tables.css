@@ -163,6 +163,9 @@ thead tr:first-child th:first-child {
 }
 
 
+thead tr:first-child th:first-child {
+    visibility: hidden; /* Скрыть содержимое, но сохранить размеры ячейки */
+}
 
 
 .filter-select {

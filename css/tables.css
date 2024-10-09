@@ -122,7 +122,7 @@
 
 /* Checked state for top-nav labels */
 .top-nav-input:checked + .top-nav-label {
-    border-color: #355c7d; /* Это приглушённый тёмно-синий */
+    border-color: #034076; /* Это приглушённый тёмно-синий */
     border-width: 2px; /* Set the border width */
     border-style: solid; /* Make sure the border is solid */
 }

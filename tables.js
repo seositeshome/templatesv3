@@ -131,7 +131,7 @@ const generateMainTable = async (tableName, token) => {
     theadtr.append(th1)
     for (const record of records) {
         const th = th1.cloneNode(true)
-        th.querySelector('span').textContent = record.name
+        th.querySelector('span').textContent = record.columnName
         theadtr.append(th)
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()

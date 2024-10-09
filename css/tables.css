@@ -371,7 +371,7 @@ thead tr:nth-child(2) th:first-child { /* Первая ячейка второй
     align-items: center;
     cursor: pointer;
     font-size: 19px;
-    transition: background 0.3s, color 0.3s, border 0.3s;
+    transition: background 0.1s, color 0.1s, border 0.1s;
     padding-left: 2px;
     padding-right: 2px;
     border-width: 2px;

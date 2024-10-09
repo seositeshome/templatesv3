@@ -209,9 +209,9 @@ thead tr:first-child th {
 /* Состояние фокуса */
 .filter-input:focus {
     outline: none;
-    border-color: #ffa500; /* Более яркая граница при фокусе */
-    background-color: #333; /* Меняем фон при фокусе */
-    color: #fff; /* Белый текст при фокусе */
+    background-color: #ffa500;/* Dark blue background */
+    color: #333333 !important; /* White text */ 
+    transition: background-color 0.1s, color 0.1s ease-in-out;
 }
 
 /* Контейнер фильтра */

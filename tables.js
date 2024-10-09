@@ -1,4 +1,4 @@
-document.getElementById('reload').addEventListener('click', function() {
+document.getElementById('reload').addEventListener('click', function () {
     location.reload();
 });
 
@@ -75,8 +75,8 @@ const generateMainTable = async (tableName, token) => {
                     obj[td.getAttribute('name')] = parseFloat(td.textContent)
                 }
                 else {
-                    if (td.getAttribute('name') ) {
-                        obj[td.getAttribute('name')] =td.textContent ? new Date(td.textContent) : undefined
+                    if (td.getAttribute('name')) {
+                        obj[td.getAttribute('name')] = td.textContent ? new Date(td.textContent) : undefined
                     }
 
                 }
@@ -109,10 +109,10 @@ const generateMainTable = async (tableName, token) => {
     rButton.onclick = async (e) => {
         let userInput = prompt("Enter table name to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
         sButton.classList.add('save')
-        if(userInput ==='table'){
+        if (userInput === 'table') {
             remove = true
         }
-      
+
 
     }
     //theadtr.innerHTML = ''
@@ -125,7 +125,7 @@ const generateMainTable = async (tableName, token) => {
     const mainRecords = res.records
     let total = mainRecords.length
     const originalFilter = table.querySelector('#filterHead')
-    
+
     const th1 = theadtr.querySelector('th')
     th1.querySelector('span').textContent = 'row number'
     theadtr.append(th1)
@@ -141,11 +141,11 @@ const generateMainTable = async (tableName, token) => {
         }
     }
     const tbody = table.querySelector('tbody')
-    const generateRecord = (record, first,elementIndex) => {
+    const generateRecord = (record, first, elementIndex) => {
         const tr = document.createElement('tr')
-        tr.setAttribute('index',elementIndex+1)
+        tr.setAttribute('index', elementIndex + 1)
         const td = document.createElement('td')
-        td.textContent = elementIndex+1
+        td.textContent = elementIndex + 1
         tr.append(td)
         for (const r of records) {
             const td = document.createElement('td')
@@ -159,7 +159,8 @@ const generateMainTable = async (tableName, token) => {
             if (r.cut) {
                 td.classList.add('short')
             }
-            td.onblur = () => {tr.setAttribute('data-changed', '')
+            td.onblur = () => {
+                tr.setAttribute('data-changed', '')
                 sButton.classList.add('save')
             }
             tr.append(td)
@@ -175,9 +176,9 @@ const generateMainTable = async (tableName, token) => {
 
         }
     }
-    for (let i=0;i< total;i++) {
+    for (let i = 0; i < total; i++) {
         const record = mainRecords[i]
-        generateRecord(record,false,i)
+        generateRecord(record, false, i)
     }
     document.getElementById('add').onclick = async (e) => {
         let userInput = prompt("Enter table name to add table \nEnter number to add rows");
@@ -214,16 +215,16 @@ const generateMainTable = async (tableName, token) => {
             ),
         }).then(e => e.json())
         console.log(JSON.stringify(results))
-        for (let i=0;i<results.length;i++) {
+        for (let i = 0; i < results.length; i++) {
             const r = results[i]
-            generateRecord({ id: r[0] }, true,total+i)
+            generateRecord({ id: r[0] }, true, total + i)
         }
-        total+=results.length
+        total += results.length
         runScript1()
         runScript2()
         sButton.classList.remove('save')
     }
-    
+
     t.parentNode.append(table)
     await runScript1()
     await runScript2()
@@ -250,10 +251,10 @@ const generateSettingTable = async (table, token) => {
     tr.id = "settingsHead";
 
     // Define the table header names
-    const headers = ["Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
+    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
-    const o =tr.querySelector('th')
+    const o = tr.querySelector('th')
     for (const headerText of headers) {
         let th = o.cloneNode(true)
         th.querySelector('span').textContent = headerText; // Set the text content for <th>
@@ -277,24 +278,25 @@ const generateSettingTable = async (table, token) => {
             sButton.classList.add('save')
         }
         tds[0].textContent = record.name; // Fill 'name' in the first column
-        tds[0].onblur = setModified
+        tds[1].textContent = record.columnName
+        tds[1].onblur = setModified
         // Set the checkbox states for 'hidden' and 'cut'
-        tds[1].querySelector('input[type="checkbox"]').checked = record.hidden;
-        tds[1].querySelector('input[type="checkbox"]').onchange = setModified
-        tds[2].querySelector('input[type="checkbox"]').checked = record.cut;
+        tds[2].querySelector('input[type="checkbox"]').checked = record.hidden;
         tds[2].querySelector('input[type="checkbox"]').onchange = setModified
+        tds[3].querySelector('input[type="checkbox"]').checked = record.cut;
+        tds[3].querySelector('input[type="checkbox"]').onchange = setModified
 
         // Set the position in the input element
-        tds[3].querySelector('input').value = record.position;
-        tds[3].querySelector('input').onchange = setModified
+        tds[4].querySelector('input').value = record.position;
+        tds[4].querySelector('input').onchange = setModified
         // Set the correct option in the dropdown based on 'type'
-        const select = tds[4].querySelector('select');
+        const select = tds[5].querySelector('select');
         select.onchange = setModified
         const typeOption = Array.from(select.options).find(option => option.text.toLowerCase() === record.type?.toLowerCase());
         if (typeOption) {
             select.value = typeOption.value;
         }
-        tds[5].querySelector('input').onchange = (e) => {
+        tds[6].querySelector('input').onchange = (e) => {
             setModified(e);
             if (e.target.hasAttribute('checked')) {
                 e.target.removeAttribute('checked')
@@ -314,7 +316,7 @@ const generateSettingTable = async (table, token) => {
             tableSettings.querySelector('tbody').appendChild(cloned);
         }
     }
-    
+
 
     document.getElementById('add').onclick = async (e) => {
 
@@ -336,8 +338,20 @@ const generateSettingTable = async (table, token) => {
             return
         }
         const p = []
+        const generateName = () => {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let name = '';
+            const length = 10; // Adjust the length of the random string
+
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                name += characters[randomIndex];
+            }
+
+            return name;
+        }
         for (i = 0; i < parseInt(inputV); i++) {
-            p.push({})
+            p.push({ name: generateName() })
         }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
             method: 'PUT',
@@ -361,10 +375,10 @@ const generateSettingTable = async (table, token) => {
     rButton.onclick = async (e) => {
         let userInput = prompt("Enter 'table' to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
         sButton.classList.add('save')
-        if(userInput ==='table'){
+        if (userInput === 'table') {
             remove = true
         }
-      
+
 
     }
     sButton.onclick = async (e) => {
@@ -617,16 +631,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     const table = urlParams.get('table');
     const show = urlParams.get('show');
     settingsButton.onclick = (e) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             generateSettingTable(table, token)
-            
+
             const value = 'settings'
             urlParams.set('show', value);
             history.pushState({}, '', `${window.location.pathname}?${urlParams}`);
         }
     }
     dataButton.onclick = (e) => {
-        if(e.target.checked){
+        if (e.target.checked) {
             generateMainTable(table, token)
             const value = 'data'
             urlParams.set('show', value);
@@ -634,7 +648,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
     // Extract the query parameters
-    
+
     if (!token) {
         window.localion.href = './'
     }
@@ -648,7 +662,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         dataButton.checked = true
     }
     sButton.classList.add('loaded')
-    
+
     document.querySelector('.current').textContent = table
     sButton.classList.remove('loading')
 })

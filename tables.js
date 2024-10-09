@@ -147,11 +147,21 @@ const generateMainTable = async (tableName, token) => {
         input.id = record.name
         label.setAttribute('for', record.name)
         label.onclick = (e) => {
+            const ths = theadtr.querySelectorAll('th')
+            for(const t of ths){
+                const input = t.querySelector('input')
+                if(!input.checked){
+                    const l = t.querySelector('label')
+                    label.classList.remove('desc')
+                    label.classList.remove('asc')
+                }
+            }
             console.log('clicked')
             e.stopPropagation()
             if (label.classList.contains('asc')) {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')
+                label.classList.add('desc')
             } else if (label.classList.contains('desc')) {
                 // Case where class list includes 'desc'
                 label.classList.remove('desc')

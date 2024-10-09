@@ -160,7 +160,7 @@
 .filter-select {
     display: block;
     width: 100%; /* Ширина под содержимое */
-    height: 32px; /* Высота селектора */
+    height: 28px; /* Высота селектора */
     padding: 2px 5px; /* Отступы внутри */
     background-color: #333; /* Тёмный фон */
     color: #ccc; /* Светлый текст */
@@ -173,7 +173,7 @@
 .filter-input {
     display: block;
     width: 100%; 
-    height: 30px; /* Одинаковая высота с селектором */
+    height: 28px; /* Одинаковая высота с селектором */
     padding: 2px 5px;
     background-color: #333;
     color: #ccc;

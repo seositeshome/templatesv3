@@ -278,7 +278,9 @@ thead tr:first-child th {
     max-width: 50px;
 }
 
-
+td:empty {
+    background-color: #f0f0f0; /* Устанавливаем светлый цвет для пустых ячеек */
+}  
 
 .filter input[type="number"] {
     -moz-appearance: textfield; /* Firefox */

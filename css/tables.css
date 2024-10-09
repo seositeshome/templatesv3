@@ -283,7 +283,8 @@
     color: #ccc; /* Цвет текста */
     font-size: 1.2em; /* Размер шрифта */
     font-weight: bold; /* Жирный шрифт */
-    margin-left: 10px; /* Отступ слева */
+    margin-left: 10px;
+    margin-right: 10px; /* Отступ слева */
     background-color: #2a2a2a; /* Фон для выделения */
     padding: 5px 10px;
     border-radius: 5px;

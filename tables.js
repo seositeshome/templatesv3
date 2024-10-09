@@ -152,8 +152,8 @@ const generateMainTable = async (tableName, token) => {
                 const input = t.querySelector('input')
                 if(input && !input.checked){
                     const l = t.querySelector('label')
-                    label.classList.remove('desc')
-                    label.classList.remove('asc')
+                    l.classList.remove('desc')
+                    l.classList.remove('asc')
                 }
             }
             console.log('clicked')

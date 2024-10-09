@@ -379,11 +379,10 @@ thead tr:first-child th {
 
 /* Checked state: border around the label */
 .sort-input:checked + .sort-label {
-    border-color: #0056b3; /* Синяя рамка при checked */
+    border-color: #ffa500; /* Синяя рамка при checked */
     border-width: 2px;
     border-style: solid;
     color: #fff; /* Белый текст */
-    background-color: #0056b3; /* Синий фон при checked */
 }
 
 /* Hidden radio input */

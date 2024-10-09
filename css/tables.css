@@ -157,14 +157,20 @@
     text-align: left;
 }
 
+
+thead tr:first-child {
+    height: 25px; /* Задаем фиксированную высоту строки */
+}
+
 thead tr:first-child th {
     text-align: center; /* Горизонтальное выравнивание по центру */
     vertical-align: middle; /* Вертикальное выравнивание по центру */
+    height: 25px; /* Задаем высоту ячейкам заголовков */
+    padding: 0; /* Убираем отступы для ячеек */
+    line-height: 25px; /* Устанавливаем высоту строки текста */
+    vertical-align: middle; /* Выравниваем содержимое по вертикали */
 }
 
-thead tr:first-child  {
-  height: 25px;
-}
 
 
 

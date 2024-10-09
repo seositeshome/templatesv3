@@ -127,8 +127,7 @@ const generateMainTable = async (tableName, token) => {
     const originalFilter = table.querySelector('#filterHead')
 
     const th1 = theadtr.querySelector('th')
-    th1.querySelector('span').textContent = 'row number'
-    theadtr.append(th1)
+    theadtr.append(document.createElement('th'))
     for (const record of records) {
         const th = th1.cloneNode(true)
         th.querySelector('span').textContent = record.columnName
@@ -140,14 +139,16 @@ const generateMainTable = async (tableName, token) => {
             th.setAttribute('hidden', '')
         }
         const label = th.querySelector('label')
-        th.querySelector('label').onclick = (e) => {
-            if (label.classList.contains('asc')) {
+        th.querySelector('input').onclick = (e) => {
+            console.log('clicked')
+            e.stopPropagation()
+            if (label.classList.contains('ask')) {
                 // Case where class list includes 'asc'
-                label.classList.remove('asc')
+                label.classList.remove('ask')
             } else if (label.classList.contains('desc')) {
                 // Case where class list includes 'desc'
                 label.classList.remove('desc')
-                label.classList.add('asc')
+                label.classList.add('ask')
                 console.log('The label has "desc" class');
             } else {
                 label.classList.add('desc')

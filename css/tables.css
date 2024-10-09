@@ -166,16 +166,18 @@ thead tr:first-child th:first-child {
 
   
 }
-thead tr:nth-child(2) th:first-child { /* Первая ячейка второй строки */
-    border-top: none;  /* Убираем верхнюю границу */
-    align-items: center !important;
-
+thead tr:nth-child(2) th:first-child {
+    border-top: none; /* Убираем верхнюю границу */
+    position: relative; /* Устанавливаем относительное позиционирование для управления содержимым через псевдоэлементы */
+    text-align: center; /* Горизонтально по центру */
 }
 
-
-thead tr:nth-child(2) th:first-child::before { /* Первая ячейка второй строки */
-    content: "#️⃣"
-
+thead tr:nth-child(2) th:first-child::before {
+    content: "#️⃣";
+    position: absolute; /* Позиционируем псевдоэлемент */
+    top: 0; /* Располагаем у верхней границы */
+    left: 50%; /* Смещаем псевдоэлемент по центру ячейки */
+    transform: translateX(-50%); /* Корректируем позицию, чтобы текст был точно по центру */
 }
 
 

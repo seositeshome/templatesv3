@@ -140,7 +140,7 @@ const generateMainTable = async (tableName, token) => {
             clonedFilter.setAttribute('hidden', '')
         }
         const label = th.querySelector('label')
-        th.querySelector('input').onclick = (e) => {
+        th.querySelector('.sort-label').onclick = (e) => {
             console.log('clicked')
             e.stopPropagation()
             if (label.classList.contains('ask')) {

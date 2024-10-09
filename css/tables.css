@@ -157,6 +157,12 @@
     text-align: left;
 }
 
+thead tr:first-child th:first-child {
+    text-align: center; /* Выровнять текст по центру */
+    vertical-align: middle; /* Выровнять по вертикали */
+}
+
+
 .filter-select {
     display: block;
     width: 100%; /* Ширина под содержимое */

@@ -344,7 +344,7 @@
 
 /* Add up and down arrows as content */
 .sort-label::before {
-    content: "▲▼"; /* Дефолтный символ до выбора */
+    content: "⇅"; /* Дефолтный символ до выбора */
 }
 
 

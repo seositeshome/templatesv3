@@ -332,6 +332,8 @@ thead tr:first-child th {
     padding: 5px 10px;
     border-radius: 5px;
     display: inline-block; /* Для правильного размещения */
+    text-transform: capitalize; /* Делаем первую букву каждого слова заглавной */
+
 }
 
 

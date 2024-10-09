@@ -140,7 +140,7 @@ const generateMainTable = async (tableName, token) => {
             th.setAttribute('hidden', '')
         }
         const label = th.querySelector('label')
-        th.querySelector('input').onclick = (e) => {
+        th.querySelector('label').onclick = (e) => {
             if (label.classList.contains('asc')) {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')

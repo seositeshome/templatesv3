@@ -27,7 +27,7 @@ const saveTable = async (event) => {
 }
 const generateMainTable = async (tableName, token) => {
 
-    const { records } = await fetch(`https://api.seositeshome.com/tables/${tableName}settings?token=${token}`, {
+    let { records } = await fetch(`https://api.seositeshome.com/tables/${tableName}settings?token=${token}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -36,6 +36,7 @@ const generateMainTable = async (tableName, token) => {
     if (!records) {
         return
     }
+    records = [{columnName:'created',name:'created'},...records]
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')
@@ -129,6 +130,7 @@ const generateMainTable = async (tableName, token) => {
     const th1 = theadtr.querySelector('th')
     theadtr.append(document.createElement('th'))
     originalFilter.parentNode.append(document.createElement('th'))
+    
     for (const record of records) {
         const th = th1.cloneNode(true)
         th.querySelector('span').textContent = record.columnName

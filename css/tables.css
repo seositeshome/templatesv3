@@ -308,3 +308,54 @@
 
 
 
+/* Sort label for ascending/descending */
+.sort-label {
+    padding: 2px 8px;
+    height: 25px;
+    background: #333;
+    color: #ccc;
+    border-radius: 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: 5px;
+    transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+/* Add up and down arrows as content */
+.sort-label.asc::before {
+    content: "▲"; /* Arrow up for ascending */
+    margin-right: 5px;
+}
+
+.sort-label.desc::before {
+    content: "▼"; /* Arrow down for descending */
+    margin-right: 5px;
+}
+
+/* Checked state: border around the label */
+.sort-input:checked + .sort-label {
+    border-color: #0056b3; /* Blue border when checked */
+    border-width: 2px;
+    border-style: solid;
+    color: #fff; /* White text */
+    background-color: #0056b3; /* Blue background when checked */
+}
+
+/* Hidden radio input */
+.sort-input {
+    display: none; /* Hide radio input */
+}
+
+/* Hover effect for sort labels */
+.sort-label:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+/* Active effect for sort label (pressed state) */
+.sort-label:active {
+    transform: scale(0.95);
+}

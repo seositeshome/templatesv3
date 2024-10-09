@@ -36,7 +36,7 @@ const generateMainTable = async (tableName, token) => {
     if (!records) {
         return
     }
-    records = [{columnName:'created',name:'created'},...records]
+    records = [{ columnName: 'created', name: 'created' }, ...records]
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')
@@ -130,14 +130,14 @@ const generateMainTable = async (tableName, token) => {
     const th1 = theadtr.querySelector('th')
     theadtr.append(document.createElement('th'))
     originalFilter.parentNode.append(document.createElement('th'))
-    
+
     for (const record of records) {
         const th = th1.cloneNode(true)
         th.querySelector('span').textContent = record.columnName
-        
+
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()
-        
+
         if (record.hidden) {
             th.setAttribute('hidden', '')
             clonedFilter.setAttribute('hidden', '')
@@ -145,7 +145,7 @@ const generateMainTable = async (tableName, token) => {
         const label = th.querySelector('label')
         const input = th.querySelector('input')
         input.id = record.name
-        label.setAttribute('for',record.name)
+        label.setAttribute('for', record.name)
         label.onclick = (e) => {
             console.log('clicked')
             e.stopPropagation()
@@ -181,7 +181,15 @@ const generateMainTable = async (tableName, token) => {
                 td.setAttribute('hidden', '')
 
             }
-            td.textContent = record[r.name]
+
+            if (r.name === 'created') {
+                const date = new Date(record[r.name]);
+                const formattedDate = date.toISOString().slice(0, 19); // Removes milliseconds and 'Z'
+                td.textContent = formattedDate;
+            }
+            else {
+                td.textContent = record[r.name]
+            }
             td.setAttribute('name', r.name)
             td.setAttribute('type', r.type)
             if (r.cut) {

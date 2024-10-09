@@ -234,7 +234,7 @@
 .table tbody td { 
     border: 1px solid #444; /* Add border between columns and rows */
     padding: 8px; /* Adjust padding to your needs */
-    text-align: center;
+    text-align: left;
     font-size: 18px; 
     white-space: nowrap; /* Предотвращает перенос текста на новую строку */
     overflow: hidden; 

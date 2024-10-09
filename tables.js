@@ -356,6 +356,22 @@ const generateSettingTable = async (table, token) => {
             }
 
         }
+        const wrapper = tds[6].querySelector('#fWrapper')
+        const fkey = wrapper.querySelector('#foreignKey')
+        const ftable = wrapper.querySelector('#foreignTable')
+        const check = tds[6].querySelector('#foreignCheckbox')
+        if(record.ftable){
+            
+            wrapper.removeAttribute('hidden')
+            fkey.value = record.fkey
+            ftable.value = record.ftable
+            check.setAttribute('hidden','')
+
+        }
+        check.onclick = ()=>{
+            check.setAttribute('hidden','')
+            wrapper.removeAttribute('hidden')
+        }
         // Append the cloned row to the table
         if (first) {
             const tbody = tableSettings.querySelector('tbody')

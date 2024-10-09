@@ -169,6 +169,17 @@ thead tr:nth-child(2) th:first-child {
 }
 
 
+thead tr:first-child th {
+    padding: 4px 8px; /* Уменьшение отступов */
+    font-size: 0.9em; /* Уменьшение размера шрифта */
+    line-height: 1.2; /* Уменьшение высоты строки */
+    background-color: #2a2a2a; /* Цвет фона заголовков */
+    color: #ccc; /* Цвет текста заголовков */
+    font-weight: bold; /* Сохранение жирного шрифта */
+    border-bottom: 2px solid #444; /* Нижняя граница */
+}
+
+
 
 .filter-select {
     display: block;

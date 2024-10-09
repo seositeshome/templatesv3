@@ -399,7 +399,8 @@ thead tr:nth-child(2) th:first-child { /* Первая ячейка второй
 .sort-input:checked + .sort-label {
     border-color:#0056b3; /* Синяя рамка при checked */
     background-color:#0056b3; /* Синяя рамка при checked */
-
+    padding-left: 2px;
+    padding-right: 2px;
     border-width: 2px;
     border-style: solid;
     color: #fff; /* Белый текст */

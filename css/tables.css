@@ -256,7 +256,6 @@ thead tr:first-child th {
 /* Table body rows */
 .table tbody tr {
     border: 1px solid #444;
-
     transition: background-color 0.3s;
 }
 

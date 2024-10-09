@@ -143,7 +143,10 @@ const generateMainTable = async (tableName, token) => {
             clonedFilter.setAttribute('hidden', '')
         }
         const label = th.querySelector('label')
-        th.querySelector('.sort-label').onclick = (e) => {
+        const input = th.querySelector('input')
+        input.id = record.name
+        label.setAttribute('for',record.name)
+        label.onclick = (e) => {
             console.log('clicked')
             e.stopPropagation()
             if (label.classList.contains('asc')) {

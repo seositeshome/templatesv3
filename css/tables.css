@@ -173,6 +173,13 @@ thead tr:nth-child(2) th:first-child { /* Первая ячейка второй
 }
 
 
+thead tr:nth-child(2) th:first-child::before { /* Первая ячейка второй строки */
+    content: "#️⃣"
+
+}
+
+
+
 
 
 

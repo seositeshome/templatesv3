@@ -368,8 +368,10 @@ const generateSettingTable = async (table, token) => {
         if (!results) {
             return
         }
+        let i =0
         for (const r of results) {
-            generateFromRecord({ id: r[0] }, true)
+            generateFromRecord({ id: r[0],name:p[i].name }, true)
+            i++
         }
     }
     rButton.onclick = async (e) => {

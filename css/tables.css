@@ -171,7 +171,6 @@ thead tr:first-child th:first-child {
 }
 thead tr:nth-child(2) th:first-child { /* Первая ячейка второй строки */
     all: unset; /* Убираем все наследуемые и установленные ранее стили */
-
     border-left: none; /* Убираем левую границу */
     border-top: none;  /* Убираем верхнюю границу */
     background-color: #1e1e1e;

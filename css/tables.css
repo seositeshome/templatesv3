@@ -213,8 +213,9 @@ thead tr:first-child th {
 
 /* Состояние фокуса */
 .filter-input:focus {
+    border-color: #ffa500;/* Dark blue background */
     outline: none;
-    background-color: #ffa500;/* Dark blue background */
+    background-color: #f7bd50;/* Dark blue background */
     color: #333333 !important; /* White text */ 
     transition: background-color 0.1s, color 0.1s ease-in-out;
 }

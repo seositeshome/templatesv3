@@ -162,6 +162,11 @@ thead tr:first-child th {
     vertical-align: middle; /* Вертикальное выравнивание по центру */
 }
 
+thead tr:first-child  {
+  height: 25px;
+}
+
+
 
 thead tr:first-child th:first-child,
 thead tr:nth-child(2) th:first-child {

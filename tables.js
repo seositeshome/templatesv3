@@ -139,6 +139,22 @@ const generateMainTable = async (tableName, token) => {
         if (record.hidden) {
             th.setAttribute('hidden', '')
         }
+        const label = th.querySelector('label')
+        th.querySelector('input').onclick = (e) => {
+            if (label.classList.contains('asc')) {
+                // Case where class list includes 'asc'
+                label.classList.remove('asc')
+            } else if (label.classList.contains('desc')) {
+                // Case where class list includes 'desc'
+                label.classList.remove('desc')
+                label.classList.add('asc')
+                console.log('The label has "desc" class');
+            } else {
+                label.classList.add('desc')
+                // Case where class list includes neither 'asc' nor 'desc'
+                console.log('The label has neither "asc" nor "desc" class');
+            }
+        }
     }
     const tbody = table.querySelector('tbody')
     const generateRecord = (record, first, elementIndex) => {
@@ -258,6 +274,8 @@ const generateSettingTable = async (table, token) => {
     for (const headerText of headers) {
         let th = o.cloneNode(true)
         th.querySelector('span').textContent = headerText; // Set the text content for <th>
+        th.querySelector('label').remove()
+        th.querySelector('input').remove()
         tr.appendChild(th); // Append the <th> to the <tr>
         /*
         const clonedFilter = originalFilter.cloneNode(true)
@@ -370,9 +388,9 @@ const generateSettingTable = async (table, token) => {
         if (!results) {
             return
         }
-        let k =0
+        let k = 0
         for (const r of results) {
-            generateFromRecord({ id: r[0],name:p[k].name }, true)
+            generateFromRecord({ id: r[0], name: p[k].name }, true)
             k++
         }
     }

@@ -357,8 +357,6 @@ thead tr:first-child th {
 
 /* Sort label for ascending/descending */
 .sort-label {
-    padding: 2px 8px;
-    height: 25px;
     background: #333;
     color: #ccc;
     border-radius: 5px;
@@ -366,8 +364,7 @@ thead tr:first-child th {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    font-size: 0.9em;
-    margin-left: 5px;
+    font-size: 19px;
     transition: background 0.3s, color 0.3s, border 0.3s;
 }
 

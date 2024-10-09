@@ -165,6 +165,7 @@ thead tr:first-child th:first-child, /* Первая ячейка первой �
 thead tr:nth-child(2) th:first-child { /* Первая ячейка второй строки */
     border-left: none; /* Убираем левую границу */
     border-top: none;  /* Убираем верхнюю границу */
+    border-bottom: none
 }
 
 

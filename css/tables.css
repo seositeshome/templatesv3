@@ -120,6 +120,11 @@
     background: #444;
 }
 
+td:empty {
+    display: none;
+  }
+
+  
 /* Checked state for top-nav labels */
 .top-nav-input:checked + .top-nav-label {
     border-color: #0056b3; /* Это приглушённый тёмно-синий */

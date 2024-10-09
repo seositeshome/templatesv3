@@ -321,7 +321,6 @@
     align-items: center;
     cursor: pointer;
     font-size: 0.9em;
-    margin-left: 5px;
     transition: background 0.3s, color 0.3s, border 0.3s;
 }
 

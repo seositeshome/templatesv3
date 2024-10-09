@@ -163,14 +163,12 @@
 
 thead tr:first-child th:first-child {
     border-bottom: none;
-    display: none;
 
   
 }
 thead tr:nth-child(2) th:first-child { /* Первая ячейка второй строки */
     border-top: none;  /* Убираем верхнюю границу */
-    display: none;
-
+    content: "#️⃣"
 
 }
 

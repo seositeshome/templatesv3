@@ -167,9 +167,7 @@ thead tr:first-child th {
     padding-bottom: -10px;
     text-align: center; /* Горизонтальное выравнивание по центру */
     vertical-align: middle; /* Вертикальное выравнивание по центру */
-    height: 25px; /* Задаем высоту ячейкам заголовков */
     padding: 0; /* Убираем отступы для ячеек */
-    line-height: 25px; /* Устанавливаем высоту строки текста */
     vertical-align: middle; /* Выравниваем содержимое по вертикали */
 }
 

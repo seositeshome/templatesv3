@@ -157,7 +157,7 @@ const generateMainTable = async (tableName, token) => {
                 }
             }
             console.log('clicked')
-            e.stopPropagation()
+            
             if (label.classList.contains('asc')) {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')

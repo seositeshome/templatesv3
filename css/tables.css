@@ -391,16 +391,16 @@ thead tr:nth-child(2) th:first-child::before { /* Первая ячейка вт
 
 /* Add up and down arrows as content */
 .sort-label::before {
-    content: "↕️"; /* Дефолтный символ до выбора */
+    content: "⬍"; /* Дефолтный символ до выбора */
 }
 
 
 .sort-label.asc::before {
-    content: "⬆️"; /* Arrow up for ascending */
+    content: "↑"; /* Arrow up for ascending */
 }
 
 .sort-label.desc::before {
-    content: "⬇️"; /* Arrow down for descending */
+    content: "↓"; /* Arrow down for descending */
 }
 
 /* Checked state: border around the label */

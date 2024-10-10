@@ -31,6 +31,7 @@
     width: 100%;
     box-sizing: border-box; /* Include padding in width calculation */
     flex-wrap: wrap;
+    row-gap: 5px; /* Добавляет 5px отступ между строками */
 
 }
 

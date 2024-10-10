@@ -356,10 +356,10 @@ const generateSettingTable = async (table, token) => {
             }
 
         }
-        const wrapper = tds[6].querySelector('#fWrapper')
+        const wrapper = tds[7].querySelector('#fWrapper')
         const fkey = wrapper.querySelector('#foreignKey')
         const ftable = wrapper.querySelector('#foreignTable')
-        const check = tds[6].querySelector('#foreignCheckbox')
+        const check = tds[7].querySelector('#foreignCheckbox')
         if(record.ftable){
             
             wrapper.removeAttribute('hidden')

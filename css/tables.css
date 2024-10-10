@@ -75,7 +75,7 @@
 
 }
 .loading-btn.save::before {
-    content: "💾";
+    content: "📤";
 }
 
 

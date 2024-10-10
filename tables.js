@@ -269,7 +269,7 @@ const generateMainTable = async (tableName, token) => {
         for (i = 0; i < parseInt(inputV); i++) {
             const p1 = {}
             if(records.find(e=>e.name==='shortId')){
-                p.shortId = generateUUID()
+                p1.shortId = generateUUID()
             }
             p.push(p1)
         }

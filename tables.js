@@ -25,6 +25,13 @@ const saveTable = async (event) => {
     event.target.closest('[data-menu]').setAttribute('hidden', '')
     generateTables()
 }
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = Math.random() * 16 | 0,
+        v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 const generateMainTable = async (tableName, token) => {
 
     let { records } = await fetch(`https://api.seositeshome.com/tables/${tableName}settings?token=${token}`, {
@@ -260,7 +267,11 @@ const generateMainTable = async (tableName, token) => {
         }
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
-            p.push({})
+            const p1 = {}
+            if(records.find(e=>e.name==='shortId')){
+                p.shortId = generateUUID()
+            }
+            p.push(p1)
         }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
             method: 'PUT',

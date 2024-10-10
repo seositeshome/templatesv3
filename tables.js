@@ -205,9 +205,14 @@ const generateMainTable = async (tableName, token) => {
             }
 
            
-            td.textContent = record[r.name]
             if(record.type ==='date'){
+                const f = record[r.name].replace('T', ' ').slice(0, 19);
+                console.log(f)
                 td.textContent = record[r.name].replace('T', ' ').slice(0, 19);
+            }
+            else{
+                td.textContent = record[r.name]
+
             }
             td.setAttribute('name', r.name)
             td.setAttribute('type', r.type)

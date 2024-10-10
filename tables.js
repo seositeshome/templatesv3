@@ -36,7 +36,7 @@ const generateMainTable = async (tableName, token) => {
     if (!records) {
         return
     }
-    records = [{ columnName: 'created', name: 'created' }, ... records.sort((a, b) => {return posA - posB;})]
+    records = [{ columnName: 'created', name: 'created' }, ... records.sort((a, b) => {return a - b;})]
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')

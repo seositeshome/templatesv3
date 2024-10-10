@@ -30,6 +30,7 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
     width: 100%;
     box-sizing: border-box; /* Include padding in width calculation */
+    flex-wrap: wrap;
 
 }
 

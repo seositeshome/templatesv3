@@ -204,14 +204,9 @@ const generateMainTable = async (tableName, token) => {
 
             }
 
-            if (r.name === 'created') {
-                const date = new Date(record[r.name]);
-                const formattedDate = date.toISOString().slice(0, 19); // Removes milliseconds and 'Z'
-                td.textContent = formattedDate;
-            }
-            else {
-                td.textContent = record[r.name]
-            }
+           
+            td.textContent = record[r.name]
+            
             td.setAttribute('name', r.name)
             td.setAttribute('type', r.type)
             if (r.cut) {

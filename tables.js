@@ -297,7 +297,7 @@ const generateSettingTable = async (table, token) => {
     tr.id = "settingsHead";
 
     // Define the table header names
-    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove"];
+    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove","Foreign key"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
     const o = tr.querySelector('th')
@@ -355,6 +355,22 @@ const generateSettingTable = async (table, token) => {
                 e.target.setAttribute('checked', '')
             }
 
+        }
+        const wrapper = tds[6].querySelector('#fWrapper')
+        const fkey = wrapper.querySelector('#foreignKey')
+        const ftable = wrapper.querySelector('#foreignTable')
+        const check = tds[6].querySelector('#foreignCheckbox')
+        if(record.ftable){
+            
+            wrapper.removeAttribute('hidden')
+            fkey.value = record.fkey
+            ftable.value = record.ftable
+            check.setAttribute('hidden','')
+
+        }
+        check.onclick = ()=>{
+            check.setAttribute('hidden','')
+            wrapper.removeAttribute('hidden')
         }
         // Append the cloned row to the table
         if (first) {

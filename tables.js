@@ -77,7 +77,7 @@ const generateMainTable = async (tableName, token) => {
                 }
                 else {
                     if (td.getAttribute('name')) {
-                        obj[td.getAttribute('name')] = td.textContent ? new Date(td.textContent).toISOString().slice(0, 19).replace('T', ' ') : undefined
+                        obj[td.getAttribute('name')] = td.textContent ? (new Date(td.textContent)).toISOString().slice(0, 19).replace('T', ' ') : undefined
                     }
 
                 }

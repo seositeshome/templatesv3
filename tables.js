@@ -577,7 +577,7 @@ const generateSettingTable = async (table, token) => {
     }
 
     console.log('generating records')
-    for (const record of records) {
+    for (const record of records.filter(e=>!(e.name ==='shortId' ||e.name ==='created'))) {
         generateFromRecord(record)
     }
 

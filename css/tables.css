@@ -71,11 +71,11 @@
 
 
 .loading-btn.save {
-    background-color: #d8d8d8 !important;
+    background-color: #90EE90 !important;
 
 }
 .loading-btn.save::before {
-    content: "📤";
+    content: "💾";
 }
 
 

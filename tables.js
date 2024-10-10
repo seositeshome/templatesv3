@@ -36,9 +36,13 @@ const generateMainTable = async (tableName, token) => {
     if (!records) {
         return
     }
+    const addCL = document.getElementById('add-created-label')
+    const addIL = document.getElementById('add-id-label')
+    addIL.setAttribute('hidden','')
+    addCL.setAttribute('hidden','')
     records = records.sort((a, b) => a.position - b.position);
     console.log(JSON.stringify(records))
-    records = [{ columnName: 'created', name: 'created' }, ... records]
+    records = [ ... records]
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')
@@ -346,6 +350,11 @@ const generateSettingTable = async (table, token) => {
     if (!records) {
         return
     }
+    const addCL = document.getElementById('add-created-label')
+    const addIL = document.getElementById('add-id-label')
+    addIL.removeAttribute('hidden')
+    addCL.removeAttribute('hidden')
+
     document.getElementById('tableToShow')?.remove()
     const tableSettings = t.cloneNode(true)
     tableSettings.removeAttribute('hidden')
@@ -456,6 +465,8 @@ const generateSettingTable = async (table, token) => {
         sButton.classList.add('loading')
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
+        const checkedId = addIL.querySelector('input').checked
+        const checkedCreated = addCL.querySelector('input').checked
         if (remove) {
             await fetch(`https://api.seositeshome.com/tables/${table}`, {
                 method: 'DELETE',
@@ -503,7 +514,7 @@ const generateSettingTable = async (table, token) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ids: toDIds, // Send the array of updated records
+                    ids: toDIds,
                 }),
             });
         }
@@ -521,6 +532,9 @@ const generateSettingTable = async (table, token) => {
             },
             body: JSON.stringify({
                 items: updatedItems.filter(e => e), // Send the array of updated records
+                
+                checkedId,
+                checkedCreated
             }),
         });
         await fetch(`https://api.seositeshome.com/tables/${table}/alter`, {

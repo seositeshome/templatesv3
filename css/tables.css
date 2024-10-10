@@ -178,6 +178,11 @@
 }
 
 
+thead tr:first-child th {
+    text-align: center;
+    vertical-align: middle;
+}
+
 
 thead tr:first-child th:first-child {
     border-bottom: none;

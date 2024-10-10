@@ -281,7 +281,7 @@ const generateMainTable = async (tableName, token) => {
 }
 const generateSettingTable = async (table, token) => {
     //generate setting table
-    const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
+    const { records } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}&sort=position`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

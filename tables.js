@@ -287,6 +287,62 @@ const generateSettingTable = async (table, token) => {
             'Content-Type': 'application/json',
         },
     }).then(e => e.json())
+    document.getElementById('add').onclick = async (e) => {
+
+        let userInput = prompt("Enter table name to add table \nEnter number to add rows");
+        let inputV = parseInt(userInput)
+        if (!inputV) {
+            r = await fetch('https://api.seositeshome.com/table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    {
+                        table: userInput,
+
+                    }
+                ),
+            })
+            return
+        }
+        const p = []
+        const generateName = () => {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            let name = '';
+            const length = 10; // Adjust the length of the random string
+
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                name += characters[randomIndex];
+            }
+
+            return name;
+        }
+        for (i = 0; i < parseInt(inputV); i++) {
+            p.push({ name: generateName() })
+        }
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    items: p,
+
+                }
+            ),
+        }).then(e => e.json())
+        if (!results) {
+            return
+        }
+        let k = 0
+        for (const r of results) {
+            generateFromRecord({ id: r[0], name: p[k].name }, true)
+            k++
+        }
+    }
     if (!records) {
         return
     }
@@ -386,62 +442,7 @@ const generateSettingTable = async (table, token) => {
     }
 
 
-    document.getElementById('add').onclick = async (e) => {
-
-        let userInput = prompt("Enter table name to add table \nEnter number to add rows");
-        let inputV = parseInt(userInput)
-        if (!inputV) {
-            r = await fetch('https://api.seositeshome.com/table', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(
-                    {
-                        table: userInput,
-
-                    }
-                ),
-            })
-            return
-        }
-        const p = []
-        const generateName = () => {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-            let name = '';
-            const length = 10; // Adjust the length of the random string
-
-            for (let i = 0; i < length; i++) {
-                const randomIndex = Math.floor(Math.random() * characters.length);
-                name += characters[randomIndex];
-            }
-
-            return name;
-        }
-        for (i = 0; i < parseInt(inputV); i++) {
-            p.push({ name: generateName() })
-        }
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                    items: p,
-
-                }
-            ),
-        }).then(e => e.json())
-        if (!results) {
-            return
-        }
-        let k = 0
-        for (const r of results) {
-            generateFromRecord({ id: r[0], name: p[k].name }, true)
-            k++
-        }
-    }
+   
     rButton.onclick = async (e) => {
         let userInput = prompt("Enter 'table' to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
         sButton.classList.add('save')

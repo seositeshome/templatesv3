@@ -9,6 +9,11 @@
     overflow: hidden; /* No scroll on body */
 }
 
+td[name="shortId"] {
+    text-transform: uppercase;
+}
+
+
 /* Main container */
 .main {
     flex-grow: 1; /* Make main take up all the remaining space */

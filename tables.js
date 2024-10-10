@@ -486,7 +486,9 @@ const generateSettingTable = async (table, token) => {
                     hidden: tds[2].querySelector('input[type="checkbox"]').checked, // Get the 'hidden' checkbox value
                     cut: tds[3].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
                     position: parseInt(tds[4].querySelector('input').value, 10) || 0, // Get the position, default to 0
-                    type: tds[5].querySelector('select').value // Get the selected type from the dropdown
+                    type: tds[5].querySelector('select').value, 
+                    fkey: tds[7].querySelector('#foreignKey').value,
+                    ftable: tds[7].querySelector('#foreignTable').value
                 };
             }
         });

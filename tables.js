@@ -254,7 +254,7 @@ const generateMainTable = async (tableName, token) => {
             }
             td.setAttribute('name', r.name)
             td.setAttribute('type', r.type)
-            if (r.cut) {
+            if (r.cut || r.name ==='shortId') {
                 td.classList.add('short')
             }
             td.onblur = () => {

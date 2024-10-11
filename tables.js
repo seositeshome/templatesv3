@@ -133,10 +133,8 @@ const generateMainTable = async (tableName, token) => {
             remove = true
         }
         else{
-            async function removeRow (index){
-
-            }
-            async function remove(input) {
+            
+            async function removeElements(input) {
                 const elements = input.split(',');
                 const indexes = []
                 for (let i = 0; i < elements.length; i++) {
@@ -170,9 +168,7 @@ const generateMainTable = async (tableName, token) => {
                 });
                 delements.forEach(e=>e.remove())
             }
-        if (userInput == table) {
-            await remove()
-            
+            removeElements(userInput)
         }
 
 

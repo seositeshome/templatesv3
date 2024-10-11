@@ -489,6 +489,6 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     -moz-user-select: text!important;
     -ms-user-select: text!important;
     overflow: visible !important;
-    max-width:auto !important;
+    max-width: none !important;
 
 }

@@ -478,7 +478,7 @@ td:empty {
 
 
 
-  #settingsHead ~ tr td:nth-child(1) {
+  #settingsHead ~ tbody tr td:nth-child(1) {
     width: auto !important;
     color: #ccc !important;
 }

@@ -127,9 +127,9 @@ const generateMainTable = async (tableName, token) => {
 
     }
     rButton.onclick = async (e) => {
-        let userInput = prompt("Enter table name to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
+        let userInput = prompt(`Enter ${table} to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here`);
         sButton.classList.add('save')
-        if (userInput === 'table') {
+        if (userInput === table) {
             remove = true
         }
 
@@ -369,10 +369,7 @@ const generateSettingTable = async (table, token) => {
     if (!records) {
         return
     }
-    const addCL = document.getElementById('add-created-label')
-    const addIL = document.getElementById('add-id-label')
-    addIL.removeAttribute('hidden')
-    addCL.removeAttribute('hidden')
+    
 
     document.getElementById('tableToShow')?.remove()
     const tableSettings = t.cloneNode(true)
@@ -483,8 +480,6 @@ const generateSettingTable = async (table, token) => {
         sButton.classList.add('loading')
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
-        const checkedId = addIL.querySelector('input').checked
-        const checkedCreated = addCL.querySelector('input').checked
         if (remove) {
             await fetch(`https://api.seositeshome.com/tables/${table}`, {
                 method: 'DELETE',
@@ -550,8 +545,6 @@ const generateSettingTable = async (table, token) => {
             body: JSON.stringify({
                 items: updatedItems.filter(e => e), // Send the array of updated records
                 
-                checkedId,
-                checkedCreated
             }),
         });
         await fetch(`https://api.seositeshome.com/tables/${table}/alter`, {

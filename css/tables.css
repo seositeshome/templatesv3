@@ -483,4 +483,5 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     overflow: visible!important;
     width: auto!important;
     color:#ccc !important;
+    user-select: text !important;
 }

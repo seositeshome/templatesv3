@@ -469,6 +469,6 @@ td:empty {
 
 
 .short {
-    max-width: 60px;
+    max-width: 80px;
     text-overflow: ellipsis;
   }

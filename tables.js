@@ -61,7 +61,7 @@ const generateMainTable = async (tableName, token) => {
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
         if (remove) {
-            await fetch(`https://api.seositeshome.com/tables/${table}`, {
+            await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

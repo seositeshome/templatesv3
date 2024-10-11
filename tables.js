@@ -44,12 +44,7 @@ const generateMainTable = async (tableName, token) => {
         return
     }
     
-    if(records.find(e=>e.name==='created')){
-        addCL.querySelector('input').checked = true
-    }
-    if(records.find(e=>e.name==='shortId')){
-        addIL.querySelector('input').checked = true
-    }
+    
     records = records.sort((a, b) => a.position - b.position);
     console.log(JSON.stringify(records))
     records = [ ... records]

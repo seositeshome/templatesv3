@@ -443,13 +443,12 @@ const generateSettingTable = async (table, token) => {
 
         }
         const wrapper = tds[7].querySelector('#fWrapper')
-        const fkey = wrapper.querySelector('#foreignKey')
+        
         const ftable = wrapper.querySelector('#foreignTable')
         const check = tds[7].querySelector('#foreignCheckbox')
         if(record.ftable){
             
             wrapper.removeAttribute('hidden')
-            fkey.value = record.fkey
             ftable.value = record.ftable
             check.setAttribute('hidden','')
 
@@ -520,7 +519,6 @@ const generateSettingTable = async (table, token) => {
                     cut: tds[3].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
                     position: parseInt(tds[4].querySelector('input').value, 10) || 0, // Get the position, default to 0
                     type: tds[5].querySelector('select').value, 
-                    fkey: tds[7].querySelector('#foreignKey').value || undefined,
                     ftable: tds[7].querySelector('#foreignTable').value || undefined
                 }; 
             }

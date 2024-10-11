@@ -191,6 +191,8 @@ td[name="shortId"] {
 thead tr:first-child th {
     text-align: center;
     vertical-align: middle;
+    white-space: nowrap;
+
 }
 
 
@@ -469,6 +471,6 @@ td:empty {
 
 
 .short {
-    max-width: 80px;
+    max-width: 60px;
     text-overflow: ellipsis;
   }

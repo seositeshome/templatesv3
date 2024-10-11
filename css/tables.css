@@ -488,7 +488,6 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     -webkit-user-select: text!important;
     -moz-user-select: text!important;
     -ms-user-select: text!important;
-    overflow: visible !important;
     max-width: none !important;
     text-align: left !important;
 

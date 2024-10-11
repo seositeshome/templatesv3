@@ -480,6 +480,6 @@ td:empty {
 
 
 table[data-settings-table] tbody tr td:nth-child(1) {
-    width: auto !important;
+    width: 50px !important;
     color: #ccc !important;
 }

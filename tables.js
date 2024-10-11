@@ -43,10 +43,7 @@ const generateMainTable = async (tableName, token) => {
     if (!records) {
         return
     }
-    const addCL = document.getElementById('add-created-label')
-    const addIL = document.getElementById('add-id-label')
-    addIL.setAttribute('hidden','')
-    addCL.setAttribute('hidden','')
+    
     if(records.find(e=>e.name==='created')){
         addCL.querySelector('input').checked = true
     }

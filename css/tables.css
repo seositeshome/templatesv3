@@ -484,4 +484,5 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     width: auto!important;
     color:#ccc !important;
     user-select: text !important;
+    padding-right: 5px !important;
 }

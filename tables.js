@@ -52,6 +52,7 @@ const generateMainTable = async (tableName, token) => {
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')
     table.id = 'tableToShow'
+    table.setAttribute('data-settings-table','')
     const theadtr = table.querySelector('thead tr')
     let remove = false
     const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
@@ -405,6 +406,7 @@ const generateSettingTable = async (table, token) => {
     const tableSettings = t.cloneNode(true)
     tableSettings.removeAttribute('hidden')
     tableSettings.id = 'tableToShow'
+    tableSettings.setAttribute('data-table','')
     const original = document.getElementById('settingsRow')
     let tr = tableSettings.querySelector('thead tr')
     tr.id = "settingsHead";

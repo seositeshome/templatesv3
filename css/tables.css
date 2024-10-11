@@ -480,11 +480,9 @@ td:empty {
 
 
 table[data-settings-table] tbody tr td:nth-child(1) {
-    overflow: visible!important;
     width: auto!important;
     color:#ccc !important;
     user-select: text !important;
-    padding-right: 5px !important;
     -webkit-user-select: text!important;
     -moz-user-select: text!important;
     -ms-user-select: text!important;

@@ -192,6 +192,7 @@ thead tr:first-child th {
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
+    max-width: auto;
 
 }
 

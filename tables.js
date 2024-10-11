@@ -120,9 +120,9 @@ const generateMainTable = async (tableName, token) => {
 
     }
     rButton.onclick = async (e) => {
-        let userInput = prompt(`Enter ${table} to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here`);
+        let userInput = prompt(`Enter ${tableName} to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here`);
         sButton.classList.add('save')
-        if (userInput == table) {
+        if (userInput == tableName) {
             remove = true
         }
         else{
@@ -150,7 +150,7 @@ const generateMainTable = async (tableName, token) => {
                     return element
                 })
                 const ids = Array.from(delements).map(element=>element.id)
-                await fetch(`https://api.seositeshome.com/tables/${table}`, {
+                await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

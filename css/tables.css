@@ -480,8 +480,7 @@ td:empty {
 
 
 table[data-settings-table] tbody tr td:nth-child(1) {
-    white-space: nowrap !important;
     overflow: visible!important;
     width: auto!important;
-    max-width: none !important;
+    color:#ccc !important;
 }

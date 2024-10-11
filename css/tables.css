@@ -9,6 +9,12 @@
     overflow: hidden; /* No scroll on body */
 }
 
+.short {
+    max-width: 40px;
+    text-overflow: ellipsis;
+  }
+
+  
 td[name="shortId"] {
     text-transform: uppercase;
 }

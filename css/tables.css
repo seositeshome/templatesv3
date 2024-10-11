@@ -475,3 +475,9 @@ td:empty {
     max-width: 60px;
     text-overflow: ellipsis;
   }
+
+
+
+  #settingsHead + tr td:nth-child(1) {
+    width: auto !important;
+}

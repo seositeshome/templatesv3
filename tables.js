@@ -129,8 +129,50 @@ const generateMainTable = async (tableName, token) => {
     rButton.onclick = async (e) => {
         let userInput = prompt(`Enter ${table} to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here`);
         sButton.classList.add('save')
-        if (userInput === table) {
+        if (userInput == table) {
             remove = true
+        }
+        else{
+            async function removeRow (index){
+
+            }
+            async function remove(input) {
+                const elements = input.split(',');
+                const indexes = []
+                for (let i = 0; i < elements.length; i++) {
+                    const element = elements[i];
+                    
+                    if (element.includes('-')) {
+                        const range = element.split('-');
+                        const start = parseInt(range[0], 10);
+                        const end = parseInt(range[1], 10);
+                        
+                        for (let j = start; j <= end; j++) {
+                            indexes.push(j)
+                        }
+                    } else {
+                         indexes.push(parseInt(element, 10));
+                    }
+                }
+                const delements = indexes.map(index=>{
+                    const element = document.querySelector(`[index="${index}"]`)
+                    return element
+                })
+                const ids = Array.from(delements).map(element=>element.id)
+                await fetch(`https://api.seositeshome.com/tables/${table}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ids
+                    }),
+                });
+                delements.forEach(e=>e.remove())
+            }
+        if (userInput == table) {
+            await remove()
+            
         }
 
 

@@ -490,5 +490,6 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     -ms-user-select: text!important;
     overflow: visible !important;
     max-width: none !important;
+    text-align: left !important;
 
 }

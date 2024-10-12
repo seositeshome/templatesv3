@@ -152,9 +152,9 @@ td[name="shortId"] {
   
 /* Checked state for top-nav labels */
 .top-nav-input:checked + .top-nav-label {
-    border-color: #0056b3; /* Это приглушённый тёмно-синий */
-    border-width: 2px; /* Set the border width */
-    border-style: solid; /* Make sure the border is solid */
+    border-color: #0056b3 !important; /* Это приглушённый тёмно-синий */
+    border-width: 2px !important; /* Set the border width */
+    border-style: solid !important; /* Make sure the border is solid */
 }
 
 .top-nav-input {

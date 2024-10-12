@@ -151,11 +151,7 @@ td[name="shortId"] {
 
   
 /* Checked state for top-nav labels */
-.top-nav-input:checked + .top-nav-label {
-    border-color: #0056b3 !important; /* Это приглушённый тёмно-синий */
-    border-width: 2px !important; /* Set the border width */
-    border-style: solid !important; /* Make sure the border is solid */
-}
+
 
 .top-nav-input {
     display: none; /* Скрываем radio-инпуты */
@@ -489,4 +485,11 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     max-width: none !important;
     text-align: left !important;
 
+}
+
+
+.top-nav-input:checked + .top-nav-label {
+    border-color: #0056b3 !important; /* Это приглушённый тёмно-синий */
+    border-width: 2px !important; /* Set the border width */
+    border-style: solid !important; /* Make sure the border is solid */
 }

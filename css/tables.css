@@ -358,13 +358,6 @@ thead tr:nth-child(2) th:first-child::before {
     max-width: 50px;
 }
 
-/* Editable cells */
-.table tbody td[contenteditable="true"],
-.cell-checked {
-    background-color: #ffa500;/* Dark blue background */
-    color: #333333 !important; /* White text */ 
-    transition: background-color 0.1s, color 0.1s ease-in-out;
-}
 
 /* Alternating row colors */
 .table tbody tr:nth-child(odd) {
@@ -489,4 +482,13 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     max-width: none !important;
     text-align: left !important;
 
+}
+
+
+/* Editable cells */
+.table tbody td[contenteditable="true"],
+.cell-checked {
+    background-color: #ffa500 !important;/* Dark blue background */
+    color: #333333 !important; /* White text */ 
+    transition: background-color 0.1s, color 0.1s ease-in-out !important;
 }

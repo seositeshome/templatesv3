@@ -492,3 +492,29 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     color: #333333 !important; /* White text */ 
     transition: background-color 0.1s, color 0.1s ease-in-out !important;
 }
+
+
+
+.td-button {
+    background-color: #555454; /* Button background */
+    color: #fff; /* Button text color */
+    text-align: center; /* Center text */
+    padding: 10px 15px; /* Padding for a button-like appearance */
+    border: none; /* Remove any borders */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    display: inline-block; /* Ensure it's inline, like a button */
+    font-size: 1em; /* Adjust font size */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    min-width: 80px; /* Set a minimum width */
+}
+
+.td-button:hover {
+    background-color: #444; /* Slightly lighter on hover */
+}
+
+.td-button:active {
+    transform: scale(0.95); /* Slight shrink on press */
+    background-color: #333; /* Darker background on click */
+}

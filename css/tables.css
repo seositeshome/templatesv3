@@ -507,8 +507,6 @@ table[data-settings-table] tbody tr td:nth-child(1) {
     display: inline-block; /* Makes the element inline but still block-like */
     font-size: 1em; /* Standard font size */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for depth (3D effect) */
-    min-width: 100px; /* Minimum width to make it look like a button */
-    min-height: 40px; /* Minimum height to keep button proportions */
     vertical-align: middle; /* Align with text vertically in the row */
     user-select: none; /* Disable text selection */
 }

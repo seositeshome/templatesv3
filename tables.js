@@ -461,6 +461,11 @@ const generateSettingTable = async (table, token) => {
         if (typeOption) {
             select.value = typeOption.value;
         }
+        if(record.type.startsWith('button')){
+            const parsed =JSON.parse(record.type.replace('button',''))
+            tds[8].querySelector('#buttonName').value = parsed.name
+            tds[8].querySelector('#buttonValue').value = parsed['data-button']
+        }
         tds[6].querySelector('input').onchange = (e) => {
             setModified(e);
             if (e.target.hasAttribute('checked')) {
@@ -538,7 +543,9 @@ const generateSettingTable = async (table, token) => {
                 return undefined
             }
             else {
-                return {
+                const name = tds[8].querySelector('#buttonName').value
+                const value =  tds[8].querySelector('#buttonValue').value
+                const result = {
                     id: row.id, // The id of the row (record)
                     name: tds[0].textContent.trim(), // Get the name from the first column
                     columnName: tds[1].textContent.trim(),
@@ -546,8 +553,13 @@ const generateSettingTable = async (table, token) => {
                     cut: tds[3].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
                     position: parseInt(tds[4].querySelector('input').value, 10) || 0, // Get the position, default to 0
                     type: tds[5].querySelector('select').value, 
-                    ftable: tds[7].querySelector('#foreignTable').value || undefined
+                    ftable: tds[7].querySelector('#foreignTable').value || undefined,
+
                 }; 
+                if(name && value){
+                    result.type = 'button'+JSON.stringify({name,[data-button]:value})
+                }
+                return result
             }
         });
         console.log('to deleted ' + JSON.stringify(toDIds))

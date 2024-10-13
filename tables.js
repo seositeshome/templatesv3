@@ -248,11 +248,21 @@ const generateMainTable = async (tableName, token) => {
                 console.log(f)
                 td.textContent = record[r.name].replace('T', ' ').slice(0, 19);
             }
+            else if(r.type.startsWith('button')){
+                const parsed =JSON.parse(r.type.replace('button',''))
+                const {name }= parsed
+                const value = parse['data-button']
+                const button = document.createElement('button')
+                button.textContent = name
+                button.setAttribute('data-button',value)
+                td.append(button)
+            }
             else{
                 td.textContent = record[r.name]
 
             }
             td.setAttribute('name', r.name)
+            td.setAttribute('cname', r.columnName)
             td.setAttribute('type', r.type)
             if (r.cut || r.name ==='shortId') {
                 td.classList.add('short')
@@ -412,7 +422,7 @@ const generateSettingTable = async (table, token) => {
     tr.id = "settingsHead";
 
     // Define the table header names
-    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove","Foreign key"];
+    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove","Foreign key","button"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
     const o = tr.querySelector('th')

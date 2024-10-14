@@ -10,7 +10,7 @@ const rButton = document.getElementById('remove')
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 
-    r = await fetch('https://api.seositeshome.com/table', {
+    r = await fetch(`https://api.seositeshome.com/table?token=${token}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const generateMainTable = async (tableName, token) => {
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
         if (remove) {
-            await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
+            await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ const generateMainTable = async (tableName, token) => {
         });
 
         // Now send the updated data to the server via a PUT request
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ const generateMainTable = async (tableName, token) => {
                     return element
                 })
                 const ids = Array.from(delements).map(element=>element.id)
-                await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
+                await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -292,7 +292,7 @@ const generateMainTable = async (tableName, token) => {
         let userInput = prompt("Enter table name to add table \nEnter number to add rows");
         let inputV = parseInt(userInput)
         if (!inputV) {
-            r = await fetch('https://api.seositeshome.com/table', {
+            r = await fetch(`https://api.seositeshome.com/table?token=${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -314,7 +314,7 @@ const generateMainTable = async (tableName, token) => {
             }
             p.push(p1)
         }
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}`, {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -356,7 +356,7 @@ const generateSettingTable = async (table, token) => {
         let userInput = prompt("Enter table name to add table \nEnter number to add rows");
         let inputV = parseInt(userInput)
         if (!inputV) {
-            r = await fetch('https://api.seositeshome.com/table', {
+            r = await fetch(`https://api.seositeshome.com/table?token=${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -386,7 +386,7 @@ const generateSettingTable = async (table, token) => {
         for (i = 0; i < parseInt(inputV); i++) {
             p.push({ name: generateName() })
         }
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -528,7 +528,7 @@ const generateSettingTable = async (table, token) => {
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
         if (remove) {
-            await fetch(`https://api.seositeshome.com/tables/${table}`, {
+            await fetch(`https://api.seositeshome.com/tables/${table}?token=${token}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -574,7 +574,7 @@ const generateSettingTable = async (table, token) => {
         });
         console.log('to deleted ' + JSON.stringify(toDIds))
         if (toDIds.length) {
-            await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+            await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -591,7 +591,7 @@ const generateSettingTable = async (table, token) => {
         }
 
         // Now send the updated data to the server via a PUT request
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings`, {
+        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -601,7 +601,7 @@ const generateSettingTable = async (table, token) => {
                 
             }),
         });
-        await fetch(`https://api.seositeshome.com/tables/${table}/alter`, {
+        await fetch(`https://api.seositeshome.com/tables/${table}/alter?token=${token}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

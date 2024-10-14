@@ -497,9 +497,10 @@ const generateSettingTable = async (table, token) => {
             check.setAttribute('hidden','')
 
         }
-        check.onclick = ()=>{
+        check.onclick = (e)=>{
             check.setAttribute('hidden','')
             wrapper.removeAttribute('hidden')
+            setModified(e)
         }
         // Append the cloned row to the table
         if (first) {
@@ -817,4 +818,5 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     document.querySelector('.current').textContent = table
     sButton.classList.remove('loading')
+    activeWebhookButtons()
 })

@@ -1,5 +1,7 @@
 const activateWebhook = async(table,id)=>{
-    await fetch('https://api.seositeshome.com/activatepaypalwebhook', {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    await fetch(`https://api.seositeshome.com/activatepaypalwebhook?token=${token}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

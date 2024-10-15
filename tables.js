@@ -572,7 +572,7 @@ const generateSettingTable = async (table, token) => {
 
                 }; 
                 if(name && value){
-                    result.type = 'button'+JSON.stringify({name,[data-button]:value})
+                    result.type = 'button'+JSON.stringify({name,"data-button":value})
                 }
                 return result
             }

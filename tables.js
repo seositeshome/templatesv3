@@ -251,7 +251,7 @@ const generateMainTable = async (tableName, token) => {
             else if(r.type.startsWith('button')){
                 const parsed =JSON.parse(r.type.replace('button',''))
                 const {name }= parsed
-                const value = parse['data-button']
+                const value = parsed['data-button']
                 const button = document.createElement('button')
                 button.textContent = name
                 button.setAttribute('data-button',value)

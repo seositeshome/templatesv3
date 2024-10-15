@@ -1,4 +1,5 @@
-const activateWebhook = async(table,id)=>{
+const activateWebhook = async(table,id,tr)=>{
+    tr.querySelector(`[cname="webhook status"]`).textContent = 'processing'
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     await fetch(`https://api.seositeshome.com/activatepaypalwebhook?token=${token}`, {
@@ -14,6 +15,7 @@ const activateWebhook = async(table,id)=>{
             }
         ),
     })
+    tr.querySelector(`[cname="webhook status"]`).textContent = 'activated'
 }
 var activeWebhookButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="activate-paypal-webhook"]`)
@@ -22,10 +24,10 @@ var activeWebhookButtons = async()=>{
         const id = tr.id
         const urlParams = new URLSearchParams(window.location.search);
         const table = urlParams.get('table');
-        tr.querySelector(`[cname="webhook status"]`).textContent = 'processing'
-        button.onclick = ()=>activateWebhook(table,id)
+       
+        button.onclick = ()=>activateWebhook(table,id,tr)
         
-        tr.querySelector(`[cname="webhook status"]`).textContent = 'activated'
+        
     }
 
 }

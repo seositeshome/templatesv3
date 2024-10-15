@@ -474,7 +474,9 @@ const generateSettingTable = async (table, token) => {
         if(record.type?.startsWith('button')){
             const parsed =JSON.parse(record.type.replace('button',''))
             tds[8].querySelector('#buttonName').value = parsed.name
+            tds[8].querySelector('#buttonName').onchange = setModified
             tds[8].querySelector('#buttonValue').value = parsed['data-button']
+            tds[8].querySelector('#buttonName').onchange = setModified
         }
         tds[6].querySelector('input').onchange = (e) => {
             setModified(e);

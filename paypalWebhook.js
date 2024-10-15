@@ -23,7 +23,8 @@ var activeWebhookButtons = async()=>{
         const urlParams = new URLSearchParams(window.location.search);
         const table = urlParams.get('table');
         tr.querySelector(`[cname="webhook status"]`).textContent = 'processing'
-        await activateWebhook(table,id)
+        button.onclick = ()=>activateWebhook(table,id)
+        
         tr.querySelector(`[cname="webhook status"]`).textContent = 'activated'
     }
 

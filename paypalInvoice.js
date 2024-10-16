@@ -1,4 +1,4 @@
-const activateWebhook = async(table,id,tr)=>{
+const createInvoice = async(table,id,tr)=>{
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const email = prompt("Please enter email:");

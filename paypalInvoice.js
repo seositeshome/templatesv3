@@ -1,6 +1,9 @@
 const activateWebhook = async(table,id,tr)=>{
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
+    const email = prompt("Please enter email:");
+    const amount = prompt("Please enter the amount:");
+    const currency = prompt("Please enter the currency (e.g., USD, EUR):");
     await fetch(`https://api.seositeshome.com/createInvoice?token=${token}`, {
         method: 'POST',
         headers: {
@@ -9,7 +12,10 @@ const activateWebhook = async(table,id,tr)=>{
         body: JSON.stringify(
             {
                 table,
-                id
+                id,
+                email,
+                amount,
+                currency
 
             }
         ),

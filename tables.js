@@ -822,6 +822,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     document.querySelector('.current').textContent = table
     sButton.classList.remove('loading')
-    activateWebhookButtons()
-    createInvoiceButtons()
+    await activateWebhookButtons()
+    await createInvoiceButtons()
 })

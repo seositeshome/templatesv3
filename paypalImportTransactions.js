@@ -1,9 +1,8 @@
 const importTransactions = async(table,id,tr)=>{
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
-    const email = prompt("Please enter email:");
-    const amount = prompt("Please enter the amount:");
-    const currency = prompt("Please enter the currency (e.g., USD, EUR):");
+    let days = prompt("enter days");
+    days = parseInt(days)
     await fetch(`https://api.seositeshome.com/importTransactions?token=${token}`, {
         method: 'POST',
         headers: {
@@ -13,10 +12,7 @@ const importTransactions = async(table,id,tr)=>{
             {
                 table,
                 id,
-                email,
-                amount,
-                currency
-
+                days
             }
         )
     })

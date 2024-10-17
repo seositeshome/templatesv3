@@ -824,4 +824,5 @@ document.addEventListener('DOMContentLoaded', async function () {
     sButton.classList.remove('loading')
     await activateWebhookButtons()
     await createInvoiceButtons()
+    await importTransactionsButtons()
 })

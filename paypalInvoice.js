@@ -1,6 +1,7 @@
 const createInvoice = async(table,id,tr)=>{
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
+    const product = prompt("Please enter product:");
     const email = prompt("Please enter email:");
     const amount = prompt("Please enter the amount:");
     const currency = prompt("Please enter the currency (e.g., USD, EUR):");
@@ -15,7 +16,8 @@ const createInvoice = async(table,id,tr)=>{
                 id,
                 email,
                 amount,
-                currency
+                currency,
+                product
 
             }
         )

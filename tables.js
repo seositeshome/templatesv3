@@ -89,7 +89,7 @@ const generateMainTable = async (tableName, token) => {
                 }
                 else {
                     if (td.getAttribute('name')) {
-                        obj[td.getAttribute('name')] = td.textContent ? td.textContent : undefined
+                        obj[td.getAttribute('name')] = td.textContent ? td.textContent : null
                     }
 
                 }

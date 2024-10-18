@@ -80,7 +80,12 @@ const generateMainTable = async (tableName, token) => {
 
             const obj = { id: parseInt(row.id) }
             for (const td of tds) {
+
                 const type = td.getAttribute('type')
+                const cname = td.getAttribute('cname')
+                if(cname ==='tracking' ||cname ==='courier'){
+                    continue
+                }
                 if (type === 'string') {
                     obj[td.getAttribute('name')] = td.textContent
                 }
@@ -822,7 +827,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     document.querySelector('.current').textContent = table
     sButton.classList.remove('loading')
-    await activateWebhookButtons()
-    await createInvoiceButtons()
-    await importTransactionsButtons()
+    activateWebhookButtons()
+    createInvoiceButtons()
+    importTransactionsButtons()
+    activateTrackingButtons()
 })

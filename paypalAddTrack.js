@@ -20,7 +20,8 @@ const save = async(table,id,row)=>{
         }
 
     }
-   
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
     const updatedItems = [obj]
     const { results } = await fetch(`https://api.seositeshome.com/tables/${table}?token=${token}`, {
             method: 'PUT',

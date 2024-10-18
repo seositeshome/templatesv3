@@ -1,6 +1,7 @@
 const save = async(table,id,row)=>{
     console.log('clicked')
-    
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
      await fetch(`https://api.seositeshome.com/sendTracking?token=${token}`, {
             method: 'POST',
             headers: {

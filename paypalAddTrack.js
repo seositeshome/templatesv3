@@ -11,7 +11,7 @@ const save = async(table,id,row)=>{
                 id, // Send the array of updated records
             }),
         });
-    row.querySelector(`[cname="transaction status"]`).textContent = 'added'
+    row.querySelector(`[cname="track status"]`).textContent = 'added'
 }
 var activateTrackingButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="paypal-add-tracking-number"]`)

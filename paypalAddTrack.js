@@ -21,7 +21,7 @@ const save = async(table,id,row)=>{
     }
    
     const updatedItems = [obj]
-    const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
+    const { results } = await fetch(`https://api.seositeshome.com/tables/${table}?token=${token}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

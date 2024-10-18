@@ -37,3 +37,35 @@ var createInvoiceButtons = async()=>{
     }
 
 }
+const cancelInvoice = async(table,id,tr)=>{
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    await fetch(`https://api.seositeshome.com/cancelInvoice?token=${token}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                
+                id,
+
+            }
+        )
+    })
+    tr.querySelector(`[cname="track status"]`).textContent = 'invoice status'
+}
+var cancelInvoiceButtons = async()=>{
+    const buttons = document.querySelectorAll(`[data-button="cancel invoice"]`)
+    for(const button of buttons){
+        const tr = button.closest('tr')
+        const id = tr.id
+        const urlParams = new URLSearchParams(window.location.search);
+        const table = urlParams.get('table');
+       
+        button.onclick = ()=>cancelInvoice(table,id,tr)
+        
+        
+    }
+
+}

@@ -1,4 +1,4 @@
-const activateWebhook = async(table,id,row)=>{
+const save = async(table,id,row)=>{
     const tds = row.querySelectorAll('td');
 
     const obj = { id: parseInt(row.id) }

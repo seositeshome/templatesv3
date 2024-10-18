@@ -1,4 +1,5 @@
 const save = async(table,id,row)=>{
+    console.log('clicked')
     const tds = row.querySelectorAll('td');
 
     const obj = { id: parseInt(row.id) }

@@ -32,7 +32,7 @@ const save = async(table,id,row)=>{
         });
 }
 var activateTrackingButtons = async()=>{
-    const buttons = document.querySelectorAll(`[data-button="activate-paypal-webhook"]`)
+    const buttons = document.querySelectorAll(`[data-button="paypal-add-tracking-number"]`)
     for(const button of buttons){
         const tr = button.closest('tr')
         const id = tr.id

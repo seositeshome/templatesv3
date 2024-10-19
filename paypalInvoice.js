@@ -53,7 +53,7 @@ const cancelInvoice = async(table,id,tr)=>{
             }
         )
     })
-    tr.querySelector(`[cname="track status"]`).textContent = 'invoice status'
+    tr.querySelector(`[cname='invoice status']`).textContent = 'cancelled'
 }
 var cancelInvoiceButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="paypal-cancel-invoice"]`)

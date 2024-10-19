@@ -56,7 +56,7 @@ const cancelInvoice = async(table,id,tr)=>{
     tr.querySelector(`[cname="track status"]`).textContent = 'invoice status'
 }
 var cancelInvoiceButtons = async()=>{
-    const buttons = document.querySelectorAll(`[data-button="cancel invoice"]`)
+    const buttons = document.querySelectorAll(`[data-button="paypal-cancel-invoice"]`)
     for(const button of buttons){
         const tr = button.closest('tr')
         const id = tr.id

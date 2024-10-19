@@ -62,7 +62,9 @@ var cancelInvoiceButtons = async()=>{
         const id = tr.id
         const urlParams = new URLSearchParams(window.location.search);
         const table = urlParams.get('table');
-       
+        if( tr.querySelector(`[cname='invoice status']`).textContent === 'cancelled'){
+            button.remove()
+        }
         button.onclick = ()=>cancelInvoice(table,id,tr)
         
         

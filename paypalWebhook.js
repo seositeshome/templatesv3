@@ -16,6 +16,7 @@ const activateWebhook = async(table,id,tr)=>{
         ),
     })
     tr.querySelector(`[cname="webhook status"]`).textContent = 'activated'
+    alert('webhook activate')
 }
 var activateWebhookButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="activate-paypal-webhook"]`)

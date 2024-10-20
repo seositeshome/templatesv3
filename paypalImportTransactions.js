@@ -16,6 +16,8 @@ const importTransactions = async(table,id,tr)=>{
             }
         )
     })
+    alert('import transactions done')
+
 }
 var importTransactionsButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="get-last-paypal-trans"]`)

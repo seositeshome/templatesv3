@@ -22,6 +22,7 @@ const createInvoice = async(table,id,tr)=>{
             }
         )
     })
+    alert('invoice added')
 }
 var createInvoiceButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="create-paypal-invoice"]`)
@@ -54,6 +55,7 @@ const cancelInvoice = async(table,id,tr)=>{
         )
     })
     tr.querySelector(`[cname='invoice status']`).textContent = 'cancelled'
+    alert('invoice cancelled')
 }
 var cancelInvoiceButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="paypal-cancel-invoice"]`)

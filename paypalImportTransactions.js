@@ -20,7 +20,7 @@ const importTransactions = async(table,id,tr)=>{
         alert('import transaction done');
     } else {
         const errorData = await response.json(); // Optional: get more details about the error
-        alert(`Problem importing: ${errorData.message || 'Unknown error'}`);
+        alert(`Problem importing: ${errorData.error || 'Unknown error'}`);
     }
 
 }

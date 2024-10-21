@@ -20,7 +20,7 @@ const activateWebhook = async(table,id,tr)=>{
         alert('webhook activate');
     } else {
         const errorData = await response.json(); // Optional: get more details about the error
-        alert(`Problem activating webhook: ${errorData.message || 'Unknown error'}`);
+        alert(`Problem activating webhook: ${errorData.error || 'Unknown error'}`);
     }
 }
 var activateWebhookButtons = async()=>{

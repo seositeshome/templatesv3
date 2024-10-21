@@ -16,7 +16,7 @@ const save = async(table,id,row)=>{
         alert('adding track info done');
     } else {
         const errorData = await response.json(); // Optional: get more details about the error
-        alert(`Problem adding tracking info: ${errorData.message || 'Unknown error'}`);
+        alert(`Problem adding tracking info: ${errorData.error || 'Unknown error'}`);
     }
 
 }

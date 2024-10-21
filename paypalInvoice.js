@@ -26,7 +26,7 @@ const createInvoice = async(table,id,tr)=>{
         alert('Invoice sent successfully!');
     } else {
         const errorData = await response.json(); // Optional: get more details about the error
-        alert(`Problem sending invoice: ${errorData.message || 'Unknown error'}`);
+        alert(`Problem sending invoice: ${errorData.error || 'Unknown error'}`);
     }
 }
 var createInvoiceButtons = async()=>{

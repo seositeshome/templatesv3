@@ -5,7 +5,7 @@ const createInvoice = async(table,id,tr)=>{
     const email = prompt("Please enter email:");
     const amount = prompt("Please enter the amount:");
     const currency = prompt("Please enter the currency (e.g., USD, EUR):");
-    await fetch(`https://api.seositeshome.com/createInvoice?token=${token}`, {
+    const response =  await fetch(`https://api.seositeshome.com/createInvoice?token=${token}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

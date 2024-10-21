@@ -3,7 +3,7 @@ const importTransactions = async(table,id,tr)=>{
     const token = urlParams.get('token');
     let days = prompt("enter days");
     days = parseInt(days)
-    await fetch(`https://api.seositeshome.com/importTransactions?token=${token}`, {
+    const response =  await fetch(`https://api.seositeshome.com/importTransactions?token=${token}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

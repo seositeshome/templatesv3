@@ -2,7 +2,7 @@ const activateWebhook = async(table,id,tr)=>{
     tr.querySelector(`[cname="webhook status"]`).textContent = 'processing'
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
-    await fetch(`https://api.seositeshome.com/activatepaypalwebhook?token=${token}`, {
+    const response =  await fetch(`https://api.seositeshome.com/activatepaypalwebhook?token=${token}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -245,7 +245,7 @@ const generateMainTable = async (tableName, token) => {
             }
 
            
-            if(r.type ==='date'){
+            if(r.type ==='date' || r.type ==='date ISO 8601 UTC'){
                 const f = record[r.name].replace('T', ' ').slice(0, 19);
                 console.log(f)
                 td.textContent = record[r.name].replace('T', ' ').slice(0, 19);

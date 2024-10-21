@@ -12,7 +12,13 @@ const save = async(table,id,row)=>{
             }),
         });
     row.querySelector(`[cname="track status"]`).textContent = 'added'
-    alert('tracking added')
+    if (response.ok) {
+        alert('adding track info done');
+    } else {
+        const errorData = await response.json(); // Optional: get more details about the error
+        alert(`Problem adding tracking info: ${errorData.message || 'Unknown error'}`);
+    }
+
 }
 var activateTrackingButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="paypal-add-tracking-number"]`)

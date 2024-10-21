@@ -22,7 +22,12 @@ const createInvoice = async(table,id,tr)=>{
             }
         )
     })
-    alert('invoice added')
+    if (response.ok) {
+        alert('Invoice sent successfully!');
+    } else {
+        const errorData = await response.json(); // Optional: get more details about the error
+        alert(`Problem sending invoice: ${errorData.message || 'Unknown error'}`);
+    }
 }
 var createInvoiceButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="create-paypal-invoice"]`)

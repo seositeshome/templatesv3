@@ -16,7 +16,12 @@ const activateWebhook = async(table,id,tr)=>{
         ),
     })
     tr.querySelector(`[cname="webhook status"]`).textContent = 'activated'
-    alert('webhook activate')
+    if (response.ok) {
+        alert('webhook activate');
+    } else {
+        const errorData = await response.json(); // Optional: get more details about the error
+        alert(`Problem activating webhook: ${errorData.message || 'Unknown error'}`);
+    }
 }
 var activateWebhookButtons = async()=>{
     const buttons = document.querySelectorAll(`[data-button="activate-paypal-webhook"]`)

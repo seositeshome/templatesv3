@@ -248,7 +248,7 @@ const generateMainTable = async (tableName, token) => {
             if(r.type ==='date' || r.type ==='date ISO 8601 UTC'){
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
                 console.log(f)
-                td.textContent = record[r.name].replace('T', ' ').slice(0, 19);
+                td.textContent = record[r.name]?.replace('T', ' ').slice(0, 19);
             }
             else if(r.type.startsWith('button')){
                 const parsed =JSON.parse(r.type.replace('button',''))

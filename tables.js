@@ -865,7 +865,7 @@ if (loadingButton) {
 // Add an event listener to warn before closing the page
 window.addEventListener('beforeunload', function (e) {
     if (isDirty) {
-        const message = "You have unsaved changes. Are you sure you want to leave the page?";
+        const message = "YOU HAVE UNSAVED CHANGED!";
         e.returnValue = message;
         return message;
     }

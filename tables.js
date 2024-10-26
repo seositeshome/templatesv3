@@ -835,7 +835,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
 
-// code that prevent reloading not saving
+/* 
+code that prevent reloading not saving
+*/
 let isDirty = false;
 
 // Function to update the isDirty flag

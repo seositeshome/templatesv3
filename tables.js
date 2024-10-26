@@ -831,3 +831,42 @@ document.addEventListener('DOMContentLoaded', async function () {
     sButton.classList.remove('loading')
     
 })
+
+
+
+
+// code that prevent reloading not saving
+let isDirty = false;
+
+// Function to update the isDirty flag
+function updateDirtyState(mutationsList) {
+    mutationsList.forEach(mutation => {
+        if (mutation.target.classList.contains('loading-btn')) {
+            if (mutation.target.classList.contains('save')) {
+                isDirty = true;
+            } else {
+                isDirty = false;
+            }
+        }
+    });
+}
+
+// Create an observer to watch for attribute changes
+const observer = new MutationObserver(updateDirtyState);
+
+// Find the element with the class "loading-btn"
+const loadingButton = document.querySelector('.loading-btn');
+
+// Start the observer on the element, watching for class attribute changes
+if (loadingButton) {
+    observer.observe(loadingButton, { attributes: true, attributeFilter: ['class'] });
+}
+
+// Add an event listener to warn before closing the page
+window.addEventListener('beforeunload', function (e) {
+    if (isDirty) {
+        const message = "You have unsaved changes. Are you sure you want to leave the page?";
+        e.returnValue = message;
+        return message;
+    }
+});

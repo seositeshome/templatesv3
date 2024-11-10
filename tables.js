@@ -489,13 +489,8 @@ const generateQuery = async (query, token) => {
 
     }
     //theadtr.innerHTML = ''
-    const res = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(e => e.json())
-    const mainRecords = res.records
+   
+    const mainRecords = result
     let total = mainRecords.length
     const originalFilter = table.querySelector('#filterHead')
 

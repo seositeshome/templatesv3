@@ -353,7 +353,7 @@ const generateMainTable = async (tableName, token) => {
 }
 const generateQuery = async (query, token) => {
 
-    let { result } = await fetch(`https://api.seositeshome.com/query/${query}?token=${token}`, {
+    let { result,records } = await fetch(`https://api.seositeshome.com/query/${query}?token=${token}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -363,7 +363,6 @@ const generateQuery = async (query, token) => {
         return
     }
     console.log(result)
-    return
     
     
     records = records.sort((a, b) => a.position - b.position);

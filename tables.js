@@ -364,10 +364,12 @@ const generateQuery = async (query, token) => {
     }
     console.log(result)
     
+    for(const record of records){
+        record = record.sort((a, b) => a.position - b.position);
+    }
     
-    records = records.sort((a, b) => a.position - b.position);
     console.log(JSON.stringify(records))
-    records = [ ... records]
+    records = records.flat()
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')

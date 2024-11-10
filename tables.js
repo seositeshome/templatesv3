@@ -347,6 +347,7 @@ const generateMainTable = async (tableName, token) => {
     importTransactionsButtons()
     activateTrackingButtons()
     cancelInvoiceButtons()
+    openQueryButtons()
     loadTradesButton()
 
 }

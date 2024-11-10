@@ -363,11 +363,7 @@ const generateQuery = async (query, token) => {
         return
     }
     console.log(result)
-    records = records.map(record=>record.sort((a, b) => a.position - b.position))
-   
     
-    console.log(JSON.stringify(records))
-    records = records.flat()
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')

@@ -363,10 +363,8 @@ const generateQuery = async (query, token) => {
         return
     }
     console.log(result)
-    
-    for(const record of records){
-        record = record.sort((a, b) => a.position - b.position);
-    }
+    records = records.map(record=>record.sort((a, b) => a.position - b.position))
+   
     
     console.log(JSON.stringify(records))
     records = records.flat()

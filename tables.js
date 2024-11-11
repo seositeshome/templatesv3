@@ -169,7 +169,18 @@ const generateMainTable = async (tableName, token) => {
 
     }
     //theadtr.innerHTML = ''
-    const res = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
+    let url = `https://api.seositeshome.com/tables/${tableName}?token=${token}`
+    const urlParams = new URLSearchParams(window.location.search);
+    const filters = urlParams.get('filters')
+    const sort = urlParams.get('sort')
+    const sortType = urlParams.get('sortType')
+    if(sort){
+        url+=`&sort=${sort}&sortType=${sortType}`
+    }
+    if(filters){
+        url+=`&filters=${filters}`
+    }
+    const res = await fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

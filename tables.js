@@ -191,31 +191,38 @@ const generateMainTable = async (tableName, token) => {
         clonedFilter.id = record.name.toLocaleLowerCase()
         const filterInput = clonedFilter.querySelector('input')
         filterInput.onblur = (e) => {
-            const value = filterInput.value
-            const selectElement = clonedFilter.querySelector('select')
+            const value = filterInput.value;
+            const selectElement = clonedFilter.querySelector('select');
             const selectedType = selectElement.value;
-            const selectedField = record.name.toLocaleLowerCase()
+            const selectedField = record.name.toLocaleLowerCase();
+        
             // Get the current query string from the browser's URL
             const urlParams = new URLSearchParams(window.location.search);
             let filters = JSON.parse(urlParams.get('filters') || '[]'); // Get the 'filters' query param or an empty array if it doesn't exist
-
-            // Check if the filter already exists by field name
-            const existingFilterIndex = filters.findIndex(f => f.field === selectedField);
-
-            if (existingFilterIndex !== -1) {
-                // If the field already exists, update the filter object
-                filters[existingFilterIndex] = { type: selectedType, value, field: selectedField };
+        
+            // Check if the value is empty
+            if (value.trim() === '') {
+                // If the value is empty, remove the filter object from the array
+                filters = filters.filter(f => f.field !== selectedField);
             } else {
-                // Otherwise, add the new filter object
-                filters.push({ type: selectedType, value, field: selectedField });
+                // Otherwise, check if the filter already exists by field name
+                const existingFilterIndex = filters.findIndex(f => f.field === selectedField);
+        
+                if (existingFilterIndex !== -1) {
+                    // If the field already exists, update the filter object
+                    filters[existingFilterIndex] = { type: selectedType, value, field: selectedField };
+                } else {
+                    // Otherwise, add the new filter object
+                    filters.push({ type: selectedType, value, field: selectedField });
+                }
             }
-
+        
             // Update the 'filters' parameter in the URL with the updated filters array
             urlParams.set('filters', JSON.stringify(filters));
+        
             // Update the browser's URL without reloading the page
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
-
-        }
+        };
 
         if (record.hidden) {
             th.setAttribute('hidden', '')

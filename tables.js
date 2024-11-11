@@ -338,8 +338,11 @@ const generateMainTable = async (tableName, token) => {
         label.setAttribute('for', record.name)
         const urlParams = new URLSearchParams(window.location.search);
         const filters = JSON.parse(urlParams.get('filters') || '[]'); // Parses 'filters' if it exists, or defaults to an empty array
-
-       
+        const sort1 = urlParams.get('sort')
+        const sortType1 = urlParams.get('sortType')
+       if(sort1 && sortType1 && sort1 ===record.name){
+        label.classList.add(sortType1)
+       }
 
         // Find the filter object that matches the 'field' with the 'record.name'
         const filter = filters.find(f => f.field === record.name);

@@ -325,7 +325,7 @@ const generateMainTable = async (tableName, token) => {
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
             generateFilteredRecords()
         }
-        filterInput.onchange = updateQuery;
+        filterInput.addEventListener('input', updateQuery);
         selectElement.onchange = updateQuery;
 
         if (record.hidden) {

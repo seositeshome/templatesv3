@@ -189,7 +189,72 @@ const generateMainTable = async (tableName, token) => {
     const mainRecords = res.records
     let total = mainRecords.length
     const originalFilter = table.querySelector('#filterHead')
+    const tbody = table.querySelector('tbody')
+    const generateFilteredRecords = async()=>{
+        const urlParams = new URLSearchParams(window.location.search);
+        const filters = urlParams.get('filters')
+        const sort = urlParams.get('sort')
+        const sortType = urlParams.get('sortType')
+        tbody.innerHtml = ''
+        const filtered = mainRecords.filter(record => {
+            // Loop through each filter and apply it to the record
+            for (const filter of filters || []) {
+                const { type, field, value } = filter;
+        
+                // Convert the record field to a string for comparison
+                const recordValue = String(record[field]);
+        
+                // Apply the filter based on type
+                switch (type) {
+                    case 'contains':
+                        if (!recordValue.includes(value)) {
+                            return false; // If the record doesn't match the filter, exclude it
+                        }
+                        break;
+        
+                    case 'more':
+                        if (parseFloat(recordValue) <= parseFloat(value)) {
+                            return false; // If the record value is not greater, exclude it
+                        }
+                        break;
+        
+                    case 'less':
+                        if (parseFloat(recordValue) >= parseFloat(value)) {
+                            return false; // If the record value is not smaller, exclude it
+                        }
+                        break;
+        
+                    case 'equal':
+                        if (recordValue !== value) {
+                            return false; // If the record value doesn't match exactly, exclude it
+                        }
+                        break;
+        
+                    case 'beginswith':
+                        if (!recordValue.startsWith(value)) {
+                            return false; // If the record value doesn't start with the value, exclude it
+                        }
+                        break;
+        
+                    case 'endswith':
+                        if (!recordValue.endsWith(value)) {
+                            return false; // If the record value doesn't end with the value, exclude it
+                        }
+                        break;
+        
+                    default:
+                        return false; // If filter type is unknown, exclude this record
+                }
+            }
+        
+            return true; // If the record passes all filters, include it in the result
+        });
+        for(const record of filtered){
+            await generateRecord(record)
+        }
 
+
+    }
     const th1 = theadtr.querySelector('th')
     theadtr.append(document.createElement('th'))
     originalFilter.parentNode.append(document.createElement('th'))
@@ -234,6 +299,7 @@ const generateMainTable = async (tableName, token) => {
         
             // Update the browser's URL without reloading the page
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+            generateFilteredRecords()
         }
         filterInput.onblur = updateQuery;
         selectElement.onchange = updateQuery;
@@ -290,7 +356,7 @@ const generateMainTable = async (tableName, token) => {
     }
     originalFilter.remove()
     th1.remove()
-    const tbody = table.querySelector('tbody')
+   
     const generateRecord = (record, first, elementIndex) => {
         const tr = document.createElement('tr')
         tr.setAttribute('index', elementIndex + 1)

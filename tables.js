@@ -209,7 +209,7 @@ const generateMainTable = async (tableName, token) => {
                 // Apply the filter based on type
                 switch (type) {
                     case 'contains':
-                        if (!recordValue.includes(value)) {
+                        if (!recordValue.toLocaleLowerCase().includes(value.toLowerCase())) {
                             return false; // If the record doesn't match the filter, exclude it
                         }
                         break;
@@ -227,19 +227,19 @@ const generateMainTable = async (tableName, token) => {
                         break;
 
                     case 'equal':
-                        if (recordValue !== value) {
+                        if (recordValue.toLocaleLowerCase() !== value.toLocaleLowerCase()) {
                             return false; // If the record value doesn't match exactly, exclude it
                         }
                         break;
 
                     case 'beginswith':
-                        if (!recordValue.startsWith(value)) {
+                        if (!recordValue.toLowerCase().startsWith(value.toLowerCase())) {
                             return false; // If the record value doesn't start with the value, exclude it
                         }
                         break;
 
                     case 'endswith':
-                        if (!recordValue.endsWith(value)) {
+                        if (!recordValue.toLowerCase().endsWith(value.toLowerCase())) {
                             return false; // If the record value doesn't end with the value, exclude it
                         }
                         break;
@@ -684,7 +684,7 @@ const generateQuery = async (query, token) => {
                 // Apply the filter based on type
                 switch (type) {
                     case 'contains':
-                        if (!recordValue.includes(value)) {
+                        if (!recordValue.toLocaleLowerCase().includes(value.toLowerCase())) {
                             return false; // If the record doesn't match the filter, exclude it
                         }
                         break;
@@ -702,19 +702,19 @@ const generateQuery = async (query, token) => {
                         break;
 
                     case 'equal':
-                        if (recordValue !== value) {
+                        if (recordValue.toLocaleLowerCase() !== value.toLocaleLowerCase()) {
                             return false; // If the record value doesn't match exactly, exclude it
                         }
                         break;
 
                     case 'beginswith':
-                        if (!recordValue.startsWith(value)) {
+                        if (!recordValue.toLowerCase().startsWith(value.toLowerCase())) {
                             return false; // If the record value doesn't start with the value, exclude it
                         }
                         break;
 
                     case 'endswith':
-                        if (!recordValue.endsWith(value)) {
+                        if (!recordValue.toLowerCase().endsWith(value.toLowerCase())) {
                             return false; // If the record value doesn't end with the value, exclude it
                         }
                         break;

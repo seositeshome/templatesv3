@@ -341,7 +341,8 @@ const generateMainTable = async (tableName, token) => {
         const sort1 = urlParams.get('sort')
         const sortType1 = urlParams.get('sortType')
        if(sort1 && sortType1 && sort1 ===record.name){
-        label.classList.add(sortType1)
+            label.classList.add(sortType1)
+            input.checked = true
        }
 
         // Find the filter object that matches the 'field' with the 'record.name'

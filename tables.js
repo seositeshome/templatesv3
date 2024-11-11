@@ -336,6 +336,7 @@ const generateMainTable = async (tableName, token) => {
         const input = th.querySelector('input')
         input.id = record.name
         label.setAttribute('for', record.name)
+        const urlParams = new URLSearchParams(window.location.search);
         const filters = JSON.parse(urlParams.get('filters') || '[]'); // Parses 'filters' if it exists, or defaults to an empty array
 
        
@@ -351,7 +352,7 @@ const generateMainTable = async (tableName, token) => {
             // If no matching filter is found, optionally clear the input or set a default value
             filterInput.value = ''; // or you can set a default value here
         }
-        const urlParams = new URLSearchParams(window.location.search);
+        
         let sortField = urlParams.get('sort');
         let sortType = urlParams.get('sortType')
         label.onclick = (e) => {

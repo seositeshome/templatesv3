@@ -252,6 +252,26 @@ const generateMainTable = async (tableName, token) => {
             return true; // If the record passes all filters, include it in the result
         });
         console.log('filtered ' + JSON.stringify(filtered))
+        if (sort && sortType) {
+            filtered.sort((a, b) => {
+                const valueA = a[sort];
+                const valueB = b[sort];
+        
+                // If values are non-comparable (like undefined or null), handle them gracefully
+                if (valueA === undefined || valueA === null) return 1;
+                if (valueB === undefined || valueB === null) return -1;
+        
+                // For numerical sorting, use parseFloat. For other cases (e.g., strings), use localeCompare
+                if (typeof valueA === 'string' && typeof valueB === 'string') {
+                    return (sortType === 'desc' ? valueB.localeCompare(valueA) : valueA.localeCompare(valueB));
+                } else {
+                    return (sortType === 'desc' ? valueB - valueA : valueA - valueB);
+                }
+            });
+        } else {
+            // If no sort or sortType is provided, use a default sorting mechanism, for example, by 'id' (ascending)
+            filtered.sort((a, b) => a.id - b.id);
+        }
         for (let i = 0; i < filtered.length; i++) {
             const record = filtered[i]
             generateRecord(record, false, i)

@@ -338,8 +338,7 @@ const generateMainTable = async (tableName, token) => {
         label.setAttribute('for', record.name)
         const filters = JSON.parse(urlParams.get('filters') || '[]'); // Parses 'filters' if it exists, or defaults to an empty array
 
-        // Assuming 'record' is defined elsewhere, like for example:
-        const record = { name: 'John', id: 1 };  // Example record
+       
 
         // Find the filter object that matches the 'field' with the 'record.name'
         const filter = filters.find(f => f.field === record.name);

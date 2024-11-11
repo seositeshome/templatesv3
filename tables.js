@@ -234,6 +234,7 @@ const generateMainTable = async (tableName, token) => {
         
             // Update the browser's URL without reloading the page
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+            generateMainTable(tableName, token)
         }
         filterInput.onblur = updateQuery;
         selectElement.onchange = updateQuery;

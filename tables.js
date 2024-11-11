@@ -235,6 +235,7 @@ const generateMainTable = async (tableName, token) => {
         const input = th.querySelector('input')
         input.id = record.name
         label.setAttribute('for', record.name)
+        const urlParams = new URLSearchParams(window.location.search);
         let sortField = urlParams.get('sort') ;
         let sortType = urlParams.get('sortType') 
         label.onclick = (e) => {

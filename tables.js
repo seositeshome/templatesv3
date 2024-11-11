@@ -191,6 +191,7 @@ const generateMainTable = async (tableName, token) => {
     const originalFilter = table.querySelector('#filterHead')
     const tbody = table.querySelector('tbody')
     const generateFilteredRecords = async()=>{
+        console.log('generating filtered')
         const urlParams = new URLSearchParams(window.location.search);
         const filters = urlParams.get('filters')
         const sort = urlParams.get('sort')

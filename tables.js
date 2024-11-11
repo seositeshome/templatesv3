@@ -196,10 +196,8 @@ const generateMainTable = async (tableName, token) => {
         const filters = urlParams.get('filters')
         const sort = urlParams.get('sort')
         const sortType = urlParams.get('sortType')
-        const rows = table.querySelector('tbody').children;
-        for (let i = 0; i < rows.length; i++) {
-            rows[i].remove();
-        }
+        table.querySelector('tbody').innerHtml =''
+        
         const filtered = mainRecords.filter(record => {
             // Loop through each filter and apply it to the record
             for (const filter of JSON.parse(filters) || []) {

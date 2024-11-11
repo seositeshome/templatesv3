@@ -254,8 +254,9 @@ const generateMainTable = async (tableName, token) => {
             return true; // If the record passes all filters, include it in the result
         });
         console.log('filtered ' + JSON.stringify(filtered))
-        for (const record of filtered) {
-            await generateRecord(record)
+        for (let i = 0; i < filtered.length; i++) {
+            const record = filtered[i]
+            generateRecord(record, false, i)
         }
 
 

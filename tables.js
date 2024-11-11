@@ -196,8 +196,8 @@ const generateMainTable = async (tableName, token) => {
         const filters = urlParams.get('filters')
         const sort = urlParams.get('sort')
         const sortType = urlParams.get('sortType')
-        document.querySelectorAll('[index]').forEach(e=>e.remove())
-        
+        document.querySelectorAll('[index]').forEach(e => e.remove())
+
         const filtered = mainRecords.filter(record => {
             // Loop through each filter and apply it to the record
             for (const filter of JSON.parse(filters) || []) {
@@ -256,11 +256,11 @@ const generateMainTable = async (tableName, token) => {
             filtered.sort((a, b) => {
                 const valueA = a[sort];
                 const valueB = b[sort];
-        
+
                 // If values are non-comparable (like undefined or null), handle them gracefully
                 if (valueA === undefined || valueA === null) return 1;
                 if (valueB === undefined || valueB === null) return -1;
-        
+
                 // For numerical sorting, use parseFloat. For other cases (e.g., strings), use localeCompare
                 if (typeof valueA === 'string' && typeof valueB === 'string') {
                     return (sortType === 'desc' ? valueB.localeCompare(valueA) : valueA.localeCompare(valueB));
@@ -325,7 +325,7 @@ const generateMainTable = async (tableName, token) => {
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
             generateFilteredRecords()
         }
-        filterInput.onblur = updateQuery;
+        filterInput.onchange = updateQuery;
         selectElement.onchange = updateQuery;
 
         if (record.hidden) {
@@ -336,6 +336,22 @@ const generateMainTable = async (tableName, token) => {
         const input = th.querySelector('input')
         input.id = record.name
         label.setAttribute('for', record.name)
+        const filters = JSON.parse(urlParams.get('filters') || '[]'); // Parses 'filters' if it exists, or defaults to an empty array
+
+        // Assuming 'record' is defined elsewhere, like for example:
+        const record = { name: 'John', id: 1 };  // Example record
+
+        // Find the filter object that matches the 'field' with the 'record.name'
+        const filter = filters.find(f => f.field === record.name);
+
+
+        // If the filter is found, set the input's value
+        if (filter) {
+            filterInput.value = filter.value;
+        } else {
+            // If no matching filter is found, optionally clear the input or set a default value
+            filterInput.value = ''; // or you can set a default value here
+        }
         const urlParams = new URLSearchParams(window.location.search);
         let sortField = urlParams.get('sort');
         let sortType = urlParams.get('sortType')

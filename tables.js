@@ -664,14 +664,140 @@ const generateQuery = async (query, token) => {
     const th1 = theadtr.querySelector('th')
     theadtr.append(document.createElement('th'))
     originalFilter.parentNode.append(document.createElement('th'))
+    const tbody = table.querySelector('tbody')
+    const generateFilteredRecords = async () => {
+        console.log('generating filtered')
+        const urlParams = new URLSearchParams(window.location.search);
+        const filters = urlParams.get('filters')
+        const sort = urlParams.get('sort')
+        const sortType = urlParams.get('sortType')
+        document.querySelectorAll('[index]').forEach(e => e.remove())
 
+        const filtered = mainRecords.filter(record => {
+            // Loop through each filter and apply it to the record
+            for (const filter of JSON.parse(filters) || []) {
+                const { type, field, value } = filter;
+
+                // Convert the record field to a string for comparison
+                const recordValue = String(record[field]);
+
+                // Apply the filter based on type
+                switch (type) {
+                    case 'contains':
+                        if (!recordValue.includes(value)) {
+                            return false; // If the record doesn't match the filter, exclude it
+                        }
+                        break;
+
+                    case 'more':
+                        if (parseFloat(recordValue) <= parseFloat(value)) {
+                            return false; // If the record value is not greater, exclude it
+                        }
+                        break;
+
+                    case 'less':
+                        if (parseFloat(recordValue) >= parseFloat(value)) {
+                            return false; // If the record value is not smaller, exclude it
+                        }
+                        break;
+
+                    case 'equal':
+                        if (recordValue !== value) {
+                            return false; // If the record value doesn't match exactly, exclude it
+                        }
+                        break;
+
+                    case 'beginswith':
+                        if (!recordValue.startsWith(value)) {
+                            return false; // If the record value doesn't start with the value, exclude it
+                        }
+                        break;
+
+                    case 'endswith':
+                        if (!recordValue.endsWith(value)) {
+                            return false; // If the record value doesn't end with the value, exclude it
+                        }
+                        break;
+
+                    default:
+                        return false; // If filter type is unknown, exclude this record
+                }
+            }
+
+            return true; // If the record passes all filters, include it in the result
+        });
+        console.log('filtered ' + JSON.stringify(filtered))
+        if (sort && sortType) {
+            filtered.sort((a, b) => {
+                const valueA = a[sort];
+                const valueB = b[sort];
+
+                // If values are non-comparable (like undefined or null), handle them gracefully
+                if (valueA === undefined || valueA === null) return 1;
+                if (valueB === undefined || valueB === null) return -1;
+
+                // For numerical sorting, use parseFloat. For other cases (e.g., strings), use localeCompare
+                if (typeof valueA === 'string' && typeof valueB === 'string') {
+                    return (sortType === 'desc' ? valueB.localeCompare(valueA) : valueA.localeCompare(valueB));
+                } else {
+                    return (sortType === 'desc' ? valueB - valueA : valueA - valueB);
+                }
+            });
+        } else {
+            // If no sort or sortType is provided, use a default sorting mechanism, for example, by 'id' (ascending)
+            filtered.sort((a, b) => a.id - b.id);
+        }
+        for (let i = 0; i < filtered.length; i++) {
+            const record = filtered[i]
+            generateRecord(record, false, i)
+        }
+
+
+    }
     for (const record of records) {
         const th = th1.cloneNode(true)
         th.querySelector('span').textContent = record.columnName
 
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()
+        const filterInput = clonedFilter.querySelector('input')
+        const selectElement = clonedFilter.querySelector('select');
+        const updateQuery = (e) => {
+            const value = filterInput.value;
 
+            const selectedType = selectElement.value;
+            const selectedField = record.name
+
+            // Get the current query string from the browser's URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let filters = JSON.parse(urlParams.get('filters') || '[]'); // Get the 'filters' query param or an empty array if it doesn't exist
+
+            // Check if the value is empty
+            if (value.trim() === '') {
+                // If the value is empty, remove the filter object from the array
+                filters = filters.filter(f => f.field !== selectedField);
+            } else {
+                // Otherwise, check if the filter already exists by field name
+                const existingFilterIndex = filters.findIndex(f => f.field === selectedField);
+
+                if (existingFilterIndex !== -1) {
+                    // If the field already exists, update the filter object
+                    filters[existingFilterIndex] = { type: selectedType, value, field: selectedField };
+                } else {
+                    // Otherwise, add the new filter object
+                    filters.push({ type: selectedType, value, field: selectedField });
+                }
+            }
+
+            // Update the 'filters' parameter in the URL with the updated filters array
+            urlParams.set('filters', JSON.stringify(filters));
+
+            // Update the browser's URL without reloading the page
+            window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+            generateFilteredRecords()
+        }
+        filterInput.addEventListener('input', updateQuery);
+        selectElement.onchange = updateQuery;
         if (record.hidden) {
             th.setAttribute('hidden', '')
             clonedFilter.setAttribute('hidden', '')
@@ -706,13 +832,13 @@ const generateQuery = async (query, token) => {
                 // Case where class list includes neither 'asc' nor 'desc'
                 console.log('The label has neither "asc" nor "desc" class');
             }
+            generateFilteredRecords()
         }
         theadtr.append(th)
         originalFilter.parentNode.append(clonedFilter)
     }
     originalFilter.remove()
     th1.remove()
-    const tbody = table.querySelector('tbody')
     const generateRecord = (record, first, elementIndex) => {
         const tr = document.createElement('tr')
         tr.setAttribute('index', elementIndex + 1)

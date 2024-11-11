@@ -199,7 +199,7 @@ const generateMainTable = async (tableName, token) => {
         tbody.innerHtml = ''
         const filtered = mainRecords.filter(record => {
             // Loop through each filter and apply it to the record
-            for (const filter of filters || []) {
+            for (const filter of JSON.parse(filters) || []) {
                 const { type, field, value } = filter;
         
                 // Convert the record field to a string for comparison

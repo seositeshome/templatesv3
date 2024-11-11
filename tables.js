@@ -174,11 +174,11 @@ const generateMainTable = async (tableName, token) => {
     const filters = urlParams.get('filters')
     const sort = urlParams.get('sort')
     const sortType = urlParams.get('sortType')
-    if(sort){
-        url+=`&sort=${sort}&sortType=${sortType}`
+    if (sort) {
+        url += `&sort=${sort}&sortType=${sortType}`
     }
-    if(filters){
-        url+=`&filters=${filters}`
+    if (filters) {
+        url += `&filters=${filters}`
     }
     const res = await fetch(url, {
         method: 'GET',
@@ -190,21 +190,24 @@ const generateMainTable = async (tableName, token) => {
     let total = mainRecords.length
     const originalFilter = table.querySelector('#filterHead')
     const tbody = table.querySelector('tbody')
-    const generateFilteredRecords = async()=>{
+    const generateFilteredRecords = async () => {
         console.log('generating filtered')
         const urlParams = new URLSearchParams(window.location.search);
         const filters = urlParams.get('filters')
         const sort = urlParams.get('sort')
         const sortType = urlParams.get('sortType')
-        table.querySelector('tbody').children.forEach(e=>e.remove())
+        const rows = table.querySelector('tbody').children;
+        for (let i = 0; i < rows.length; i++) {
+            rows[i].remove();
+        }
         const filtered = mainRecords.filter(record => {
             // Loop through each filter and apply it to the record
             for (const filter of JSON.parse(filters) || []) {
                 const { type, field, value } = filter;
-        
+
                 // Convert the record field to a string for comparison
                 const recordValue = String(record[field]);
-        
+
                 // Apply the filter based on type
                 switch (type) {
                     case 'contains':
@@ -212,46 +215,46 @@ const generateMainTable = async (tableName, token) => {
                             return false; // If the record doesn't match the filter, exclude it
                         }
                         break;
-        
+
                     case 'more':
                         if (parseFloat(recordValue) <= parseFloat(value)) {
                             return false; // If the record value is not greater, exclude it
                         }
                         break;
-        
+
                     case 'less':
                         if (parseFloat(recordValue) >= parseFloat(value)) {
                             return false; // If the record value is not smaller, exclude it
                         }
                         break;
-        
+
                     case 'equal':
                         if (recordValue !== value) {
                             return false; // If the record value doesn't match exactly, exclude it
                         }
                         break;
-        
+
                     case 'beginswith':
                         if (!recordValue.startsWith(value)) {
                             return false; // If the record value doesn't start with the value, exclude it
                         }
                         break;
-        
+
                     case 'endswith':
                         if (!recordValue.endsWith(value)) {
                             return false; // If the record value doesn't end with the value, exclude it
                         }
                         break;
-        
+
                     default:
                         return false; // If filter type is unknown, exclude this record
                 }
             }
-        
+
             return true; // If the record passes all filters, include it in the result
         });
-        console.log('filtered '+JSON.stringify(filtered))
-        for(const record of filtered){
+        console.log('filtered ' + JSON.stringify(filtered))
+        for (const record of filtered) {
             await generateRecord(record)
         }
 
@@ -271,14 +274,14 @@ const generateMainTable = async (tableName, token) => {
         const selectElement = clonedFilter.querySelector('select');
         const updateQuery = (e) => {
             const value = filterInput.value;
-            
+
             const selectedType = selectElement.value;
             const selectedField = record.name
-        
+
             // Get the current query string from the browser's URL
             const urlParams = new URLSearchParams(window.location.search);
             let filters = JSON.parse(urlParams.get('filters') || '[]'); // Get the 'filters' query param or an empty array if it doesn't exist
-        
+
             // Check if the value is empty
             if (value.trim() === '') {
                 // If the value is empty, remove the filter object from the array
@@ -286,7 +289,7 @@ const generateMainTable = async (tableName, token) => {
             } else {
                 // Otherwise, check if the filter already exists by field name
                 const existingFilterIndex = filters.findIndex(f => f.field === selectedField);
-        
+
                 if (existingFilterIndex !== -1) {
                     // If the field already exists, update the filter object
                     filters[existingFilterIndex] = { type: selectedType, value, field: selectedField };
@@ -295,10 +298,10 @@ const generateMainTable = async (tableName, token) => {
                     filters.push({ type: selectedType, value, field: selectedField });
                 }
             }
-        
+
             // Update the 'filters' parameter in the URL with the updated filters array
             urlParams.set('filters', JSON.stringify(filters));
-        
+
             // Update the browser's URL without reloading the page
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
             generateFilteredRecords()
@@ -315,8 +318,8 @@ const generateMainTable = async (tableName, token) => {
         input.id = record.name
         label.setAttribute('for', record.name)
         const urlParams = new URLSearchParams(window.location.search);
-        let sortField = urlParams.get('sort') ;
-        let sortType = urlParams.get('sortType') 
+        let sortField = urlParams.get('sort');
+        let sortType = urlParams.get('sortType')
         label.onclick = (e) => {
             const ths = theadtr.querySelectorAll('th')
             for (const t of ths) {
@@ -333,20 +336,20 @@ const generateMainTable = async (tableName, token) => {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')
                 label.classList.add('desc')
-                sortField=record.name
-                sortType='desc'
+                sortField = record.name
+                sortType = 'desc'
             } else if (label.classList.contains('desc')) {
                 // Case where class list includes 'desc'
                 label.classList.remove('desc')
                 label.classList.add('asc')
                 console.log('The label has "desc" class');
-                sortField=record.name
-                sortType='asc'
+                sortField = record.name
+                sortType = 'asc'
             } else {
                 label.classList.add('desc')
                 // Case where class list includes neither 'asc' nor 'desc'
-                sortField=record.name
-                sortType='desc'
+                sortField = record.name
+                sortType = 'desc'
                 console.log('The label has neither "asc" nor "desc" class');
             }
             urlParams.set('sort', sortField);
@@ -358,7 +361,7 @@ const generateMainTable = async (tableName, token) => {
     }
     originalFilter.remove()
     th1.remove()
-   
+
     const generateRecord = (record, first, elementIndex) => {
         const tr = document.createElement('tr')
         tr.setAttribute('index', elementIndex + 1)

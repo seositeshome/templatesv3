@@ -190,9 +190,10 @@ const generateMainTable = async (tableName, token) => {
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()
         const filterInput = clonedFilter.querySelector('input')
-        filterInput.onblur = (e) => {
+        const selectElement = clonedFilter.querySelector('select');
+        const updateQuery = (e) => {
             const value = filterInput.value;
-            const selectElement = clonedFilter.querySelector('select');
+            
             const selectedType = selectElement.value;
             const selectedField = record.name.toLocaleLowerCase();
         
@@ -222,7 +223,9 @@ const generateMainTable = async (tableName, token) => {
         
             // Update the browser's URL without reloading the page
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
-        };
+        }
+        filterInput.onblur = updateQuery;
+        selectElement.onchange = updateQuery;
 
         if (record.hidden) {
             th.setAttribute('hidden', '')

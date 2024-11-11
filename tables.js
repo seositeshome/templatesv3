@@ -196,7 +196,7 @@ const generateMainTable = async (tableName, token) => {
         const filters = urlParams.get('filters')
         const sort = urlParams.get('sort')
         const sortType = urlParams.get('sortType')
-        table.querySelector('tbody').innerHtml =''
+        document.getElementById('tableToShow').querySelector('tbody').innerHtml =''
         
         const filtered = mainRecords.filter(record => {
             // Loop through each filter and apply it to the record

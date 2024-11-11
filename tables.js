@@ -195,7 +195,7 @@ const generateMainTable = async (tableName, token) => {
             const value = filterInput.value;
             
             const selectedType = selectElement.value;
-            const selectedField = record.name.toLocaleLowerCase();
+            const selectedField = record.name
         
             // Get the current query string from the browser's URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -235,6 +235,8 @@ const generateMainTable = async (tableName, token) => {
         const input = th.querySelector('input')
         input.id = record.name
         label.setAttribute('for', record.name)
+        let sortField = urlParams.get('sort') ;
+        let sortType = urlParams.get('sortType') 
         label.onclick = (e) => {
             const ths = theadtr.querySelectorAll('th')
             for (const t of ths) {
@@ -251,16 +253,24 @@ const generateMainTable = async (tableName, token) => {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')
                 label.classList.add('desc')
+                sortField=record.name
+                sortType='desc'
             } else if (label.classList.contains('desc')) {
                 // Case where class list includes 'desc'
                 label.classList.remove('desc')
                 label.classList.add('asc')
                 console.log('The label has "desc" class');
+                sortField=record.name
+                sortType='asc'
             } else {
                 label.classList.add('desc')
                 // Case where class list includes neither 'asc' nor 'desc'
+                sortField=record.name
+                sortType='desc'
                 console.log('The label has neither "asc" nor "desc" class');
             }
+            urlParams.set('sort', sortField);
+            urlParams.set('sortType', sortType);
         }
         theadtr.append(th)
         originalFilter.parentNode.append(clonedFilter)

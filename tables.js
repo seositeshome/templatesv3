@@ -27,11 +27,11 @@ const saveTable = async (event) => {
 }
 function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      const r = Math.random() * 16 | 0,
-        v = c === 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
+        const r = Math.random() * 16 | 0,
+            v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
     });
-  }
+}
 const generateMainTable = async (tableName, token) => {
 
     let { records } = await fetch(`https://api.seositeshome.com/tables/${tableName}settings?token=${token}`, {
@@ -43,16 +43,16 @@ const generateMainTable = async (tableName, token) => {
     if (!records) {
         return
     }
-    
-    
+
+
     records = records.sort((a, b) => a.position - b.position);
     console.log(JSON.stringify(records))
-    records = [ ... records]
+    records = [...records]
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')
     table.id = 'tableToShow'
-    table.setAttribute('data-table','')
+    table.setAttribute('data-table', '')
     const theadtr = table.querySelector('thead tr')
     let remove = false
     const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
@@ -82,7 +82,7 @@ const generateMainTable = async (tableName, token) => {
             for (const td of tds) {
 
                 const type = td.getAttribute('type')
-                
+
                 if (type === 'string') {
                     obj[td.getAttribute('name')] = td.textContent
                 }
@@ -127,31 +127,31 @@ const generateMainTable = async (tableName, token) => {
         if (userInput == tableName) {
             remove = true
         }
-        else{
-            
+        else {
+
             async function removeElements(input) {
                 const elements = input.split(',');
                 const indexes = []
                 for (let i = 0; i < elements.length; i++) {
                     const element = elements[i];
-                    
+
                     if (element.includes('-')) {
                         const range = element.split('-');
                         const start = parseInt(range[0], 10);
                         const end = parseInt(range[1], 10);
-                        
+
                         for (let j = start; j <= end; j++) {
                             indexes.push(j)
                         }
                     } else {
-                         indexes.push(parseInt(element, 10));
+                        indexes.push(parseInt(element, 10));
                     }
                 }
-                const delements = indexes.map(index=>{
+                const delements = indexes.map(index => {
                     const element = document.querySelector(`[index="${index}"]`)
                     return element
                 })
-                const ids = Array.from(delements).map(element=>element.id)
+                const ids = Array.from(delements).map(element => element.id)
                 await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
                     method: 'DELETE',
                     headers: {
@@ -161,7 +161,7 @@ const generateMainTable = async (tableName, token) => {
                         ids
                     }),
                 });
-                delements.forEach(e=>e.remove())
+                delements.forEach(e => e.remove())
             }
             removeElements(userInput)
         }
@@ -189,6 +189,33 @@ const generateMainTable = async (tableName, token) => {
 
         const clonedFilter = originalFilter.cloneNode(true)
         clonedFilter.id = record.name.toLocaleLowerCase()
+        const filterInput = clonedFilter.querySelector('input')
+        filterInput.onblur = (e) => {
+            const value = filterInput.value
+            const selectElement = clonedFilter.querySelector('select')
+            const selectedType = selectElement.value;
+            const selectedField = record.name.toLocaleLowerCase()
+            // Get the current query string from the browser's URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let filters = JSON.parse(urlParams.get('filters') || '[]'); // Get the 'filters' query param or an empty array if it doesn't exist
+
+            // Check if the filter already exists by field name
+            const existingFilterIndex = filters.findIndex(f => f.field === selectedField);
+
+            if (existingFilterIndex !== -1) {
+                // If the field already exists, update the filter object
+                filters[existingFilterIndex] = { type: selectedType, value, field: selectedField };
+            } else {
+                // Otherwise, add the new filter object
+                filters.push({ type: selectedType, value, field: selectedField });
+            }
+
+            // Update the 'filters' parameter in the URL with the updated filters array
+            urlParams.set('filters', JSON.stringify(filters));
+            // Update the browser's URL without reloading the page
+            window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+
+        }
 
         if (record.hidden) {
             th.setAttribute('hidden', '')
@@ -200,16 +227,16 @@ const generateMainTable = async (tableName, token) => {
         label.setAttribute('for', record.name)
         label.onclick = (e) => {
             const ths = theadtr.querySelectorAll('th')
-            for(const t of ths){
+            for (const t of ths) {
                 const input1 = t.querySelector('input')
-                if(input1 && (!input1.checked ||input.id !==input1.id)){
+                if (input1 && (!input1.checked || input.id !== input1.id)) {
                     const l = t.querySelector('label')
                     l.classList.remove('desc')
                     l.classList.remove('asc')
                 }
             }
             console.log('clicked')
-            
+
             if (label.classList.contains('asc')) {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')
@@ -244,29 +271,29 @@ const generateMainTable = async (tableName, token) => {
 
             }
 
-           
-            if(r.type ==='date' || r.type ==='date ISO 8601 UTC'){
+
+            if (r.type === 'date' || r.type === 'date ISO 8601 UTC') {
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
                 console.log(f)
                 td.textContent = record[r.name]?.replace('T', ' ').slice(0, 19);
             }
-            else if(r.type.startsWith('button')){
-                const parsed =JSON.parse(r.type.replace('button',''))
-                const {name }= parsed
+            else if (r.type.startsWith('button')) {
+                const parsed = JSON.parse(r.type.replace('button', ''))
+                const { name } = parsed
                 const value = parsed['data-button']
                 const button = document.createElement('button')
                 button.textContent = name
-                button.setAttribute('data-button',value)
+                button.setAttribute('data-button', value)
                 td.append(button)
             }
-            else{
+            else {
                 td.textContent = record[r.name]
 
             }
             td.setAttribute('name', r.name)
             td.setAttribute('cname', r.columnName)
             td.setAttribute('type', r.type)
-            if (r.cut || r.name ==='shortId') {
+            if (r.cut || r.name === 'shortId') {
                 td.classList.add('short')
             }
             td.onblur = () => {
@@ -311,8 +338,8 @@ const generateMainTable = async (tableName, token) => {
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
             const p1 = {}
-            if(records.find(e=>e.name==='shortId')){
-                p1.shortId = generateUUID().replaceAll('-','')
+            if (records.find(e => e.name === 'shortId')) {
+                p1.shortId = generateUUID().replaceAll('-', '')
             }
             p.push(p1)
         }
@@ -353,7 +380,7 @@ const generateMainTable = async (tableName, token) => {
 }
 const generateQuery = async (query, token) => {
 
-    let { result,records } = await fetch(`https://api.seositeshome.com/query/${query}?token=${token}`, {
+    let { result, records } = await fetch(`https://api.seositeshome.com/query/${query}?token=${token}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -363,12 +390,12 @@ const generateQuery = async (query, token) => {
         return
     }
     console.log(result)
-    
+
     document.getElementById('tableToShow')?.remove()
     const table = t.cloneNode(true)
     table.removeAttribute('hidden')
     table.id = 'tableToShow'
-    table.setAttribute('data-table','')
+    table.setAttribute('data-table', '')
     const theadtr = table.querySelector('thead tr')
     let remove = false
     const childs = table.querySelector('tbody').querySelectorAll('tr:not([hidden])').forEach(e => e.remove())
@@ -398,7 +425,7 @@ const generateQuery = async (query, token) => {
             for (const td of tds) {
 
                 const type = td.getAttribute('type')
-                
+
                 if (type === 'string') {
                     obj[td.getAttribute('name')] = td.textContent
                 }
@@ -443,31 +470,31 @@ const generateQuery = async (query, token) => {
         if (userInput == tableName) {
             remove = true
         }
-        else{
-            
+        else {
+
             async function removeElements(input) {
                 const elements = input.split(',');
                 const indexes = []
                 for (let i = 0; i < elements.length; i++) {
                     const element = elements[i];
-                    
+
                     if (element.includes('-')) {
                         const range = element.split('-');
                         const start = parseInt(range[0], 10);
                         const end = parseInt(range[1], 10);
-                        
+
                         for (let j = start; j <= end; j++) {
                             indexes.push(j)
                         }
                     } else {
-                         indexes.push(parseInt(element, 10));
+                        indexes.push(parseInt(element, 10));
                     }
                 }
-                const delements = indexes.map(index=>{
+                const delements = indexes.map(index => {
                     const element = document.querySelector(`[index="${index}"]`)
                     return element
                 })
-                const ids = Array.from(delements).map(element=>element.id)
+                const ids = Array.from(delements).map(element => element.id)
                 await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
                     method: 'DELETE',
                     headers: {
@@ -477,7 +504,7 @@ const generateQuery = async (query, token) => {
                         ids
                     }),
                 });
-                delements.forEach(e=>e.remove())
+                delements.forEach(e => e.remove())
             }
             removeElements(userInput)
         }
@@ -485,7 +512,7 @@ const generateQuery = async (query, token) => {
 
     }
     //theadtr.innerHTML = ''
-   
+
     const mainRecords = result
     let total = mainRecords.length
     const originalFilter = table.querySelector('#filterHead')
@@ -511,16 +538,16 @@ const generateQuery = async (query, token) => {
         label.setAttribute('for', record.name)
         label.onclick = (e) => {
             const ths = theadtr.querySelectorAll('th')
-            for(const t of ths){
+            for (const t of ths) {
                 const input1 = t.querySelector('input')
-                if(input1 && (!input1.checked ||input.id !==input1.id)){
+                if (input1 && (!input1.checked || input.id !== input1.id)) {
                     const l = t.querySelector('label')
                     l.classList.remove('desc')
                     l.classList.remove('asc')
                 }
             }
             console.log('clicked')
-            
+
             if (label.classList.contains('asc')) {
                 // Case where class list includes 'asc'
                 label.classList.remove('asc')
@@ -555,29 +582,29 @@ const generateQuery = async (query, token) => {
 
             }
 
-           
-            if(r.type ==='date' || r.type ==='date ISO 8601 UTC'){
+
+            if (r.type === 'date' || r.type === 'date ISO 8601 UTC') {
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
                 console.log(f)
                 td.textContent = record[r.name]?.replace('T', ' ').slice(0, 19);
             }
-            else if(r.type.startsWith('button')){
-                const parsed =JSON.parse(r.type.replace('button',''))
-                const {name }= parsed
+            else if (r.type.startsWith('button')) {
+                const parsed = JSON.parse(r.type.replace('button', ''))
+                const { name } = parsed
                 const value = parsed['data-button']
                 const button = document.createElement('button')
                 button.textContent = name
-                button.setAttribute('data-button',value)
+                button.setAttribute('data-button', value)
                 td.append(button)
             }
-            else{
+            else {
                 td.textContent = record[r.name]
 
             }
             td.setAttribute('name', r.name)
             td.setAttribute('cname', r.columnName)
             td.setAttribute('type', r.type)
-            if (r.cut || r.name ==='shortId') {
+            if (r.cut || r.name === 'shortId') {
                 td.classList.add('short')
             }
             td.onblur = () => {
@@ -622,8 +649,8 @@ const generateQuery = async (query, token) => {
         const p = []
         for (i = 0; i < parseInt(inputV); i++) {
             const p1 = {}
-            if(records.find(e=>e.name==='shortId')){
-                p1.shortId = generateUUID().replaceAll('-','')
+            if (records.find(e => e.name === 'shortId')) {
+                p1.shortId = generateUUID().replaceAll('-', '')
             }
             p.push(p1)
         }
@@ -729,19 +756,19 @@ const generateSettingTable = async (table, token) => {
     if (!records) {
         return
     }
-    
+
 
     document.getElementById('tableToShow')?.remove()
     const tableSettings = t.cloneNode(true)
     tableSettings.removeAttribute('hidden')
     tableSettings.id = 'tableToShow'
-    tableSettings.setAttribute('data-settings-table','')
+    tableSettings.setAttribute('data-settings-table', '')
     const original = document.getElementById('settingsRow')
     let tr = tableSettings.querySelector('thead tr')
     tr.id = "settingsHead";
 
     // Define the table header names
-    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove","Foreign key","button"];
+    const headers = ["Db Name", "Column Name", "Hidden column", "Cut long cell", "Position", "Data type", "Remove", "Foreign key", "button"];
     const originalFilter = tableSettings.querySelector('#filterHead')
     // Loop through the headers and create each <th> element
     const o = tr.querySelector('th')
@@ -792,12 +819,12 @@ const generateSettingTable = async (table, token) => {
         }
         tds[8].querySelector('#buttonName').onchange = setModified
         tds[8].querySelector('#buttonName').onchange = setModified
-        if(record.type?.startsWith('button')){
-            const parsed =JSON.parse(record.type.replace('button',''))
+        if (record.type?.startsWith('button')) {
+            const parsed = JSON.parse(record.type.replace('button', ''))
             tds[8].querySelector('#buttonName').value = parsed.name
-            
+
             tds[8].querySelector('#buttonValue').value = parsed['data-button']
-           
+
         }
         tds[6].querySelector('input').onchange = (e) => {
             setModified(e);
@@ -810,18 +837,18 @@ const generateSettingTable = async (table, token) => {
 
         }
         const wrapper = tds[7].querySelector('#fWrapper')
-        
+
         const ftable = wrapper.querySelector('#foreignTable')
         const check = tds[7].querySelector('#foreignCheckbox')
-        if(record.ftable){
-            
+        if (record.ftable) {
+
             wrapper.removeAttribute('hidden')
             ftable.value = record.ftable
-            check.setAttribute('hidden','')
+            check.setAttribute('hidden', '')
 
         }
-        check.onclick = (e)=>{
-            check.setAttribute('hidden','')
+        check.onclick = (e) => {
+            check.setAttribute('hidden', '')
             wrapper.removeAttribute('hidden')
             setModified(e)
         }
@@ -837,7 +864,7 @@ const generateSettingTable = async (table, token) => {
     }
 
 
-   
+
     rButton.onclick = async (e) => {
         let userInput = prompt("Enter 'table' to remove table \nEnter row numbers in format 1,3,9-99,200-300 to remove rows\nOr selected rows will appear here");
         sButton.classList.add('save')
@@ -878,7 +905,7 @@ const generateSettingTable = async (table, token) => {
             }
             else {
                 const name = tds[8].querySelector('#buttonName').value
-                const value =  tds[8].querySelector('#buttonValue').value
+                const value = tds[8].querySelector('#buttonValue').value
                 const result = {
                     id: row.id, // The id of the row (record)
                     name: tds[0].textContent.trim(), // Get the name from the first column
@@ -886,12 +913,12 @@ const generateSettingTable = async (table, token) => {
                     hidden: tds[2].querySelector('input[type="checkbox"]').checked, // Get the 'hidden' checkbox value
                     cut: tds[3].querySelector('input[type="checkbox"]').checked, // Get the 'cut' checkbox value
                     position: parseInt(tds[4].querySelector('input').value, 10) || 0, // Get the position, default to 0
-                    type: tds[5].querySelector('select').value, 
+                    type: tds[5].querySelector('select').value,
                     ftable: tds[7].querySelector('#foreignTable').value || undefined,
 
-                }; 
-                if(name && value){
-                    result.type = 'button'+JSON.stringify({name,"data-button":value})
+                };
+                if (name && value) {
+                    result.type = 'button' + JSON.stringify({ name, "data-button": value })
                 }
                 return result
             }
@@ -922,7 +949,7 @@ const generateSettingTable = async (table, token) => {
             },
             body: JSON.stringify({
                 items: updatedItems.filter(e => e), // Send the array of updated records
-                
+
             }),
         });
         await fetch(`https://api.seositeshome.com/tables/${table}/alter?token=${token}`, {
@@ -946,7 +973,7 @@ const generateSettingTable = async (table, token) => {
     }
 
     console.log('generating records')
-    for (const record of records.filter(e=>!(e.name ==='shortId' ||e.name ==='created'))) {
+    for (const record of records.filter(e => !(e.name === 'shortId' || e.name === 'created'))) {
         generateFromRecord(record)
     }
 
@@ -1107,23 +1134,23 @@ document.addEventListener('DOMContentLoaded', async function () {
     const table = urlParams.get('table');
     const show = urlParams.get('show');
     const query = urlParams.get('query');
-   
+
     // Extract the query parameters
 
     if (!token) {
         window.localion.href = './'
     }
     document.querySelector('.current').textContent = table
-    if(query){
+    if (query) {
         settingsButton.remove()
         dataButton.remove()
-        await generateQuery(query,token)
+        await generateQuery(query, token)
     }
-    else{
+    else {
         settingsButton.onclick = (e) => {
             if (e.target.checked) {
                 generateSettingTable(table, token)
-    
+
                 const value = 'settings'
                 urlParams.set('show', value);
                 history.pushState({}, '', `${window.location.pathname}?${urlParams}`);
@@ -1140,19 +1167,19 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (show === 'settings') {
             await generateSettingTable(table, token)
             settingsButton.checked = true
-    
+
         }
         else {
             await generateMainTable(table, token)
             dataButton.checked = true
         }
     }
-    
+
     sButton.classList.add('loaded')
 
-    
+
     sButton.classList.remove('loading')
-    
+
 })
 
 

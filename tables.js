@@ -354,6 +354,7 @@ const generateMainTable = async (tableName, token) => {
             urlParams.set('sort', sortField);
             urlParams.set('sortType', sortType);
             window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+            generateFilteredRecords()
         }
         theadtr.append(th)
         originalFilter.parentNode.append(clonedFilter)

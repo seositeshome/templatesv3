@@ -524,18 +524,18 @@
                   return
                 }
                 const { folders, components } = getFoldersAndComponents()
-                const selectedItems = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`).then(e => e.json())
+                const selectedItems = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`).then(e => e.json())
                 console.log('selected' + JSON.stringify(selectedItems))
                 const allFoldersPromises = folders.map(
                   async folder => {
-                    const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
+                    const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
                     const items = response1.items.filter(e => e.lsi1.split(';')[0].endsWith(path.split('|')[1]))
                     const promises = items.map(async item => {
                       const existingLsi1 = item.lsi1
                       //delete old
-                      const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`).then(e => e.json())
+                      const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`).then(e => e.json())
                       const dPromises = response.items.map(toD => {
-                        fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${toD.id}:${toD.sk}`, {
+                        fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${toD.id}:${toD.sk}`, {
                           method: 'DELETE',
                           headers: {
                             'Content-Type': 'application/json',
@@ -557,7 +557,7 @@
                           element.target_element = newId + '-tree'
                         }
                         element.id = newId
-                        return fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                        return fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                           method: 'POST',
                           headers: {
                             'Content-Type': 'application/json',
@@ -601,14 +601,14 @@
                   }
                   const allFoldersPromises = folders.map(
                     async folder => {
-                      const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
+                      const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
                       const items = response1.items.filter(e => e.lsi1.replace(folder, '').split(';')[0].includes(oldName))
                       const promises = items.map(async item => {
-                        const fullItem = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item.id}:${item.sk}`)
+                        const fullItem = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item.id}:${item.sk}`)
                           .then(e => e.json())
                         fullItem.id = item.id
                         fullItem.lsi1 = fullItem.lsi1.replace(oldName, newName)
-                        await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                        await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                           method: 'POST',
                           headers: {
                             'Content-Type': 'application/json',
@@ -627,14 +627,14 @@
                 else {
                   const allFoldersPromises = folders.map(
                     async folder => {
-                      const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
+                      const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
                       const items = response1.items.filter(e => e.lsi1.split(';')[0].endsWith('|' + oldName))
                       const promises = items.map(async item => {
-                        const fullItem = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item.id}:${item.sk}`)
+                        const fullItem = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item.id}:${item.sk}`)
                           .then(e => e.json())
                         fullItem.id = item.id
                         fullItem.lsi1 = fullItem.lsi1.replace('|' + oldName, '|' + newName)
-                        await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                        await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                           method: 'POST',
                           headers: {
                             'Content-Type': 'application/json',
@@ -691,9 +691,9 @@
 
                 const allFoldersPromises = folders.map(
                   async folder => {
-                    const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
+                    const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder}`).then(e => e.json());
                     const promises = items.map(async item => {
-                      const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`).then(e => e.json())
+                      const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`).then(e => e.json())
                       const p = response.items.map(entry => {
                         //filter depending on action
                         for (const key of Object.keys(checkboxStatus)) {
@@ -720,7 +720,7 @@
             document.querySelectorAll('[data-menu]:not([hidden])').forEach(e => e.remove())
           }
           const loadHelpers = async () => {
-            const { items } = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2' + `?id=${localStorage.getItem('ownerid')}&sk=helper:&startsWith=true`)
+            const { items } = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2' + `?id=${localStorage.getItem('ownerid')}&sk=helper:&startsWith=true`)
               .then(e => e.json())
             const helperEl2 = document.querySelector('[data-entity="helpers"]')
             document.querySelectorAll('[helper]').forEach(e => e.remove())
@@ -808,7 +808,7 @@
             const ownerid = localStorage.getItem('ownerid')
             const helperid = localStorage.getItem('helperid')
             const sk = `folder:${helperid ? helperid : ownerid}:lvl1:`
-            url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
+            url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
             console.log(url)
             const res = await fetch(url)
             const response = await res.json()
@@ -930,7 +930,7 @@
           }
           const loadPaypals = async () => {
             const original = document.getElementById('paypal-item')
-            const { items } = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=paypal:${localStorage.getItem('ownerid')}`, {
+            const { items } = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=paypal:${localStorage.getItem('ownerid')}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -941,7 +941,7 @@
               const cloned = original.cloneNode(true)
 
               cloned.removeAttribute('hidden')
-              const email = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=email&startsWith=true`, {
+              const email = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&sk=email&startsWith=true`, {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
@@ -978,13 +978,13 @@
           }
           const load = async () => {
             const orderItem = document.getElementById("order-item")
-            const { items } = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=order:${localStorage.getItem('ownerid')}`, {
+            const { items } = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=order:${localStorage.getItem('ownerid')}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
               },
             }).then(e => e.json())
-            const items2Promise = items.map(item1 => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
+            const items2Promise = items.map(item1 => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -1066,13 +1066,13 @@
           const loadInvoices = async () => {
             const orderItem = document.getElementById("invoice-item")
             console.log('loading invoices')
-            const { items } = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=cart:${localStorage.getItem('ownerid')}`, {
+            const { items } = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=cart:${localStorage.getItem('ownerid')}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
               },
             }).then(e => e.json())
-            const items2Promise = items.map(item1 => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
+            const items2Promise = items.map(item1 => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -1176,13 +1176,13 @@
           /*
           const load = async () => {
           const orderItem = document.getElementById("invoice-item")
-          const { items } = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=cart:${localStorage.getItem('ownerid')}`, {
+          const { items } = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=cart:${localStorage.getItem('ownerid')}`, {
           method: 'GET',
           headers: {
           'Content-Type': 'application/json',
           },
           }).then(e => e.json())
-          const items2Promise = items.map(item1 => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
+          const items2Promise = items.map(item1 => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
           method: 'GET',
           headers: {
           'Content-Type': 'application/json',
@@ -1679,7 +1679,7 @@
         absolute.querySelector('input').checked = false
       }
     }
-    let backend_url = 'https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2'
+    let backend_url = 'https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2'
     var convertToOldPath = (path) => {
       const splited = path.split('|')
       const fileName = splited.pop()
@@ -1845,7 +1845,7 @@
       }/*
       const copy = async (id) => {
         console.log(id)
-        const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
+        const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -1872,7 +1872,7 @@
             console.log('err1')
             entry.target_element = newId + '-tree'
           }
-          const response1 = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1929,7 +1929,7 @@
               }
               console.log('menu item ' + JSON.stringify(menuItem))
               delete pLoad.href
-              const data = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+              const data = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -1937,7 +1937,7 @@
                 body: JSON.stringify(pLoad),
               })
               if (byId) {
-                await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -1960,7 +1960,7 @@
                   r = '/' + p.join('/')
                 }
                 const compId = "*" + r + '|' + fileName
-                await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -1978,7 +1978,7 @@
                 console.log(new_value)
                 console.log(convertToOldPath(itemLsi1))
                 const relativePath = getRelativePath(convertToOldPath(new_value), convertToOldPath(itemLsi1))
-                await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -1998,7 +1998,7 @@
             }
 
 
-            const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
+            const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -2027,7 +2027,7 @@
                 console.log('err1')
                 entry.target_element = newId + '-tree'
               }
-              const response1 = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+              const response1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -2075,7 +2075,7 @@
           saveButton.onclick = async function (e) {
             e.stopPropagation()
             const new_value = cloned.querySelector('[data-input="create-new-file-path-input"]').value
-            const res1 = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/' + id + ':path', {
+            const res1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/' + id + ':path', {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -2086,7 +2086,7 @@
             // create folders 
 
 
-            await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+            await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -2303,13 +2303,13 @@
 
 
       const setProtected = async (id, protected) => {
-        const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=path&startsWith=true`, {
+        const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=path&startsWith=true`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
         }).then(response => response.json());
-        await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+        await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -2335,13 +2335,13 @@
     }
     const updateFolder = async (path, new_value, last, d, htmlStructChecked, allStructurs) => {
 
-      const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
+      const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
       //list of sub paths
       const data1 = await response1.json();
       const splited = path.split('/')
       splited.pop()
       const fpath = splited.join('/') + '|'
-      const response2 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
+      const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
       //list of sub paths
       const data2 = await response2.json();
       const items1 = [...data1.items.filter(e => !e.lsi1.includes('A-Modules'))
@@ -2366,7 +2366,7 @@
       console.log('replaceByIditems ' + JSON.stringify(replaceByIditems))
       console.log('doNotReplaceItems ' + JSON.stringify(doNotReplaceItems))
       await Promise.all(replaceByIditems.map(async item55 => {
-        const item = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item55.id}:${item55.sk}`)
+        const item = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item55.id}:${item55.sk}`)
           .then(e => e.json())
         item.id = item55.id
         const splited = convertToOldPath(item.lsi1).split('/')
@@ -2381,7 +2381,7 @@
           const splited2 = convertToOldPath(item.lsi1).replace(path, new_value).split('/')
           splited2.splice(index)
           const startsWith = splited2.join('/') + '/'
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
           //list of sub paths
           const data = await response.json();
           const targetDirectories = []
@@ -2402,7 +2402,7 @@
           const splited2 = convertToOldPath(item.lsi1).replace(path, new_value).split('/')
           splited2.splice(index)
           const startsWith = splited2.join('/') + '/'
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
           //list of sub paths
           const data = await response.json();
           const targetDirectories = []
@@ -2421,7 +2421,7 @@
 
           const newId = generateUUID()
 
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`, {
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -2448,14 +2448,14 @@
 
           //backup
           {
-            const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${newLSI}`);
+            const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${newLSI}`);
             //list of sub paths
             const data = await response.json();
             if (data.items.length) {
               //move to trash
               await Promise.all(data.items.map(async el => {
                 const id = el.id
-                const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
+                const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
                   method: 'GET',
                   headers: {
                     'Content-Type': 'application/json',
@@ -2466,7 +2466,7 @@
 
                   if (item1.sk === 'path') {
                     const trashLsi = 'trash/' + d.toISOString().slice(0, -5) + '-replace/' + item1.lsi1
-                    await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                    await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -2498,7 +2498,7 @@
 
           }
           pathI.hub_items && (payload.hub_items = pathI.hub_items)
-          const data = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          const data = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -2510,7 +2510,7 @@
           await createFolders(convertToOldPath(newLSI))
 
 
-          await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -2548,7 +2548,7 @@
           const splited2 = convertToOldPath(item.lsi1).replace(path, new_value).split('/')
           splited2.splice(index)
           const startsWith = splited2.join('/') + '/'
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
           //list of sub paths
           const data = await response.json();
           const targetDirectories = []
@@ -2566,7 +2566,7 @@
           const splited2 = convertToOldPath(item.lsi1).replace(path, new_value).split('/')
           splited2.splice(index)
           const startsWith = splited2.join('/') + '/'
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${startsWith}`);
           //list of sub paths
           const data = await response.json();
           const targetDirectories = []
@@ -2587,7 +2587,7 @@
         const r = targetPaths.map(async new_value1 => {
           const newId = generateUUID()
 
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`, {
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -2610,7 +2610,7 @@
           }
           {
             console.log('geeeting ' + newLSI)
-            const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${newLSI}`);
+            const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${newLSI}`);
             //list of sub paths
             const data = await response.json();
             if (data.items.length) {
@@ -2632,7 +2632,7 @@
           if (newLSI.endsWith('Head-Content')) {
             pLoad.hosting_time = { created: new Date().getTime() }
           }
-          const data = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          const data = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -2653,7 +2653,7 @@
                 console.log('err1')
                 item1.target_element = newId + '-tree'
               }
-              return fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+              return fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -2804,20 +2804,20 @@
           const spath = path.slice(0, -1) + '|';
 
           if (helperid) {
-            url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
+            url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
           }
           else {
-            url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
+            url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
           }
           let data1 = fetch(url).then(e => e.json())
           //get folders
           if (path.split('/').length > 3) {
             //normal
             if (localStorage.getItem('helperid')) {
-              url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
+              url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
             }
             else {
-              url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
+              url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
             }
             const response = await fetch(url);
             if (!response.ok) {
@@ -2841,7 +2841,7 @@
             //use folders
             const sk = `folder:${helperid ? helperid : ownerid}:lvl${path.split('/').length}:${path}`
             console.log(sk)
-            let url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
+            let url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
             const response = await fetch(url);
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -2901,7 +2901,7 @@
           data1 = await data1
           let elements = data1.items.filter(i => i.lsi1).map(item1 => { return { ...item1, name: item1.lsi1.replace(spath, '').split(';')[0] } });
           elements.sort((a, b) => a.name.localeCompare(b.name));
-          const promise = elements.map(el1 => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
+          const promise = elements.map(el1 => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -2966,13 +2966,13 @@
         filePathList.innerHTML = '';
 
         if (helperid) {
-          url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
+          url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
         }
         else {
-          url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
+          url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
         }
         let data1 = fetch(url).then(e => e.json())
-        url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
+        url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
         return fetch(url)
           .then(response => {
             if (!response.ok) {
@@ -3044,7 +3044,7 @@
             data1 = await data1
             let elements = data1.items.filter(i => i.lsi1).map(item1 => { return { ...item1, name: item1.lsi1.replace('|', '').split(';')[0] } });
             elements.sort((a, b) => a.name.localeCompare(b.name));
-            const promise = elements.map(el1 => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
+            const promise = elements.map(el1 => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -3220,13 +3220,13 @@
             const last = splitedPath[splitedPath.length - 2]
             console.log('last ' + last)
             const copyToTarget = async (path, new_value, backupCheck) => {
-              const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
+              const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
               //list of sub paths
               const data1 = await response1.json();
               const splited = path.split('/')
               splited.pop()
               const fpath = splited.join('/') + '|'
-              const response2 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
+              const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
               //list of sub paths
               const data2 = await response2.json();
               const items1 = [...data1.items, ...data2.items]
@@ -3255,7 +3255,7 @@
               await Promise.all(items.map(async item => {
                 const newId = generateUUID()
 
-                const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`, {
+                const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${item.id}&startsWith=true`, {
                   method: 'GET',
                   headers: {
                     'Content-Type': 'application/json',
@@ -3276,14 +3276,14 @@
                 }
 
                 if (backupCheck) {
-                  const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${newLSI}`);
+                  const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${newLSI}`);
                   //list of sub paths
                   const data = await response.json();
                   console.log('backuping ' + JSON.stringify(data.items))
                   if (data.items.length) {
                     //move to trash
                     const id = data.items[0].id
-                    const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
+                    const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`, {
                       method: 'GET',
                       headers: {
                         'Content-Type': 'application/json',
@@ -3293,7 +3293,7 @@
                     await Promise.all(res2.items.map(async item1 => {
 
                       if (item1.sk === 'path') {
-                        await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                        await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                           method: 'POST',
                           headers: {
                             'Content-Type': 'application/json',
@@ -3324,7 +3324,7 @@
                 if (newLSI.endsWith('Head-Content')) {
                   pLoad.hosting_time = { created: new Date().getTime() }
                 }
-                const data = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                const data = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -3337,7 +3337,7 @@
                 if (byId || absolute || relative) {
 
                   if (byId) {
-                    await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                    await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -3363,7 +3363,7 @@
                     }
                     const compId = "*" + r + '|' + fileName
                     p.shift()
-                    await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                    await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -3379,7 +3379,7 @@
                   }
                   else {
                     const relativePath = getRelativePath(convertToOldPath(newLSI), pathI.lsi1.replace('|', '/'))
-                    await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                    await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -3407,7 +3407,7 @@
                         console.log('err1')
                         item1.target_element = newId + '-tree'
                       }
-                      return fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+                      return fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json',
@@ -3481,12 +3481,12 @@
             e.stopPropagation()
             let new_value = cloned.querySelector('[data-input="create-new-file-path-input"]').value
             !new_value.endsWith('/') && (new_value = new_value + '/')
-            const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
+            const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
             //list of sub paths
             const data = await response.json();
 
             const promises = data.items.map(async item1 => {
-              const item = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
+              const item = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
@@ -3494,7 +3494,7 @@
                 },
               }).then(e => e.json());;
               item.id = item1.id
-              await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+              await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -3511,12 +3511,12 @@
             const splited = path.split('/')
             splited.pop()
             const filePath = splited.join('/') + '|'
-            const response2 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${filePath}`);
+            const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${filePath}`);
             //list of sub paths
             const data2 = await response2.json();
 
             const promises2 = data2.items.map(async item1 => {
-              const item = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
+              const item = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
@@ -3524,7 +3524,7 @@
                 },
               }).then(e => e.json());
               item.id = item1.id
-              await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+              await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -3697,13 +3697,13 @@
       const helperid = localStorage.getItem('helperid')
 
       const openHubs = async (e, id, path) => {
-        const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
+        const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
         //list of sub paths
         const data1 = await response1.json();
         const splited = path.split('/')
         splited.pop()
         const fpath = splited.join('/') + '|Hub'
-        const response2 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
+        const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${fpath}`);
         //list of sub paths
         const data2 = await response2.json();
         const items1 = [...data1.items.filter(e => e.lsi1.split(';')[0].endsWith('|Hub')), ...data2.items]
@@ -3730,7 +3730,7 @@
 
       const publishFolder = async (id, path) => {
         try {
-          fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/bulkpublish', {
+          fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/bulkpublish', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -3747,20 +3747,20 @@
 
       const setProtected = async (id, path, protected) => {
         const ownerid = localStorage.getItem('ownerid')
-        const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path}`);
+        const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path}`);
         //list of sub paths
         const data = await response1.json();
-        let url2 = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path.slice(0, -1) + '|'}`;
+        let url2 = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path.slice(0, -1) + '|'}`;
         let data2 = await fetch(url2).then(e => e.json())
         await Promise.all([...data.items, ...data2.items].map(async item1 => {
-          const item = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
+          const item = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${item1.id}:${item1.sk}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
             },
           }).then(el => el.json())
           item.id = item1.id
-          fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -4341,7 +4341,7 @@
       const target = event.target
       const menu = target.closest('#helper-menu')
       const sk = menu.getAttribute('sk')
-      await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${localStorage.getItem('ownerid')}:${sk}`, {
+      await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${localStorage.getItem('ownerid')}:${sk}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -4379,7 +4379,7 @@
           id: ownerid,
           sk: `folder:${ownerid}:lvl${i + 1}:${path1}`
         }
-        await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+        await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -4389,7 +4389,7 @@
 
         if (helper) {
           payload.sk = `folder:${helper}:lvl${i + 1}:${path1}`
-          await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -4420,13 +4420,13 @@
       if (productCheckbox.checked) {
         //get style from hub
         const hub = newPath.split('/')[0] + '/Home|Hub'
-        const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${hub}`);
+        const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${hub}`);
         //list of sub paths
         console.log(hub)
         const data1 = await response1.json();
         console.log(JSON.stringify(data1))
 
-        const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${data1.items[0].id}&sk=${data1.items[0].sk}&startsWith=true`, {
+        const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${data1.items[0].id}&sk=${data1.items[0].sk}&startsWith=true`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -4448,18 +4448,18 @@
         const folders = Array.from(elements).filter(e => e.hasAttribute('folder')).map(e => e.getAttribute('folder'))
         const components = Array.from(elements).filter(e => e.hasAttribute('component')).map(e => { return { lsi1: e.getAttribute('component'), id: e.id } })
         const components1 = await Promise.all(
-          components.map(({ id }) => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:path`).then(e => e.json()).then(r => {
+          components.map(({ id }) => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:path`).then(e => e.json()).then(r => {
             r.id = id
             return r
           }))
         )
         const components2 = [...components1]
         for (const folder of folders) {
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder.slice(0, -1) + '|'}`);
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${folder.slice(0, -1) + '|'}`);
           //list of sub paths
           const { items } = await response.json();
           const items2 = await Promise.all(
-            items.map(({ id }) => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:path`).then(e => e.json()).then(r => {
+            items.map(({ id }) => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:path`).then(e => e.json()).then(r => {
               r.id = id
               return r
             }))
@@ -4476,17 +4476,17 @@
           await updateFolder(copyFrom, copyTo, last, new Date())
           //Set sku
           const headLSI = copyTo + 'Content/Page|Head-Content'
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${headLSI}`);
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${headLSI}`);
           //list of sub paths
           const { items } = await response.json();
           const toUp = items[0]
-          const url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${toUp.id}:${toUp.sk}`
+          const url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${toUp.id}:${toUp.sk}`
           console.log(url)
           const item = await fetch(url).then(r => r.json())
           item.id = toUp.id
           item.sku = component.sku
           console.log(JSON.stringify(item))
-          await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             body: JSON.stringify(item),
           });
@@ -4499,13 +4499,13 @@
       }
       if (blogCheckbox.checked) {
         const hub = newPath.split('/')[0] + '/Home|Hub'
-        const response1 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${hub}`);
+        const response1 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${hub}`);
         //list of sub paths
         console.log(hub)
         const data1 = await response1.json();
         console.log(JSON.stringify(data1))
 
-        const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${data1.items[0].id}&sk=${data1.items[0].sk}&startsWith=true`, {
+        const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${data1.items[0].id}&sk=${data1.items[0].sk}&startsWith=true`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -4538,7 +4538,7 @@
       if (helperId) {
         payload.helperUUID = 'path:' + helperId
       }
-      await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+      await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -4570,11 +4570,11 @@
       var listItem = document.getElementById(id);
 
       try {
-        const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
+        const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
         //list of sub paths
         const data = await response.json();
 
-        const response2 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path.slice(0, -1) + '|'}`);
+        const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path.slice(0, -1) + '|'}`);
         //list of sub paths
         const data2 = await response2.json();
         const itemsChunks = chunkArray([...data.items, ...data2.items], 100)
@@ -4583,7 +4583,7 @@
           const all1 = await Promise.all(items.map(async item => {
 
             const { id, } = item;
-            const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=path&startsWith=true`).then(e => e.json())
+            const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=path&startsWith=true`).then(e => e.json())
             let item1 = response.items.find(e => e.sk === 'path')
             if (item1.protected) {
               console.log('protected el ' + id)
@@ -4592,7 +4592,7 @@
             if (item1.lsi1.startsWith('trash')) {
               for (const item of response.items) {
                 const { id, sk } = item
-                const deleteResponse = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:${sk}`, {
+                const deleteResponse = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:${sk}`, {
                   method: 'DELETE',
                   headers: {
                     'Content-Type': 'application/json',
@@ -4604,7 +4604,7 @@
             }
             else {
               const trashLsi = 'trash/' + d.toISOString().slice(0, -5) + '-replace/' + item1.lsi1
-              await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+              await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -4651,18 +4651,18 @@
       var listItem = document.getElementById(id);
 
       try {
-        const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
+        const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path}`);
         //list of sub paths
         const data = await response.json();
 
-        const response2 = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path.slice(0, -1) + '|'}`);
+        const response2 = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${localStorage.getItem('ownerid')}&gsi1lsi1=true&lsi1=${path.slice(0, -1) + '|'}`);
         //list of sub paths
         const data2 = await response2.json();
         const items = [...data.items, ...data2.items].filter(item => !item.lsi1.split(';')[0].endsWith('-Content'))
         const all = await Promise.all(items.map(async item => {
 
           const { id, } = item;
-          const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=path&startsWith=true`).then(e => e.json())
+          const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&sk=path&startsWith=true`).then(e => e.json())
           let item1 = response.items.find(e => e.sk === 'path')
           if (item1.protected) {
             console.log('protected el ' + id)
@@ -4671,7 +4671,7 @@
           if (item1.lsi1.startsWith('trash')) {
             for (const item of response.items) {
               const { id, sk } = item
-              const deleteResponse = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:${sk}`, {
+              const deleteResponse = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:${sk}`, {
                 method: 'DELETE',
                 headers: {
                   'Content-Type': 'application/json',
@@ -4683,7 +4683,7 @@
           }
           else {
             const trashLsi = 'trash/' + d.toISOString().slice(0, -5) + '-replace/' + item1.lsi1
-            await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+            await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -4732,7 +4732,7 @@
 
       const d = new Date()
       try {
-        const response = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`);
+        const response = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${id}&startsWith=true`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -4748,7 +4748,7 @@
         if (pathI.lsi1.startsWith('trash')) {
           for (const item of data.items) {
             const { id, sk } = item
-            const deleteResponse = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:${sk}`, {
+            const deleteResponse = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${id}:${sk}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
@@ -4760,7 +4760,7 @@
         }
         else {
           const trashLsi = 'trash/' + d.toISOString().slice(0, -5) + '-replace/' + pathI.lsi1
-          await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -4801,13 +4801,13 @@
       filePathList.innerHTML = '';
       document.getElementById('main-files-list').append(filePathList)
       if (helperid) {
-        url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
+        url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
       }
       else {
-        url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
+        url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=|&token=${localStorage.getItem('token')}`;
       }
       let data1 = fetch(url).then(e => e.json())
-      url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
+      url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
       return fetch(url)
         .then(response => {
           if (!response.ok) {
@@ -4878,12 +4878,12 @@
           folders.map(async folder => {
             let url2
             if (helperid) {
-              url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
-              url2 = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url2 = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
             }
             else {
-              url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
-              url2 = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url2 = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
             }
             console.log(url)
             let data1 = fetch(url).then(e => e.json())
@@ -4893,7 +4893,7 @@
             if ((!data1.items.length && !data2.items.length) || !folder) {
               const sk = `folder:${helperid ? helperid : ownerid}:lvl${path.split('/').length}:${path}${folder}`
               const encoded = `${ownerid}:${sk}`.replaceAll('/', '~')
-              await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${encoded}`, {
+              await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${encoded}`, {
                 method: 'DELETE',
                 headers: {
                   'Content-Type': 'application/json',
@@ -4909,7 +4909,7 @@
           let elements = data1.items.filter(i => i.lsi1).map(item1 => { return { ...item1, name: item1.lsi1.replace('|', '').split(';')[0] } });
           elements.sort((a, b) => a.name.localeCompare(b.name));
           for (const el1 of elements) {
-            const item = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
+            const item = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -5088,21 +5088,21 @@
         document.getElementById('main-files-list').append(filePathList)
 
         if (helperid) {
-          url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
+          url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
         }
         else {
-          url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
+          url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${spath}&token=${localStorage.getItem('token')}`;
         }
         let data1 = fetch(url).then(e => e.json())
         const setHeadDates = async (element, path) => {
           const headPath = path + 'Content/Page|Head-Content'
-          let headUrl = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${headPath}&token=${localStorage.getItem('token')}`;
+          let headUrl = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${headPath}&token=${localStorage.getItem('token')}`;
 
           const { items } = await fetch(headUrl).then(e => e.json())
           console.log(headUrl)
           console.log(JSON.stringify(items))
           if (items.length) {
-            const item = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${items[0].id}:${items[0].sk}`, {
+            const item = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${items[0].id}:${items[0].sk}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -5161,10 +5161,10 @@
         if (path.split('/').length > 3) {
           //normal
           if (localStorage.getItem('helperid')) {
-            url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
+            url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
           }
           else {
-            url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
+            url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path}&token=${localStorage.getItem('token')}`;
           }
           const response = await fetch(url);
           if (!response.ok) {
@@ -5188,7 +5188,7 @@
           //use folders
           const sk = `folder:${helperid ? helperid : ownerid}:lvl${path.split('/').length}:${path}`
           console.log(sk)
-          let url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
+          let url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${ownerid}&sk=${sk}&startsWith=true`
           const response = await fetch(url);
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -5268,7 +5268,7 @@
         data1 = await data1
         let elements = data1.items.filter(i => i.lsi1).map(item1 => { return { ...item1, name: item1.lsi1.replace(spath, '').split(';')[0] } });
         elements.sort((a, b) => a.name.localeCompare(b.name));
-        const promise = elements.map(el1 => fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
+        const promise = elements.map(el1 => fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -5277,7 +5277,7 @@
         const elements1 = await Promise.all(elements)
         for (const item of elements1) {
           /*
-          const item = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
+          const item = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${el1.id}:${el1.sk}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -5314,12 +5314,12 @@
           folders.map(async folder => {
             let url2
             if (helperid) {
-              url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
-              url2 = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url2 = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?helperUUID=path:${helperid}&ownerUUID=${ownerid}&helperlsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
             }
             else {
-              url = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
-              url2 = `https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '/'}&token=${localStorage.getItem('token')}&pageSize=1`;
+              url2 = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${path + folder + '|'}&token=${localStorage.getItem('token')}&pageSize=1`;
             }
             let data1 = fetch(url).then(e => e.json())
             let data2 = fetch(url2).then(e => e.json())
@@ -5329,7 +5329,7 @@
               console.log(url)
               const sk = `folder:${helperid ? helperid : ownerid}:lvl${path.split('/').length}:${path}${folder}`
               const encoded = `${ownerid}:${sk}`.replaceAll('/', '~')
-              await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${encoded}`, {
+              await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${encoded}`, {
                 method: 'DELETE',
                 headers: {
                   'Content-Type': 'application/json',

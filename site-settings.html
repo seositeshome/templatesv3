@@ -128,7 +128,7 @@
         response.ownerUUID = 'aws_creds:' + localStorage.getItem('ownerid')
   
   
-        const res1 = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+        const res1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -147,7 +147,7 @@
         }
         pp_response.ownerUUID = 'pp_creds:' + localStorage.getItem('ownerid')
         console.log('new '+ JSON.stringify(pp_response))
-        const res1 = await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+        const res1 = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -157,7 +157,7 @@
   
       }
       const getSite = async () => {
-        const res = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${site.toLowerCase()}:creds`)
+        const res = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${site.toLowerCase()}:creds`)
         response = await res.json()
         console.log('1' + JSON.stringify(response))
         if (!response) {
@@ -170,7 +170,7 @@
             bucket: 'your_bucket',
             ownerUUID: 'aws_creds:' + localStorage.getItem('ownerid'),
           };
-          await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -196,7 +196,7 @@
   
       }
       const getSitePP = async () => {
-        const res = await fetch(`https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${site.toLowerCase()}:pp_creds`)
+        const res = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2/${site.toLowerCase()}:pp_creds`)
         pp_response = await res.json()
         console.log('1' + JSON.stringify(pp_response))
         if (!pp_response) {
@@ -212,7 +212,7 @@
             environment: 'live',
             ownerUUID: 'pp_creds:' + localStorage.getItem('ownerid'),
           };
-          await fetch('https://kg93g76834.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
+          await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

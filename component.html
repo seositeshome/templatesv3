@@ -5558,7 +5558,7 @@
       mainImage = querySelectorAll1('.article_lead_img')[0]
 
 
-      secondaryImages = Array.from(querySelectorAll1('.article_img'))
+      let secondaryImages = Array.from(querySelectorAll1('.article_img'))
 
 
       const cropedImages = await fetch(`https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?id=${hid}&sk=crop:article&startsWith=true`)
@@ -5625,6 +5625,14 @@
         if (!pics[i]) {
           break;
         }
+        const aAlt = secondaryImages[i].alt
+        
+        let sPic = pics[i]
+        const fPic = pics.find(e=>e.alt ===aAlt || e['alt:' + site] ===aAlt || e['alt:global'] ===aAlt ) 
+        if(fPic){
+          sPic = fPic
+        }
+        const picAlt = sPic.alt || sPic['alt:' + site] || sPic['alt:global']
         const payload3 = {
 
           time: (new Date()).getTime().toString(),
@@ -5641,7 +5649,7 @@
           action: 'setAttribute',
           target_element: secondaryImages[i].id + '-tree',
           key: 'alt',
-          value: secondaryImages[i].alt || secondaryImages[i]['alt:' + site] || secondaryImages[i]['alt:global'],
+          value: picAlt,
 
         }
         await pushAction(payload4)

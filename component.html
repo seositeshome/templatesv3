@@ -23241,7 +23241,8 @@ headers: {
               const payload = {
                 id,
                 sk: path,
-                date: getFormatedDate()
+                date: getFormatedDate(),
+                ['alt:global']: fileName.split('.')[0]
               }
               const response = await fetch('https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2', {
                 method: 'POST',

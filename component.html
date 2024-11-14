@@ -4544,7 +4544,7 @@
       }
       // Loop through each image item
       const site = pathItemPath.split('/')[0].toLowerCase()
-      items.forEach((item) => {
+      for(const item of items) {
         // Clone the template row
         const clonedRow = templateRow.cloneNode(true);
         clonedRow.querySelector('[data-picture-time]').textContent = item.date || ''
@@ -4677,7 +4677,7 @@
 
         // Append the cloned row to the table
         table.appendChild(clonedRow);
-      });
+      }
       // Select all gallery images
       const images = clonedFieldset.querySelectorAll('.gallery-image');
 

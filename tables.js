@@ -1349,37 +1349,34 @@ const runScript1 = () => {
        
     });
     document.addEventListener('keydown', function (event) {
+        // Check if Ctrl or Cmd is pressed along with 'C' key
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             // Find all the checked cells in the table
             const checkedCells = document.querySelectorAll('.table td.cell-checked');
             
             if (checkedCells.length > 0) {
-                // Prevent the default copy behavior
+                // Prevent the default copy action
                 event.preventDefault();
     
-                // Group checked cells by row
+                // Group checked cells by their row (tr)
                 const rows = [];
-                let currentRow = null;
-    
+                
+                // Iterate through the checked cells
                 checkedCells.forEach(cell => {
-                    const row = cell.closest('tr'); // Find the parent row of each checked cell
+                    const row = cell.closest('tr');  // Find the parent row of the cell
+                    const rowIndex = rows.findIndex(rowData => rowData.row === row); // Find if the row is already in our group
     
-                    // If we haven't seen this row before, create a new row
-                    if (currentRow !== row) {
-                        if (currentRow) rows.push(currentRow);
-                        currentRow = row;
+                    if (rowIndex === -1) {
+                        // If the row is not already in the rows array, create a new entry
+                        rows.push({ row: row, cells: [] });
                     }
     
-                    // Add the cell's content to the current row
-                    if (!currentRow.cells) currentRow.cells = [];
-                    currentRow.cells.push(cell.textContent.trim());
+                    // Push the cell's text content into the corresponding row
+                    rows[rows.findIndex(rowData => rowData.row === row)].cells.push(cell.textContent.trim());
                 });
     
-                // Push the last row to rows
-                if (currentRow) rows.push(currentRow);
-    
-                // Format the rows into a tabular format (CSV-like or HTML table-like format)
-                const tableContent = rows.map(row => row.cells.join('\t')).join('\n'); // Tab-separated values for table-like structure
+                // Format the rows into a tab-separated string (similar to table format)
+                const tableContent = rows.map(rowData => rowData.cells.join('\t')).join('\n'); // Tab-separated cells
     
                 // Copy the formatted table content to the clipboard
                 copyToClipboard(tableContent);

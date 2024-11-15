@@ -1325,6 +1325,7 @@ const runScript1 = () => {
             // Remove contenteditable attribute when focus is lost (blur event)
             element.addEventListener('blur', function () {
                 element.removeAttribute('contenteditable');
+                element.classList.remove('cell-checked');
             }, { once: true }); // The listener runs only once per event
         }
     }

@@ -1330,8 +1330,9 @@ const runScript1 = () => {
 
     // Watch for all table cells with 'data-entity-value' attribute
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
-        row.querySelectorAll('td:not(:first-child)').forEach(function (cell) {
-            // Make cell editable on double-click if it doesn't contain a <button>
+        const arr =  row.querySelectorAll('td:not(:first-child)')
+        for(let i=1;i<arr.length;i++){
+            const cell = arr[i]
             if (!cell.querySelector('button')) {
                 cell.addEventListener('dblclick', function () {
                     console.log('double click');
@@ -1344,7 +1345,8 @@ const runScript1 = () => {
                     event.stopPropagation(); // Prevent click event from bubbling up
                 });
             }
-        });
+        }
+       
     });
     document.addEventListener('keydown', function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {

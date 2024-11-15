@@ -1344,7 +1344,7 @@ const runScript1 = () => {
         }
     });
     document.addEventListener('keydown', function (event) {
-        if (event.ctrlKey && event.key === 'c') {
+        if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             // Find the checked cell
            
             const checkedCell = document.querySelector('.table td.cell-checked');

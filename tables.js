@@ -1310,7 +1310,14 @@ const runScript1 = () => {
     function makeEditable(element) {
         element.setAttribute('contenteditable', 'true');
         element.focus(); // Focus on the element so the user can start typing
-
+        // Select all the text in the contenteditable element
+        if (document.createRange && window.getSelection) {
+            const range = document.createRange(); // Create a new range
+            range.selectNodeContents(element); // Select the contents of the element
+            const selection = window.getSelection(); // Get the current selection
+            selection.removeAllRanges(); // Remove any existing selections
+            selection.addRange(range); // Add the new range (select all content)
+        }
         // Remove contenteditable attribute when focus is lost (blur event)
         element.addEventListener('blur', function () {
             element.removeAttribute('contenteditable');
@@ -1330,15 +1337,15 @@ const runScript1 = () => {
 
     // Watch for all table cells with 'data-entity-value' attribute
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
-        const arr =  row.querySelectorAll('td')
-        for(let i=1;i<arr.length;i++){
+        const arr = row.querySelectorAll('td')
+        for (let i = 1; i < arr.length; i++) {
             const cell = arr[i]
             if (!cell.querySelector('button')) {
                 cell.addEventListener('dblclick', function () {
                     console.log('double click');
                     makeEditable(cell);
                 });
-    
+
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>
                 cell.addEventListener('click', function (event) {
                     toggleCellChecked(cell);
@@ -1346,21 +1353,21 @@ const runScript1 = () => {
                 });
             }
         }
-       
+
     });
     document.addEventListener('keydown', function (event) {
         // Check if Ctrl or Cmd is pressed along with 'C' key
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             // Find all the checked cells in the table
             const checkedCells = document.querySelectorAll('.table td.cell-checked');
-            
+
             if (checkedCells.length > 0) {
                 // Prevent the default copy action
                 event.preventDefault();
-    
+
                 // Group checked cells by their row (tr)
                 const rows = [];
-                
+
                 // Iterate through the checked cells
                 checkedCells.forEach(cell => {
                     if (cell === cell.closest('tr').querySelector('td:first-child')) {
@@ -1368,29 +1375,29 @@ const runScript1 = () => {
                     }
                     const row = cell.closest('tr');  // Find the parent row of the cell
                     const rowIndex = rows.findIndex(rowData => rowData.row === row); // Find if the row is already in our group
-    
+
                     if (rowIndex === -1) {
                         // If the row is not already in the rows array, create a new entry
                         rows.push({ row: row, cells: [] });
                     }
-    
+
                     // Push the cell's text content into the corresponding row
                     rows[rows.findIndex(rowData => rowData.row === row)].cells.push(cell.textContent.trim());
                 });
-    
+
                 // Format the rows into a tab-separated string (similar to table format)
                 const tableContent = rows.map(rowData => rowData.cells.join('\t')).join('\n'); // Tab-separated cells
-    
+
                 // Copy the formatted table content to the clipboard
                 copyToClipboard(tableContent);
             }
         }
     });
-    
+
     // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
-    
+
     document.addEventListener('click', function () {
-        if(isSelecting){
+        if (isSelecting) {
             isSelecting = false
             return
         }
@@ -1400,18 +1407,18 @@ const runScript1 = () => {
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const cells = row.querySelectorAll('td');
-        
-        if(!cells.length) {
 
-            return 
+        if (!cells.length) {
+
+            return
         }
         for (let i = 1; i < cells.length; i++) {
             const cell = cells[i];
             cell.addEventListener('mousedown', function (event) {
-        
+
                 isSelecting = true;
                 let selectedCells = new Set();  // Track selected cells
-        
+
                 // Function to select a single cell, excluding those with buttons
                 function selectCell(cell) {
                     if (cell && !cell.querySelector('button')) {
@@ -1419,10 +1426,10 @@ const runScript1 = () => {
                         selectedCells.add(cell);
                     }
                 }
-        
+
                 // Initial selection of the first clicked cell (only this one cell)
                 selectCell(cell);
-        
+
                 // Handle mousemove to select neighboring cells (individually, not the whole row)
                 const onMouseMove = (moveEvent) => {
                     const targetCell = moveEvent.target.closest('td');  // Find the closest cell to the mouse pointer
@@ -1430,7 +1437,7 @@ const runScript1 = () => {
                         selectCell(targetCell);  // Select individual cell on mouse move
                     }
                 };
-        
+
                 // Mouseup to stop selecting
                 const onMouseUp = () => {
                     event.preventDefault();  // Prevent text selection during mouse down
@@ -1438,7 +1445,7 @@ const runScript1 = () => {
                     document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event
                     document.removeEventListener('mouseup', onMouseUp);  // Stop mouseup event
                 };
-        
+
                 // Add mousemove and mouseup listeners to continue selecting on mousemove
                 document.addEventListener('mousemove', onMouseMove);
                 document.addEventListener('mouseup', onMouseUp);
@@ -1447,7 +1454,7 @@ const runScript1 = () => {
         // Handle mouse down to start selecting cells
         const firstCell = cells[0]
         firstCell.addEventListener('mousedown', function (event) {
-            isSelecting= true
+            isSelecting = true
             let selectedCells = new Set();
 
             // Function to select cells in a row, excluding those with buttons
@@ -1487,7 +1494,7 @@ const runScript1 = () => {
 
     });
 
-    
+
 }
 
 const runScript2 = () => {

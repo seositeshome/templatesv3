@@ -1355,6 +1355,9 @@ const runScript1 = () => {
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>
                 cell.addEventListener('click', function (event) {
+                    isEditable?.removeAttribute('contenteditable');
+                    isEditable?.classList.remove('cell-checked');
+                    isEditable = false
                     toggleCellChecked(cell);
                     event.stopPropagation(); // Prevent click event from bubbling up
                 });
@@ -1408,9 +1411,7 @@ const runScript1 = () => {
             isSelecting = false
             return
         }
-        isEditable.removeAttribute('contenteditable');
-        isEditable.classList.remove('cell-checked');
-        isEditable = false
+       
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');
         });

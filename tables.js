@@ -276,7 +276,7 @@ const generateMainTable = async (tableName, token) => {
             const record = filtered[i]
             generateRecord(record, false, i)
         }
-       
+
         activateWebhookButtons()
         createInvoiceButtons()
         importTransactionsButtons()
@@ -521,7 +521,7 @@ const generateMainTable = async (tableName, token) => {
     }
 
     t.parentNode.append(table)
-    
+
     activateWebhookButtons()
     createInvoiceButtons()
     importTransactionsButtons()
@@ -1335,7 +1335,7 @@ const runScript1 = () => {
                 console.log('double click');
                 makeEditable(cell);
             });
-    
+
             // Add 'cell-checked' class on single click, skip if cell contains a <button>
             cell.addEventListener('click', function (event) {
                 toggleCellChecked(cell);
@@ -1346,9 +1346,9 @@ const runScript1 = () => {
     document.addEventListener('keydown', function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             // Find the checked cell
-           
+
             const checkedCell = document.querySelector('.table td.cell-checked');
-            
+
             if (checkedCell) {
                 // Copy the content of the checked cell to clipboard
                 event.preventDefault()
@@ -1361,6 +1361,59 @@ const runScript1 = () => {
     document.addEventListener('click', function () {
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');
+        });
+    });
+    document.querySelectorAll('#tableToShow tr').forEach(function (row) {
+        const firstCell = row.querySelector('td:first-child');
+
+
+        // Handle mouse down to start selecting cells
+        firstCell.addEventListener('mousedown', function (event) {
+            event.preventDefault(); // Prevent text selection during mouse down
+
+            let isSelecting = true;
+            let selectedCells = new Set();
+
+            // Function to select cells in a row, excluding those with buttons
+            function selectCellsInRow(row) {
+                row.querySelectorAll('td').forEach(function (cell) {
+                    if (!cell.querySelector('button')) {
+                        cell.classList.add('cell-selected');
+                        selectedCells.add(cell);
+                    }
+                });
+            }
+
+            // Initial selection of the first clicked row (the row that was clicked)
+            selectCellsInRow(row);
+
+            // Handle mousemove to select neighboring rows
+            const onMouseMove = (moveEvent) => {
+                const targetRow = moveEvent.target.closest('tr');
+                if (targetRow && targetRow !== row && targetRow.querySelector('td:first-child') && !targetRow.querySelector('td:first-child').querySelector('button')) {
+                    // Select the neighboring row's cells
+                    selectCellsInRow(targetRow);
+                }
+            };
+
+            // Mouseup to stop selecting
+            const onMouseUp = () => {
+                isSelecting = false;
+                document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event
+                document.removeEventListener('mouseup', onMouseUp);  // Stop mouseup event
+            };
+
+            // Add mousemove and mouseup listeners
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+    });
+
+    // Function to reset the cell selection (called on document click or when needed)
+    document.addEventListener('click', function () {
+        document.querySelectorAll('.cell-selected').forEach(function (selectedCell) {
+            selectedCell.classList.remove('cell-selected');
         });
     });
 }

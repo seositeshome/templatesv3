@@ -1357,7 +1357,7 @@ const runScript1 = () => {
                 cell.addEventListener('click', function (event) {
                     if (isEditable && isEditable === cell) {
                         return
-                    } else {
+                    } else if(isEditable && isEditable !== cell) {
                         isEditable.removeAttribute('contenteditable');
                         isEditable.classList.remove('cell-checked');
                         // Remove any active text selection (deselect)

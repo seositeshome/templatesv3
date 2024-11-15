@@ -1355,7 +1355,7 @@ const runScript1 = () => {
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>
                 cell.addEventListener('click', function (event) {
-                    if(isEditable && isEditable ===cell){
+                    if(isEditable && isEditable !==cell){
                         isEditable.removeAttribute('contenteditable');
                         isEditable.classList.remove('cell-checked');
                         isEditable = false

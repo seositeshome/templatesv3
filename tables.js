@@ -1370,14 +1370,14 @@ const runScript1 = () => {
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const firstCell = row.querySelectorAll('td')[0];
-        isSelecting= true
+        
         if(!firstCell) return
 
         // Handle mouse down to start selecting cells
         firstCell.addEventListener('mousedown', function (event) {
             event.preventDefault(); // Prevent text selection during mouse down
             event.stopPropagation(); // Prevent click event from bubbling up
-            
+            isSelecting= true
             let selectedCells = new Set();
 
             // Function to select cells in a row, excluding those with buttons

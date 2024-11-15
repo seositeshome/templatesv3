@@ -1321,7 +1321,7 @@ const runScript1 = () => {
             // Set the element to be contenteditable and focus
             element.setAttribute('contenteditable', 'true');
             element.focus();
-            isEditable = true
+            isEditable = element
             // Remove contenteditable attribute when focus is lost (blur event)
             element.addEventListener('blur', function () {
                 element.removeAttribute('contenteditable');
@@ -1408,6 +1408,8 @@ const runScript1 = () => {
             isSelecting = false
             return
         }
+        isEditable.removeAttribute('contenteditable');
+        isEditable.classList.remove('cell-checked');
         isEditable = false
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');

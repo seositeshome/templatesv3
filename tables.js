@@ -1345,7 +1345,8 @@ const runScript1 = () => {
         for (let i = 1; i < arr.length; i++) {
             const cell = arr[i]
             if (!cell.querySelector('button')) {
-                cell.addEventListener('dblclick', function () {
+                cell.addEventListener('dblclick', function (event) {
+                    event.preventDefault()
                     console.log('double click');
                     makeEditable(cell);
                 });

@@ -1365,7 +1365,7 @@ const runScript1 = () => {
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const firstCell = row.querySelectorAll('td')[0];
-        !firstCell && return
+        if(!firstCell) return
 
         // Handle mouse down to start selecting cells
         firstCell.addEventListener('mousedown', function (event) {

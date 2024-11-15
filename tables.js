@@ -1399,11 +1399,55 @@ const runScript1 = () => {
         });
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
-        const firstCell = row.querySelectorAll('td')[0];
+        const cells = row.querySelectorAll('td');
         
-        if(!firstCell) return
+        if(!cells.length) {
 
+            return 
+        }
+        for (let i = 1; i < cells.length; i++) {
+            const cell = cells[i];
+            cell.addEventListener('mousedown', function (event) {
+                event.preventDefault(); // Prevent text selection during mouse down
+                event.stopPropagation(); // Prevent click event from bubbling up
+        
+                isSelecting = true;
+                let selectedCells = new Set();  // Track selected cells
+        
+                // Function to select a single cell, excluding those with buttons
+                function selectCell(cell) {
+                    if (cell && !cell.querySelector('button')) {
+                        cell.classList.add('cell-checked');
+                        selectedCells.add(cell);
+                    }
+                }
+        
+                // Initial selection of the first clicked cell (only this one cell)
+                selectCell(cell);
+        
+                // Handle mousemove to select neighboring cells (individually, not the whole row)
+                const onMouseMove = (moveEvent) => {
+                    const targetCell = moveEvent.target.closest('td');  // Find the closest cell to the mouse pointer
+                    if (targetCell && targetCell !== cell && !targetCell.querySelector('button')) {
+                        selectCell(targetCell);  // Select individual cell on mouse move
+                    }
+                };
+        
+                // Mouseup to stop selecting
+                const onMouseUp = () => {
+                    event.preventDefault();  // Prevent text selection during mouse down
+                    event.stopPropagation();  // Prevent click event from bubbling up
+                    document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event
+                    document.removeEventListener('mouseup', onMouseUp);  // Stop mouseup event
+                };
+        
+                // Add mousemove and mouseup listeners to continue selecting on mousemove
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            });
+        }
         // Handle mouse down to start selecting cells
+        const firstCell = cells[0]
         firstCell.addEventListener('mousedown', function (event) {
             event.preventDefault(); // Prevent text selection during mouse down
             event.stopPropagation(); // Prevent click event from bubbling up

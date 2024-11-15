@@ -1420,7 +1420,8 @@ const runScript1 = () => {
         for (let i = 1; i < cells.length; i++) {
             const cell = cells[i];
             cell.addEventListener('mousedown', function (event) {
-
+                event.preventDefault(); // Prevent text selection during mouse down
+                event.stopPropagation(); // Prevent click event from bubbling up
                 isSelecting = true;
                 let selectedCells = new Set();  // Track selected cells
 
@@ -1461,7 +1462,8 @@ const runScript1 = () => {
         firstCell.addEventListener('mousedown', function (event) {
             isSelecting = true
             let selectedCells = new Set();
-
+            event.preventDefault(); // Prevent text selection during mouse down
+            event.stopPropagation(); // Prevent click event from bubbling up
             // Function to select cells in a row, excluding those with buttons
             function selectCellsInRow(row) {
                 row.querySelectorAll('td').forEach(function (cell) {

@@ -1355,8 +1355,8 @@ const runScript1 = () => {
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>
                 cell.addEventListener('click', function (event) {
-                    isEditable?.removeAttribute('contenteditable');
-                    isEditable?.classList.remove('cell-checked');
+                    isEditable && isEditable.removeAttribute('contenteditable');
+                    isEditable && isEditable.classList.remove('cell-checked');
                     isEditable = false
                     toggleCellChecked(cell);
                     event.stopPropagation(); // Prevent click event from bubbling up

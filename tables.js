@@ -276,6 +276,15 @@ const generateMainTable = async (tableName, token) => {
             const record = filtered[i]
             generateRecord(record, false, i)
         }
+        await runScript1()
+        await runScript2()
+        activateWebhookButtons()
+        createInvoiceButtons()
+        importTransactionsButtons()
+        activateTrackingButtons()
+        cancelInvoiceButtons()
+        openQueryButtons()
+        loadTradesButton()
 
 
     }
@@ -340,10 +349,10 @@ const generateMainTable = async (tableName, token) => {
         const filters = JSON.parse(urlParams.get('filters') || '[]'); // Parses 'filters' if it exists, or defaults to an empty array
         const sort1 = urlParams.get('sort')
         const sortType1 = urlParams.get('sortType')
-       if(sort1 && sortType1 && sort1 ===record.name){
+        if (sort1 && sortType1 && sort1 === record.name) {
             label.classList.add(sortType1)
             input.checked = true
-       }
+        }
 
         // Find the filter object that matches the 'field' with the 'record.name'
         const filter = filters.find(f => f.field === record.name);
@@ -356,7 +365,7 @@ const generateMainTable = async (tableName, token) => {
             // If no matching filter is found, optionally clear the input or set a default value
             filterInput.value = ''; // or you can set a default value here
         }
-        
+
         let sortField = urlParams.get('sort');
         let sortType = urlParams.get('sortType')
         label.onclick = (e) => {

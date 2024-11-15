@@ -1365,15 +1365,15 @@ const runScript1 = () => {
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const firstCell = row.querySelectorAll('td')[0];
-        if(!firstCell) return
-
+        if (!firstCell) return;
+    
         // Handle mouse down to start selecting cells
         firstCell.addEventListener('mousedown', function (event) {
             event.preventDefault(); // Prevent text selection during mouse down
-
+    
             let isSelecting = true;
             let selectedCells = new Set();
-
+    
             // Function to select cells in a row, excluding those with buttons
             function selectCellsInRow(row) {
                 row.querySelectorAll('td').forEach(function (cell) {
@@ -1383,10 +1383,10 @@ const runScript1 = () => {
                     }
                 });
             }
-
+    
             // Initial selection of the first clicked row (the row that was clicked)
             selectCellsInRow(row);
-
+    
             // Handle mousemove to select neighboring rows
             const onMouseMove = (moveEvent) => {
                 const targetRow = moveEvent.target.closest('tr');
@@ -1395,19 +1395,20 @@ const runScript1 = () => {
                     selectCellsInRow(targetRow);
                 }
             };
-
-            // Mouseup to stop selecting
+    
+            // Mouseup to stop selecting (but don't deselect cells)
             const onMouseUp = () => {
                 isSelecting = false;
-                document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event
-                document.removeEventListener('mouseup', onMouseUp);  // Stop mouseup event
+                // Do not remove listeners here, because we want to keep the cells selected
+                // document.removeEventListener('mousemove', onMouseMove); // We won't remove this
+                // document.removeEventListener('mouseup', onMouseUp); // We won't remove this
             };
-
+    
             // Add mousemove and mouseup listeners
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onMouseUp);
         });
-
+    
     });
 
     

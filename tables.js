@@ -1438,11 +1438,12 @@ const runScript1 = () => {
         for (let i = 1; i < cells.length; i++) {
             const cell = cells[i];
             cell.addEventListener('mousedown', function (event) {
-                event.preventDefault(); // Prevent text selection during mouse down
-                event.stopPropagation(); // Prevent click event from bubbling up
                 if (isEditable) {
                     return
                 }
+                event.preventDefault(); // Prevent text selection during mouse down
+                event.stopPropagation(); // Prevent click event from bubbling up
+                
                 isSelecting = true;
                 let selectedCells = new Set();  // Track selected cells
 

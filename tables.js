@@ -1358,20 +1358,26 @@ const runScript1 = () => {
         }
     });
     // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
+    let isSelecting = false;
     document.addEventListener('click', function () {
+        if(isSelecting){
+            isSelecting = false
+            return
+        }
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');
         });
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const firstCell = row.querySelectorAll('td')[0];
+        isSelecting= true
         if(!firstCell) return
 
         // Handle mouse down to start selecting cells
         firstCell.addEventListener('mousedown', function (event) {
             event.preventDefault(); // Prevent text selection during mouse down
             event.stopPropagation(); // Prevent click event from bubbling up
-            let isSelecting = true;
+            
             let selectedCells = new Set();
 
             // Function to select cells in a row, excluding those with buttons
@@ -1398,7 +1404,6 @@ const runScript1 = () => {
 
             // Mouseup to stop selecting
             const onMouseUp = () => {
-                isSelecting = false;
                 event.preventDefault(); // Prevent text selection during mouse down
                 event.stopPropagation(); // Prevent click event from bubbling up
                 document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event

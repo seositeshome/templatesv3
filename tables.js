@@ -1378,7 +1378,7 @@ const runScript1 = () => {
             function selectCellsInRow(row) {
                 row.querySelectorAll('td').forEach(function (cell) {
                     if (!cell.querySelector('button')) {
-                        cell.classList.add('cell-selected');
+                        cell.classList.add('cell-checked');
                         selectedCells.add(cell);
                     }
                 });
@@ -1410,12 +1410,7 @@ const runScript1 = () => {
 
     });
 
-    // Function to reset the cell selection (called on document click or when needed)
-    document.addEventListener('click', function () {
-        document.querySelectorAll('.cell-selected').forEach(function (selectedCell) {
-            selectedCell.classList.remove('cell-selected');
-        });
-    });
+    
 }
 
 const runScript2 = () => {

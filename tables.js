@@ -1364,7 +1364,7 @@ const runScript1 = () => {
         });
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
-        const firstCell = row.querySelector('td:first-child');
+        const firstCell = row.querySelectorAll('td')[0];
 
 
         // Handle mouse down to start selecting cells

@@ -1330,7 +1330,7 @@ const runScript1 = () => {
 
     // Watch for all table cells with 'data-entity-value' attribute
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
-        const arr =  row.querySelectorAll('td:not(:first-child)')
+        const arr =  row.querySelectorAll('td')
         for(let i=1;i<arr.length;i++){
             const cell = arr[i]
             if (!cell.querySelector('button')) {

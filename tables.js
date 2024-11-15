@@ -1355,12 +1355,16 @@ const runScript1 = () => {
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>
                 cell.addEventListener('click', function (event) {
-                    if(isEditable && isEditable !==cell){
+                    if (isEditable && isEditable !== cell) {
                         isEditable.removeAttribute('contenteditable');
                         isEditable.classList.remove('cell-checked');
+                        // Remove any active text selection (deselect)
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+
                         isEditable = false
                     }
-                    
+
                     toggleCellChecked(cell);
                     event.stopPropagation(); // Prevent click event from bubbling up
                 });
@@ -1414,7 +1418,7 @@ const runScript1 = () => {
             isSelecting = false
             return
         }
-       
+
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');
         });
@@ -1431,7 +1435,7 @@ const runScript1 = () => {
             cell.addEventListener('mousedown', function (event) {
                 event.preventDefault(); // Prevent text selection during mouse down
                 event.stopPropagation(); // Prevent click event from bubbling up
-                if(isEditable){
+                if (isEditable) {
                     return
                 }
                 isSelecting = true;

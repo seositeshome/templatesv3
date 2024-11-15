@@ -1350,18 +1350,43 @@ const runScript1 = () => {
     });
     document.addEventListener('keydown', function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
-            // Find the checked cell
-
-            const checkedCell = document.querySelector('.table td.cell-checked');
-
-            if (checkedCell) {
-                // Copy the content of the checked cell to clipboard
-                event.preventDefault()
-                const text = checkedCell.textContent.trim();
-                copyToClipboard(text);
+            // Find all the checked cells in the table
+            const checkedCells = document.querySelectorAll('.table td.cell-checked');
+            
+            if (checkedCells.length > 0) {
+                // Prevent the default copy behavior
+                event.preventDefault();
+    
+                // Group checked cells by row
+                const rows = [];
+                let currentRow = null;
+    
+                checkedCells.forEach(cell => {
+                    const row = cell.closest('tr'); // Find the parent row of each checked cell
+    
+                    // If we haven't seen this row before, create a new row
+                    if (currentRow !== row) {
+                        if (currentRow) rows.push(currentRow);
+                        currentRow = row;
+                    }
+    
+                    // Add the cell's content to the current row
+                    if (!currentRow.cells) currentRow.cells = [];
+                    currentRow.cells.push(cell.textContent.trim());
+                });
+    
+                // Push the last row to rows
+                if (currentRow) rows.push(currentRow);
+    
+                // Format the rows into a tabular format (CSV-like or HTML table-like format)
+                const tableContent = rows.map(row => row.cells.join('\t')).join('\n'); // Tab-separated values for table-like structure
+    
+                // Copy the formatted table content to the clipboard
+                copyToClipboard(tableContent);
             }
         }
     });
+    
     // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
     
     document.addEventListener('click', function () {

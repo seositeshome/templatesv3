@@ -1307,6 +1307,7 @@ function copyToClipboard(text) {
 const runScript1 = () => {
     let isSelecting = false;
     console.log('running script 1')
+    let isEditable = false
     function makeEditable(element) {
         // Check if the element is already contenteditable
         if (element.hasAttribute('contenteditable')) {
@@ -1320,7 +1321,7 @@ const runScript1 = () => {
             // Set the element to be contenteditable and focus
             element.setAttribute('contenteditable', 'true');
             element.focus();
-    
+            isEditable = true
             // Remove contenteditable attribute when focus is lost (blur event)
             element.addEventListener('blur', function () {
                 element.removeAttribute('contenteditable');
@@ -1406,6 +1407,7 @@ const runScript1 = () => {
             isSelecting = false
             return
         }
+        isEditable = false
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');
         });
@@ -1422,6 +1424,9 @@ const runScript1 = () => {
             cell.addEventListener('mousedown', function (event) {
                 event.preventDefault(); // Prevent text selection during mouse down
                 event.stopPropagation(); // Prevent click event from bubbling up
+                if(isEditable){
+                    return
+                }
                 isSelecting = true;
                 let selectedCells = new Set();  // Track selected cells
 

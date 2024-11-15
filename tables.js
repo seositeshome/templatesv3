@@ -1308,20 +1308,24 @@ const runScript1 = () => {
     let isSelecting = false;
     console.log('running script 1')
     function makeEditable(element) {
-        element.setAttribute('contenteditable', 'true');
-        element.focus(); // Focus on the element so the user can start typing
-        // Select all the text in the contenteditable element
-        if (document.createRange && window.getSelection) {
-            const range = document.createRange(); // Create a new range
-            range.selectNodeContents(element); // Select the contents of the element
-            const selection = window.getSelection(); // Get the current selection
-            selection.removeAllRanges(); // Remove any existing selections
-            selection.addRange(range); // Add the new range (select all content)
+        // Check if the element is already contenteditable
+        if (element.hasAttribute('contenteditable')) {
+            // Select all text inside the contenteditable element
+            const range = document.createRange();
+            const selection = window.getSelection();
+            range.selectNodeContents(element);
+            selection.removeAllRanges(); // Clear any previous selection
+            selection.addRange(range); // Select the entire content of the element
+        } else {
+            // Set the element to be contenteditable and focus
+            element.setAttribute('contenteditable', 'true');
+            element.focus();
+    
+            // Remove contenteditable attribute when focus is lost (blur event)
+            element.addEventListener('blur', function () {
+                element.removeAttribute('contenteditable');
+            }, { once: true }); // The listener runs only once per event
         }
-        // Remove contenteditable attribute when focus is lost (blur event)
-        element.addEventListener('blur', function () {
-            element.removeAttribute('contenteditable');
-        }, { once: true }); // The listener runs only once per event
     }
 
     // Function to toggle the 'cell-checked' class when a cell is clicked

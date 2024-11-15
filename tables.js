@@ -276,8 +276,7 @@ const generateMainTable = async (tableName, token) => {
             const record = filtered[i]
             generateRecord(record, false, i)
         }
-        await runScript1()
-        await runScript2()
+       
         activateWebhookButtons()
         createInvoiceButtons()
         importTransactionsButtons()
@@ -285,6 +284,8 @@ const generateMainTable = async (tableName, token) => {
         cancelInvoiceButtons()
         openQueryButtons()
         loadTradesButton()
+        await runScript1()
+        await runScript2()
 
 
     }
@@ -520,8 +521,7 @@ const generateMainTable = async (tableName, token) => {
     }
 
     t.parentNode.append(table)
-    await runScript1()
-    await runScript2()
+    
     activateWebhookButtons()
     createInvoiceButtons()
     importTransactionsButtons()
@@ -529,6 +529,8 @@ const generateMainTable = async (tableName, token) => {
     cancelInvoiceButtons()
     openQueryButtons()
     loadTradesButton()
+    await runScript1()
+    await runScript2()
 
 }
 const generateQuery = async (query, token) => {
@@ -1294,6 +1296,14 @@ function createNewTable() {
     fieldset2.removeAttribute('hidden');
 
 }
+function copyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+}
 const runScript1 = () => {
     console.log('running script 1')
     function makeEditable(element) {
@@ -1320,18 +1330,33 @@ const runScript1 = () => {
     // Watch for all table cells with 'data-entity-value' attribute
     document.querySelectorAll('#tableToShow td').forEach(function (cell) {
         // Make cell editable on double-click
-        cell.addEventListener('dblclick', function () {
-            console.log('double click')
-            makeEditable(cell);
-        });
-
-        // Add 'cell-checked' class on single click
-        cell.addEventListener('click', function (event) {
-            toggleCellChecked(cell);
-            event.stopPropagation(); // Prevent click event from bubbling up
-        });
+        if (!cell.querySelector('button')) {
+            cell.addEventListener('dblclick', function () {
+                console.log('double click');
+                makeEditable(cell);
+            });
+    
+            // Add 'cell-checked' class on single click, skip if cell contains a <button>
+            cell.addEventListener('click', function (event) {
+                toggleCellChecked(cell);
+                event.stopPropagation(); // Prevent click event from bubbling up
+            });
+        }
     });
-
+    document.addEventListener('keydown', function (event) {
+        if (event.ctrlKey && event.key === 'c') {
+            // Find the checked cell
+           
+            const checkedCell = document.querySelector('.table td.cell-checked');
+            
+            if (checkedCell) {
+                // Copy the content of the checked cell to clipboard
+                event.preventDefault()
+                const text = checkedCell.textContent.trim();
+                copyToClipboard(text);
+            }
+        }
+    });
     // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
     document.addEventListener('click', function () {
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
@@ -1339,6 +1364,7 @@ const runScript1 = () => {
         });
     });
 }
+
 const runScript2 = () => {
     console.log('running script 2')
     let activeCell = null; // Variable to store the currently active cell

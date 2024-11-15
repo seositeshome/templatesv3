@@ -1363,6 +1363,9 @@ const runScript1 = () => {
                 
                 // Iterate through the checked cells
                 checkedCells.forEach(cell => {
+                    if (cell === cell.closest('tr').querySelector('td:first-child')) {
+                        return; // Skip this cell
+                    }
                     const row = cell.closest('tr');  // Find the parent row of the cell
                     const rowIndex = rows.findIndex(rowData => rowData.row === row); // Find if the row is already in our group
     

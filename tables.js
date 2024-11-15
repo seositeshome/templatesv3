@@ -1370,7 +1370,7 @@ const runScript1 = () => {
         // Handle mouse down to start selecting cells
         firstCell.addEventListener('mousedown', function (event) {
             event.preventDefault(); // Prevent text selection during mouse down
-
+            event.stopPropagation(); // Prevent click event from bubbling up
             let isSelecting = true;
             let selectedCells = new Set();
 
@@ -1399,6 +1399,8 @@ const runScript1 = () => {
             // Mouseup to stop selecting
             const onMouseUp = () => {
                 isSelecting = false;
+                event.preventDefault(); // Prevent text selection during mouse down
+                event.stopPropagation(); // Prevent click event from bubbling up
                 document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event
                 document.removeEventListener('mouseup', onMouseUp);  // Stop mouseup event
             };

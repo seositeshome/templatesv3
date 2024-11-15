@@ -1305,6 +1305,7 @@ function copyToClipboard(text) {
     document.body.removeChild(textArea);
 }
 const runScript1 = () => {
+    let isSelecting = false;
     console.log('running script 1')
     function makeEditable(element) {
         element.setAttribute('contenteditable', 'true');
@@ -1328,20 +1329,22 @@ const runScript1 = () => {
     }
 
     // Watch for all table cells with 'data-entity-value' attribute
-    document.querySelectorAll('#tableToShow td').forEach(function (cell) {
-        // Make cell editable on double-click
-        if (!cell.querySelector('button')) {
-            cell.addEventListener('dblclick', function () {
-                console.log('double click');
-                makeEditable(cell);
-            });
-
-            // Add 'cell-checked' class on single click, skip if cell contains a <button>
-            cell.addEventListener('click', function (event) {
-                toggleCellChecked(cell);
-                event.stopPropagation(); // Prevent click event from bubbling up
-            });
-        }
+    document.querySelectorAll('#tableToShow tr').forEach(function (row) {
+        row.querySelectorAll('td:not(:first-child)').forEach(function (cell) {
+            // Make cell editable on double-click if it doesn't contain a <button>
+            if (!cell.querySelector('button')) {
+                cell.addEventListener('dblclick', function () {
+                    console.log('double click');
+                    makeEditable(cell);
+                });
+    
+                // Add 'cell-checked' class on single click, skip if cell contains a <button>
+                cell.addEventListener('click', function (event) {
+                    toggleCellChecked(cell);
+                    event.stopPropagation(); // Prevent click event from bubbling up
+                });
+            }
+        });
     });
     document.addEventListener('keydown', function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
@@ -1358,7 +1361,7 @@ const runScript1 = () => {
         }
     });
     // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
-    let isSelecting = false;
+    
     document.addEventListener('click', function () {
         if(isSelecting){
             isSelecting = false

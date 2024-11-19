@@ -1311,6 +1311,8 @@ const runScript1 = () => {
     function makeEditable(element) {
         const selection = window.getSelection();
         // Check if the element is already contenteditable
+        
+        
         if (element.hasAttribute('contenteditable')) {
             // Select all text inside the contenteditable element
            
@@ -1320,7 +1322,6 @@ const runScript1 = () => {
             // Set the element to be contenteditable and focus
             element.setAttribute('contenteditable', 'true');
             element.focus();
-            isEditable = element
             // Remove contenteditable attribute when focus is lost (blur event)
             element.addEventListener('blur', function () {
                 element.removeAttribute('contenteditable');
@@ -1331,6 +1332,7 @@ const runScript1 = () => {
         
         range.selectNodeContents(element);
         selection.addRange(range); // Select the entire content of the element
+        isEditable = element
     }
 
     // Function to toggle the 'cell-checked' class when a cell is clicked

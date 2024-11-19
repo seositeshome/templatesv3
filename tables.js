@@ -1312,9 +1312,7 @@ const runScript1 = () => {
         // Check if the element is already contenteditable
         if (element.hasAttribute('contenteditable')) {
             // Select all text inside the contenteditable element
-            const range = document.createRange();
-            const selection = window.getSelection();
-            range.selectNodeContents(element);
+            
             selection.removeAllRanges(); // Clear any previous selection
             selection.addRange(range); // Select the entire content of the element
         } else {
@@ -1328,6 +1326,9 @@ const runScript1 = () => {
                 element.classList.remove('cell-checked');
             }, { once: true }); // The listener runs only once per event
         }
+        const range = document.createRange();
+        const selection = window.getSelection();
+        range.selectNodeContents(element);
     }
 
     // Function to toggle the 'cell-checked' class when a cell is clicked

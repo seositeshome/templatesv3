@@ -1330,6 +1330,7 @@ const runScript1 = () => {
             element.removeAttribute('contenteditable');
             element.classList.remove('cell-checked');
             element.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
+            isEditable = null
         };
         element.addEventListener('blur', blurHandler, { once: true });
     

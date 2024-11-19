@@ -1313,7 +1313,10 @@ const runScript1 = () => {
         
         // If element is already editable, just clear the selection and return.
         if (element.hasAttribute('contenteditable')) {
-            selection.removeAllRanges();
+            const range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();  // Clear previous selections
+            selection.addRange(range); // Select the entire content of the element
             return;
         }
         
@@ -1388,11 +1391,13 @@ const runScript1 = () => {
     document.addEventListener('keydown', function (event) {
         // Check if Ctrl or Cmd is pressed along with 'C' key
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
+            console.log('clicked ctrl+c')
             // Find all the checked cells in the table
             const checkedCells = document.querySelectorAll('.table td.cell-checked');
 
             if (checkedCells.length > 0) {
                 // Prevent the default copy action
+                console.log('cells checked')
                 event.preventDefault();
 
                 // Group checked cells by their row (tr)

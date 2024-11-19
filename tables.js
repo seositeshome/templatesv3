@@ -1310,27 +1310,30 @@ const runScript1 = () => {
     let isEditable = false
     function makeEditable(element) {
         const selection = window.getSelection();
-        // Check if the element is already contenteditable
         
-        
+        // If element is already editable, just clear the selection and return.
         if (element.hasAttribute('contenteditable')) {
-            // Select all text inside the contenteditable element
-           
-            selection.removeAllRanges(); // Clear any previous selection
-           
-        } else {
-            // Set the element to be contenteditable and focus
-            element.setAttribute('contenteditable', 'true');
-            element.focus();
-            // Remove contenteditable attribute when focus is lost (blur event)
-            element.addEventListener('blur', function () {
-                element.removeAttribute('contenteditable');
-                element.classList.remove('cell-checked');
-            }, { once: true }); // The listener runs only once per event
+            selection.removeAllRanges();
+            return;
         }
-        const range = document.createRange();
         
+        // Make the element editable
+        element.setAttribute('contenteditable', 'true');
+        element.classList.add('cell-checked'); // Add a class when the element is editable
+        element.focus();
+    
+        // Handle blur event to remove contenteditable and the class
+        const blurHandler = function () {
+            element.removeAttribute('contenteditable');
+            element.classList.remove('cell-checked');
+            element.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
+        };
+        element.addEventListener('blur', blurHandler, { once: true });
+    
+        // Select the entire content of the element
+        const range = document.createRange();
         range.selectNodeContents(element);
+        selection.removeAllRanges();  // Clear previous selections
         selection.addRange(range); // Select the entire content of the element
         isEditable = element
     }

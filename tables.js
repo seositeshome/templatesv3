@@ -1396,7 +1396,7 @@ const runScript1 = () => {
             // Find all the checked cells in the table
             const checkedCells = document.querySelectorAll('.table td.cell-checked');
 
-            if (checkedCells.length > 0) {
+            if (checkedCells.length > 0 && !isEditable) {
                 // Prevent the default copy action
                 console.log('cells checked')
                 event.preventDefault();

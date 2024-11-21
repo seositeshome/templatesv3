@@ -1,12 +1,23 @@
 document.getElementById('reload').addEventListener('click', function () {
     location.reload();
 });
-
+var socket
 const t = document.getElementById('dtable')
 const sButton = document.querySelector('.loading-btn')
 const dataButton = document.getElementById('data-table')
 const settingsButton = document.getElementById('settings-table')
 const rButton = document.getElementById('remove')
+const emitCellChanged = (rowId, rowName, value) => {
+    const data = {
+        date: new Date(),
+        rowId,
+        rowName,
+        value
+    };
+
+    // Emit 'cellChanged' event to the server
+    socket.emit('cellChanged', data);
+}
 const saveTable = async (event) => {
     const { value } = document.querySelector('[data-input="create-new-table-input"]')
 
@@ -452,6 +463,7 @@ const generateMainTable = async (tableName, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
+                emitCellChanged(tr.id, td.name, td.value)
                 sButton.classList.add('save')
             }
             tr.append(td)
@@ -890,6 +902,7 @@ const generateQuery = async (query, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
+                emitCellChanged('cell2', td.value)
                 sButton.classList.add('save')
             }
             tr.append(td)
@@ -1310,7 +1323,7 @@ const runScript1 = () => {
     let isEditable = false
     function makeEditable(element) {
         const selection = window.getSelection();
-        
+
         // If element is already editable, just clear the selection and return.
         if (element.hasAttribute('contenteditable')) {
             const range = document.createRange();
@@ -1319,12 +1332,12 @@ const runScript1 = () => {
             selection.addRange(range); // Select the entire content of the element
             return;
         }
-        
+
         // Make the element editable
         element.setAttribute('contenteditable', 'true');
         element.classList.add('cell-checked'); // Add a class when the element is editable
         element.focus();
-    
+
         // Handle blur event to remove contenteditable and the class
         const blurHandler = function () {
             element.removeAttribute('contenteditable');
@@ -1333,7 +1346,7 @@ const runScript1 = () => {
             isEditable = null
         };
         element.addEventListener('blur', blurHandler, { once: true });
-    
+
         // Select the entire content of the element
         const range = document.createRange();
         range.selectNodeContents(element);
@@ -1367,7 +1380,7 @@ const runScript1 = () => {
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>
                 cell.addEventListener('click', function (event) {
-                    if(isEditable){
+                    if (isEditable) {
                         if (isEditable === cell) {
                             return
                         } else {
@@ -1376,11 +1389,11 @@ const runScript1 = () => {
                             // Remove any active text selection (deselect)
                             const selection = window.getSelection();
                             selection.removeAllRanges();
-    
+
                             isEditable = false
                         }
                     }
-                    
+
 
                     toggleCellChecked(cell);
                     event.stopPropagation(); // Prevent click event from bubbling up
@@ -1457,7 +1470,7 @@ const runScript1 = () => {
                 }
                 event.preventDefault(); // Prevent text selection during mouse down
                 event.stopPropagation(); // Prevent click event from bubbling up
-                
+
                 isSelecting = true;
                 let selectedCells = new Set();  // Track selected cells
 
@@ -1606,7 +1619,27 @@ const runScript2 = () => {
         });
     });
 }
+const initiateSocket = async (table) => {
+    socket = io('https://api.seositeshome.com');
+    const joinRoom = (table) => {
+        socket.emit('joinRoom', table);
+    }
+    socket.on('connect', () => {
+        console.log('Connected to server with ID:', socket.id);
+        joinRoom(table)
+    });
 
+    socket.on('disconnect', () => {
+        console.log('Disconnected from server');
+    });
+    socket.on('cellChanged', (data) => {
+        const { rowId,
+            rowName,
+            value } = data
+        const t = document.getElementById('tableToShow')
+        t.querySelector('#'+rowId).querySelector(`[name="${rowName}"]`).value = value
+    });
+}
 document.addEventListener('DOMContentLoaded', async function () {
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -1653,6 +1686,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             await generateMainTable(table, token)
             dataButton.checked = true
         }
+        initiateSocket(table)
     }
 
     sButton.classList.add('loaded')

@@ -1620,7 +1620,7 @@ const runScript2 = () => {
     });
 }
 const initiateSocket = async (table) => {
-    socket = io('https://api.seositeshome.com');
+    socket = io('162.0.208.90');
     const joinRoom = (table) => {
         socket.emit('joinRoom', table);
     }

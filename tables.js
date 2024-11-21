@@ -904,7 +904,7 @@ const generateQuery = async (query, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged(tr.id, r.name, td.textContent)
+                emitCellChanged(tr.id, r.name, td.textContent,pValue)
                 sButton.classList.add('save')
                 pValue = td.textContent
             }

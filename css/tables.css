@@ -22,7 +22,9 @@ td[name="shortId"] {
     flex-grow: 1; /* Make main take up all the remaining space */
     overflow-x: auto; /* Allow horizontal scrolling */
     white-space: nowrap; /* Prevent content from wrapping */
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
     background: #1e1e1e; /* Dark grey background */
 }
 

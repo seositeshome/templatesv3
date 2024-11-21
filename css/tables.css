@@ -34,7 +34,9 @@ td[name="shortId"] {
     display: flex;
     align-items: center;
     z-index: 9;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
     padding-bottom: 3px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
     width: 100%;

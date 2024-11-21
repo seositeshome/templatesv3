@@ -464,7 +464,7 @@ const generateMainTable = async (tableName, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged(tr.id, td.name, td.value)
+                emitCellChanged(tr.id, r.name, td.value)
                 sButton.classList.add('save')
             }
             tr.append(td)
@@ -903,7 +903,7 @@ const generateQuery = async (query, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged('cell2', td.value)
+                emitCellChanged('cell2', r.name, td.value)
                 sButton.classList.add('save')
             }
             tr.append(td)
@@ -1621,7 +1621,13 @@ const runScript2 = () => {
     });
 }
 const initiateSocket = async (table) => {
-    socket = io('api.seositeshome.com/');
+    
+    socket = io('https://api.seositeshome.com', {
+        transports: ['websocket'], // Force WebSocket as the transport method
+        secure: true,              // Use HTTPS (wss) for secure connection
+        reconnection: true,       // Enable automatic reconnection
+        autoConnect: true          // Automatically attempt to connect
+      });
     const joinRoom = (table) => {
         socket.emit('joinRoom', table);
     }

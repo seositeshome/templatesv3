@@ -464,7 +464,7 @@ const generateMainTable = async (tableName, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged(tr.id, r.name, td.value)
+                emitCellChanged(tr.id, r.name, td.textContent)
                 sButton.classList.add('save')
             }
             tr.append(td)
@@ -903,7 +903,7 @@ const generateQuery = async (query, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged('cell2', r.name, td.value)
+                emitCellChanged(tr.id, r.name, td.textContent)
                 sButton.classList.add('save')
             }
             tr.append(td)
@@ -1654,7 +1654,7 @@ const initiateSocket = async (table) => {
         const t = document.getElementById('tableToShow')
         console.log('cell changed')
         console.log(JSON.stringify(data))
-        t.querySelector('tbody').querySelector('#'+rowId).querySelector(`[name="${rowName}"]`).value = value
+        t.querySelector('tbody').querySelector('#'+rowId).querySelector(`[name="${rowName}"]`).textContent = value
     });
 }
 document.addEventListener('DOMContentLoaded', async function () {

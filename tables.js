@@ -1653,7 +1653,8 @@ const initiateSocket = async (table) => {
             value } = data
         const t = document.getElementById('tableToShow')
         console.log('cell changed')
-        t.querySelector('#'+rowId).querySelector(`[name="${rowName}"]`).value = value
+        console.log(JSON.stringify(data))
+        t.querySelector('tbody').querySelector('#'+rowId).querySelector(`[name="${rowName}"]`).value = value
     });
 }
 document.addEventListener('DOMContentLoaded', async function () {

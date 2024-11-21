@@ -90,7 +90,7 @@ const generateMainTable = async (tableName, token) => {
         const updatedItems = Array.from(changedRows).map(row => {
             const tds = row.querySelectorAll('td');
 
-            const obj = { id: parseInt(row.id) }
+            const obj = { id: parseInt(row.id.replace('id-','')) }
             for (const td of tds) {
 
                 const type = td.getAttribute('type')

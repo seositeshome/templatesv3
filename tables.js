@@ -470,7 +470,7 @@ const generateMainTable = async (tableName, token) => {
             tr.append(td)
 
         }
-        tr.id = record.id
+        tr.id ='id-'+ record.id
         if (first) {
             tbody.insertBefore(tr, tbody.firstChild); // Insert `tr` as the first child
 
@@ -909,7 +909,7 @@ const generateQuery = async (query, token) => {
             tr.append(td)
 
         }
-        tr.id = record.id
+        tr.id ='id-'+ record.id
         if (first) {
             tbody.insertBefore(tr, tbody.firstChild); // Insert `tr` as the first child
 
@@ -1654,7 +1654,7 @@ const initiateSocket = async (table) => {
         const t = document.getElementById('tableToShow')
         console.log('cell changed')
         console.log(JSON.stringify(data))
-        t.querySelector('tbody').querySelector(`#\\${rowId}`).querySelector(`[name="${rowName}"]`).textContent = value
+        t.querySelector('tbody').querySelector(`#id-${rowId}`).querySelector(`[name="${rowName}"]`).textContent = value
     });
 }
 document.addEventListener('DOMContentLoaded', async function () {

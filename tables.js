@@ -1621,7 +1621,7 @@ const runScript2 = () => {
     });
 }
 const initiateSocket = async (table) => {
-    socket = io('https://api.seositeshome.com/');
+    socket = io('api.seositeshome.com/');
     const joinRoom = (table) => {
         socket.emit('joinRoom', table);
     }

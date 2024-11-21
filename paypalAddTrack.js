@@ -1,5 +1,11 @@
 const save = async(table,id,row)=>{
     console.log('clicked')
+    
+    const statusRow =row.querySelector(`[cname="track status"]`)
+    if(statusRow.textContent ==='adding'){
+        return
+    }
+    statusRow.textContent ='adding'
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const response =  await fetch(`https://api.seositeshome.com/sendTracking?token=${token}`, {
@@ -11,7 +17,7 @@ const save = async(table,id,row)=>{
                 id, // Send the array of updated records
             }),
         });
-    row.querySelector(`[cname="track status"]`).textContent = 'added'
+    statusRow.textContent = 'added'
     if (response.ok) {
         alert('adding track info done');
     } else {

@@ -8,6 +8,7 @@ const dataButton = document.getElementById('data-table')
 const settingsButton = document.getElementById('settings-table')
 const rButton = document.getElementById('remove')
 const emitCellChanged = (rowId, rowName, value) => {
+    console.log('emiting')
     const data = {
         date: new Date(),
         rowId,

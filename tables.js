@@ -1629,6 +1629,14 @@ const initiateSocket = async (table) => {
         console.log('Connected to server with ID:', socket.id);
         joinRoom(table)
     });
+    socket.on('connect_error', (error) => {
+        console.error('Connection error:', error);
+      });
+      
+      // Handle connection timeouts
+      socket.on('connect_timeout', (timeout) => {
+        console.log('Connection timed out:', timeout);
+      });
 
     socket.on('disconnect', () => {
         console.log('Disconnected from server');

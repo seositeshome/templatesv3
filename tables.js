@@ -436,7 +436,7 @@ const generateMainTable = async (tableName, token) => {
                 td.setAttribute('hidden', '')
 
             }
-
+            let pValue = td.textContent
 
             if (r.type === 'date' || r.type === 'date ISO 8601 UTC') {
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
@@ -464,8 +464,9 @@ const generateMainTable = async (tableName, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged(tr.id, r.name, td.textContent)
+                emitCellChanged(tr.id, r.name, td.textContent,pValue)
                 sButton.classList.add('save')
+                pValue = td.textContent
             }
             tr.append(td)
 
@@ -876,7 +877,7 @@ const generateQuery = async (query, token) => {
 
             }
 
-
+            let pValue = td.textContent
             if (r.type === 'date' || r.type === 'date ISO 8601 UTC') {
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
                 console.log(f)
@@ -905,6 +906,7 @@ const generateQuery = async (query, token) => {
                 tr.setAttribute('data-changed', '')
                 emitCellChanged(tr.id, r.name, td.textContent)
                 sButton.classList.add('save')
+                pValue = td.textContent
             }
             tr.append(td)
 

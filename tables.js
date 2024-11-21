@@ -437,7 +437,7 @@ const generateMainTable = async (tableName, token) => {
                 td.setAttribute('hidden', '')
 
             }
-            let pValue = td.textContent
+            
 
             if (r.type === 'date' || r.type === 'date ISO 8601 UTC') {
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
@@ -457,6 +457,7 @@ const generateMainTable = async (tableName, token) => {
                 td.textContent = record[r.name]
 
             }
+            let pValue = td.textContent
             td.setAttribute('name', r.name)
             td.setAttribute('cname', r.columnName)
             td.setAttribute('type', r.type)
@@ -878,7 +879,6 @@ const generateQuery = async (query, token) => {
 
             }
 
-            let pValue = td.textContent
             if (r.type === 'date' || r.type === 'date ISO 8601 UTC') {
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
                 console.log(f)
@@ -903,6 +903,8 @@ const generateQuery = async (query, token) => {
             if (r.cut || r.name === 'shortId') {
                 td.classList.add('short')
             }
+            
+            let pValue = td.textContent
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
                 emitCellChanged(tr.id, r.name, td.textContent,pValue)

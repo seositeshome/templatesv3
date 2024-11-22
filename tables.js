@@ -1586,7 +1586,7 @@ const runScript2 = () => {
 
         // Split clipboard data by newline to get rows
         let rows = clipboardData.split('\n');
-        if(rows.length <2 && rows[0].split('\t') <2){
+        if(rows.length <2 && rows[0].split('\t').length <2){
             const toInsert = clipboardData
             const tds = document.querySelectorAll('.cell-checked')
             for(const td of tds){

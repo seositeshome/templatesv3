@@ -1329,7 +1329,7 @@ const runScript1 = () => {
     let isSelecting = false;
     console.log('running script 1')
     let isEditable = false
-    function makeEditable(element) {
+    function makeEditable(element,event) {
 
         // If element is already editable, just clear the selection and return.
         if (element.hasAttribute('contenteditable')) {
@@ -1371,9 +1371,8 @@ const runScript1 = () => {
             const cell = arr[i]
             if (!cell.querySelector('button')) {
                 cell.addEventListener('dblclick', function (event) {
-                    event.preventDefault()
                     console.log('double click');
-                    makeEditable(cell);
+                    makeEditable(cell,event);
                 });
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>

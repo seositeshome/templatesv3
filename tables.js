@@ -1412,10 +1412,11 @@ const runScript1 = () => {
     });
     document.addEventListener('keydown', function (event) {
         // Check if Ctrl or Cmd is pressed along with 'C' key
+        
+        const checkedCells = document.querySelectorAll('.table td.cell-checked');
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             console.log('clicked ctrl+c')
             // Find all the checked cells in the table
-            const checkedCells = document.querySelectorAll('.table td.cell-checked');
 
             if (checkedCells.length > 0 && !isEditable) {
                 // Prevent the default copy action
@@ -1448,6 +1449,9 @@ const runScript1 = () => {
                 // Copy the formatted table content to the clipboard
                 copyToClipboard(tableContent);
             }
+        }
+        else if(checkedCells.length > 0 && !isEditable) {
+            makeEditable(checkedCells[0])
         }
     });
 

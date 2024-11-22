@@ -1585,6 +1585,17 @@ const runScript2 = () => {
 
         // Split clipboard data by newline to get rows
         let rows = clipboardData.split('\n');
+        if(rows.length ===1 && rows[0].split('\t') ===1){
+            const toInsert = clipboardData
+            const tds = document.querySelectorAll('.cell-checked')
+            for(const td of tds){
+                td.closest('tr').setAttribute('data-changed', 'true')
+                td.textContent = toInsert
+            }
+            sButton.classList.add('save')
+            return
+
+        }
         activeCell.closest('tr').setAttribute('data-changed', 'true')
         sButton.classList.add('save')
         // Get the row and cell index for starting the paste

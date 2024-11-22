@@ -1335,7 +1335,9 @@ const runScript1 = () => {
         if (element.hasAttribute('contenteditable')) {
             return;
         }
-
+        if(event){
+            event.preventDefault()
+        }
         // Make the element editable
         element.setAttribute('contenteditable', 'true');
         element.classList.add('cell-checked'); // Add a class when the element is editable
@@ -1373,6 +1375,15 @@ const runScript1 = () => {
                 cell.addEventListener('dblclick', function (event) {
                     console.log('double click');
                     makeEditable(cell,event);
+                    const mouseEvent = new MouseEvent('dblclick', {
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: event.clientX,
+                        clientY: event.clientY,
+                    });
+                
+                    // Dispatch the simulated event at the cursor position
+                    cell.dispatchEvent(mouseEvent);
                 });
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>

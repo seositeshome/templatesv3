@@ -1382,7 +1382,7 @@ const runScript1 = () => {
                         clientX: event.clientX,
                         clientY: event.clientY,
                     });
-                    if (!flag) {
+                    if (flag) {
 
                         // Dispatch the simulated event at the cursor position
                         cell.dispatchEvent(mouseEvent);

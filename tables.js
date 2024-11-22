@@ -1334,10 +1334,6 @@ const runScript1 = () => {
 
         // If element is already editable, just clear the selection and return.
         if (element.hasAttribute('contenteditable')) {
-            const range = document.createRange();
-            range.selectNodeContents(element);
-            selection.removeAllRanges();  // Clear previous selections
-            selection.addRange(range); // Select the entire content of the element
             return;
         }
 
@@ -1356,10 +1352,12 @@ const runScript1 = () => {
         element.addEventListener('blur', blurHandler, { once: true });
 
         // Select the entire content of the element
+        /*
         const range = document.createRange();
         range.selectNodeContents(element);
         selection.removeAllRanges();  // Clear previous selections
         selection.addRange(range); // Select the entire content of the element
+        */
         isEditable = element
     }
 

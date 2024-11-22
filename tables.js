@@ -1553,7 +1553,7 @@ const runScript1 = () => {
                         return
                     }
                     isEditable?.removeAttribute('contenteditable');
-                    isEditable?.classList.remove('cell-checked');
+                    isEditable?.classList?.remove('cell-checked');
                     isEditable = null
                 }
                 event.preventDefault(); // Prevent text selection during mouse down

@@ -1572,7 +1572,7 @@ const runScript2 = () => {
     // Handle paste event
     document.addEventListener('paste', function (event) {
         // Check if an active cell is selected
-        if (!activeCell) {
+        if (!document.querySelectorAll('.cell-checked').length) {
             console.log("No cell selected for pasting!");
             return;
         }

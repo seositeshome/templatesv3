@@ -1342,17 +1342,17 @@ const runScript1 = () => {
         element.focus();
         const selection = window.getSelection();
         const range = document.createRange();
-
-        // Select the text content of the element
-        range.selectNodeContents(element); // Select all content inside the element
-
-        // Now expand the range to select only the word under the cursor
-        const wordRange = range.cloneRange();
-        wordRange.expand('word'); // Expand the range to select the entire word
-
-        // Remove any previous selection and apply the new word selection
-        selection.removeAllRanges();
-        selection.addRange(wordRange);
+    
+        // Get the cursor's current position in the element
+        range.selectNodeContents(element); // Select the entire content
+        selection.removeAllRanges();        // Remove any previous selection
+        selection.addRange(range);          // Add the entire range first
+    
+        // Expand the range to the word under the cursor
+        const wordRange = selection.getRangeAt(0).cloneRange(); // Clone the range of the selection
+        wordRange.expand('word');              // Expand the range to select the entire word
+        selection.removeAllRanges();           // Remove any previous selection
+        selection.addRange(wordRange); 
         // Handle blur event to remove contenteditable and the class
         const blurHandler = function () {
             element.removeAttribute('contenteditable');

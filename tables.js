@@ -7,7 +7,7 @@ const sButton = document.querySelector('.loading-btn')
 const dataButton = document.getElementById('data-table')
 const settingsButton = document.getElementById('settings-table')
 const rButton = document.getElementById('remove')
-const emitCellChanged = (rowId, rowName, value,pValue) => {
+const emitCellChanged = (rowId, rowName, value, pValue) => {
     console.log('emiting')
     const data = {
         date: new Date(),
@@ -91,7 +91,7 @@ const generateMainTable = async (tableName, token) => {
         const updatedItems = Array.from(changedRows).map(row => {
             const tds = row.querySelectorAll('td');
 
-            const obj = { id: parseInt(row.id.replace('id-','')) }
+            const obj = { id: parseInt(row.id.replace('id-', '')) }
             for (const td of tds) {
 
                 const type = td.getAttribute('type')
@@ -437,7 +437,7 @@ const generateMainTable = async (tableName, token) => {
                 td.setAttribute('hidden', '')
 
             }
-            
+
 
             if (r.type === 'date' || r.type === 'date ISO 8601 UTC') {
                 const f = record[r.name]?.replace('T', ' ').slice(0, 19);
@@ -466,14 +466,14 @@ const generateMainTable = async (tableName, token) => {
             }
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged(tr.id, r.name, td.textContent,pValue)
+                emitCellChanged(tr.id, r.name, td.textContent, pValue)
                 sButton.classList.add('save')
                 pValue = td.textContent
             }
             tr.append(td)
 
         }
-        tr.id ='id-'+ record.id
+        tr.id = 'id-' + record.id
         if (first) {
             tbody.insertBefore(tr, tbody.firstChild); // Insert `tr` as the first child
 
@@ -903,18 +903,18 @@ const generateQuery = async (query, token) => {
             if (r.cut || r.name === 'shortId') {
                 td.classList.add('short')
             }
-            
+
             let pValue = td.textContent
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
-                emitCellChanged(tr.id, r.name, td.textContent,pValue)
+                emitCellChanged(tr.id, r.name, td.textContent, pValue)
                 sButton.classList.add('save')
                 pValue = td.textContent
             }
             tr.append(td)
 
         }
-        tr.id ='id-'+ record.id
+        tr.id = 'id-' + record.id
         if (first) {
             tbody.insertBefore(tr, tbody.firstChild); // Insert `tr` as the first child
 
@@ -1330,7 +1330,6 @@ const runScript1 = () => {
     console.log('running script 1')
     let isEditable = false
     function makeEditable(element) {
-        const selection = window.getSelection();
 
         // If element is already editable, just clear the selection and return.
         if (element.hasAttribute('contenteditable')) {
@@ -1341,7 +1340,19 @@ const runScript1 = () => {
         element.setAttribute('contenteditable', 'true');
         element.classList.add('cell-checked'); // Add a class when the element is editable
         element.focus();
+        const selection = window.getSelection();
+        const range = document.createRange();
 
+        // Select the text content of the element
+        range.selectNodeContents(element); // Select all content inside the element
+
+        // Now expand the range to select only the word under the cursor
+        const wordRange = range.cloneRange();
+        wordRange.expand('word'); // Expand the range to select the entire word
+
+        // Remove any previous selection and apply the new word selection
+        selection.removeAllRanges();
+        selection.addRange(wordRange);
         // Handle blur event to remove contenteditable and the class
         const blurHandler = function () {
             element.removeAttribute('contenteditable');
@@ -1351,13 +1362,6 @@ const runScript1 = () => {
         };
         element.addEventListener('blur', blurHandler, { once: true });
 
-        // Select the entire content of the element
-        /*
-        const range = document.createRange();
-        range.selectNodeContents(element);
-        selection.removeAllRanges();  // Clear previous selections
-        selection.addRange(range); // Select the entire content of the element
-        */
         isEditable = element
     }
 
@@ -1410,7 +1414,7 @@ const runScript1 = () => {
     });
     document.addEventListener('keydown', function (event) {
         // Check if Ctrl or Cmd is pressed along with 'C' key
-        
+
         const checkedCells = document.querySelectorAll('.table td.cell-checked');
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             console.log('clicked ctrl+c')
@@ -1448,7 +1452,7 @@ const runScript1 = () => {
                 copyToClipboard(tableContent);
             }
         }
-        else if(!event.ctrlKey && !event.metaKey && checkedCells.length > 0 && !isEditable) {
+        else if (!event.ctrlKey && !event.metaKey && checkedCells.length > 0 && !isEditable) {
             makeEditable(checkedCells[0])
         }
     });
@@ -1563,13 +1567,13 @@ const runScript1 = () => {
 
 
 }
-var activeCell = null; 
+var activeCell = null;
 const runScript2 = () => {
     console.log('running script 2')
     // Variable to store the currently active cell
 
     // Track clicks only on <td> elements within the <tbody> of #tableData
-    
+
 
     // Handle paste event
     document.addEventListener('paste', function (event) {
@@ -1588,10 +1592,10 @@ const runScript2 = () => {
 
         // Split clipboard data by newline to get rows
         let rows = clipboardData.split('\n');
-        if(rows.length <2 && rows[0].split('\t').length <2){
+        if (rows.length < 2 && rows[0].split('\t').length < 2) {
             const toInsert = clipboardData
             const tds = activeCells
-            for(const td of tds){
+            for (const td of tds) {
                 td.closest('tr').setAttribute('data-changed', 'true')
                 td.textContent = toInsert
             }
@@ -1638,13 +1642,13 @@ const runScript2 = () => {
     });
 }
 const initiateSocket = async (table) => {
-    
+
     socket = io('https://api.seositeshome.com', {
         transports: ['websocket'], // Force WebSocket as the transport method
         secure: true,              // Use HTTPS (wss) for secure connection
         reconnection: true,       // Enable automatic reconnection
         autoConnect: true          // Automatically attempt to connect
-      });
+    });
     const joinRoom = (table) => {
         socket.emit('joinRoom', table);
     }
@@ -1654,12 +1658,12 @@ const initiateSocket = async (table) => {
     });
     socket.on('connect_error', (error) => {
         console.error('Connection error:', error);
-      });
-      
-      // Handle connection timeouts
-      socket.on('connect_timeout', (timeout) => {
+    });
+
+    // Handle connection timeouts
+    socket.on('connect_timeout', (timeout) => {
         console.log('Connection timed out:', timeout);
-      });
+    });
 
     socket.on('disconnect', () => {
         console.log('Disconnected from server');

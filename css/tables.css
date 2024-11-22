@@ -401,6 +401,10 @@ thead tr:nth-child(2) th:first-child::before {
 #left {
     margin-left: 20px;
 }
+#right {
+    margin-left: -3px;
+}
+
 #left::before {
     content: "⬅️"; /* Добавляем эмодзи через псевдоэлемент */
 }

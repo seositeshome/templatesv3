@@ -1369,7 +1369,7 @@ const runScript1 = () => {
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');
         });
-
+        activeCell = cell
         // Add 'cell-checked' class to the clicked cell
         cell.classList.add('cell-checked');
     }
@@ -1560,18 +1560,13 @@ const runScript1 = () => {
 
 
 }
-
+var activeCell = null; 
 const runScript2 = () => {
     console.log('running script 2')
-    let activeCell = null; // Variable to store the currently active cell
+    // Variable to store the currently active cell
 
     // Track clicks only on <td> elements within the <tbody> of #tableData
-    document.querySelectorAll('#tableToShow tbody td').forEach(function (cell) {
-        cell.addEventListener('click', function () {
-            activeCell = cell; // Set the clicked cell as the active one
-            console.log("Active cell set: ", activeCell);
-        });
-    });
+    
 
     // Handle paste event
     document.addEventListener('paste', function (event) {

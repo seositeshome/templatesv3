@@ -1339,7 +1339,7 @@ const runScript1 = () => {
         // Make the element editable
         element.setAttribute('contenteditable', 'true');
         element.classList.add('cell-checked'); // Add a class when the element is editable
-        element.focus();
+        
         
         // Handle blur event to remove contenteditable and the class
         const blurHandler = function () {

@@ -14,7 +14,7 @@ const save = async(table,id,row)=>{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id, // Send the array of updated records
+                id:id.replace('id-',''), // Send the array of updated records
             }),
         });
     statusRow.textContent = 'added'

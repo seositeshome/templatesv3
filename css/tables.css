@@ -402,7 +402,7 @@ thead tr:nth-child(2) th:first-child::before {
     margin-left: 20px;
 }
 #right {
-    margin-left: -3px;
+    margin-left: -7px;
 }
 
 #left::before {

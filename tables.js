@@ -1462,6 +1462,7 @@ const runScript1 = () => {
         document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
             checkedCell.classList.remove('cell-checked');
         });
+        activeCell = null
     });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const cells = row.querySelectorAll('td');

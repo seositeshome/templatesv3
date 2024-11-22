@@ -5,7 +5,7 @@ const openQuery = async(id) => {
     const table = urlParams.get('table'); // Get the table from the URL
 
     // Construct the new URL with query parameters
-    const newUrl = `./tables.html?token=${token}&query=${id}`;
+    const newUrl = `./tables.html?token=${token}&query=${id.replace('id-','')}`;
 
     // Open the new URL in a new window (or tab)
     window.open(newUrl, '_blank');  // '_blank' ensures it opens in a new tab or window

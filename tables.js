@@ -1588,7 +1588,7 @@ const runScript2 = () => {
         let rows = clipboardData.split('\n');
         if(rows.length <2 && rows[0].split('\t').length <2){
             const toInsert = clipboardData
-            const tds = document.querySelectorAll('.cell-checked')
+            const tds = activeCells
             for(const td of tds){
                 td.closest('tr').setAttribute('data-changed', 'true')
                 td.textContent = toInsert

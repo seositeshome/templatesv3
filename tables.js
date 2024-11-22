@@ -1273,7 +1273,9 @@ const generateSettingTable = async (table, token) => {
     }
 
     console.log('generating records')
-    for (const record of records.filter(e => !(e.name === 'shortId' || e.name === 'created'))) {
+    const filtered = records.filter(e => !(e.name === 'shortId' || e.name === 'created'))
+    const sortedFiltered = filtered.sort((a, b) => a.position - b.position);
+    for (const record of sortedFiltered) {
         generateFromRecord(record)
     }
 

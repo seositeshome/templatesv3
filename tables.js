@@ -1329,20 +1329,20 @@ const runScript1 = () => {
     let isSelecting = false;
     console.log('running script 1')
     let isEditable = false
-    function makeEditable(element,event) {
+    function makeEditable(element, event) {
 
         // If element is already editable, just clear the selection and return.
         if (element.hasAttribute('contenteditable')) {
-            return;
+            return true;
         }
-        if(event){
+        if (event) {
             event.preventDefault()
         }
         // Make the element editable
         element.setAttribute('contenteditable', 'true');
         element.classList.add('cell-checked'); // Add a class when the element is editable
-        
-        
+
+
         // Handle blur event to remove contenteditable and the class
         const blurHandler = function () {
             element.removeAttribute('contenteditable');
@@ -1374,16 +1374,20 @@ const runScript1 = () => {
             if (!cell.querySelector('button')) {
                 cell.addEventListener('dblclick', function (event) {
                     console.log('double click');
-                    makeEditable(cell,event);
+                    const flag = makeEditable(cell, event);
                     const mouseEvent = new MouseEvent('dblclick', {
                         bubbles: true,
                         cancelable: true,
                         clientX: event.clientX,
                         clientY: event.clientY,
                     });
-                
-                    // Dispatch the simulated event at the cursor position
-                    cell.dispatchEvent(mouseEvent);
+                    if (!flag) {
+
+                        // Dispatch the simulated event at the cursor position
+                        cell.dispatchEvent(mouseEvent);
+                    }
+
+
                 });
 
                 // Add 'cell-checked' class on single click, skip if cell contains a <button>

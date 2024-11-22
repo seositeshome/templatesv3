@@ -1350,6 +1350,7 @@ const runScript1 = () => {
             element.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
             isEditable = null
         };
+        element.focus()
         element.addEventListener('blur', blurHandler, { once: true });
 
         isEditable = element

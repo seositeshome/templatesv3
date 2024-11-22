@@ -1340,19 +1340,7 @@ const runScript1 = () => {
         element.setAttribute('contenteditable', 'true');
         element.classList.add('cell-checked'); // Add a class when the element is editable
         element.focus();
-        const selection = window.getSelection();
-        const range = document.createRange();
-    
-        // Get the cursor's current position in the element
-        range.selectNodeContents(element); // Select the entire content
-        selection.removeAllRanges();        // Remove any previous selection
-        selection.addRange(range);          // Add the entire range first
-    
-        // Expand the range to the word under the cursor
-        const wordRange = selection.getRangeAt(0).cloneRange(); // Clone the range of the selection
-        wordRange.expand('word');              // Expand the range to select the entire word
-        selection.removeAllRanges();           // Remove any previous selection
-        selection.addRange(wordRange); 
+        
         // Handle blur event to remove contenteditable and the class
         const blurHandler = function () {
             element.removeAttribute('contenteditable');

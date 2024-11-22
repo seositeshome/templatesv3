@@ -1552,8 +1552,8 @@ const runScript1 = () => {
                     if(isEditable == cell){
                         return
                     }
-                    isEditable.removeAttribute('contenteditable');
-                    isEditable.classList.remove('cell-checked');
+                    isEditable?.removeAttribute('contenteditable');
+                    isEditable?.classList.remove('cell-checked');
                     isEditable = null
                 }
                 event.preventDefault(); // Prevent text selection during mouse down

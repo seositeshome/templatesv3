@@ -1366,8 +1366,7 @@ const runScript1 = () => {
         // Add 'cell-checked' class to the clicked cell
         cell.classList.add('cell-checked');
     }
-    function selectWordAtCursor(event) {
-        const element = document.getElementById("text");
+    function selectWordAtCursor(event,element) {
         const selection = window.getSelection();
         const range = document.createRange();
         
@@ -1433,7 +1432,7 @@ const runScript1 = () => {
                 cell.addEventListener('dblclick', function (event) {
                     console.log('double click');
                     const flag = makeEditable(cell, event);
-                    selectWordAtCursor(event)
+                    selectWordAtCursor(event,cell)
                     /*
                     if (!flag) {
                         const mouseEvent2 = new MouseEvent('click', {

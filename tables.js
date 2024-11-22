@@ -1450,7 +1450,7 @@ const runScript1 = () => {
                 copyToClipboard(tableContent);
             }
         }
-        else if(checkedCells.length > 0 && !isEditable) {
+        else if(!event.ctrlKey && !event.metaKey && checkedCells.length > 0 && !isEditable) {
             makeEditable(checkedCells[0])
         }
     });

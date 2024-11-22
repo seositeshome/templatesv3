@@ -1376,14 +1376,22 @@ const runScript1 = () => {
                 cell.addEventListener('dblclick', function (event) {
                     console.log('double click');
                     const flag = makeEditable(cell, event);
-                    const mouseEvent = new MouseEvent('dblclick', {
-                        bubbles: true,
-                        cancelable: true,
-                        clientX: event.clientX,
-                        clientY: event.clientY,
-                    });
+                    
                     if (!flag) {
-
+                        const mouseEvent2 = new MouseEvent('click', {
+                            bubbles: true,
+                            cancelable: true,
+                            clientX: event.clientX,
+                            clientY: event.clientY,
+                        });
+                        // Dispatch the simulated event at the cursor position
+                        cell.dispatchEvent(mouseEvent2);
+                        const mouseEvent = new MouseEvent('dblclick', {
+                            bubbles: true,
+                            cancelable: true,
+                            clientX: event.clientX,
+                            clientY: event.clientY,
+                        });
                         // Dispatch the simulated event at the cursor position
                         cell.dispatchEvent(mouseEvent);
                     }

@@ -13,7 +13,7 @@ const createInvoice = async(table,id,tr)=>{
         body: JSON.stringify(
             {
                 table,
-                id,
+                id:id.replace('id-',''),
                 email,
                 amount,
                 currency,

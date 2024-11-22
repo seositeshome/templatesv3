@@ -8829,7 +8829,7 @@
             let f = pathItem.hub_items?.import_items && pathItem.hub_items?.import_items.find(e => e.name === import_name && e.component === import_page)
             let compid = document.querySelector(`[name="${import_page}"]`)?.parentNode.getAttribute('cid')
             if (!compid && f) {
-              const absolutePath = getAbsolutePath(pathItemPath, f.componentPath)
+              const absolutePadata_articleth = getAbsolutePath(pathItemPath, f.componentPath)
               url = `https://5jfh1fonoh.execute-api.us-east-1.amazonaws.com/prod/templatesv2?ownerUUID=path:${ownerid}&gsi1lsi1=true&lsi1=${absolutePath}&token=${localStorage.getItem('token')}`;
 
               const res = await fetch(url).then(res => res.json())

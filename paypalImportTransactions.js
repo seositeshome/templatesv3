@@ -11,7 +11,7 @@ const importTransactions = async(table,id,tr)=>{
         body: JSON.stringify(
             {
                 table,
-                id,
+                id:id.replace('id-',''),
                 days
             }
         )

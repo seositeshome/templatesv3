@@ -10,7 +10,7 @@ const activateWebhook = async(table,id,tr)=>{
         body: JSON.stringify(
             {
                 table,
-                id
+                id:id.replace('id-',''),
 
             }
         ),

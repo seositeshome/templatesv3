@@ -1366,7 +1366,64 @@ const runScript1 = () => {
         // Add 'cell-checked' class to the clicked cell
         cell.classList.add('cell-checked');
     }
-
+    function selectWordAtCursor(event) {
+        const element = document.getElementById("text");
+        const selection = window.getSelection();
+        const range = document.createRange();
+        
+        // Get the position of the mouse relative to the element
+        const rect = element.getBoundingClientRect();
+        const clickPosX = event.clientX - rect.left; // Mouse position within the element
+        const clickPosY = event.clientY - rect.top;
+    
+        // Get the text content and create a range for selecting
+        const textNode = element.firstChild; // Assuming a single text node
+        const textContent = textNode.textContent;
+        
+        // Split text content into words (you could use regex or a splitting approach)
+        const words = textContent.split(' ');
+    
+        let currentPosX = 0;
+        let selectedWordIndex = -1;
+        const wordWidths = [];
+    
+        // Measure width of each word to find which one the cursor is on
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        context.font = '16px Arial'; // Same font as the element's font
+    
+        words.forEach((word, index) => {
+          wordWidths.push(context.measureText(word + ' ').width); // Include space to prevent partial selections
+        });
+    
+        // Find the word index closest to the cursor
+        let totalWidth = 0;
+        for (let i = 0; i < wordWidths.length; i++) {
+          totalWidth += wordWidths[i];
+    
+          if (clickPosX < totalWidth) {
+            selectedWordIndex = i;
+            break;
+          }
+        }
+    
+        if (selectedWordIndex === -1) return; // No word found (edge case)
+    
+        // Create range for the word
+        let start = 0;
+        for (let i = 0; i < selectedWordIndex; i++) {
+          start += words[i].length + 1; // Include space
+        }
+    
+        const end = start + words[selectedWordIndex].length;
+    
+        range.setStart(textNode, start);
+        range.setEnd(textNode, end);
+    
+        selection.removeAllRanges();
+        selection.addRange(range); // Select the word
+      }
+    
     // Watch for all table cells with 'data-entity-value' attribute
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const arr = row.querySelectorAll('td')
@@ -1376,7 +1433,8 @@ const runScript1 = () => {
                 cell.addEventListener('dblclick', function (event) {
                     console.log('double click');
                     const flag = makeEditable(cell, event);
-                    
+                    selectWordAtCursor(event)
+                    /*
                     if (!flag) {
                         const mouseEvent2 = new MouseEvent('click', {
                             bubbles: true,
@@ -1395,7 +1453,7 @@ const runScript1 = () => {
                         // Dispatch the simulated event at the cursor position
                         cell.dispatchEvent(mouseEvent);
                     }
-
+                    */
 
                 });
 

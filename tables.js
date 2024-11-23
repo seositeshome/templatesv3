@@ -665,7 +665,7 @@ const generateQuery = async (query, token) => {
                     const element = document.querySelector(`[index="${index}"]`)
                     return element
                 })
-                const ids = Array.from(delements).map(element => element.id)
+                const ids = Array.from(delements).map(element => element.id.replace('id-',""))
                 await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
                     method: 'DELETE',
                     headers: {

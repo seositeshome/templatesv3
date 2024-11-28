@@ -1318,6 +1318,7 @@ function createNewTable() {
 
 }
 function copyToClipboard(text) {
+    console.log('copying '+text)
     const textArea = document.createElement('textarea');
     textArea.value = text;
     document.body.appendChild(textArea);

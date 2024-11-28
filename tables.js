@@ -1513,7 +1513,7 @@ const runScript1 = () => {
                 const tableContent = rows.map(rowData => rowData.cells.join('\t')).join('\n'); // Tab-separated cells
 
                 // Copy the formatted table content to the clipboard
-                await copyToClipboard(tableContent);
+                copyToClipboard(tableContent);
             }
         }
         else if (event.key === "Escape") {

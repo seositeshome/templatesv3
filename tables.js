@@ -1319,7 +1319,7 @@ function createNewTable() {
 }
 function copyToClipboard(text) {
     console.log('copying ' + text)
-    navigator.clipboard.writeText(text)
+    return navigator.clipboard.writeText(text)
 }
 const runScript1 = () => {
     let isSelecting = false;
@@ -1513,7 +1513,7 @@ const runScript1 = () => {
                 const tableContent = rows.map(rowData => rowData.cells.join('\t')).join('\n'); // Tab-separated cells
 
                 // Copy the formatted table content to the clipboard
-                copyToClipboard(tableContent);
+                await copyToClipboard(tableContent);
             }
         }
         else if (event.key === "Escape") {

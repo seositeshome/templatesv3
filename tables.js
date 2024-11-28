@@ -1533,7 +1533,7 @@ const runScript1 = () => {
         }
 
     });
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown',async function (event) {
         // Check if Ctrl or Cmd is pressed along with 'C' key
 
         const checkedCells = document.querySelectorAll('.table td.cell-checked');
@@ -1572,7 +1572,7 @@ const runScript1 = () => {
                 // Copy the formatted table content to the clipboard
                 try{
 
-                    navigator.clipboard.writeText(tableContent)
+                    await navigator.clipboard.writeText(tableContent)
                 }
                 catch(e){
                     alert('error copying to clipboard '+e.message)

@@ -1319,12 +1319,7 @@ function createNewTable() {
 }
 function copyToClipboard(text) {
     console.log('copying ' + text)
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
+    navigator.clipboard.writeText(text)
 }
 const runScript1 = () => {
     let isSelecting = false;

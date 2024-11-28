@@ -1708,11 +1708,13 @@ const runScript1 = () => {
             const onMouseUp = () => {
                 event.preventDefault(); // Prevent text selection during mouse down
                 event.stopPropagation(); // Prevent click event from bubbling up
+                console.log('removing mouse move and mouseup event listeners')
                 document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event
                 document.removeEventListener('mouseup', onMouseUp);  // Stop mouseup event
             };
 
             // Add mousemove and mouseup listeners
+            console.log('adding mouse move and mouseup event listeners')
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onMouseUp);
         });

@@ -1461,6 +1461,9 @@ const runScript1 = () => {
             if (!cell.querySelector('button')) {
                 cell.addEventListener('dblclick', function (event) {
                     console.log('double click');
+                    if(isEditable == cell){
+                        return
+                    }
                     const flag = makeEditable(cell, event);
                     selectWordAtCursor(event, cell)
                     /*

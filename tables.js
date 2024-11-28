@@ -1345,6 +1345,8 @@ const runScript1 = () => {
             element.classList.remove('cell-checked');
             element.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
             isEditable = null
+            const selection = window.getSelection();
+            selection.removeAllRanges();
         };
         element.focus()
         element.addEventListener('blur', blurHandler, { once: true });
@@ -1423,7 +1425,11 @@ const runScript1 = () => {
             }
         }
     
-        if (selectedWordIndex === -1) return; // No word found (edge case)
+        // If no word was selected (click is in empty space), select the first word to the left
+        if (selectedWordIndex === -1) {
+            // If the click is at the very beginning (or no word is found), select the first word
+            selectedWordIndex = 0;
+        }
     
         // Calculate the starting index of the selected word in the text
         let startPos = 0;
@@ -1451,6 +1457,7 @@ const runScript1 = () => {
         selection.removeAllRanges();
         selection.addRange(range); // Select the word
     }
+    
     
 
     // Watch for all table cells with 'data-entity-value' attribute
@@ -1558,6 +1565,8 @@ const runScript1 = () => {
                 isEditable.removeAttribute('contenteditable');
                 
                 isEditable = null
+                const selection = window.getSelection();
+                selection.removeAllRanges();
                 // Your logic for handling the Escape key, e.g., closing a modal or exiting full screen
             }
             document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
@@ -1606,6 +1615,8 @@ const runScript1 = () => {
                     isEditable?.removeAttribute('contenteditable');
                     isEditable?.classList?.remove('cell-checked');
                     isEditable = null
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
                 }
                 event.preventDefault(); // Prevent text selection during mouse down
                 event.stopPropagation(); // Prevent click event from bubbling up

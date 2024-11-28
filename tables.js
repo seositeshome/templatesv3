@@ -1365,59 +1365,93 @@ const runScript1 = () => {
     function selectWordAtCursor(event, element) {
         const selection = window.getSelection();
         const range = document.createRange();
-
+    
         // Get the position of the mouse relative to the element
         const rect = element.getBoundingClientRect();
         const clickPosX = event.clientX - rect.left; // Mouse position within the element
         const clickPosY = event.clientY - rect.top;
-
-        // Get the text content and create a range for selecting
-        const textNode = element.firstChild; // Assuming a single text node
-        const textContent = textNode.textContent;
-
-        // Split text content into words (you could use regex or a splitting approach)
-        const words = textContent.split(' ');
-
-        let currentPosX = 0;
-        let selectedWordIndex = -1;
-        const wordWidths = [];
-
-        // Measure width of each word to find which one the cursor is on
+    
+        // Get the computed font style of the element to match it for canvas measurement
+        const style = window.getComputedStyle(element);
+        const font = `${style.fontSize} ${style.fontFamily}`;
+    
+        // Create a canvas to measure text width
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = '16px Arial'; // Same font as the element's font
-
-        words.forEach((word, index) => {
-            wordWidths.push(context.measureText(word + ' ').width); // Include space to prevent partial selections
-        });
-
-        // Find the word index closest to the cursor
+        context.font = font;
+    
+        // Flatten the element's text nodes (including multiline text)
+        let textNodes = [];
+        function extractTextNodes(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                textNodes.push(node);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                node.childNodes.forEach(child => extractTextNodes(child));
+            }
+        }
+        extractTextNodes(element);
+    
+        // Measure the width of each word
+        let words = [];
+        let wordWidths = [];
         let totalWidth = 0;
+    
+        // Iterate over text nodes
+        textNodes.forEach(textNode => {
+            const textContent = textNode.textContent;
+            const wordArray = textContent.split(' ');
+    
+            wordArray.forEach((word, index) => {
+                const wordWidth = context.measureText(word + ' ').width; // include space after the word
+                words.push(word);
+                wordWidths.push(wordWidth);
+                totalWidth += wordWidth;
+            });
+        });
+    
+        // Now find which word is closest to the click position
+        let clickOffset = 0;
+        let selectedWordIndex = -1;
+    
         for (let i = 0; i < wordWidths.length; i++) {
-            totalWidth += wordWidths[i];
-
-            if (clickPosX < totalWidth) {
+            clickOffset += wordWidths[i];
+    
+            // If click is before this word's end, select it
+            if (clickPosX < clickOffset) {
                 selectedWordIndex = i;
                 break;
             }
         }
-
+    
         if (selectedWordIndex === -1) return; // No word found (edge case)
-
-        // Create range for the word
-        let start = 0;
+    
+        // Calculate the starting index of the selected word in the text
+        let startPos = 0;
         for (let i = 0; i < selectedWordIndex; i++) {
-            start += words[i].length + 1; // Include space
+            startPos += words[i].length + 1; // Account for spaces
         }
-
-        const end = start + words[selectedWordIndex].length;
-
-        range.setStart(textNode, start);
-        range.setEnd(textNode, end);
-
+    
+        const endPos = startPos + words[selectedWordIndex].length;
+    
+        // Create range for the selected word
+        let currentPos = 0;
+        textNodes.forEach(textNode => {
+            const textContent = textNode.textContent;
+            const endIndex = currentPos + textContent.length;
+    
+            // If the word falls within this text node, adjust the range accordingly
+            if (currentPos <= startPos && endIndex >= endPos) {
+                range.setStart(textNode, startPos - currentPos);
+                range.setEnd(textNode, endPos - currentPos);
+            }
+            currentPos += textContent.length;
+        });
+    
+        // Remove any existing selection and apply the new range
         selection.removeAllRanges();
         selection.addRange(range); // Select the word
     }
+    
 
     // Watch for all table cells with 'data-entity-value' attribute
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {

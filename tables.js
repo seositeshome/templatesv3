@@ -1519,8 +1519,9 @@ const runScript1 = () => {
         else if (event.key === "Escape") {
             if (isEditable) {
                 isEditable.removeAttribute('contenteditable');
-                isEditable.classList.remove('cell-checked');
-                isEditable.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
+                document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+                    checkedCell.classList.remove('cell-checked');
+                });; // Remove the event listener after it runs
                 isEditable = null
                 // Your logic for handling the Escape key, e.g., closing a modal or exiting full screen
             }

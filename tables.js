@@ -1715,8 +1715,9 @@ const runScript1 = () => {
 
             // Add mousemove and mouseup listeners
             console.log('adding mouse move and mouseup event listeners')
-            document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('mousemove', onMouseMove);
+            
         });
 
     });

@@ -226,7 +226,11 @@ const generateMainTable = async (tableName, token) => {
                             return false; // If the record doesn't match the filter, exclude it
                         }
                         break;
-
+                    case 'notcontains':
+                        if (recordValue.toLocaleLowerCase().includes(value.toLowerCase())) {
+                            return false; // If the record does match the filter, exclude it
+                        }
+                        break;
                     case 'more':
                         if (parseFloat(recordValue) <= parseFloat(value)) {
                             return false; // If the record value is not greater, exclude it
@@ -715,7 +719,12 @@ const generateQuery = async (query, token) => {
                             return false; // If the record doesn't match the filter, exclude it
                         }
                         break;
-
+                        
+                    case 'notcontains':
+                        if (recordValue.toLocaleLowerCase().includes(value.toLowerCase())) {
+                            return false; // If the record does match the filter, exclude it
+                        }
+                        break;
                     case 'more':
                         if (parseFloat(recordValue) <= parseFloat(value)) {
                             return false; // If the record value is not greater, exclude it

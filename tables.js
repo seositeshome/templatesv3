@@ -1666,13 +1666,16 @@ const runScript1 = () => {
                 const onMouseUp = () => {
                     event.preventDefault();  // Prevent text selection during mouse down
                     event.stopPropagation();  // Prevent click event from bubbling up
+                    console.log('removing event listeners')
                     document.removeEventListener('mousemove', onMouseMove);  // Stop mousemove event
                     document.removeEventListener('mouseup', onMouseUp);  // Stop mouseup event
                 };
 
                 // Add mousemove and mouseup listeners to continue selecting on mousemove
-                document.addEventListener('mousemove', onMouseMove);
+                console.log('adding event listeners')
                 document.addEventListener('mouseup', onMouseUp);
+                document.addEventListener('mousemove', onMouseMove);
+               
             });
         }
         // Handle mouse down to start selecting cells

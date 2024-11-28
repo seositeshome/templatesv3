@@ -164,7 +164,7 @@ const generateMainTable = async (tableName, token) => {
                     const element = document.querySelector(`[index="${index}"]`)
                     return element
                 })
-                const ids = Array.from(delements).map(element => element.id.replace('id-',''))
+                const ids = Array.from(delements).map(element => element.id.replace('id-', ''))
                 await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
                     method: 'DELETE',
                     headers: {
@@ -665,7 +665,7 @@ const generateQuery = async (query, token) => {
                     const element = document.querySelector(`[index="${index}"]`)
                     return element
                 })
-                const ids = Array.from(delements).map(element => element.id.replace('id-',""))
+                const ids = Array.from(delements).map(element => element.id.replace('id-', ""))
                 await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
                     method: 'DELETE',
                     headers: {
@@ -1318,7 +1318,7 @@ function createNewTable() {
 
 }
 function copyToClipboard(text) {
-    console.log('copying '+text)
+    console.log('copying ' + text)
     const textArea = document.createElement('textarea');
     textArea.value = text;
     document.body.appendChild(textArea);
@@ -1521,9 +1521,25 @@ const runScript1 = () => {
                 copyToClipboard(tableContent);
             }
         }
-        else if (!event.ctrlKey && !event.metaKey && checkedCells.length > 0 && !isEditable) {
+        else if (event.key === "Escape") {
+            if (isEditable) {
+                isEditable.removeAttribute('contenteditable');
+                isEditable.classList.remove('cell-checked');
+                isEditable.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
+                isEditable = null
+                // Your logic for handling the Escape key, e.g., closing a modal or exiting full screen
+            }
+
+        }
+        else if (!event.ctrlKey &&
+            !event.metaKey &&
+            !event.altKey &&
+            !event.shiftKey &&
+            event.key !== "Alt" && event.key != "Option" &&
+            checkedCells.length > 0 && !isEditable) {
             makeEditable(checkedCells[0])
         }
+
     });
 
     // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
@@ -1550,7 +1566,7 @@ const runScript1 = () => {
             const cell = cells[i];
             cell.addEventListener('mousedown', function (event) {
                 if (isEditable) {
-                    if(isEditable == cell){
+                    if (isEditable == cell) {
                         return
                     }
                     isEditable?.removeAttribute('contenteditable');

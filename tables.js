@@ -1425,10 +1425,13 @@ const runScript1 = () => {
             }
         }
     
-        // If no word was selected (click is in empty space), select the first word to the left
+        // If no word was selected (click is in empty space), select the closest word to the left
         if (selectedWordIndex === -1) {
-            // If the click is at the very beginning (or no word is found), select the first word
-            selectedWordIndex = 0;
+            // We want the word to the left of the click, so use the last word in the text
+            selectedWordIndex = wordWidths.length - 1;
+        } else if (clickPosX - (clickOffset - wordWidths[selectedWordIndex]) <= wordWidths[selectedWordIndex] / 2) {
+            // If the click is closer to the left side of the selected word, select the previous word
+            selectedWordIndex = Math.max(selectedWordIndex - 1, 0);
         }
     
         // Calculate the starting index of the selected word in the text
@@ -1457,6 +1460,7 @@ const runScript1 = () => {
         selection.removeAllRanges();
         selection.addRange(range); // Select the word
     }
+    
     
     
 

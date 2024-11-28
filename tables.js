@@ -1519,12 +1519,13 @@ const runScript1 = () => {
         else if (event.key === "Escape") {
             if (isEditable) {
                 isEditable.removeAttribute('contenteditable');
-                document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
-                    checkedCell.classList.remove('cell-checked');
-                });; // Remove the event listener after it runs
+                
                 isEditable = null
                 // Your logic for handling the Escape key, e.g., closing a modal or exiting full screen
             }
+            document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+                checkedCell.classList.remove('cell-checked');
+            });; // Remove the event listener after it runs
 
         }
         else if (!event.ctrlKey &&

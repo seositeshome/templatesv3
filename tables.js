@@ -1330,7 +1330,9 @@ function copyToClipboard(text) {
     console.log('copying ' + text)
     return navigator.clipboard.writeText(text)
 }
+var activeCell = null;
 const runScript1 = () => {
+    activeCell = null
     let isSelecting = false;
     console.log('running script 1')
     let isEditable = false
@@ -1727,7 +1729,7 @@ const runScript1 = () => {
 
 
 }
-var activeCell = null;
+
 const runScript2 = () => {
     console.log('running script 2')
     // Variable to store the currently active cell

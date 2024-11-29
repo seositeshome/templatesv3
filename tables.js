@@ -719,7 +719,7 @@ const generateQuery = async (query, token) => {
                             return false; // If the record doesn't match the filter, exclude it
                         }
                         break;
-                        
+
                     case 'notcontains':
                         if (recordValue.toLocaleLowerCase().includes(value.toLowerCase())) {
                             return false; // If the record does match the filter, exclude it
@@ -1331,39 +1331,43 @@ function copyToClipboard(text) {
     return navigator.clipboard.writeText(text)
 }
 var activeCell = null;
+var isEditable = false
+var isSelecting = false;
+function makeEditable(element, event) {
+
+    // If element is already editable, just clear the selection and return.
+    if (element.hasAttribute('contenteditable')) {
+        return true;
+    }
+    if (event) {
+        event.preventDefault()
+    }
+    // Make the element editable
+    element.setAttribute('contenteditable', 'true');
+    element.classList.add('cell-checked'); // Add a class when the element is editable
+
+
+    // Handle blur event to remove contenteditable and the class
+    const blurHandler = function () {
+        element.removeAttribute('contenteditable');
+        element.classList.remove('cell-checked');
+        element.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
+        isEditable = null
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+    };
+    element.focus()
+    element.addEventListener('blur', blurHandler, { once: true });
+
+    isEditable = element
+}
 const runScript1 = () => {
     activeCell = null
-    let isSelecting = false;
+    isEditable = false
+    isSelecting = false;
     console.log('running script 1')
-    let isEditable = false
-    function makeEditable(element, event) {
 
-        // If element is already editable, just clear the selection and return.
-        if (element.hasAttribute('contenteditable')) {
-            return true;
-        }
-        if (event) {
-            event.preventDefault()
-        }
-        // Make the element editable
-        element.setAttribute('contenteditable', 'true');
-        element.classList.add('cell-checked'); // Add a class when the element is editable
-
-
-        // Handle blur event to remove contenteditable and the class
-        const blurHandler = function () {
-            element.removeAttribute('contenteditable');
-            element.classList.remove('cell-checked');
-            element.removeEventListener('blur', blurHandler); // Remove the event listener after it runs
-            isEditable = null
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-        };
-        element.focus()
-        element.addEventListener('blur', blurHandler, { once: true });
-
-        isEditable = element
-    }
+    
 
     // Function to toggle the 'cell-checked' class when a cell is clicked
     function toggleCellChecked(cell) {
@@ -1378,21 +1382,21 @@ const runScript1 = () => {
     function selectWordAtCursor(event, element) {
         const selection = window.getSelection();
         const range = document.createRange();
-    
+
         // Get the position of the mouse relative to the element
         const rect = element.getBoundingClientRect();
         const clickPosX = event.clientX - rect.left; // Mouse position within the element
         const clickPosY = event.clientY - rect.top;
-    
+
         // Get the computed font style of the element to match it for canvas measurement
         const style = window.getComputedStyle(element);
         const font = `${style.fontSize} ${style.fontFamily}`;
-    
+
         // Create a canvas to measure text width
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
         context.font = font;
-    
+
         // Flatten the element's text nodes (including multiline text)
         let textNodes = [];
         function extractTextNodes(node) {
@@ -1403,17 +1407,17 @@ const runScript1 = () => {
             }
         }
         extractTextNodes(element);
-    
+
         // Measure the width of each word
         let words = [];
         let wordWidths = [];
         let totalWidth = 0;
-    
+
         // Iterate over text nodes
         textNodes.forEach(textNode => {
             const textContent = textNode.textContent;
             const wordArray = textContent.split(' ');
-    
+
             wordArray.forEach((word, index) => {
                 const wordWidth = context.measureText(word + ' ').width; // include space after the word
                 words.push(word);
@@ -1421,21 +1425,21 @@ const runScript1 = () => {
                 totalWidth += wordWidth;
             });
         });
-    
+
         // Now find which word is closest to the click position
         let clickOffset = 0;
         let selectedWordIndex = -1;
-    
+
         for (let i = 0; i < wordWidths.length; i++) {
             clickOffset += wordWidths[i];
-    
+
             // If click is before this word's end, select it
             if (clickPosX < clickOffset) {
                 selectedWordIndex = i;
                 break;
             }
         }
-    
+
         // If no word was selected (click is in empty space), select the closest word to the left
         if (selectedWordIndex === -1) {
             // We want the word to the left of the click, so use the last word in the text
@@ -1444,21 +1448,21 @@ const runScript1 = () => {
             // If the click is closer to the left side of the selected word, select the previous word
             selectedWordIndex = Math.max(selectedWordIndex - 1, 0);
         }
-    
+
         // Calculate the starting index of the selected word in the text
         let startPos = 0;
         for (let i = 0; i < selectedWordIndex; i++) {
             startPos += words[i].length + 1; // Account for spaces
         }
-    
+
         const endPos = startPos + words[selectedWordIndex].length;
-    
+
         // Create range for the selected word
         let currentPos = 0;
         textNodes.forEach(textNode => {
             const textContent = textNode.textContent;
             const endIndex = currentPos + textContent.length;
-    
+
             // If the word falls within this text node, adjust the range accordingly
             if (currentPos <= startPos && endIndex >= endPos) {
                 range.setStart(textNode, startPos - currentPos);
@@ -1466,14 +1470,14 @@ const runScript1 = () => {
             }
             currentPos += textContent.length;
         });
-    
+
         // Remove any existing selection and apply the new range
         selection.removeAllRanges();
         selection.addRange(range); // Select the word
     }
-    
-    
-    
+
+
+
 
     // Watch for all table cells with 'data-entity-value' attribute
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
@@ -1483,7 +1487,7 @@ const runScript1 = () => {
             if (!cell.querySelector('button')) {
                 cell.addEventListener('dblclick', function (event) {
                     console.log('double click');
-                    if(isEditable == cell){
+                    if (isEditable == cell) {
                         return
                     }
                     const flag = makeEditable(cell, event);
@@ -1535,90 +1539,7 @@ const runScript1 = () => {
         }
 
     });
-    document.addEventListener('keydown',async function (event) {
-        // Check if Ctrl or Cmd is pressed along with 'C' key
 
-        const checkedCells = document.querySelectorAll('.table td.cell-checked');
-        if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
-            console.log('clicked ctrl+c')
-            // Find all the checked cells in the table
-
-            if (checkedCells.length > 0 && !isEditable) {
-                // Prevent the default copy action
-                console.log('cells checked')
-                event.preventDefault();
-
-                // Group checked cells by their row (tr)
-                const rows = [];
-
-                // Iterate through the checked cells
-                checkedCells.forEach(cell => {
-                    if (cell === cell.closest('tr').querySelector('td:first-child')) {
-                        return; // Skip this cell
-                    }
-                    const row = cell.closest('tr');  // Find the parent row of the cell
-                    const rowIndex = rows.findIndex(rowData => rowData.row === row); // Find if the row is already in our group
-
-                    if (rowIndex === -1) {
-                        // If the row is not already in the rows array, create a new entry
-                        rows.push({ row: row, cells: [] });
-                    }
-
-                    // Push the cell's text content into the corresponding row
-                    rows[rows.findIndex(rowData => rowData.row === row)].cells.push(cell.textContent.trim());
-                });
-
-                // Format the rows into a tab-separated string (similar to table format)
-                const tableContent = rows.map(rowData => rowData.cells.join('\t')).join('\n'); // Tab-separated cells
-
-                // Copy the formatted table content to the clipboard
-                try{
-
-                    await navigator.clipboard.writeText(tableContent)
-                }
-                catch(e){
-                    alert('error copying to clipboard '+e.message)
-                }
-            }
-        }
-        else if (event.key === "Escape") {
-            if (isEditable) {
-                isEditable.removeAttribute('contenteditable');
-                
-                isEditable = null
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                // Your logic for handling the Escape key, e.g., closing a modal or exiting full screen
-            }
-            document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
-                checkedCell.classList.remove('cell-checked');
-            });; // Remove the event listener after it runs
-
-        }
-        else if (!event.ctrlKey &&
-            !event.metaKey &&
-            !event.altKey &&
-            !event.shiftKey &&
-            event.key !== "Alt" && event.key != "Option" &&
-            checkedCells.length > 0 && !isEditable) {
-            makeEditable(checkedCells[0])
-        }
-
-    });
-
-    // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
-
-    document.addEventListener('click', function () {
-        if (isSelecting) {
-            isSelecting = false
-            return
-        }
-
-        document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
-            checkedCell.classList.remove('cell-checked');
-        });
-        activeCell = null
-    });
     document.querySelectorAll('#tableToShow tr').forEach(function (row) {
         const cells = row.querySelectorAll('td');
 
@@ -1677,7 +1598,7 @@ const runScript1 = () => {
                 console.log('adding event listeners')
                 document.addEventListener('mouseup', onMouseUp);
                 document.addEventListener('mousemove', onMouseMove);
-               
+
             });
         }
         // Handle mouse down to start selecting cells
@@ -1722,18 +1643,108 @@ const runScript1 = () => {
             console.log('adding mouse move and mouseup event listeners')
             document.addEventListener('mouseup', onMouseUp);
             document.addEventListener('mousemove', onMouseMove);
-            
+
         });
 
     });
 
 
 }
-
+let script2Runned = false
 const runScript2 = () => {
     console.log('running script 2')
+    if(script2Runned){
+        return
+    }
+    else{
+        script2Runned= true
+    }
     // Variable to store the currently active cell
+    async function keyDown1(event) {
+        // Check if Ctrl or Cmd is pressed along with 'C' key
 
+        const checkedCells = document.querySelectorAll('.table td.cell-checked');
+        if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
+            console.log('clicked ctrl+c')
+            // Find all the checked cells in the table
+
+            if (checkedCells.length > 0 && !isEditable) {
+                // Prevent the default copy action
+                console.log('cells checked')
+                event.preventDefault();
+
+                // Group checked cells by their row (tr)
+                const rows = [];
+
+                // Iterate through the checked cells
+                checkedCells.forEach(cell => {
+                    if (cell === cell.closest('tr').querySelector('td:first-child')) {
+                        return; // Skip this cell
+                    }
+                    const row = cell.closest('tr');  // Find the parent row of the cell
+                    const rowIndex = rows.findIndex(rowData => rowData.row === row); // Find if the row is already in our group
+
+                    if (rowIndex === -1) {
+                        // If the row is not already in the rows array, create a new entry
+                        rows.push({ row: row, cells: [] });
+                    }
+
+                    // Push the cell's text content into the corresponding row
+                    rows[rows.findIndex(rowData => rowData.row === row)].cells.push(cell.textContent.trim());
+                });
+
+                // Format the rows into a tab-separated string (similar to table format)
+                const tableContent = rows.map(rowData => rowData.cells.join('\t')).join('\n'); // Tab-separated cells
+
+                // Copy the formatted table content to the clipboard
+                try {
+
+                    await navigator.clipboard.writeText(tableContent)
+                }
+                catch (e) {
+                    alert('error copying to clipboard ' + e.message)
+                }
+            }
+        }
+        else if (event.key === "Escape") {
+            if (isEditable) {
+                isEditable.removeAttribute('contenteditable');
+
+                isEditable = null
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                // Your logic for handling the Escape key, e.g., closing a modal or exiting full screen
+            }
+            document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+                checkedCell.classList.remove('cell-checked');
+            });; // Remove the event listener after it runs
+
+        }
+        else if (!event.ctrlKey &&
+            !event.metaKey &&
+            !event.altKey &&
+            !event.shiftKey &&
+            event.key !== "Alt" && event.key != "Option" &&
+            checkedCells.length > 0 && !isEditable) {
+            makeEditable(checkedCells[0])
+        }
+
+    }
+    document.addEventListener('keydown', keyDown1);
+
+    // Listen for clicks anywhere on the page to remove 'cell-checked' from any cell
+
+    document.addEventListener('click', function () {
+        if (isSelecting) {
+            isSelecting = false
+            return
+        }
+
+        document.querySelectorAll('.table td.cell-checked').forEach(function (checkedCell) {
+            checkedCell.classList.remove('cell-checked');
+        });
+        activeCell = null
+    });
     // Track clicks only on <td> elements within the <tbody> of #tableData
 
 

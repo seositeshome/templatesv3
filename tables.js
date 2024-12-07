@@ -471,7 +471,10 @@ const generateMainTable = async (tableName, token) => {
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
                 emitCellChanged(tr.id, r.name, td.textContent, pValue)
-                if(table ==='paxful' && td.getAttribute('cname') ==='trades status'){
+                console.log(table)
+                console.log(r.columnName)
+
+                if(table ==='paxful' && r.columnName =='trades status'){
                     const nTd = tr.querySelector('[cname="update"]')
                     emitCellChanged(tr.id, nTd.getAttribute('name'), 'yes', nTd.textContent)
                     nTd.textContent = 'yes'
@@ -922,6 +925,8 @@ const generateQuery = async (query, token) => {
             td.onblur = () => {
                 tr.setAttribute('data-changed', '')
                 emitCellChanged(tr.id, r.name, td.textContent, pValue)
+                console.log(table)
+                console.log(r.columnName)
                 if(table ==='paxful' && td.getAttribute('cname') ==='trades status'){
                     const nTd = tr.querySelector('[cname="update"]')
                     emitCellChanged(tr.id, nTd.getAttribute('name'), 'yes', nTd.textContent)

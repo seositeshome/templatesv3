@@ -16,7 +16,7 @@ const emitCellChanged = (rowId, rowName, value, pValue) => {
         value,
         pValue
     };
-
+    console.log(JSON.stringify(data))
     // Emit 'cellChanged' event to the server
     socket.emit('cellChanged', data);
 }

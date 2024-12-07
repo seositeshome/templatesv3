@@ -474,7 +474,8 @@ const generateMainTable = async (tableName, token) => {
                 console.log(table)
                 console.log(r.columnName)
 
-                if(table ==='paxful' && r.columnName =='trades status'){
+                const urlParams = new URLSearchParams(window.location.search);
+                if(urlParams.get('table') ==='paxful' && td.getAttribute('cname') ==='trades status'){
                     const nTd = tr.querySelector('[cname="update"]')
                     emitCellChanged(tr.id, nTd.getAttribute('name'), 'yes', nTd.textContent)
                     nTd.textContent = 'yes'
@@ -927,7 +928,8 @@ const generateQuery = async (query, token) => {
                 emitCellChanged(tr.id, r.name, td.textContent, pValue)
                 console.log(table)
                 console.log(r.columnName)
-                if(table ==='paxful' && td.getAttribute('cname') ==='trades status'){
+                const urlParams = new URLSearchParams(window.location.search);
+                if(urlParams.get('table') ==='paxful' && td.getAttribute('cname') ==='trades status'){
                     const nTd = tr.querySelector('[cname="update"]')
                     emitCellChanged(tr.id, nTd.getAttribute('name'), 'yes', nTd.textContent)
                     nTd.textContent = 'yes'

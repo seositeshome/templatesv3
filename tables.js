@@ -1104,7 +1104,7 @@ const generateSettingTable = async (table, token) => {
         }
         let k = 0
         for (const r of results) {
-            generateFromRecord({ id: r[0], name: p[k].name }, true)
+            generateFromRecord({ id: r[0], name: p[k].name , type: 'string'}, true)
             k++
         }
     }

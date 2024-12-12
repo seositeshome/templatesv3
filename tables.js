@@ -74,15 +74,22 @@ const generateMainTable = async (tableName, token) => {
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
         if (remove) {
-            await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const e = document.getElementById('tableToShow')
-            e.remove()
-            sButton.classList.remove('loading')
+            try {
+                await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const e = document.getElementById('tableToShow')
+                e.remove()
+                sButton.classList.remove('loading')
+            }
+            catch (e) {
+                sButton.classList.remove('loading')
+                sButton.classList.add('save')
+            }
+
             return
         }
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
@@ -114,24 +121,31 @@ const generateMainTable = async (tableName, token) => {
         });
 
         // Now send the updated data to the server via a PUT request
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                items: updatedItems, // Send the array of updated records
-            }),
-        });
+        try {
+            const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    items: updatedItems, // Send the array of updated records
+                }),
+            });
 
 
-        // Log the server response
-        console.log(JSON.stringify(results));
+            // Log the server response
+            console.log(JSON.stringify(results));
 
-        // Optional: Clear the 'data-changed' attribute from rows after successful update
-        changedRows.forEach(row => row.removeAttribute('data-changed'));
-        sButton.classList.remove('loading')
-        sButton.classList.add('loaded')
+            // Optional: Clear the 'data-changed' attribute from rows after successful update
+            changedRows.forEach(row => row.removeAttribute('data-changed'));
+            sButton.classList.remove('loading')
+            sButton.classList.add('loaded')
+        }
+        catch (e) {
+            sButton.classList.remove('loading')
+            sButton.classList.add('save')
+        }
+
 
     }
     rButton.onclick = async (e) => {
@@ -475,7 +489,7 @@ const generateMainTable = async (tableName, token) => {
                 console.log(r.columnName)
 
                 const urlParams = new URLSearchParams(window.location.search);
-                if(urlParams.get('table') ==='paxful' && td.getAttribute('cname') ==='trades status'){
+                if (urlParams.get('table') === 'paxful' && td.getAttribute('cname') === 'trades status') {
                     const nTd = tr.querySelector('[cname="update"]')
                     emitCellChanged(tr.id, nTd.getAttribute('name'), 'yes', nTd.textContent)
                     nTd.textContent = 'yes'
@@ -588,15 +602,22 @@ const generateQuery = async (query, token) => {
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
         if (remove) {
-            await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const e = document.getElementById('tableToShow')
-            e.remove()
-            sButton.classList.remove('loading')
+            try {
+                await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const e = document.getElementById('tableToShow')
+                e.remove()
+                sButton.classList.remove('loading')
+            }
+            catch (e) {
+                sButton.classList.remove('loading')
+                sButton.classList.add('save')
+            }
+
             return
         }
         const changedRows = table.querySelector('tbody').querySelectorAll('tr[data-changed]');
@@ -628,24 +649,32 @@ const generateQuery = async (query, token) => {
         });
 
         // Now send the updated data to the server via a PUT request
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                items: updatedItems, // Send the array of updated records
-            }),
-        });
+        try {
+            const { results } = await fetch(`https://api.seositeshome.com/tables/${tableName}?token=${token}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    items: updatedItems, // Send the array of updated records
+                }),
+            });
 
 
-        // Log the server response
-        console.log(JSON.stringify(results));
+            // Log the server response
+            console.log(JSON.stringify(results));
 
-        // Optional: Clear the 'data-changed' attribute from rows after successful update
-        changedRows.forEach(row => row.removeAttribute('data-changed'));
-        sButton.classList.remove('loading')
-        sButton.classList.add('loaded')
+            // Optional: Clear the 'data-changed' attribute from rows after successful update
+            changedRows.forEach(row => row.removeAttribute('data-changed'));
+            sButton.classList.remove('loading')
+            sButton.classList.add('loaded')
+        }
+        catch (e) {
+            sButton.classList.remove('loading')
+            sButton.classList.add('save')
+        }
+
+
 
     }
     rButton.onclick = async (e) => {
@@ -929,7 +958,7 @@ const generateQuery = async (query, token) => {
                 console.log(table)
                 console.log(r.columnName)
                 const urlParams = new URLSearchParams(window.location.search);
-                if(urlParams.get('table') ==='paxful' && td.getAttribute('cname') ==='trades status'){
+                if (urlParams.get('table') === 'paxful' && td.getAttribute('cname') === 'trades status') {
                     const nTd = tr.querySelector('[cname="update"]')
                     emitCellChanged(tr.id, nTd.getAttribute('name'), 'yes', nTd.textContent)
                     nTd.textContent = 'yes'
@@ -1056,7 +1085,7 @@ const generateSettingTable = async (table, token) => {
             return name;
         }
         for (i = 0; i < parseInt(inputV); i++) {
-            p.push({ name: generateName(),type:'string' })
+            p.push({ name: generateName(), type: 'string' })
         }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
             method: 'PUT',
@@ -1205,16 +1234,23 @@ const generateSettingTable = async (table, token) => {
         sButton.classList.remove('save')
         sButton.classList.remove('loaded')
         if (remove) {
-            await fetch(`https://api.seositeshome.com/tables/${table}?token=${token}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const e = document.getElementById('tableToShow')
-            e.remove()
+            try {
+                await fetch(`https://api.seositeshome.com/tables/${table}?token=${token}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const e = document.getElementById('tableToShow')
+                e.remove()
 
-            sButton.classList.remove('loading')
+                sButton.classList.remove('loading')
+            }
+            catch (e) {
+                sButton.classList.remove('loading')
+                sButton.classList.add('save')
+            }
+
             return
         }
         const changedRows = tableSettings.querySelector('tbody').querySelectorAll('tr[data-changed]');
@@ -1250,51 +1286,58 @@ const generateSettingTable = async (table, token) => {
             }
         });
         console.log('to deleted ' + JSON.stringify(toDIds))
-        if (toDIds.length) {
-            await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
-                method: 'DELETE',
+        try {
+
+
+            if (toDIds.length) {
+                await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ids: toDIds,
+                    }),
+                });
+            }
+
+            for (const id of toDIds) {
+                document.getElementById(id).remove()
+
+            }
+
+            // Now send the updated data to the server via a PUT request
+            const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    ids: toDIds,
+                    items: updatedItems.filter(e => e), // Send the array of updated records
+
                 }),
             });
+            await fetch(`https://api.seositeshome.com/tables/${table}/alter?token=${token}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    items: updatedItems, // Send the array of updated records
+                }),
+            });
+
+            // Log the server response
+            console.log(JSON.stringify(results));
+
+            // Optional: Clear the 'data-changed' attribute from rows after successful update
+            changedRows.forEach(row => row.removeAttribute('data-changed'));
+            sButton.classList.remove('loading')
+            sButton.classList.add('loaded')
+        } catch (e) {
+            sButton.classList.remove('loading')
+            sButton.classList.add('save')
         }
-
-        for (const id of toDIds) {
-            document.getElementById(id).remove()
-
-        }
-
-        // Now send the updated data to the server via a PUT request
-        const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                items: updatedItems.filter(e => e), // Send the array of updated records
-
-            }),
-        });
-        await fetch(`https://api.seositeshome.com/tables/${table}/alter?token=${token}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                items: updatedItems, // Send the array of updated records
-            }),
-        });
-
-        // Log the server response
-        console.log(JSON.stringify(results));
-
-        // Optional: Clear the 'data-changed' attribute from rows after successful update
-        changedRows.forEach(row => row.removeAttribute('data-changed'));
-        sButton.classList.remove('loading')
-        sButton.classList.add('loaded')
 
     }
 
@@ -1384,7 +1427,7 @@ const runScript1 = () => {
     isSelecting = false;
     console.log('running script 1')
 
-    
+
 
     // Function to toggle the 'cell-checked' class when a cell is clicked
     function toggleCellChecked(cell) {
@@ -1670,11 +1713,11 @@ const runScript1 = () => {
 let script2Runned = false
 const runScript2 = () => {
     console.log('running script 2')
-    if(script2Runned){
+    if (script2Runned) {
         return
     }
-    else{
-        script2Runned= true
+    else {
+        script2Runned = true
     }
     // Variable to store the currently active cell
     async function keyDown1(event) {

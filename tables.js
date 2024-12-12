@@ -1056,7 +1056,7 @@ const generateSettingTable = async (table, token) => {
             return name;
         }
         for (i = 0; i < parseInt(inputV); i++) {
-            p.push({ name: generateName() })
+            p.push({ name: generateName(),type:'string' })
         }
         const { results } = await fetch(`https://api.seositeshome.com/tables/${table}settings?token=${token}`, {
             method: 'PUT',

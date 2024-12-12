@@ -17,12 +17,14 @@ const save = async(table,id,row)=>{
                 id:id.replace('id-',''), // Send the array of updated records
             }),
         });
-    statusRow.textContent = 'added'
     if (response.ok) {
+        
+        statusRow.textContent = 'added'
         alert('adding track info done');
     } else {
+        statusRow.textContent = ''
         const errorData = await response.json(); // Optional: get more details about the error
-        alert(`Problem adding tracking info: ${errorData.error || 'Unknown error'}`);
+        alert(`Problem adding tracking info: ${errorData.error || 'Unknown error'} ${errorData.error.includes('Unauthorized') ?' \n please check access keys' :''}`);
     }
 
 }

@@ -555,7 +555,7 @@ const generateMainTable = async (tableName, token) => {
         console.log(JSON.stringify(results))
         for (let i = 0; i < results.length; i++) {
             const r = results[i]
-            generateRecord({ id: r[0] }, true, total + i)
+            generateRecord({ id: r[0],shortId:p[i].shortId }, true, total + i)
         }
         total += results.length
         runScript1()

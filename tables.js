@@ -533,10 +533,27 @@ const generateMainTable = async (tableName, token) => {
             return
         }
         const p = []
+        function formatDateForMariaDB(date) {
+            // Ensure the date is a Date object
+            if (!(date instanceof Date)) {
+                throw new Error('Provided value is not a Date object');
+            }
+        
+            // Format the date as YYYY-MM-DD HH:MM:SS
+            const year = date.getUTCFullYear();
+            const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const day = String(date.getUTCDate()).padStart(2, '0');
+            const hours = String(date.getUTCHours()).padStart(2, '0');
+            const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+            const r = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+            return r;
+        }
         for (i = 0; i < parseInt(inputV); i++) {
             const p1 = {}
             if (records.find(e => e.name === 'shortId')) {
                 p1.shortId = generateUUID().replaceAll('-', '')
+                p1.created = formatDateForMariaDB(new Date())
             }
             p.push(p1)
         }
@@ -555,7 +572,7 @@ const generateMainTable = async (tableName, token) => {
         console.log(JSON.stringify(results))
         for (let i = 0; i < results.length; i++) {
             const r = results[i]
-            generateRecord({ id: r[0],shortId:p[i].shortId }, true, total + i)
+            generateRecord({ id: r[0],shortId:p[i].shortId,created:p[i].created }, true, total + i)
         }
         total += results.length
         runScript1()
